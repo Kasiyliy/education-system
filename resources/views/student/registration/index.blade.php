@@ -20,7 +20,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Students<small> Registered Student List.</small></h2>
+                        <h2>Студенты<small> Список зарегестрированных студентов.</small></h2>
 
                         <div class="clearfix"></div>
                     </div>
@@ -30,27 +30,15 @@
                             <form class="" method="POST" action="{{URL::route('student.registration.list')}}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="col-md-4 col-sm-12 col-xs-12">
-                                    <label for="department_id">Department: <span class="required">*</span></label>
-                                    {!!Form::select('department_id', $departments, $selectDep, ['placeholder' => 'Pick a department','class'=>'select2_single department form-control has-feedback-left','tabindex'=>'-1','id'=>'department_id']) !!}
+                                    <label for="subject_id">Под курс: <span class="required">*</span></label>
+                                    {!!Form::select('subject_id', $subjects, $selectSub, ['placeholder' => 'Выберите под курс','class'=>'select2_single subject form-control has-feedback-left','tabindex'=>'-1','id'=>'subject_id']) !!}
                                     <i class="fa fa-home form-control-feedback left" aria-hidden="true"></i>
-
-                                </div>
-                                <div class="col-md-2 col-sm-12 col-xs-12">
-                                    <label for="session">Session: <span class="required">*</span></label>
-                                    {!!Form::select('session', $sessions, $session, ['placeholder' => 'Pick a Session','class'=>'select2_single session form-control col-md-7 col-xs-12 has-feedback-left','required'=>'required' ,'id'=>'session'])!!}
-                                    <i class="fa fa-clock-o form-control-feedback left" aria-hidden="true"></i>
-
-                                </div>
-                                <div class="col-md-4 col-sm-12 col-xs-12">
-                                    <label for="levelTerm">Semester: <span class="required">*</span></label>
-                                    {!!Form::select('levelTerm', $semesters, $selectSem, ['placeholder' => 'Pick a Semester','class'=>'select2_single semester form-control col-md-7 col-xs-12 has-feedback-left','required'=>'required'])!!}
-                                    <i class="fa fa-info form-control-feedback left" aria-hidden="true"></i>
 
                                 </div>
 
                                 <div class="col-md-2 col-sm-12 col-xs-12">
                                     <br>
-                                    <button type="submit" class="btn btn-lg btn-primary"><i class="fa fa-check"></i> Go </button>
+                                    <button type="submit" class="btn btn-lg btn-primary"><i class="fa fa-check"></i> Поиск</button>
                                 </div>
                             </form>
                         </div>
@@ -60,23 +48,18 @@
                                 <table id="datatable-buttons" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Photo</th>
-                                            <th>Name</th>
+                                            <th>ФИО</th>
                                             <th>ID no</th>
-                                            <th>Actions</th>
+                                            <th>Действаия</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($students as $student)
                                         <tr>
-                                            <td>
-                                                <img src="{{URL::asset('assets/images/students')}}/{{$student->student->photo}}" alt="Photo" class="" width="80px" height="70px" />
-                                            </td>
                                             <td>{{$student->student->firstName}} {{$student->student->middleName}} {{$student->student->lastName}}</td>
-                                            <td>{{$student->student->idNo}}</td>
+                                            <td>{{$student->student->id}}</td>
                                             <td>
-                                                <a title='View' target="_blank" class='btn btn-success btn-xs btnUpdate' href='{{URL::route('student.show',$student->students_id)}}'> <i class="glyphicon glyphicon-zoom-out icon-white"></i></a>
-                                                <form class="deleteForm" method="get" action="{{URL::route('student.registration.destroy',$student->students_id)}}">
+                                                <form class="deleteForm" method="get" action="{{URL::route('student.registration.destroy',$student->id)}}">
                                                     <input name="_method" type="hidden" value="DELETE" />
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
                                                     <button type="submit" class='btn btn-danger btn-xs btnDelete'> <i class="glyphicon glyphicon-trash icon-white"></i> </button>
@@ -119,16 +102,8 @@
 <script>
 $(document).ready(function() {
 
-    $(".department").select2({
-        placeholder: "Select Department",
-        allowClear: true
-    });
-    $(".session").select2({
-        placeholder: "Select session",
-        allowClear: true
-    });
-    $(".semester").select2({
-        placeholder: "Select Semester",
+    $(".subject").select2({
+        placeholder: "Выберите под курс",
         allowClear: true
     });
     //datatables code
@@ -174,10 +149,10 @@ $(document).ready(function() {
     }();
 
     TableManageButtons.init();
-    @if($selectDep!="" && count($students)==0)
+    @if($selectSub!="" && count($students)==0)
     new PNotify({
-        title: "Data Fetch",
-        text: 'There are no student!',
+        title: "Извлечение",
+        text: 'Никаких студентов нет!',
         styling: 'bootstrap3'
     });
     @endif
@@ -186,12 +161,12 @@ $(document).ready(function() {
         e.preventDefault();
         var that=$(this);
         swal({
-            title: "Registration Cancel!",
-            text: 'Are you sure to cancel this registration?',
+            title: "Отмена добавления!",
+            text: 'Вы уверены что хотите удалить студента от этого курса?',
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#cc3f44",
-            confirmButtonText: "Yes",
+            confirmButtonText: "Да",
             closeOnConfirm: true,
             html: false
         }, function( isConfirm ) {

@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Student;
 use App\Department;
+use App\Subject;
 use Validator;
 use Session;
 use Carbon\Carbon;
@@ -14,18 +16,9 @@ use App\Registration;
 use App\Transformers\StudentTransformer;
 
 
-class studentController extends Controller {
+class StudentController extends Controller {
 	protected $student;
-	protected $semesters=[
-		'L1T1' => '1st Year 1st Semester',
-        'L1T2' => '1st Year 2nd Semester',
-        'L2T1' => '2nd Year 1st Semester',
-        'L2T2' => '2nd Year 2nd Semester',
-        'L3T1' => '3rd Year 1st Semester',
-        'L3T2' => '3rd Year 2nd Semester',
-        'L4T1' => '4th Year 1st Semester',
-        'L4T2' => '4th Year 2nd Semester'
-	];
+	
 	public function __construct(Student $student)
 	{
 		$this->middleware('admin',['except' => ['registeredStudentList']]);
@@ -39,50 +32,40 @@ class studentController extends Controller {
 
 	public function index()
 	{
-		if(Session::has('deptId'))
-		{
-			$departments = Department::select('id','name')->orderby('name','asc')->lists('name', 'id');
-			$selectDep=Session::get('deptId');
-			$students =Student::where('department_id',$selectDep)->get();
-			return view('student.index',compact('students','departments','selectDep'));
-		}
-		$departments = Department::select('id','name')->orderby('name','asc')->lists('name', 'id');
-		$selectDep="";
-		$students =array();
-		return view('student.index',compact('students','departments','selectDep'));
+		$students =Student::all();
+		return view('student.index',compact('students'));
 	}
 	public function index2(Request $request)
 	{
-		Session::put('deptId',$request->department_id);
-		$departments = Department::select('id','name')->orderby('name','asc')->lists('name', 'id');
-		$selectDep=$request->department_id;
-		$students =Student::where('department_id',$selectDep)->get();
+		$students =Student::all();
 
-		return view('student.index',compact('students','departments','selectDep'));
+		return view('student.index',compact('students'));
 	}
 
-	public function studentList($dID,$session)
+	public function studentList($subID)
 	{
 
-		$students =Student::select('id','idNo','firstName','lastName','middleName')
-		->where('department_id',$dID)
-		->where('session',$session)
+		$registeredStudents = Registration::select('id','students_id','subject_id')
+		->where('deleted_at', '=', null)
+		->where('subject_id', '=', $subID)
+		->get();
+	
+		$students =Student::select('id','firstName','lastName','middleName')
 		->get();
 		return Response()->json([
 			'success' => true,
-			'students' => $students
+			'students' => $students,
+			'registeredStudents' => $registeredStudents
 		], 200);
 
 	}
-	public function registeredStudentList($dID,$session,$semester)
+	public function registeredStudentList($sID,$session,$semester)
 	{
 
 		$sdts=Registration::with(array('student' =>  function($query){
-			$query->select('id','idNo','firstName','middleName','lastName','photo');
+			$query->select('id','firstName','middleName','lastName');
 		}))
-		->where('department_id',$dID)
-		->where('session',$session)
-		->where('levelTerm',$semester)
+		->where('subject_id',$sID)
 		->get();
 
 		$students= Fractal()->collection($sdts, new StudentTransformer());
@@ -116,26 +99,11 @@ class studentController extends Controller {
 	{
 		$data=$request->all();
 		$rules=[
-			'idNo' => 'required|unique:students',
-			'session' => 'required',
-			'department_id' => 'required',
-			'bncReg' => 'required',
-			'batchNo' => 'required',
 			'firstName' => 'required',
 			'lastName' => 'required',
 			'gender' => 'required',
-			'religion' => 'required',
-			'bloodgroup' => 'required',
-			'nationality' => 'required',
 			'dob' => 'required',
-			'photo' => 'required|mimes:jpeg,jpg,png',
-			'mobileNo' => 'required',
-			'fatherName' => 'required',
-			'fatherMobileNo' => 'required',
-			'motherName' => 'required',
-			'motherMobileNo' => 'required',
-			'presentAddress' => 'required',
-			'parmanentAddress' => 'required'
+			'mobileNo' => 'required'
 		];
 		$validator = Validator::make($data, $rules);
 		//$errors=$validator->messages()->toArray();
@@ -148,12 +116,6 @@ class studentController extends Controller {
 			// 	'message' => $errors
 			// ], 400);
 		}
-
-		$directory = public_path() . "/assets/images/students/";
-		$fextention = $data['photo']->getClientOriginalExtension();
-		$fileName=str_replace(' ','_',$data['idNo']).'.'.$fextention;
-		$data['photo']->move($directory,$fileName);
-		$data['photo']=$fileName;
 		$student = new Student;
 		$student->create($data);
 		// return Response()->json([
@@ -220,23 +182,11 @@ class studentController extends Controller {
 	{
 		$data=$request->all();
 		$rules=[
-			'bncReg' => 'required',
-			'batchNo' => 'required',
 			'firstName' => 'required',
 			'lastName' => 'required',
 			'gender' => 'required',
-			'religion' => 'required',
-			'bloodgroup' => 'required',
-			'nationality' => 'required',
 			'dob' => 'required',
-			'photo' => 'mimes:jpeg,jpg,png',
-			'mobileNo' => 'required',
-			'fatherName' => 'required',
-			'fatherMobileNo' => 'required',
-			'motherName' => 'required',
-			'motherMobileNo' => 'required',
-			'presentAddress' => 'required',
-			'parmanentAddress' => 'required'
+			'mobileNo' => 'required'
 		];
 		$validator = Validator::make($data, $rules);
 		//$errors=$validator->messages()->toArray();
@@ -251,33 +201,17 @@ class studentController extends Controller {
 		else {
 			try {
 				$student = Student::findOrFail($id);
-				if($request->exists('photo'))
-				{
-
-					$directory = public_path() . "/assets/images/students/";
-					unlink($directory.$student->photo);
-					$fextention = $data['photo']->getClientOriginalExtension();
-					$fileName=str_replace(' ','_',$student->idNo).'.'.$fextention;
-					$data['photo']->move($directory,$fileName);
-					$data['photo']=$fileName;
-				}
-				else{
-					$data['photo']=$student->photo;
-				}
-				$data['department_id']=$student->department_id;
-				$data['session']=$student->session;
-				$data['idNo']=$student->idNo;
 				$student->fill($data)->save();
 				// return Response()->json([
 				// 	'success' => true,
 				// 	'message' => "Student Information Updated Succesfully."
 				// ], 200);
-				$notification= array('title' => 'Data Update', 'body' => "Student Information Updated Succesfully.");
+				$notification= array('title' => 'Изменение', 'body' => "Информация успешно изменена");
 				return Redirect::route('student.index')->with("success",$notification);
 			}
 			catch (Exception $e)
 			{
-				$notification= array('title' => 'Data Update', 'body' => "There is no record.");
+				$notification= array('title' => 'Изменение', 'body' => "Нету никаких записей");
 				return Redirect::route('student.index')->with("error",$notification);
 			}
 		}
@@ -294,7 +228,7 @@ class studentController extends Controller {
 	{
 		$student = Student::findOrFail($id);
 		$student->delete();
-		$notification= array('title' => 'Data Delete', 'body' => 'Student Deleted Succesfully.');
+		$notification= array('title' => 'Удаление', 'body' => 'Студент успешно удален.');
 		return Redirect::route('student.index')->with("success",$notification);
 	}
 
@@ -306,20 +240,16 @@ class studentController extends Controller {
 	*/
 	public function regCreate()
 	{
-		Student::select('session','session')->distinct()->lists('session','session');
 		$students=[];
-		$semesters= $this->semesters;
-		$departments = Department::select('id','name')->orderby('name','asc')->lists('name', 'id');
-		$sessions=Student::select('session','session')->distinct()->lists('session','session');
-		return view('student.registration.create',compact('departments','students','semesters','sessions'));
+		$subjects = Subject::select('id','name')->orderby('name','asc')->lists('name', 'id');
+		return view('student.registration.create',compact('subjects','students'));
 	}
 	public function regStore(Request $request){
 		$data=$request->all();
 		$rules=[
-			'department_id' => 'required',
+			'subject_id' => 'required',
 			//	'ids' => 'required',
 			//'registeredIds' => 'required',
-			'levelTerm' => 'required'
 		];
 		$validator = Validator::make($data, $rules);
 		//$errors=$validator->messages()->toArray();
@@ -331,7 +261,7 @@ class studentController extends Controller {
 			// ], 400);
 		}
 		if(!$request->exists('ids') || !count($data['ids']) || !$request->exists('registeredIds') || !count($data['registeredIds'])){
-			$validator->errors()->add('Student', 'Please select at least one student!');
+			$validator->errors()->add('Студент', 'Пожалуйста выберите хотя бы одного студента!');
 			return back()->withErrors($validator);
 		}
 		$toBeRegisterStudents = [] ;
@@ -341,20 +271,16 @@ class studentController extends Controller {
 			$isExists = false;
 			$isWantTo = $this->isWantToRegister($id,$data['registeredIds']);
 			if($isWantTo){
-				$sts = Registration::where('department_id',$data['department_id'])
-				->where('students_id',$id)
-				->where('levelTerm',$data['levelTerm'])->first();
+				$sts = Registration::where('subject_id',$data['subject_id'])
+				->where('students_id',$id)->first();
 				if($sts){
 					$isExists = true;
 					$alreadyRegistered +=1;
-
 				}
 				if(!$isExists){
 					$toBeRegisterStudents [] = [
-						'levelTerm' => $data['levelTerm'],
-						'department_id' => $data['department_id'],
+						'subject_id' => $data['subject_id'],
 						'students_id' => $id,
-						'session' => $data['session'],
 						'created_at' => Carbon::now(),
 						'updated_at' => Carbon::now()
 					];
@@ -373,13 +299,13 @@ class studentController extends Controller {
 		// 	], 400);
 		// }
 		Registration::insert($toBeRegisterStudents);
-		$notification= array('title' => 'Data Store', 'body' => $newRegistration.' students new registration successfull.');
+		$notification= array('title' => ' Добавление ', 'body' => $newRegistration.' Студент успешно зарегестрирован на под курс.');
 		// return Response()->json([
 		// 	'success' => true,
 		// 	'message' => $notification
 		// ], 200);
 		if($alreadyRegistered){
-			$notification= array('title' => 'Data Store', 'body' => $newRegistration.' students newly registerd and '.$alreadyRegistered.' has already registered!');
+			$notification= array('title' => ' Добавление ', 'body' => $newRegistration.' студентов успешно зарегестрировано и '.$alreadyRegistered.' уже были зарегестрированы!');
 		}
 		return back()->with("success",$notification);
 
@@ -396,39 +322,29 @@ class studentController extends Controller {
 	}
 
 	public function regIndex(){
-		$departments = Department::select('id','name')->orderby('name','asc')->lists('name', 'id');
-		$sessions=Student::select('session','session')->distinct()->lists('session','session');
-		$selectDep="";
+		$subjects = Subject::select('id','name')->orderby('name','asc')->lists('name', 'id');
+		$selectSub="";
 		$students =array();
-		$semesters= $this->semesters;
-		$selectSem="";
-		$session="";
-		return view('student.registration.index',compact('session','students','sessions','departments','selectDep','semesters','selectSem'));
+		return view('student.registration.index',compact('students','subjects','selectSub'));
 	}
 	public function regList(Request $request){
 
 		$students=Registration::with(array('student' =>  function($query){
-			$query->select('id','idNo','firstName','middleName','lastName','photo');
+			$query->select('id','firstName','middleName','lastName');
 		}))
-		->where('department_id',$request->input('department_id'))
-		->where('session',$request->input('session'))
-		->where('levelTerm',$request->input('levelTerm'))
+		->where('subject_id',$request->input('subject_id'))
 		->get();
 
-		$departments = Department::select('id','name')->orderby('name','asc')->lists('name', 'id');
-		$sessions=Student::select('session','session')->distinct()->lists('session','session');
-		$selectDep=$request->input('department_id');
-		$semesters= $this->semesters;
-		$selectSem=$request->input('levelTerm');
-		$session=$request->input('session');
-		return view('student.registration.index',compact('session','sessions','students','departments','selectDep','semesters','selectSem'));
+		$subjects = Subject::select('id','name')->orderby('name','asc')->lists('name', 'id');
+		$selectSub=$request->input('subject_id');
+		return view('student.registration.index',compact('students','subjects','selectSub'));
 
 	}
 	public function regDestroy($id)
 	{
 		$student=Registration::findOrFail($id);
 		$student->delete();
-		$notification= array('title' => 'Data Delete', 'body' => 'Cancel student registration.');
+		$notification= array('title' => 'Удаление', 'body' => 'Отмена добавления на подкурс.');
 		return Response()->json([
 			'success' => true,
 			'message' => $notification

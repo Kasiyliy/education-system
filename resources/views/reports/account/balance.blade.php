@@ -26,57 +26,6 @@
                           <div class="clearfix"></div>
 
                   </div>
-                  <div class="x_content">
-                    <div class="row">
-
-                        <form class="" method="POST" action="{{URL::route('accounting.reports.balance')}}">
-                          <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                          <div class="col-md-5 col-sm-6 col-xs-12">
-                        <label for="department_id">Date Range *:</label>
-                        <div class="input-prepend input-group">
-                               <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
-                               <input type="text" style="width: 200px" name="DateRange" id="reservation" class="form-control" value="{{$fromDate}} - {{$toDate}}" />
-                        </div>
-                        </div>
-
-                          <div class="col-md-2 col-sm-12 col-xs-12">
-                              <br>
-                            <button type="submit" class="btn btn-lg btn-primary"><i class="fa fa-check"></i> Go </button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                    <br>
-                    <h2 class="text-info text-center">Income Accounts</h2>
-                    <div class="row">
-                      <div class="col-md-12 col-sm-12 col-xs-12">
-                    <table id="datatable-buttons" class="smartTable table table-striped table-bordered">
-                      <thead>
-                        <tr>
-                          <th>Sector</th>
-                          <th>Type</th>
-                        <th>Amount</th>
-                        <th>Date</th>
-                        <th>Description</th>
-
-
-                        </tr>
-                      </thead>
-                      <tbody>
-                      @foreach($incomes as $income)
-                        <tr>
-                          <td>{{$income->sector->name}}</td>
-                          <td>{{$income->sector->type}}</td>
-                        <td>{{$income->amount}}</td>
-                        <td>{{$income->date->format('F j,Y')}}</td>
-                        <td>{{$income->description}}</td>
-                        </tr>
-                      @endforeach
-
-                      </tbody>
-
-                    </table>
-                  </div>
                 </div>
                 <h2 class="text-info text-center">Expence Accounts</h2>
                 <div class="row">

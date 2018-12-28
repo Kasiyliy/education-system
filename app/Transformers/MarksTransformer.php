@@ -18,7 +18,6 @@ class MarksTransformer extends TransformerAbstract
 
     return [
       'id' => (int)$marks->id,
-      'idNo' => $marks->student->idNo,
       'name' => $marks->student->firstName.' '.$marks->student->middleName.' '.$marks->student->lastName,
       'raw_score' => $marks->raw_score,
       'percentage' => $marks->percentage,

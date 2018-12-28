@@ -18,15 +18,14 @@
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
-					<div class="x_title">
-						<h2>Registration<small> Student semester registration</small></h2>
+					<div class="">
+						<h2>Регистрация<small> Записать студента на подкурс</small></h2>
 
-						<div class="clearfix"></div>
 					</div>
-					<div class="x_content">
+					<div class="">
 						@if (count($errors) > 0)
 						 <div class="alert alert-danger">
-								 <strong>Whoops!</strong> There were some problems with your input.<br><br>
+								 <strong>Упс!</strong> Произошли проблемы с вашим вводом.<br><br>
 								 <ul>
 										 @foreach ($errors->all() as $error)
 												 <li>{{ $error }}</li>
@@ -39,32 +38,13 @@
 							<div class="row">
 								<div class="col-md-4">
 									<div class="item form-group">
-										<label for="department">Department <span class="required">*</span>
+										<label for="subject">Под курс <span class="required">*</span>
 										</label>
 
-										{!!Form::select('department_id', $departments, null, ['placeholder' => 'Pick a department','class'=>'select2_single department form-control has-feedback-left','required'=>'required','id'=>'department_id'])!!}
+										{!!Form::select('subject_id', $subjects, null, ['placeholder' => 'Выберите под курс','class'=>'select2_single subject form-control has-feedback-left','required'=>'required','id'=>'subject_id'])!!}
 										<i class="fa fa-home form-control-feedback left" aria-hidden="true"></i>
-										<span class="text-danger">{{ $errors->first('department_id') }}</span>
+										<span class="text-danger">{{ $errors->first('subject_id') }}</span>
 									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="item form-group">
-										<label for="session">Session <span class="required">*</span>
-										</label>
-										{!!Form::select('session', $sessions, null, ['placeholder' => 'Pick a Session','class'=>'select2_single session form-control has-feedback-left','required'=>'required' ,'id'=>'session'])!!}
-										<i class="fa fa-clock-o form-control-feedback left" aria-hidden="true"></i>
-										<span class="text-danger">{{ $errors->first('session') }}</span>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="item form-group">
-										<label for="levelTerm">Semester <span class="required">*</span>
-										</label>
-										{!!Form::select('levelTerm', $semesters, null, ['placeholder' => 'Pick a Semester','class'=>'select2_single semester form-control has-feedback-left','required'=>'required'])!!}
-										<i class="fa fa-info form-control-feedback left" aria-hidden="true"></i>
-										<span class="text-danger">{{ $errors->first('levelTerm') }}</span>
-									</div>
-
 								</div>
 							</div>
 							<div class="row">
@@ -75,9 +55,10 @@
 												<tr>
 
 													<th>Id No</th>
-													<th>Name</th>
-													<th>Register? <div class="pull-right"><input type="checkbox" id="allcheck" class="js-switch allCheck" name="allcheck">All Select</div></th>
-
+													<th>ФИО</th>
+													<th>Дата </th>
+													<th>Подписать? </th>
+												
 												</tr>
 											</thead>
 											<tbody>
@@ -93,7 +74,7 @@
 
 								<div class="ln_solid"></div>
 								<div class="row">
-										<button id="btnsave" type="submit" class="btn btn-lg btn-success pull-right"><i class="fa fa-check"> Submit</i></button>
+										<button id="btnsave" type="submit" class="btn btn-lg btn-success pull-right"><i class="fa fa-check"> Подписать</i></button>
 								</div>
 
 							</form>
@@ -113,35 +94,26 @@
 			<script>
 			$(document).ready(function() {
 				 $('#btnsave').hide();
-			$(".department").select2({
-				placeholder: "Pick a department",
+			$(".subject").select2({
+				placeholder: "Выберите под курс",
 				allowClear: true
 			});
 
-			$(".session").select2({
-				placeholder: "Pick a Session",
-				allowClear: true
-			});
-			$(".semester").select2({
-				placeholder: "Pick a semester",
-				allowClear: true
-			});
 
 			//get students lists
-			$('#session').on('change',function (){
-				var dept= $('#department_id').val();
-				var session = $(this).val();
-				if(!dept){
+			$('#subject_id').on('change',function (){
+				var sub= $('#subject_id').val();
+				if(!sub){
 					new PNotify({
-						title: 'Validation Error!',
-						text: 'Please Pic A Department!',
+						title: 'Ошибка валидации!',
+						text: 'Пожалуйста выберите под курс!',
 						type: 'error',
 						styling: 'bootstrap3'
 					});
 				}
 				else {
 					$.ajax({
-						url:'/students/'+dept+'/'+session,
+						url:'/students/subject/' + sub,
 						type: 'get',
 						dataType: 'json',
 						success: function(data) {
@@ -154,8 +126,15 @@
 							else {
 								$('#btnsave').hide();
 							}
+							var studentIds = [];
+							$.each(data.registeredStudents, function(key, value) {
+								studentIds.push(value.students_id);
+							});
+
 							$.each(data.students, function(key, value) {
-								addRow(value.id,value.firstName+' '+value.middleName+' '+value.lastName,value.idNo);
+								if(!studentIds.includes(value.id)){
+									addRow( value.id ,value.firstName+' '+value.middleName+' '+value.lastName,value.idNo, false);	
+								}
 							});
 							var elems = Array.prototype.slice.call(document.querySelectorAll('.tb-switch'));
 							elems.forEach(function(html) {
@@ -178,7 +157,7 @@
 			});
 			});
 			//add row to table
-			function addRow(id,stdname,idNo) {
+			function addRow(id,stdname,idNo, flag) {
 				 var table = document.getElementById('studentList');
 				 var rowCount = table.rows.length;
 				 var row = table.insertRow(rowCount);
@@ -187,7 +166,7 @@
 				 var cell2 = row.insertCell(0);
 				 var regiNo = document.createElement("label");
 
-				 regiNo.innerHTML=idNo;
+				 regiNo.innerHTML=id ;
 				 cell2.appendChild(regiNo);
 				 var hdregi = document.createElement("input");
 				 hdregi.name="ids[]";
@@ -200,18 +179,23 @@
 				 name.innerHTML=stdname;
 				 cell4.appendChild(name);
 
-				 var cell5 = row.insertCell(2);
+				 var cell6 = row.insertCell(2);
+				 var dateBox = document.createElement("input");
+				 dateBox.type = "date";
+				 dateBox.required=true;
+				 dateBox.size="3";
+				 cell6.appendChild(dateBox);
+
+				 var cell5 = row.insertCell(3);
 				 var chkbox = document.createElement("input");
 				 chkbox.type = "checkbox";
-				 chkbox.checked=false;
+				 chkbox.checked=flag;
 				 chkbox.className="js-switch tb-switch";
 				 chkbox.name="registeredIds["+id+"]";
 				 chkbox.size="3";
 				 cell5.appendChild(chkbox);
+				 							
 			};
-			//make all checkbox checked
-			$('.allCheck').on('change',function() {
-				 $('.tb-switch').trigger('click');
-			});
+			
 			</script>
 			@endsection

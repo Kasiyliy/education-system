@@ -80,7 +80,6 @@ table {
         </tr>
         @foreach($students as $student)
         <tr>
-            <td colspan="2">{{$student['idNo']}}</td>
             <td colspan="2">{{$student['name']}}</td>
             <td >{{$student['m_written']}}</td>
             <td >{{$student['m_quiz']}}</td>

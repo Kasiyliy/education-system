@@ -12,15 +12,11 @@ class Subject extends Model {
    {
       parent::boot();
       static::deleting(function($subject) {
-         $subject->attendance()->delete();
          $subject->exams()->delete();
       });
    }
    public function department() {
       return $this->belongsTo('App\Department');
-   }
-   public function attendance() {
-      return $this->hasMany('App\Attendance','subject_id');
    }
    public function exams() {
       return $this->hasMany('App\Exam','subject_id');

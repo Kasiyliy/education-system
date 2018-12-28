@@ -48,8 +48,6 @@ class DepartmentController extends Controller {
 		$rules=[
         'name' => 'required',
 				'code' => 'required|unique:department,code',
-				'credit' => 'required|numeric',
-				'years' => 'required|numeric',
 				'description' => 'required|max:255'
 		];
 		$validator = Validator::make($data, $rules);
@@ -60,7 +58,7 @@ class DepartmentController extends Controller {
 		else {
                 $department = new Department;
                 $department->create($data);
-								$notification= array('title' => 'Data Store', 'body' => 'Department Created Succesfully.');
+								$notification= array('title' => 'Изменение', 'body' => 'Глобальный курс успешно добавлен');
                 return Redirect::route('department.create')->with("success",$notification);
     }
 
@@ -115,8 +113,6 @@ class DepartmentController extends Controller {
 		$rules=[
         'name' => 'required',
 				'code' => 'required',
-				'credit' => 'required|numeric',
-				'years' => 'required|numeric',
 				'description' => 'required|max:255'
 		];
 		$validator = Validator::make($data, $rules);
@@ -128,12 +124,12 @@ class DepartmentController extends Controller {
 						try {
                 $department = Department::findOrFail($id);
 								$department->fill($data)->save();
-								$notification= array('title' => 'Data Update', 'body' => 'Department Updated Succesfully.');
+								$notification= array('title' => 'Изменение', 'body' => 'Глобальный курс успешно изменен');
                 return Redirect::route('department.index')->with("success",$notification);
 						}
 						catch (Exception $e)
 						{
-							$notification= array('title' => 'Data Update', 'body' => "There is no record.");
+							$notification= array('title' => 'Изменение', 'body' => "Никаких записей нету");
 							return Redirect::route('department.index')->with("error",$notification);
 						}
     }
@@ -151,7 +147,7 @@ class DepartmentController extends Controller {
 	{
 		$department = Department::findOrFail($id);
 		$department->delete();
-		$notification= array('title' => 'Data Delete', 'body' => 'Department Deleted Succesfully.');
+		$notification= array('title' => 'Удаление', 'body' => 'Глобальный курс успешно удален');
 		return Redirect::route('department.index')->with("success",$notification);
 
 	}

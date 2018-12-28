@@ -17,13 +17,13 @@ class CreateRegistrationsTable extends Migration
             $table->string('levelTerm',20);
             $table->string('session',15);
             $table->unsignedInteger('students_id');
-            $table->integer('department_id')->unsigned();
+            $table->integer('subject_id')->unsigned();
             $table->foreign('students_id')
                          ->references('id')
                          ->on('students');
-            $table->foreign('department_id')
+            $table->foreign('subject_id')
                          ->references('id')
-                         ->on('department');
+                         ->on('subject');
             $table->timestamps();
             $table->softDeletes();
 

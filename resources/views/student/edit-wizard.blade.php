@@ -33,12 +33,6 @@
                 <div id="wizard" class="form_wizard wizard_horizontal">
                   <ul class="wizard_steps">
                     <li>
-                      <a href="#step-1">
-                        <span class="step_no">1</span>
-                        <span class="step_descr">Academic Information</span>
-                      </a>
-                    </li>
-                    <li>
                       <a href="#step-2">
                         <span class="step_no">2</span>
                         <span class="step_descr">
@@ -46,62 +40,7 @@
                                       </span>
                       </a>
                     </li>
-                    <li>
-                      <a href="#step-3">
-                        <span class="step_no">3</span>
-                        <span class="step_descr">
-                                          Guardian Information
-                                      </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#step-4">
-                        <span class="step_no">4</span>
-                        <span class="step_descr">Photograph
-                                      </span>
-                      </a>
-                    </li>
                   </ul>
-                  <div id="step-1">
-                    <div class="row">
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                          <label for="department_id">Department *:</label>
-                          {{ Form::select('department_id',$departments,$student->department_id,['class'=>'select2_single form-control has-feedback-left','tabindex'=>'-1','id'=>'department_id','disabled'=>'disabled']) }}
-                          <i class="fa fa-info form-control-feedback left" aria-hidden="true"></i>
-                            <span id="msg_department_id" class="text-danger" ></span>
-                          </div>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                          <label for="session">Session *:</label>
-                          <input type="text" id="session" class="form-control has-feedback-left" name="session" disabled='disabled' data-inputmask="'mask': '9999-9999'" value="{{$student->session}}"required />
-                          <i class="fa fa-clock-o form-control-feedback left" aria-hidden="true"></i>
-                            <span id="msg_session" class="text-danger" ></span>
-
-                      </div>
-
-
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 col-sm-4 col-xs-12">
-                            <label for="bncReg">BNC Reg. *:</label>
-                            <input type="text" id="bncReg" class="form-control has-feedback-left" name="bncReg"  value="{{$student->bncReg}}"required />
-                              <i class="fa fa-info form-control-feedback left" aria-hidden="true"></i>
-                                <span id="msg_bncReg" class="text-danger" ></span>
-                        </div>
-                        <div class="col-md-4 col-sm-4 col-xs-12">
-                            <label for="batchNo">Batch No *:</label>
-                            <input type="text" id="batchNo" class="form-control has-feedback-left" name="batchNo" value="{{$student->batchNo}}" required />
-                              <i class="fa fa-info form-control-feedback left" aria-hidden="true"></i>
-                                <span id="msg_batchNo" class="text-danger" ></span>
-                        </div>
-                        <div class="col-md-4 col-sm-4 col-xs-12">
-                            <label for="idNo">ID No *:</label>
-                            <input type="text" id="idNo" disabled="disabled" class="form-control has-feedback-left" name="idNo" value="{{$student->idNo}}" required />
-                              <i class="fa fa-info form-control-feedback left" aria-hidden="true"></i>
-                                <span id="msg_idNo" class="text-danger" ></span>
-                        </div>
-
-                      </div>
-                  </div>
 
                   <div id="step-2">
                     <div class="row">
@@ -142,47 +81,6 @@
                           @endif
                           </p>
                       </div>
-                      <div class="col-md-4 col-sm-6 col-xs-12">
-                          <label for="bloodgroup">Blood Group *:</label><br>
-                          <?php  $data=[
-                          ''=>'',
-                          'A+'=>'A+',
-                          'A-'=>'A-',
-                          'B+'=>'B+',
-                          'B-'=>'B-',
-                          'AB+'=>'AB+',
-                          'AB-'=>'AB-',
-                          'O+'=>'O+',
-                          'O-'=>'O-'
-                          ];?>
-                          {{ Form::select('bloodgroup',$data,$student->bloodgroup,['class'=>'select2_single form-control has-feedback-left','id'=>'bloodgroup','tabindex'=>'-1'])}}
-                          <i class="fa fa-info form-control-feedback left" aria-hidden="true"></i>
-                          <span id="msg_bloodgroup" class="text-danger" ></span>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                          <label for="religion">Religion *:</label>
-                          <?php  $data=[
-                          'Islam'=>'Islam',
-                          'Hindu'=>'Hindu',
-                          'Cristian'=>'Cristian',
-                          'Buddhist'=>'Buddhist',
-                          'Other'=>'Other'
-
-                          ];?>
-                          {{ Form::select('religion',$data,$student->religion,['class'=>'select2_single form-control has-feedback-left','id'=>'religion','tabindex'=>'-1'])}}
-                            <i class="fa fa-info form-control-feedback left" aria-hidden="true"></i>
-                            <span id="msg_religion" class="text-danger" ></span>
-
-                      </div>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                          <label for="nationality">Nationality *:</label>
-                          <input type="text" id="nationality" class="form-control has-feedback-left" value="{{$student->nationality}}" name="nationality" required />
-                            <i class="fa fa-info form-control-feedback left" aria-hidden="true"></i>
-                            <span id="msg_nationality" class="text-danger" ></span>
-                      </div>
-
                     </div>
                     <div class="row">
 
@@ -201,92 +99,6 @@
                         </div>
                     </div>
 
-                  </div>
-                  <div id="step-3">
-                    <div class="row">
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                          <label for="fatherName">Father Name *:</label>
-                          <input type="text" id="fatherName" class="form-control has-feedback-left" value="{{$student->fatherName}}" name="fatherName" required />
-                          <i class="fa fa-user form-control-feedback left" aria-hidden="true"></i>
-                          <span id="msg_fatherName" class="text-danger" ></span>
-
-                      </div>
-
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                          <label for="fatherMobileNo">Father Mobile No *:</label>
-                          <input type="text" id="fatherMobileNo" value="{{$student->fatherMobileNo}}" class="form-control has-feedback-left" data-inputmask="'mask': '880 9999999999'" name="fatherMobileNo" required />
-                          <i class="fa fa-phone form-control-feedback left" aria-hidden="true"></i>
-                          <span id="msg_fatherMobileNo" class="text-danger" ></span>
-
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                          <label for="motherName">Mother Name *:</label>
-                          <input type="text" id="motherName" class="form-control has-feedback-left" value="{{$student->motherName}}" name="motherName" required />
-                          <i class="fa fa-user form-control-feedback left" aria-hidden="true"></i>
-                          <span id="msg_motherName" class="text-danger" ></span>
-
-                      </div>
-
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                          <label for="motherMobileNo">Mother Mobile No *:</label>
-                          <input type="text" id="motherMobileNo" value="{{$student->motherMobileNo}}" class="form-control has-feedback-left" data-inputmask="'mask': '880 9999999999'" name="motherMobileNo" required />
-                          <i class="fa fa-phone form-control-feedback left" aria-hidden="true"></i>
-                          <span id="msg_motherMobileNo" class="text-danger" ></span>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                          <label for="localGuardian">Local Guardian Name :</label>
-                          <input type="text" id="localGuardian" value="{{$student->localGuardian}}" class="form-control has-feedback-left" name="localGuardian" />
-                          <i class="fa fa-user form-control-feedback left" aria-hidden="true"></i>
-
-                      </div>
-
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                          <label for="localGuardianMobileNo">Local Guardian Mobile No :</label>
-                          <input type="text" id="localGuardianMobileNo" value="{{$student->localGuardianMobileNo}}" class="form-control has-feedback-left" data-inputmask="'mask': '880 9999999999'" name="localGuardianMobileNo"  />
-                          <i class="fa fa-phone form-control-feedback left" aria-hidden="true"></i>
-
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                          <label for="presentAddress">Present Address *:</label>
-                          <textarea id="presentAddress" required="required" class="form-control has-feedback-left" name="presentAddress">{{$student->presentAddress}}</textarea>
-                           <i class="fa fa-info form-control-feedback left" aria-hidden="true"></i>
-                           <span id="msg_pra" class="text-danger" ></span>
-                      </div>
-
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                          <label for="parmanentAddress">Parmanent Address *:</label>
-                          <textarea id="parmanentAddress" required="required" class="form-control has-feedback-left" name="parmanentAddress">{{$student->parmanentAddress}}
-                          </textarea>
-                         <i class="fa fa-info form-control-feedback left" aria-hidden="true"></i>
-                         <span id="msg_paa" class="text-danger" ></span>
-                        </div>
-                    </div>
-                  </div>
-                  <div id="step-4">
-
-                    <div class="row">
-                      <div class="col-md-4">
-
-                      </div>
-
-                      <div class="col-md-4">
-                      <label for="parmanentAddress">Photograph *:</label>
-                          <input type="file" id="photo" required="required" class="form-control has-feedback-left" name="photo">
-                          <i class="fa fa-file-image-o form-control-feedback left" aria-hidden="true"></i>
-                          <span id="msg_photo" class="text-danger" ></span>
-
-                      </div>
-                      <div class="col-md-4">
-
-                      </div>
-                    </div>
-                    <br><br>
                   </div>
 
                 </div>

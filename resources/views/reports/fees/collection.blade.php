@@ -59,24 +59,6 @@
                     <th>Pay Date</th>
                   </tr>
                 </thead>
-                <tbody>
-                  @foreach($fees as $fee)
-                  <tr>
-                    <td>0{{$fee->id}}</td>
-                    <td>{{$fee->payableAmount}}</td>
-                    <td>{{$fee->paidAmount}}</td>
-                    <td>{{$fee->dueAmount}}</td>
-                    <td>{{$fee->payDate->format('F j,Y')}}</td>
-                  </tr>
-                    @endforeach
-                    <tr>
-                      <td>900000000000000009</td>
-                      <td>Total Payable: <strong><i class="blue">{{$totals->payTotal}}</i></strong> tk.</td>
-                      <td>Total Paid: <strong><i class="blue">{{$totals->paiTotal}}</i></strong> tk.</td>
-                      <td>Total Due: <strong><i class="blue">{{$totals->dueamount}}</i></strong> tk.</td>
-                      <td>-------------</td>
-                      </tr>
-                  </tbody>
                 </table>
               </div>
             </div>

@@ -29,7 +29,7 @@
           <section class="login_content">
             <form name="login" method="post" action="{{URL::route('user.login')}}">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <h1>Login </h1>
+              <h1>Логин </h1>
               <div>
                 <input type="text" class="form-control" name="login" placeholder="Username" required="" />
               </div>
@@ -37,7 +37,7 @@
                 <input type="password" class="form-control" name="password" placeholder="Password" required="" />
               </div>
               <div>
-								<button type="submit" class="btn btn-primary btn-lg">Login <i class="fa fa-2x fa-sign-in"></i></button>
+								<button type="submit" class="btn btn-primary btn-lg">Войти <i class="fa fa-2x fa-sign-in"></i></button>
               </div>
 
               <div class="clearfix"></div>

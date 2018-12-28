@@ -13,8 +13,6 @@ class Exam extends Model
     protected $table = 'exams';
     protected $fillable = [
         'department_id',
-        'session',
-        'levelTerm',
         'subject_id',
         'students_id',
         'exam',

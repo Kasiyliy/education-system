@@ -37,7 +37,7 @@
                 <form name="login" method="post" action="{{URL::route('user.login')}}">
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <input type="hidden" name="login" value="{{$user->login}}">
-								<input type="password" class="form-control text-sm" autofocus placeholder="Enter your password" name="password">
+								<input type="password" class="form-control text-sm" autofocus placeholder="Введите пароль" name="password">
 								<span class="input-group-btn">
 									<button type="submit" class="btn btn-success" type="button" href="">
 										<i class="fa fa-arrow-right"></i>

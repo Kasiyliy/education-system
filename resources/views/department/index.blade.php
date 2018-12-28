@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Department')
+@section('title', 'Глобальный курс')
 @section('extrastyle')
 <link href="{{ URL::asset('assets/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
 <link href="{{ URL::asset('assets/css/responsive.dataTables.min.css')}}" rel="stylesheet">
@@ -19,7 +19,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Department<small> All departments information.</small></h2>
+                    <h2>Глобальный курс<small> Информация о глобальных курсах</small></h2>
 
                     <div class="clearfix"></div>
                   </div>
@@ -27,12 +27,10 @@
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>Name</th>
-                          <th>Code</th>
-                          <th>Credit</th>
-                          <th>Years</th>
-                          <th>Description</th>
-                          <th>Actions</th>
+                          <th>Название</th>
+                          <th>Код глобального курса</th>
+                          <th>Краткое описание глобального курса</th>
+                          <th>Действия</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -40,8 +38,6 @@
                         <tr>
                           <td>{{$department->name}}</td>
                           <td>{{$department->code}}</td>
-                          <td>{{$department->credit}}</td>
-                          <td>{{$department->years}}</td>
                           <td>{{$department->description}}</td>
                           <td>
                          <a title='Update' class='btn btn-info btn-xs btnUpdate' id='{{$department->id}}' href='{{URL::route('department.edit',$department->id)}}'> <i class="glyphicon glyphicon-check icon-white"></i></a>

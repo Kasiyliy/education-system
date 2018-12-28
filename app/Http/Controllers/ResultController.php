@@ -22,16 +22,6 @@ class ResultController extends Controller
         $this->middleware('teacher');
 
     }
-    protected $semesters=[
-    'L1T1' => '1st Year 1st Semester',
-    'L1T2' => '1st Year 2nd Semester',
-    'L2T1' => '2nd Year 1st Semester',
-    'L2T2' => '2nd Year 2nd Semester',
-    'L3T1' => '3rd Year 1st Semester',
-    'L3T2' => '3rd Year 2nd Semester',
-    'L4T1' => '4th Year 1st Semester',
-    'L4T2' => '4th Year 2nd Semester'
-    ];
     protected $exams=[
     'Midterm Exam' => 'Midterm Exam',
     'Final Exam' => 'Final Exam',
@@ -43,17 +33,14 @@ class ResultController extends Controller
         $semesters= $this->semesters;
 
         $departments = Department::select('id', 'name')->orderby('name', 'asc')->lists('name', 'id');
-        $sessions=Student::select('session', 'session')->distinct()->lists('session', 'session');
 
-        return view('reports.result.subject', compact('departments', 'sessions', 'semesters', 'subjects'));
+        return view('reports.result.subject', compact('departments', 'subjects'));
 
     }
     public function postSubject(Request $request)
     {
         $allExams = Exam::select('exam')
         ->where('department_id', $request->input('department_id'))
-        ->where('session', $request->input('session'))
-        ->where('levelTerm', $request->input('levelTerm'))
         ->where('subject_id', $request->input('subject_id'))
         ->groupBy('exam')
         ->get();
@@ -63,18 +50,14 @@ class ResultController extends Controller
         }
         $Midterm=Exam::with(
             array('student' =>  function ($query) {
-                $query->select('id', 'idNo', 'firstName', 'middleName', 'lastName');
+                $query->select('id', 'firstName', 'middleName', 'lastName');
             })
         )
         ->where('department_id', $request->input('department_id'))
-        ->where('session', $request->input('session'))
-        ->where('levelTerm', $request->input('levelTerm'))
         ->where('subject_id', $request->input('subject_id'))
         ->where('exam', 'Midterm Exam')
         ->get();
         $Final=Exam::where('department_id', $request->input('department_id'))
-        ->where('session', $request->input('session'))
-        ->where('levelTerm', $request->input('levelTerm'))
         ->where('subject_id', $request->input('subject_id'))
         ->where('exam', 'Final Exam')
         ->get();
@@ -82,15 +65,11 @@ class ResultController extends Controller
 
         $institute = Institute::select('name')->first();
         $department = Department::select('name')->where('id', $request->input('department_id'))->first();
-        $semester = $this->semesters[$request->input('levelTerm')];
-        $session =$request->input('session');
         $subject = Subject::select('name', 'code')->where('id', $request->input('subject_id'))->first();
         $date=$Final[0]->created_at;
         $metaDatas= [
         'institute' => $institute->name,
         'department' => $department->name,
-        'semester' => $semester,
-        'session' => $session,
         'subject' => $subject->code.'-'.$subject->name,
         'monthYear' => $date->format('F/Y'),
         ];
@@ -106,8 +85,7 @@ class ResultController extends Controller
         $students=[];
         $exams = $this->exams;
         $departments = Department::select('id', 'name')->orderby('name', 'asc')->lists('name', 'id');
-        $sessions=Student::select('session', 'session')->distinct()->lists('session', 'session');
-        return view('reports.result.student', compact('departments', 'sessions', 'students', 'exams'));
+        return view('reports.result.student', compact('departments', 'students', 'exams'));
 
     }
     public function postStudent(Request $request)
@@ -115,7 +93,6 @@ class ResultController extends Controller
         //first year code start
         $l1t1=Exam::with('subject')
         ->where('department_id', $request->input('department_id'))
-        ->where('session', $request->input('session'))
         ->where('students_id', $request->input('students_id'))
         ->where('exam', $request->input('exam'))
         ->where('levelTerm', 'l1t1')
@@ -129,10 +106,8 @@ class ResultController extends Controller
         $L1T1data=(object)$this->dataManupulator($l1t1);
         $l1t2=Exam::with('subject')
         ->where('department_id', $request->input('department_id'))
-        ->where('session', $request->input('session'))
         ->where('students_id', $request->input('students_id'))
         ->where('exam', $request->input('exam'))
-        ->where('levelTerm', 'l1t2')
         ->get();
         //check if first year second semester request exam data present
         if(!count($l1t2)) {
@@ -152,10 +127,8 @@ class ResultController extends Controller
         //First Year data colection code end
         $l2t1=Exam::with('subject')
         ->where('department_id', $request->input('department_id'))
-        ->where('session', $request->input('session'))
         ->where('students_id', $request->input('students_id'))
         ->where('exam', $request->input('exam'))
-        ->where('levelTerm', 'l2t1')
         ->get();
         //check if second year first semester request exam data present
         if(!count($l2t1)) {
@@ -165,10 +138,8 @@ class ResultController extends Controller
         $L2T1data=(object)$this->dataManupulator($l2t1);
         $l2t2=Exam::with('subject')
         ->where('department_id', $request->input('department_id'))
-        ->where('session', $request->input('session'))
         ->where('students_id', $request->input('students_id'))
         ->where('exam', $request->input('exam'))
-        ->where('levelTerm', 'l2t2')
         ->get();
         //check if second year second semester request exam data present
         if(!count($l2t2)) {
@@ -187,10 +158,8 @@ class ResultController extends Controller
         //Second Year data colection code end
         $l3t1=Exam::with('subject')
         ->where('department_id', $request->input('department_id'))
-        ->where('session', $request->input('session'))
         ->where('students_id', $request->input('students_id'))
         ->where('exam', $request->input('exam'))
-        ->where('levelTerm', 'l3t1')
         ->get();
         //check if third year first semester request exam data present
         if(!count($l3t1)) {
@@ -273,21 +242,10 @@ class ResultController extends Controller
         'grade' =>$fGrade,
         'result' => $fResult,
         ];
-        $institute = Institute::select('name')->first();
-        $department = Department::select('name')->where('id', $request->input('department_id'))->first();
-        $session =$request->input('session');
         $student= Student::findOrFail($request->input('students_id'));
         $metaDatas= [
-        'institute' => $institute->name,
-        'department' => $department->name,
-        'session' => $session,
         'name'    => $student->firstName.' '.$student->middleName.' '.$student->lastName,
-        'fatherName' => $student->fatherName,
-        'motherName' => $student->motherName,
         'dob' => $student->dob->format('F j,Y'),
-        'idNo' => $student->idNo,
-        'bncReg' => $student->bncReg,
-        'exam' => $request->input('exam')
         ];
         $metaData= (object)$metaDatas;
         return view(
@@ -314,7 +272,6 @@ class ResultController extends Controller
             $toalMarks = round((($midMarks+$finalMarks)/2), 0);
             $grade=$this->gradeCalculator($toalMarks);
             $singleSTD =[
-            'idNo' => $student->student->idNo,
             'name' => $student->student->firstName.' '.$student->student->middleName.' '.$student->student->lastName,
             'm_written' => $student->raw_score,
             'm_quiz' => $student->percentage,

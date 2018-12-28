@@ -14,7 +14,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>User<small> user information.</small></h2>
+                    <h2>Пользователь<small> Информация о пользователе.</small></h2>
 
                     <div class="clearfix"></div>
                   </div>
@@ -25,7 +25,7 @@
                       <div class="row">
                         <div class="col-md-4">
                       <div class="form-group">
-                        <label class="control-label" for="firstname">First Name <span class="required">*</span>
+                        <label class="control-label" for="firstname">Имя <span class="required">*</span>
                         </label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-info blue"></i></span>
@@ -37,7 +37,7 @@
                     </div>
                       <div class="col-md-4">
                       <div class="form-group">
-                        <label class="control-label" for="lastname">Last Name <span class="required">*</span>
+                        <label class="control-label" for="lastname">Фамилия <span class="required">*</span>
                         </label>
                         <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-info blue"></i></span>
@@ -49,7 +49,7 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label class="control-label" for="userName">User Name<span class="required">*</span>
+                        <label class="control-label" for="userName">Логин<span class="required">*</span>
                         </label>
                         <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-info blue"></i></span>
@@ -63,7 +63,7 @@
                     <div class="row">
                       <div class="col-md-4">
                       <div class="form-group">
-                        <label class="control-label" for="group">Group<span class="required">*</span>
+                        <label class="control-label" for="group">Группа<span class="required">*</span>
                         </label>
                         <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-info blue"></i></span>
@@ -75,7 +75,7 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label class="control-label" for="email">Email
+                        <label class="control-label" for="email">E-mail
                         </label>
                         <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-envelope blue"></i></span>
@@ -87,7 +87,7 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label class="control-label" for="description">Description
+                        <label class="control-label" for="description">Описания
                         </label>
                         <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-info blue"></i></span>
@@ -100,7 +100,7 @@
                   </div>
 
                       <div class="row">
-                          <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-refresh"> Update Info</i></button>
+                          <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-refresh"> Обновить</i></button>
                       </div>
                     </form>
 
@@ -112,7 +112,7 @@
                       <div class="row">
                         <div class="col-md-4">
                       <div class="form-group">
-                        <label class="control-label" for="oldpassword">Current Password <span class="required">*</span>
+                        <label class="control-label" for="oldpassword">Текущий пароль<span class="required">*</span>
                         </label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-key blue"></i></span>
@@ -123,7 +123,7 @@
                     </div>
                       <div class="col-md-4">
                       <div class="form-group">
-                        <label class="control-label" for="password">New Password<span class="required">*</span>
+                        <label class="control-label" for="password">Новый пароль<span class="required">*</span>
                         </label>
                         <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-key blue"></i></span>
@@ -134,7 +134,7 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label class="control-label" for="confirmpassword">Confirm Password<span class="required">*</span>
+                        <label class="control-label" for="confirmpassword">Подтвердить новый пароль<span class="required">*</span>
                         </label>
                         <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-key blue"></i></span>
@@ -145,7 +145,7 @@
                     </div>
                   </div>
                   <div class="row">
-                      <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-refresh"> Update Password</i></button>
+                      <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-refresh"> Изменить пароль</i></button>
                   </div>
                 </form>
                   </div>

@@ -58,6 +58,7 @@ class instituteController extends Controller {
 		if ($validator->fails())
 		{
 				return Redirect::to('/institute')->withinput()->withErrors($validator);
+
 		}
 		else {
 
@@ -71,7 +72,7 @@ class instituteController extends Controller {
   		  $institue->phoneNo = $data['phoneNo'];
   			$institue->address = $data['address'];
   		 	$institue->save();
-        $notification= array('title' => 'Data Store', 'body' => 'Institute  Information saved.');
+        $notification= array('title' => 'Изменения', 'body' => 'Информация успешно изменена.');
   			return redirect('/institute')->with('success',$notification);
 
 	}

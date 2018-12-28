@@ -18,7 +18,6 @@ class StudentTransformer extends TransformerAbstract
     return [
 
       'id' => (int)$students->student->id,
-      'idNo' => $students->student->idNo,
       'name' => $students->student->firstName.' '.$students->student->middleName.' '.$students->student->lastName,
     ];
   }

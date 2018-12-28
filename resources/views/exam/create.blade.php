@@ -51,28 +51,6 @@
                            </div>
                         </div>
 
-                        <div class="col-md-4">
-                           <div class="item form-group">
-                              <label class="control-label" for="session">Session <span class="required">*</span>
-                              </label>
-                              {!!Form::select('session', $sessions, null, ['placeholder' => 'Pick a Session','class'=>'select2_single session form-control col-md-7 col-xs-12 has-feedback-left','required'=>'required' ,'id'=>'session'])!!}
-                              <i class="fa fa-clock-o form-control-feedback left" aria-hidden="true"></i>
-                              <span class="text-danger">{{ $errors->first('session') }}</span>
-
-                           </div>
-                        </div>
-                        <div class="col-md-4">
-                           <div class="item form-group">
-                              <label class="control-label" for="levelTerm">Semester <span class="required">*</span>
-                              </label>
-
-                              {!!Form::select('levelTerm', $semesters, null, ['placeholder' => 'Pick a Semester','class'=>'select2_single semester form-control has-feedback-left', 'id'=>'levelTerm','required'=>'required'])!!}
-                              <i class="fa fa-info form-control-feedback left" aria-hidden="true"></i>
-                              <span class="text-danger">{{ $errors->first('levelTerm') }}</span>
-
-                           </div>
-                        </div>
-
                      </div>
                      <div class="row">
 
@@ -196,33 +174,12 @@
                   placeholder: "Pick a student",
                   allowClear: true
                });
-               $(".semester").select2({
-                  placeholder: "Pick a semester",
-                  allowClear: true
-               });
-               $(".session").select2({
-                  placeholder: "Pick a session",
-                  allowClear: true
-               });
                //get subject lists
-               $('#levelTerm').on('change',function (){
+               $('#department_id').on('change',function (){
                   var dept= $('#department_id').val();
-                  var session = $('#session').val();
-                  var semester = $(this).val();
-                  if(!dept || !session){
-                     new PNotify({
-                        title: 'Validation Error!',
-                        text: 'Please Pic A Department or Write session!',
-                        type: 'error',
-                        styling: 'bootstrap3'
-                     });
-                  }
-                  else {
-                     //for students
-                     populateStudentGrid(dept,session,semester);
                      //for subjects
                      $.ajax({
-                        url:'/subject/'+dept+'/'+semester,
+                        url:'/subject/'+dept+'/1',
                         type: 'get',
                         dataType: 'json',
                         success: function(data) {
@@ -251,13 +208,13 @@
                            });
                         }
                      });
-                  }
                });
                //fucntions
-               function populateStudentGrid(dept,session,semester)
-               {
-                  $.ajax({
-                     url:'/students/'+dept+'/'+session+'/'+semester,
+               
+               $('#subject_id').on('change',function (){
+               var subj= $('#subject_id').val();
+               $.ajax({
+                     url:'/students/'+subj+'/1/1',
                      type: 'get',
                      dataType: 'json',
                      success: function(data) {
@@ -271,7 +228,7 @@
                            $('#btnsave').hide();
                         }
                         $.each(data.students.data, function(key, value) {
-                           addRow(value.id,value.name,value.idNo);
+                           addRow(value.id,value.name);
                         });
                         var elems = Array.prototype.slice.call(document.querySelectorAll('.tb-switch'));
                         elems.forEach(function(html) {
@@ -292,19 +249,15 @@
                         });
                      }
                   });
-               }
+               });
                //add row to table
-               function addRow(id,stdname,idNo) {
+               function addRow(id,stdname) {
                   var table = document.getElementById('studentList');
                   var rowCount = table.rows.length;
                   var row = table.insertRow(rowCount);
 
 
                   var cell0 = row.insertCell(0);
-                  var regiNo = document.createElement("label");
-
-                  regiNo.innerHTML=idNo;
-                  cell0.appendChild(regiNo);
                   var hdregi = document.createElement("input");
                   hdregi.name="ids[]";
                   hdregi.value=id;

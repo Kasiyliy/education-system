@@ -34,29 +34,12 @@
                         </div>
                      </div>
                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="session">Session <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                           {!!Form::select('session', $sessions, null, ['placeholder' => 'Pick a Session','class'=>'select2_single session form-control col-md-7 col-xs-12 has-feedback-left','required'=>'required' ,'id'=>'session'])!!}
-                           <i class="fa fa-clock-o form-control-feedback left top-25" aria-hidden="true"></i>
-                           <span class="text-danger">{{ $errors->first('session') }}</span>                       </div>
-                     </div>
-                     <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="students_id">Student <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                            {!!Form::select('students_id', $students, null, ['placeholder' => 'Pick a Student','class'=>'select2_single student form-control col-md-7 col-xs-12 has-feedback-left','required'=>'required' ,'id'=>'students_id'])!!}
                            <i class="fa fa-user form-control-feedback left top-25" aria-hidden="true"></i>
                            <span class="text-danger">{{ $errors->first('students_id') }}</span>
-                        </div>
-                     </div>
-                     <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="levelTerm">Semester <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                           {!!Form::select('levelTerm', $semesters, null, ['placeholder' => 'Pick a Semester','class'=>'select2_single semester form-control col-md-7 col-xs-12 has-feedback-left','required'=>'required'])!!}
-                           <i class="fa fa-info form-control-feedback left top-25" aria-hidden="true"></i>
-                           <span class="text-danger">{{ $errors->first('levelTerm') }}</span>
                         </div>
                      </div>
 

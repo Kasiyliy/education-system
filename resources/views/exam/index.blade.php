@@ -47,28 +47,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-2">
-                                        <div class="item form-group">
-                                            <label class="control-label" for="session">Session <span class="required">*</span>
-                                            </label>
-                                            {!!Form::select('session', $sessions, $session, ['placeholder' => 'Pick a Session','class'=>'select2_single session form-control col-md-7 col-xs-12 has-feedback-left','required'=>'required' ,'id'=>'session'])!!}
-                                            <i class="fa fa-clock-o form-control-feedback left" aria-hidden="true"></i>
-                                              <span class="text-danger">{{ $errors->first('session') }}</span>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="item form-group">
-                                            <label class="control-label" for="levelTerm">Semester <span class="required">*</span>
-                                            </label>
-
-                                            {!!Form::select('levelTerm', $semesters, $selectSem, ['placeholder' => 'Pick a Semester','class'=>'select2_single semester form-control col-md-7 col-xs-12 has-feedback-left', 'id'=>'levelTerm','required'=>'required'])!!}
-                                            <i class="fa fa-info form-control-feedback left" aria-hidden="true"></i>
-                                            <span class="text-danger">{{ $errors->first('levelTerm') }}</span>
-
-                                        </div>
-                                    </div>
-
                                 </div>
                                 <div class="row">
 
@@ -116,8 +94,6 @@
                                         <tbody>
                                             @foreach($marks as $mark)
                                             <tr>
-
-                                                <td>{{$mark['idNo']}}</td>
                                                 <td>{{$mark['name']}}</td>
                                                 <td>{{$mark['raw_score']}}</td>
                                                 <td>{{$mark['percentage']}}</td>

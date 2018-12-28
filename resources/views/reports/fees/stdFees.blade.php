@@ -78,8 +78,6 @@ h3{
         <td colspan="2">{{$metaData->name}}</td>
         <td><strong>Date of birth:</strong></td>
         <td colspan="2"> {{$metaData->dob}}</td>
-        <td><strong>Id No:</strong></td>
-        <td colspan="2">{{$metaData->idNo}}</td>
       </tr>
       <tr>
         <td><strong>BNC Reg.</strong></td>
@@ -112,17 +110,6 @@ h3{
               <th>Pay Date</th>
             </tr>
           </thead>
-          <tbody>
-            @foreach($fees as $fee)
-            <tr>
-              <td>0{{$fee->id}}</td>
-              <td>{{$fee->payableAmount}}</td>
-              <td>{{$fee->paidAmount}}</td>
-              <td>{{$fee->dueAmount}}</td>
-              <td>{{$fee->payDate->format('F j,Y')}}</td>
-            </tr>
-              @endforeach
-            </tbody>
           </table>
         </div>
       </div>

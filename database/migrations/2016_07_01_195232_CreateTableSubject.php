@@ -19,7 +19,6 @@ class CreateTableSubject extends Migration {
 			$table->string('code',20)->unique;
 			$table->string('credit',20);
 			$table->string('description',250);
-			$table->string('levelTerm',20);
 			$table->timestamps();
 			$table->softDeletes();
       $table->integer('department_id')->unsigned();

@@ -11,10 +11,9 @@ class Registration extends Model
    protected $dates = ['created_at','updated_at'];
    protected $table = 'registrations';
    protected $fillable = [
-      'levelTerm',
-      'department_id',
+      'subject_id',
       'students_id',
-      'session'
+      'deleted_at',
    ];
 
    public function department() {

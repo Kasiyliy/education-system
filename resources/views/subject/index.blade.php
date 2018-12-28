@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Subject')
+@section('title', 'Под курсы')
 @section('extrastyle')
 <link href="{{ URL::asset('assets/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
 <link href="{{ URL::asset('assets/css/responsive.dataTables.min.css')}}" rel="stylesheet">
@@ -19,7 +19,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Subject<small> All Subjects information.</small></h2>
+                    <h2>Под курс<small> Информация обо всех под курсах.</small></h2>
 
                     <div class="clearfix"></div>
                   </div>
@@ -31,7 +31,6 @@
                           <th>Code</th>
                           <th>Credit</th>
                           <th>Department</th>
-                          <th>Semester</th>
                           <th>Description</th>
                           <th>Actions</th>
                         </tr>
@@ -43,7 +42,6 @@
                           <td>{{$subject->code}}</td>
                           <td>{{$subject->credit}}</td>
                           <td>{{$subject->department->name}}</td>
-                          <td>{{$semesters[$subject->levelTerm]}}</td>
                           <td>{{$subject->description}}</td>
                           <td>
                          <a title='Update' class='btn btn-info btn-xs btnUpdate' id='{{$subject->id}}' href='{{URL::route('subject.edit',$subject->id)}}'> <i class="glyphicon glyphicon-check icon-white"></i></a>
