@@ -248,25 +248,28 @@ class StudentController extends Controller {
 		$data=$request->all();
 		$rules=[
 			'subject_id' => 'required',
-			//	'ids' => 'required',
-			//'registeredIds' => 'required',
 		];
 		$validator = Validator::make($data, $rules);
-		//$errors=$validator->messages()->toArray();
 		if ($validator->fails()){
 			return back()->withErrors($validator);
-			// return Response()->json([
-			// 	'error' => true,
-			// 	'message' => $errors
-			// ], 400);
 		}
 		if(!$request->exists('ids') || !count($data['ids']) || !$request->exists('registeredIds') || !count($data['registeredIds'])){
 			$validator->errors()->add('Студент', 'Пожалуйста выберите хотя бы одного студента!');
 			return back()->withErrors($validator);
 		}
+		if(!$request->exists('dateToLearn') || $data['dateToLearn'] == null ){
+			$validator->errors()->add('Дата','Выберите дату по которое студент будет проходить курс');
+			return back()->withErrors($validator);
+		}
+		$nowadate = Carbon::now();
+		if($data['dateToLearn'] < $nowadate){
+			$validator->errors()->add('Студент', 'Вы выбрали срок который уже прошел!');
+			return back()->withErrors($validator);
+		}
 		$toBeRegisterStudents = [] ;
 		$alreadyRegistered = 0;
 		$newRegistration = 0;
+		$dateToLearn = $data['dateToLearn'];
 		foreach ($data['ids'] as  $id){
 			$isExists = false;
 			$isWantTo = $this->isWantToRegister($id,$data['registeredIds']);
@@ -281,29 +284,19 @@ class StudentController extends Controller {
 					$toBeRegisterStudents [] = [
 						'subject_id' => $data['subject_id'],
 						'students_id' => $id,
+						'dateToLearn' => $dateToLearn,
 						'created_at' => Carbon::now(),
 						'updated_at' => Carbon::now()
 					];
+					
 					$newRegistration +=1;
 				}
 			}
 		}
-		// $isExists = Registration::where('department_id',$data['department_id'])
-		// ->where('students_id',$data['students_id'])
-		// ->where('levelTerm',$data['levelTerm'])->first();
-		//
-		// if($isExists){
-		// 	return Response()->json([
-		// 		'error' => true,
-		// 		'message' => ['Data Exists'=>"This student already registered!"]
-		// 	], 400);
-		// }
 		Registration::insert($toBeRegisterStudents);
 		$notification= array('title' => ' Добавление ', 'body' => $newRegistration.' Студент успешно зарегестрирован на под курс.');
-		// return Response()->json([
-		// 	'success' => true,
-		// 	'message' => $notification
-		// ], 200);
+		
+
 		if($alreadyRegistered){
 			$notification= array('title' => ' Добавление ', 'body' => $newRegistration.' студентов успешно зарегестрировано и '.$alreadyRegistered.' уже были зарегестрированы!');
 		}

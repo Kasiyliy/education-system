@@ -179,12 +179,17 @@
 				 name.innerHTML=stdname;
 				 cell4.appendChild(name);
 
+				
 				 var cell6 = row.insertCell(2);
 				 var dateBox = document.createElement("input");
 				 dateBox.type = "date";
-				 dateBox.required=true;
-				 dateBox.size="3";
-				 cell6.appendChild(dateBox);
+				 dateBox.onchange = function(){
+					dateBox.value = dateBox.value;
+				 dateBox.name = "dateToLearn";
+				};
+				cell6.appendChild(dateBox);
+				
+				
 
 				 var cell5 = row.insertCell(3);
 				 var chkbox = document.createElement("input");
@@ -194,8 +199,11 @@
 				 chkbox.name="registeredIds["+id+"]";
 				 chkbox.size="3";
 				 cell5.appendChild(chkbox);
-				 							
+
 			};
-			
+			//make all checkbox checked
+			$('.allCheck').on('change',function() {
+				 $('.tb-switch').trigger('click');
+			});
 			</script>
 			@endsection
