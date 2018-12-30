@@ -24,7 +24,12 @@ class HomeController extends Controller {
 
 	public function index()
 	{
-		$error = Session::get('error');
+        $user= auth()->user();
+        if($user){
+            return redirect()->to('/dashboard');
+        }
+
+        $error = Session::get('error');
 		$institute=Institute::select('name')->first();
 		if(!$institute)
 		{

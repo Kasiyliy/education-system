@@ -284,7 +284,7 @@ class StudentController extends Controller {
 					$toBeRegisterStudents [] = [
 						'subject_id' => $data['subject_id'],
 						'students_id' => $id,
-						'dateToLearn' => $dateToLearn,
+						'date_to_learn' => $dateToLearn,
 						'created_at' => Carbon::now(),
 						'updated_at' => Carbon::now()
 					];
@@ -344,6 +344,5 @@ class StudentController extends Controller {
 		], 200);
 
 	}
-
 
 }
