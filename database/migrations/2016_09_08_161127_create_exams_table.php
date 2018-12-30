@@ -20,7 +20,7 @@ class CreateExamsTable extends Migration
                 $table->string('levelTerm', 20);
                 $table->unsignedInteger('subject_id');
                 $table->unsignedInteger('students_id');
-                $table->string('exam');
+                $table->string('quiz');
                 $table->decimal('raw_score', 6, 2)->default(0.00);
                 $table->decimal('percentage', 6, 2)->default(0.00);
                 $table->decimal('weight', 6, 2)->default(0.00);

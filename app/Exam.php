@@ -15,7 +15,7 @@ class Exam extends Model
         'department_id',
         'subject_id',
         'students_id',
-        'exam',
+        'quiz',
         'raw_score',
         'percentage',
         'weight',

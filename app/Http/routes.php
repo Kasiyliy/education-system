@@ -45,13 +45,13 @@ Route::group(['middleware' => 'auth'], function()
   Route::get('registered-students',[ 'as' => 'student.registration.index','uses'=>'StudentController@regIndex']);
   Route::post('registered-students',[ 'as' => 'student.registration.list','uses'=>'StudentController@regList']);
 
-  Route::resource('exam','ExamController');
-  Route::post('exam/by-subject',[ 'as' => 'exam.index2','uses'=>'ExamController@index2']);
+
+  Route::get('quiz/by-subject',[ 'as' => 'quiz.index2','uses'=>'QuizController@index2']);
   Route::get('result-subject',[ 'as' => 'result.subject','uses'=>'ResultController@getSubject']);
   Route::post('result-subject',[ 'as' => 'result.subject.post','uses'=>'ResultController@postSubject']);
   Route::get('result-student',[ 'as' => 'result.individual','uses'=>'ResultController@getStudent']);
   Route::post('result-student',[ 'as' => 'result.individual.post','uses'=>'ResultController@postStudent']);
-
+  Route::resource('quiz','QuizController');
 
   //barcode generate
   Route::get('/barcode','barcodeController@index');

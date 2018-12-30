@@ -52,8 +52,8 @@
                       <label class="control-label" for="exam">Exam <span class="required">*</span>
                       </label>
 
-                      {!!Form::select('exam',$exams, null, ['placeholder' => 'Pick a Exam','class'=>'select2_single form-control','required'=>'required' ,'id'=>'exam'])!!}
-                      <span class="text-danger">{{ $errors->first('exam') }}</span>
+                      {!!Form::select('quiz',$exams, null, ['placeholder' => 'Pick a Exam','class'=>'select2_single form-control','required'=>'required' ,'id'=>'quiz'])!!}
+                      <span class="text-danger">{{ $errors->first('quiz') }}</span>
 
                     </div>
                   </div>

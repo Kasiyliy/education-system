@@ -39,10 +39,10 @@ class ResultController extends Controller
     }
     public function postSubject(Request $request)
     {
-        $allExams = Exam::select('exam')
+        $allExams = Exam::select('quiz')
         ->where('department_id', $request->input('department_id'))
         ->where('subject_id', $request->input('subject_id'))
-        ->groupBy('exam')
+        ->groupBy('quiz')
         ->get();
         if(count($allExams)!=2) {
             $notification= array('title' => 'Not Found!', 'body' => 'All Examinations marks not submit for this subject!');
@@ -55,11 +55,11 @@ class ResultController extends Controller
         )
         ->where('department_id', $request->input('department_id'))
         ->where('subject_id', $request->input('subject_id'))
-        ->where('exam', 'Midterm Exam')
+        ->where('quiz', 'Midterm Exam')
         ->get();
         $Final=Exam::where('department_id', $request->input('department_id'))
         ->where('subject_id', $request->input('subject_id'))
-        ->where('exam', 'Final Exam')
+        ->where('quiz', 'Final Exam')
         ->get();
   
 
@@ -94,12 +94,12 @@ class ResultController extends Controller
         $l1t1=Exam::with('subject')
         ->where('department_id', $request->input('department_id'))
         ->where('students_id', $request->input('students_id'))
-        ->where('exam', $request->input('exam'))
+        ->where('quiz', $request->input('quiz'))
         ->where('levelTerm', 'l1t1')
         ->get();
-        //check if first year first semester request exam data present
+        //check if first year first semester request quiz data present
         if(!count($l1t1)) {
-            $notification= array('title' => 'Not Found!', 'body' => 'Any subject of first year first semester for '.$request->input('exam').' not present!');
+            $notification= array('title' => 'Not Found!', 'body' => 'Any subject of first year first semester for '.$request->input('quiz').' not present!');
             return redirect()->back()->with("error", $notification);
         }
 
@@ -107,11 +107,11 @@ class ResultController extends Controller
         $l1t2=Exam::with('subject')
         ->where('department_id', $request->input('department_id'))
         ->where('students_id', $request->input('students_id'))
-        ->where('exam', $request->input('exam'))
+        ->where('quiz', $request->input('quiz'))
         ->get();
-        //check if first year second semester request exam data present
+        //check if first year second semester request quiz data present
         if(!count($l1t2)) {
-            $notification= array('title' => 'Not Found!', 'body' => 'Any subject of first year second semester for '.$request->input('exam').' not present!');
+            $notification= array('title' => 'Not Found!', 'body' => 'Any subject of first year second semester for '.$request->input('quiz').' not present!');
             return redirect()->back()->with("error", $notification);
         }
 
@@ -128,22 +128,22 @@ class ResultController extends Controller
         $l2t1=Exam::with('subject')
         ->where('department_id', $request->input('department_id'))
         ->where('students_id', $request->input('students_id'))
-        ->where('exam', $request->input('exam'))
+        ->where('quiz', $request->input('quiz'))
         ->get();
-        //check if second year first semester request exam data present
+        //check if second year first semester request quiz data present
         if(!count($l2t1)) {
-            $notification= array('title' => 'Not Found!', 'body' => 'Any subject of second year first semester for '.$request->input('exam').' not present!');
+            $notification= array('title' => 'Not Found!', 'body' => 'Any subject of second year first semester for '.$request->input('quiz').' not present!');
             return redirect()->back()->with("error", $notification);
         }
         $L2T1data=(object)$this->dataManupulator($l2t1);
         $l2t2=Exam::with('subject')
         ->where('department_id', $request->input('department_id'))
         ->where('students_id', $request->input('students_id'))
-        ->where('exam', $request->input('exam'))
+        ->where('quiz', $request->input('quiz'))
         ->get();
-        //check if second year second semester request exam data present
+        //check if second year second semester request quiz data present
         if(!count($l2t2)) {
-            $notification= array('title' => 'Not Found!', 'body' => 'Any subject of second year second semester for '.$request->input('exam').' not present!');
+            $notification= array('title' => 'Not Found!', 'body' => 'Any subject of second year second semester for '.$request->input('quiz').' not present!');
             return redirect()->back()->with("error", $notification);
         }
         $L2T2data=(object)$this->dataManupulator($l2t2);
@@ -159,11 +159,11 @@ class ResultController extends Controller
         $l3t1=Exam::with('subject')
         ->where('department_id', $request->input('department_id'))
         ->where('students_id', $request->input('students_id'))
-        ->where('exam', $request->input('exam'))
+        ->where('quiz', $request->input('quiz'))
         ->get();
-        //check if third year first semester request exam data present
+        //check if third year first semester request quiz data present
         if(!count($l3t1)) {
-            $notification= array('title' => 'Not Found!', 'body' => 'Any subject of Third year first semester for '.$request->input('exam').' not present!');
+            $notification= array('title' => 'Not Found!', 'body' => 'Any subject of Third year first semester for '.$request->input('quiz').' not present!');
             return redirect()->back()->with("error", $notification);
         }
         $L3T1data=(object)$this->dataManupulator($l3t1);
@@ -171,12 +171,12 @@ class ResultController extends Controller
         ->where('department_id', $request->input('department_id'))
         ->where('session', $request->input('session'))
         ->where('students_id', $request->input('students_id'))
-        ->where('exam', $request->input('exam'))
+        ->where('quiz', $request->input('quiz'))
         ->where('levelTerm', 'l3t2')
         ->get();
-        //check if third year second semester request exam data present
+        //check if third year second semester request quiz data present
         if(!count($l3t2)) {
-            $notification= array('title' => 'Not Found!', 'body' => 'Any subject of third year second semester for '.$request->input('exam').' not present!');
+            $notification= array('title' => 'Not Found!', 'body' => 'Any subject of third year second semester for '.$request->input('quiz').' not present!');
             return redirect()->back()->with("error", $notification);
         }
         $L3T2data=(object)$this->dataManupulator($l3t2);
@@ -195,13 +195,13 @@ class ResultController extends Controller
         ->where('department_id', $request->input('department_id'))
         ->where('session', $request->input('session'))
         ->where('students_id', $request->input('students_id'))
-        ->where('exam', $request->input('exam'))
+        ->where('quiz', $request->input('quiz'))
         ->where('levelTerm', 'l4t1')
         ->get();
 
-        //check if 4th year first semester request exam data present
+        //check if 4th year first semester request quiz data present
         if(!count($l4t1)) {
-            $notification= array('title' => 'Not Found!', 'body' => 'Any subject of 4th year first semester for '.$request->input('exam').' not present!');
+            $notification= array('title' => 'Not Found!', 'body' => 'Any subject of 4th year first semester for '.$request->input('quiz').' not present!');
             return redirect()->back()->with("error", $notification);
         }
         $L4T1data=(object)$this->dataManupulator($l4t1);
@@ -209,12 +209,12 @@ class ResultController extends Controller
         ->where('department_id', $request->input('department_id'))
         ->where('session', $request->input('session'))
         ->where('students_id', $request->input('students_id'))
-        ->where('exam', $request->input('exam'))
+        ->where('quiz', $request->input('quiz'))
         ->where('levelTerm', 'l4t2')
         ->get();
-        //check if 4th year second semester request exam data present
+        //check if 4th year second semester request quiz data present
         if(!count($l4t2)) {
-            $notification= array('title' => 'Not Found!', 'body' => 'Any subject of 4th year second semester for '.$request->input('exam').' not present!');
+            $notification= array('title' => 'Not Found!', 'body' => 'Any subject of 4th year second semester for '.$request->input('quiz').' not present!');
             return redirect()->back()->with("error", $notification);
         }
         $L4T2data=(object)$this->dataManupulator($l4t2);
@@ -268,7 +268,7 @@ class ResultController extends Controller
         foreach ($Midterm as $student) {
             $midMarks = $student->raw_score + $student->percentage + $student->weight + $student->percentage_x_weight;
             $finalMarks = $Final[$i]->raw_score + $Final[$i]->percentage + $Final[$i]->weight + $Final[$i]->percentage_x_weight;
-            //average the mark for 2 exam
+            //average the mark for 2 quiz
             $toalMarks = round((($midMarks+$finalMarks)/2), 0);
             $grade=$this->gradeCalculator($toalMarks);
             $singleSTD =[
