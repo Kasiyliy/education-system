@@ -43,7 +43,13 @@
                     <a class="nav-link js-scroll-trigger" href="#about">О нас</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#services">Курсы</a>
+                    <a class="nav-link js-scroll-trigger" >Курсы<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{{URL::route('department.create')}}">Глобальный курс</a></li>
+                      @can('Student')
+                      <li><a href="{{URL::route('department.index')}}">Мои курсы</a></li>
+                    @endcan
+                    </ul>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="#portfolio">Отзывы</a>

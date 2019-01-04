@@ -76,8 +76,8 @@
                   @if(Gate::check('Admin') || Gate::check('Teacher'))
                   <li><a><i class="fa fa-edit"></i> Тесты <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{URL::route('exam.create')}}">Добавить тест</a></li>
-                      <li><a href="{{URL::route('exam.index')}}">Список тестов</a></li>
+                      <li><a href="{{URL::route('quiz.create')}}">Добавить тест</a></li>
+                      <li><a href="{{URL::route('quiz.index')}}">Список тестов</a></li>
                       </ul>
                   </li>
                   <li><a><i class="fa fa-file-text"></i> Результаты <span class="fa fa-chevron-down"></span></a>

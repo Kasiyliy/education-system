@@ -55,7 +55,7 @@
                                        <label class="control-label" for="exam">Exam <span class="required">*</span>
                                        </label>
 
-                                       {!!Form::select('exam',$exams, $exam, ['placeholder' => 'Pick a Exam','class'=>'select2_single exam form-control','required'=>'required'])!!}
+                                       {!!Form::select('quiz',$exams, $exam, ['placeholder' => 'Pick a Exam','class'=>'quiz','required'=>'required'])!!}
                                        <span class="text-danger">{{ $errors->first('exam') }}</span>
 
                                     </div>
@@ -343,7 +343,7 @@
             //updat form submit
             $('#btnUpdate').on('click',function(e) {
                 var data= $('#markUpdateForm').serialize();
-                var postURL = '{{URL("/")}}/exam/'+$('#hiddenId').val();
+                var postURL = '{{URL("/")}}/quiz/'+$('#hiddenId').val();
                 //console.log(postURL);
                 $.ajax({
                     url: postURL,
