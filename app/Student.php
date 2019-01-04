@@ -17,8 +17,14 @@ class Student extends Model {
     'mobileNo',
     'gender',
     'dob',
-    'isActive'
+    'isActive',
+    'user_id',
   ];
+  public function setPasswordAttribute($pass){
+
+    $this->attributes['password'] = bcrypt($pass);
+
+}
   public static function boot()
   {
     parent::boot();
@@ -36,6 +42,9 @@ class Student extends Model {
   }
   public function exams() {
     return $this->hasMany('App\Exam','students_id');
+  }
+  public function user(){
+    return $this->belongsTo('App\User', 'user_id');
   }
 
 }

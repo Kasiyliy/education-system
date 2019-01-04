@@ -151,7 +151,7 @@
                      {
                         new PNotify({
                            title: 'Validation Error!',
-                           text: 'Please wite all students marks corretly!',
+                           text: 'Please write all students marks corretly!',
                            type: 'error',
                            styling: 'bootstrap3'
                         });

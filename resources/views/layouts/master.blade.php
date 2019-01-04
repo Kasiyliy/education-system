@@ -92,6 +92,7 @@
                     <ul class="nav child_menu">
                       <li><a href="{{URL::route('user.create')}}">Добавить нового пользователя</a></li>
                       <li><a href="{{URL::route('user.index')}}">Список всех пользователей</a></li>
+                      <li><a href="{{URL::route('user.addstudent')}}">Добавить аккаунт студенту</a></li>
                     </ul>
                   </li>
                   <li><a  href="{{URL::route('institute.index')}}"><i class="fa fa-building" ></i> О нас </a>

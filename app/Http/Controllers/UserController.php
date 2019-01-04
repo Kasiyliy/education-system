@@ -7,10 +7,12 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
+use App\Student;
 use Session;
 use App\Institute;
 use Validator;
 use Hash;
+use Illuminate\Support\Facades\DB;
 use App\Http\Helpers\AppHelper;
 
 class UserController extends Controller {
@@ -24,6 +26,7 @@ class UserController extends Controller {
 	*
 	* @return Response
 	*/
+
 	public function login()
 	{
 
@@ -37,13 +40,13 @@ class UserController extends Controller {
 			{
 				if (Auth::user()->group != "Admin")
 				{
-					return Redirect::to('/')->with('warning','Institute Information not setup yet! Please contact administrator.');
+					return Redirect::to('/')->with('warning','Информация об учереждение не введена! Пожалуйста свяжитесь с администартором.');
 				}
 				else {
 					$institute=new Institute;
-					$institute->name="ShanixLab";
+					$institute->name="Учереждение";
 					Session::put('inName', $institute->name);
-					$notification= array('title' => 'Information Missing', 'body' => 'Please provide institute information.');
+					$notification= array('title' => 'Отсутсвие информации', 'body' => 'Пожалуйста введите информацию про учереждение.');
 					return Redirect::to('/institute')->with('warning',$notification);
 
 				}
@@ -51,12 +54,12 @@ class UserController extends Controller {
 			else {
 				Session::put('inName', $institute->name);
 				Session::put('inNameShort', AppHelper::getShortName($institute->name));
-				$notification= array('title' => 'Login', 'body' => 'You are now logged in.');
+				$notification= array('title' => 'Логин', 'body' => 'Вы вошли в систему.');
 				return Redirect::to('/dashboard')->with('success',$notification);
 			}
 
 		} else {
-			return Redirect::to('/')->with('error', 'Your username/password combination was incorrect');
+			return Redirect::to('/')->with('error', 'Ваш логин/пароль были введены не верно');
 
 		}
 
@@ -67,7 +70,8 @@ class UserController extends Controller {
 	public function logout()
 	{
 		Auth::logout();
-		return Redirect::to('/')->with('success', 'Your are now logged out!');
+		session()->forget('name');
+		return Redirect::to('/')->with('success', 'Вы вышли из системы!');
 	}
 
 	/**
@@ -92,6 +96,58 @@ class UserController extends Controller {
 
 
 	/**
+	 * add student to account
+	 */
+	public function addstudent()
+	{
+		$users = User::leftJoin('students', 'users.id', '=', 'students.user_id')
+		->select('users.id','users.login')
+		->where('users.group' ,'=','Student')
+		->whereNull('students.user_id')
+		->lists('users.login' , 'users.id');
+
+		$students = Student::whereNull('user_id')->get();
+		
+		$studentList = Student::select('id','firstName')
+		->whereNull('students.user_id')
+		->orderby('firstName','asc')
+		->lists('firstName', 'id');
+		
+		$studentWithAccounts = Student::leftJoin('users' , 'users.id' , '=' , 'students.user_id')
+		->select('students.user_id' , 'users.login' , 'students.firstName' , 'students.lastName')
+		->whereNotNull('user_id')->get();
+
+		return view('user.addstudent')->with(compact('students' , 'users','studentWithAccounts' , 'studentList'));
+	}
+	public function deleteAccount($id)
+	{
+		$user = Student::where('students.user_id' , '=' , $id)
+		->update(['students.user_id' => null]);
+		$notification= array('title' => 'Удаление', 'body' => 'Пользователь успешно удален.');
+		return Redirect::route('user.addstudent')->with("success",$notification);
+
+	}
+	public function createstudent(Request $request){
+		$data = $request->all();
+		$rules = [
+			'student_id' => 'required',
+			'user_id' => 'required',
+		];
+		$validator = Validator::make($data , $rules);
+		if ($validator->fails())
+		{
+			return Redirect::route('user.addstudent')->withErrors($validator);
+		}
+		else {
+			$student = Student::findOrFail($request->student_id);
+			$student->user_id = $request->user_id;
+			$student->save();
+			$notification= array('title' => 'Информация сохранена', 'body' => 'Стдуент успешно зарегестрирован на аккаунт.');
+			return Redirect::route('user.addstudent')->with("success",$notification);
+		}
+	}
+
+	/**
 	* Store a newly created resource in storage.
 	*
 	* @return Response
@@ -108,7 +164,7 @@ class UserController extends Controller {
 			'password' => 'required|confirmed|min:6'
 		];
 		$message=[
-			'unique' => 'User name already exits!'
+			'unique' => 'Такой логин уже существует!'
 		];
 		$validator = Validator::make($data, $rules,$message);
 		if ($validator->fails())
@@ -118,7 +174,7 @@ class UserController extends Controller {
 		else {
 			$user= new User;
 			$user->create($data);
-			$notification= array('title' => 'Data Store', 'body' => 'User Created Succesfully.');
+			$notification= array('title' => 'Информация сохранена', 'body' => 'Пользователь успешно добавлен.');
 			return Redirect::route('user.create')->with("success",$notification);
 		}
 	}
@@ -133,7 +189,7 @@ class UserController extends Controller {
 	{
 		$user = User::findOrFail($id);
 		$user->delete();
-		$notification= array('title' => 'Data Delete', 'body' => 'User Deleted Succesfully.');
+		$notification= array('title' => 'Удаление', 'body' => 'Пользователь успешно удален.');
 		return Redirect::route('user.index')->with("success",$notification);
 	}
 
@@ -165,7 +221,7 @@ class UserController extends Controller {
 			}
 			else {
 				if(!Hash::check($request->input('oldpassword'), auth()->user()->password)){
-					$notification= array('title' => 'Validation Error', 'body' => 'Old Password did not match!!!');
+					$notification= array('title' => 'Ошибка валидации', 'body' => 'Старый пароль не соответсвует!!!');
 					return Redirect::back()->with('error',$notification);
 				}
 				$rules=[
@@ -182,7 +238,7 @@ class UserController extends Controller {
 
 			$user = User::findOrFail(auth()->user()->id);
 			$user->fill($data)->save();
-			$notification= array('title' => 'Data Change', 'body' => 'Information Updated Successfully');
+			$notification= array('title' => 'Изменение', 'body' => 'Информация успешно изменена');
 			return Redirect::back()->with('success',$notification);
 		}
 		return Redirect::back()->with('error','Invalid request!!!');

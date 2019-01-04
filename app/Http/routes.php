@@ -10,14 +10,15 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-Route::get('/', array('as' => 'home', 'uses' => 'HomeController@index'));
+Route::get('/',[ 'as' => 'homestudent.guest','uses'=>'HomeStudentController@guest']);
 Route::get('/login', array('as' => 'home', 'uses' => 'HomeController@index'));
 Route::get('/lock',array('as' => 'lock', 'uses' => 'HomeController@lock'));
-Route::get('/',"HomeController@index");
 
 Route::post('/user/login',[ 'as' => 'user.login','uses'=>'UserController@login']);
 Route::get('/user/logout',[ 'as' => 'user.logout','uses'=>'UserController@logout']);
+
+//Route::resource('homestudent','HomeStudentController');
+ Route::get('/guest',[ 'as' => 'homestudent.guest','uses'=>'HomeStudentController@guest']);
 
 Route::group(['middleware' => 'auth'], function()
 {
@@ -28,6 +29,11 @@ Route::group(['middleware' => 'auth'], function()
   Route::resource('user','UserController');
   Route::get('/settings',[ 'as' => 'user.settings','uses'=>'UserController@settings']);
  Route::post('/settings',[ 'as' => 'user.settings','uses'=>'UserController@postSettings']);
+ Route::get('/addstudent',[ 'as' => 'user.addstudent','uses'=>'UserController@addstudent']);
+ Route::post('/addstudent',[ 'as' => 'user.addstudent','uses'=>'UserController@createstudent']);
+ Route::post('/addstudent/deleteAccount/{user_id}',[ 'as' => 'user.deleteAccount','uses'=>'UserController@deleteAccount']);
+ 
+ 
 
   Route::resource('department','DepartmentController');
 

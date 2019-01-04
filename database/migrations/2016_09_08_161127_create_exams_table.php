@@ -16,8 +16,6 @@ class CreateExamsTable extends Migration
             'exams', function (Blueprint $table) {
                 $table->increments('id');
                 $table->unsignedInteger('department_id');
-                $table->string('session', 15);
-                $table->string('levelTerm', 20);
                 $table->unsignedInteger('subject_id');
                 $table->unsignedInteger('students_id');
                 $table->string('exam');

@@ -14,8 +14,6 @@ class CreateRegistrationsTable extends Migration
     {
         Schema::create('registrations', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('levelTerm',20);
-            $table->string('session',15);
             $table->unsignedInteger('students_id');
             $table->integer('subject_id')->unsigned();
             $table->foreign('students_id')

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Student')
+@section('title', 'Студент')
 @section('extrastyle')
 <link href="{{ URL::asset('assets/css/select2.min.css')}}" rel="stylesheet">
 <link href="{{ URL::asset('assets/css/green.css')}}" rel="stylesheet">
@@ -25,7 +25,6 @@
 						<form id="myForm" class="form-horizontal form-label-left" novalidate method="post" action="{{URL::route('student.store')}}" enctype="multipart/form-data">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<h3 class="text-info">Информация о студенте</h3>
-
 									<div class="row">
 										<div class="col-md-6 col-sm-6 col-xs-12">
 											<label for="firstName">Имя: <span class="text-danger">*</span></label>

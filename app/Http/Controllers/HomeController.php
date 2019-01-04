@@ -24,6 +24,11 @@ class HomeController extends Controller {
 
 	public function index()
 	{
+
+		$user = auth()->user();
+		if($user){
+			return redirect()->to('/dashboard');
+		}
 		$error = Session::get('error');
 		$institute=Institute::select('name')->first();
 		if(!$institute)
@@ -37,7 +42,7 @@ class HomeController extends Controller {
 	{
 		$user= auth()->user();
 		if(!$user)
-		return redirect()->to('/')->with('warning', 'Session expired,login again.');
+		return redirect()->to('/')->with('warning', 'Сессия завершена, пожалуйста войдите в система снова.');
 		auth()->logout();
 
 		return view('lock',compact('user'));

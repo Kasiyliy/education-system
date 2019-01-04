@@ -12,7 +12,15 @@ class User extends Authenticatable
     * @var array
     */
     protected $fillable = [
-        'firstname','lastname','login','group','description', 'email', 'password',
+        'id',
+        'firstname',
+        'lastname',
+        'login',
+        'group',
+        'description',
+        'email',
+        'password',
+        'student_id',
     ];
 
     /**
@@ -29,5 +37,10 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($pass);
 
     }
+
+    public function student(){
+        return $this->hasOne('App\Student', 'user_id');
+    }
+
 
 }

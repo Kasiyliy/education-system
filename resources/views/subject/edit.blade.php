@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Subject | Edit')
+@section('title', 'Под курс | изменение')
 
 @section('content')
 
