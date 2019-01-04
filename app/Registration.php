@@ -16,8 +16,8 @@ class Registration extends Model
       'deleted_at',
    ];
 
-   public function department() {
-      return $this->belongsTo('App\Department','department_id');
+   public function subject() {
+      return $this->belongsTo('App\Subject','subject_id');
    }
    public function student() {
       return $this->belongsTo('App\Student','students_id');

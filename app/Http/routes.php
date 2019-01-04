@@ -21,7 +21,7 @@ Route::get('/user/logout',[ 'as' => 'user.logout','uses'=>'UserController@logout
 Route::get('/guest',[ 'as' => 'homestudent.guest','uses'=>'HomeStudentController@guest']);
 
 Route::group(['prefix' => 'student', 'middleware' => ['for.student', 'auth']] , function (){
-    
+    Route::get('/my/subjects',[ 'as' => 'student.my.subjects','uses'=>'StudentSubjectsController@mySubjects']);
 });
 
 Route::group(['middleware' => ['not.for.student', 'auth']], function () {
