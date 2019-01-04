@@ -42,24 +42,33 @@
                   <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="#about">О нас</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" >Курсы<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="{{URL::route('department.create')}}">Глобальный курс</a></li>
-                      @can('Student')
-                      <li><a href="{{URL::route('department.index')}}">Мои курсы</a></li>
-                    @endcan
-                    </ul>
+
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Курсы</a>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" >Глобальный курс</a>
+                      @if(Auth::check(\App\User::STUDENT))
+                        <a class="dropdown-item" >Мои курсы</a>
+                      @endif
+
+                    </div>
                   </li>
+
                   <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="#portfolio">Отзывы</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="#contact">Контакты</a>
                   </li>
-                  <li class="nav-item">
+                  @if(Auth::check())
+                    <li class="nav-item">
+                      <a class="nav-link js-scroll-trigger" href="{{URL::route('user.logout')}}">Выход</a>
+                    </li>
+                  @else
+                    <li class="nav-item">
                       <a class="nav-link js-scroll-trigger" href="login">Вход</a>
-                  </li>
+                    </li>
+                  @endif
                 </ul>
               </div>
             </div>

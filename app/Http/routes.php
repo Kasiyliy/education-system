@@ -20,8 +20,11 @@ Route::get('/user/logout',[ 'as' => 'user.logout','uses'=>'UserController@logout
 //Route::resource('homestudent','HomeStudentController');
 Route::get('/guest',[ 'as' => 'homestudent.guest','uses'=>'HomeStudentController@guest']);
 
+Route::group(['prefix' => 'student', 'middleware' => ['for.student', 'auth']] , function (){
+    
+});
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['not.for.student', 'auth']], function () {
     Route::get('/dashboard', ['as' => 'user.dashboard', 'uses' => 'DashboardController@index']);
     Route::get('/institute', ['as' => 'institute.index', 'uses' => 'InstituteController@index']);
     Route::post('/institute', ['as' => 'institute', 'uses' => 'InstituteController@save']);

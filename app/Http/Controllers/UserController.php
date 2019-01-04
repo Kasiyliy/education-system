@@ -40,7 +40,7 @@ class UserController extends Controller {
 			$institute=Institute::select('name')->first();
 			if(!$institute)
 			{
-				if (Auth::user()->group != "Admin")
+				if (Auth::user()->group != User::ADMIN)
 				{
 
 					return Redirect::to('/')->with('warning','Информация об учереждение не введена! Пожалуйста свяжитесь с администартором.');
@@ -58,13 +58,17 @@ class UserController extends Controller {
 				Session::put('inName', $institute->name);
 				Session::put('inNameShort', AppHelper::getShortName($institute->name));
 
-				$notification= array('title' => 'Логин', 'body' => 'Вы вошли в систему.');
-				return Redirect::to('/dashboard')->with('success',$notification);
+				if(Auth::user()->group == User::STUDENT and Auth::user()->student()->get()){
+                    $notification= array('title' => 'Логин', 'body' => 'Вы вошли в систему.');
+                    return Redirect::to('/guest')->with('success',$notification);
+                }
+                $notification= array('title' => 'Логин', 'body' => 'Вы вошли в систему.');
+                return Redirect::to('/dashboard')->with('success',$notification);
 			}
 
 		} else {
 
-			return Redirect::to('/')->with('error', 'Ваш логин/пароль были введены не верно');
+			return Redirect::to('/login')->with('error', 'Ваш логин/пароль были введены не верно');
 
 		}
 
