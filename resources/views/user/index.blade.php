@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Users')
+@section('title', 'Пользователи')
 @section('extrastyle')
 <link href="{{ URL::asset('assets/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
 <link href="{{ URL::asset('assets/css/responsive.dataTables.min.css')}}" rel="stylesheet">
@@ -28,8 +28,9 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>User<small> All User information.</small></h2>
-                    <a href="{{URL::Route('user.create')}}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> New User </a>
+
+                    <h2>Пользователь<small> Информация обо всех пользователях.</small></h2>
+                    <a href="{{URL::Route('user.create')}}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Новый пользователь </a>
 
                     <div class="clearfix"></div>
                   </div>
@@ -37,13 +38,15 @@
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>Name</th>
-                          <th>User Name</th>
-                          <th>Group</th>
+
+                          <th>ФИО</th>
+                          <th>Логин</th>
+                          <th>Группа</th>
                           <th>Email</th>
-                          <th>Decription</th>
-                          <th>Created At</th>
-                          <th>Actions</th>
+                          <th>Информация</th>
+                          <th>Добавлен</th>
+                          <th>Действия</th>
+
                         </tr>
                       </thead>
                       <tbody>
@@ -59,7 +62,7 @@
                          <form class="deleteForm" method="POST" action="{{URL::route('user.destroy',$user->id)}}">
                            <input name="_method" type="hidden" value="DELETE">
                          <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                         <button type="submit" class='btn btn-danger btn-xs btnDelete' href=''> <i class="glyphicon glyphicon-trash icon-white"></i></a>
+                         <button type="submit" class='btn btn-danger btn-xs btnDelete' href=''> <i class="glyphicon glyphicon-trash icon-white"></i></button>
                        </form>
                       </td>
                         </tr>

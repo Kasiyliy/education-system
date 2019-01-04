@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
-@section('title', 'User')
+
+@section('title', 'Пользователь')
 
 @section('content')
 
@@ -14,7 +15,8 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>User<small> User basic information.</small></h2>
+
+                    <h2>Пользователь<small> Основная информация по пользователю.</small></h2>
 
                     <div class="clearfix"></div>
                   </div>
@@ -24,7 +26,8 @@
                             <div class="row">
                               <div class="col-md-4">
                             <div class="form-group">
-                              <label class="control-label" for="firstname">First Name <span class="required">*</span>
+
+                              <label class="control-label" for="firstname">Имя <span class="required">*</span>
                               </label>
                               <div class="input-group">
                                   <span class="input-group-addon"><i class="fa fa-info blue"></i></span>
@@ -36,7 +39,8 @@
                           </div>
                               <div class="col-md-4">
                             <div class="form-group">
-                              <label class="control-label" for="lastname">Last Name <span class="required">*</span>
+
+                              <label class="control-label" for="lastname">Фамилия <span class="required">*</span>
                               </label>
                               <div class="input-group">
                                   <span class="input-group-addon"><i class="fa fa-info blue"></i></span>
@@ -49,7 +53,8 @@
 
                           <div class="col-md-4">
                             <div class="form-group">
-                              <label class="control-label" for="login">User Name<span class="required">*</span>
+
+                              <label class="control-label" for="login">Логин<span class="required">*</span>
                               </label>
                               <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-info blue"></i></span>
@@ -63,14 +68,16 @@
                           <div class="row">
                             <div class="col-md-4">
                             <div class="form-group">
-                              <label class="control-label" for="group">Group<span class="required">*</span>
+
+                              <label class="control-label" for="group">Группа<span class="required">*</span>
                               </label>
                               <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-info blue"></i></span>
                                 <select class="form-control"  name="group" required="required">
-                                  <option value="Admin">Admin</option>
-                                  <option value="Teacher">Teacher</option>
-                                  <option value="Account">Account</option>
+
+                                  <option value="Admin">Администратор</option>
+                                  <option value="Teacher">Учитель</option>
+                                  <option value="Student">Студент</option>
                                 </select>
                               </div>
                               <span class="text-danger">{{ $errors->first('group') }}</span>
@@ -91,7 +98,8 @@
                           </div>
                           <div class="col-md-4">
                             <div class="form-group">
-                              <label class="control-label" for="description">Description
+
+                              <label class="control-label" for="description">Описание
                               </label>
                               <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-info blue"></i></span>
@@ -106,7 +114,8 @@
                             <div class="row">
                             <div class="col-md-4">
                             <div class="form-group">
-                              <label class="control-label" for="password">Password<span class="required">*</span>
+
+                              <label class="control-label" for="password">Пароль<span class="required">*</span>
                               </label>
                               <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-key blue"></i></span>
@@ -117,7 +126,8 @@
                           </div>
                           <div class="col-md-4">
                             <div class="form-group">
-                              <label class="control-label" for="confirmpassword">Confirm Password<span class="required">*</span>
+
+                              <label class="control-label" for="confirmpassword">Подтверждение пороля<span class="required">*</span>
                               </label>
                               <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-key blue"></i></span>
@@ -128,7 +138,8 @@
                           </div>
                         </div>
                         <div class="row">
-                            <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-plus"> Save</i></button>
+
+                            <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-plus"> Сохранить</i></button>
                         </div>
                       </form>
                   </div>

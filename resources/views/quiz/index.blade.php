@@ -71,6 +71,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </form>
                             </div>
                             <br>
@@ -99,6 +100,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -162,11 +164,13 @@
                 if (submit)
                     this.submit();
 
+
                 return false;
             });
 
             //datatables code
             var handleDataTableButtons = function () {
+
                 if ($("#datatable-buttons").length) {
                     $("#datatable-buttons").DataTable({
                         responsive: true,
@@ -202,6 +206,7 @@
                 "use strict";
                 return {
                     init: function () {
+
                         handleDataTableButtons();
                     }
                 };
@@ -239,6 +244,7 @@
                                 styling: 'bootstrap3'
                             });
                         });
+
                     }
                 });
             });

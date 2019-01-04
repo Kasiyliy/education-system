@@ -105,24 +105,18 @@ class StudentController extends Controller {
 			'dob' => 'required',
 			'mobileNo' => 'required'
 		];
-		$validator = Validator::make($data, $rules);
-		//$errors=$validator->messages()->toArray();
+
+		$message=[
+			'unique' => 'Такой логин уже существует!'
+		];
+		$validator = Validator::make($data, $rules , $message);
 		if ($validator->fails())
 		{
 			return Redirect::route('student.create')->withInput()->withErrors($validator);
-
-			// return Response()->json([
-			// 	'error' => true,
-			// 	'message' => $errors
-			// ], 400);
 		}
 		$student = new Student;
 		$student->create($data);
-		// return Response()->json([
-		// 	'success' => true,
-		// 	'message' => "Student data store successfully."
-		// ], 200);
-		$notification= array('title' => 'Data Store', 'body' => 'Student admitted succesfully.');
+		$notification= array('title' => 'Добавление', 'body' => 'Студент успешно добавлен.');
 		return Redirect::route('student.create')->with("success",$notification);
 
 	}
@@ -144,7 +138,8 @@ class StudentController extends Controller {
 		}
 		catch (Exception $e)
 		{
-			$notification= array('title' => 'Data Edit', 'body' => "There is no record.");
+
+			$notification= array('title' => 'Изменение', 'body' => "Никаких записей нет.");
 			return Redirect::route('student.index')->with("error",$notification);
 		}
 	}
@@ -166,7 +161,8 @@ class StudentController extends Controller {
 		}
 		catch (Exception $e)
 		{
-			$notification= array('title' => 'Data Edit', 'body' => "There is no record.");
+
+			$notification= array('title' => 'Изменение', 'body' => "Нет записей.");
 			return Redirect::route('student.index')->with("error",$notification);
 		}
 	}

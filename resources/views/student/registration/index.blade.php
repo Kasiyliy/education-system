@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
-@section('title', 'Students')
+
+@section('title', 'Студент')
 @section('extrastyle')
 <link href="{{ URL::asset('assets/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
 <link href="{{ URL::asset('assets/css/responsive.dataTables.min.css')}}" rel="stylesheet">

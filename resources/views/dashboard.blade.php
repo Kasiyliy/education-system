@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
-@section('title', 'Dashboard')
+
+@section('title', 'Информационная панель')
 
 @section('content')
 

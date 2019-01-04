@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
-@section('title', 'Student-Edit')
+
+@section('title', 'Студент-изменение')
 @section('extrastyle')
     <link href="{{ URL::asset('assets/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{ URL::asset('assets/css/green.css')}}" rel="stylesheet">

@@ -52,6 +52,7 @@ class QuizController extends Controller
             $quiz->description = $data['description'];
             $quiz->subject_id = $data['subject_id'];
             $quiz->user_id = Auth::id();
+
             $quiz->save();
 
             $notification = array('title' => 'Data Stored!', 'body' => 'Quiz created!');
@@ -74,6 +75,7 @@ class QuizController extends Controller
     }
 
     public function index3(Request $request)
+
     {
 
         $data = $request->all();
@@ -136,6 +138,7 @@ class QuizController extends Controller
     {
         $data = $request->all();
         $rules = [
+
             'name' => 'required|max:255',
             'description' => 'required',
             'subject_id' =>'required',

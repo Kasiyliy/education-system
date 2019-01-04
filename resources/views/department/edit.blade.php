@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
-@section('title', 'Department | Edit')
+
+@section('title', 'Глобальный курс | изменение')
 
 @section('content')
 

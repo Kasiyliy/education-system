@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('title', 'Тесты')
+
 @section('extrastyle')
     <link href="{{ URL::asset('assets/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{ URL::asset('assets/css/switchery.min.css')}}" rel="stylesheet">
@@ -80,6 +81,7 @@
 
                                 </div>
                                 <div class="row">
+
                                     <div class="col-md-12">
                                         <div class="item form-group">
                                             <label class="control-label" for="description">Краткое описание теста<span class="required">*</span>
@@ -182,6 +184,7 @@
                         });
                         $(".subject").select2({
                             placeholder: "Выберите урок",
+
                             allowClear: true
                         });
                         //get subject lists
@@ -202,6 +205,7 @@
                                     });
                                     $(".subject").select2({
                                         placeholder: "Выберите урок",
+
                                         allowClear: true
                                     });
 
@@ -272,10 +276,12 @@
                             editBtn.href = '/quiz/' + id + '/edit';
                             cell3.appendChild(editBtn);
 
+
                             var cell4 = row.insertCell(4);
                             var refBtn = document.createElement('a');
                             refBtn.className = 'btn btn-danger';
                             refBtn.innerHTML = 'удалить';
+
                             refBtn.addEventListener('click' , function(){
                                 deleteModel(id);
                             });
@@ -291,6 +297,7 @@
                             var subj = $('#subject_id').val();
                             $.ajax({
                                 url: "{{URL::route('quiz.index3')}}",
+
                                 type: 'get',
                                 data: {
                                     'subject_id': subj,

@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
-@section('title', 'Registration')
+
+@section('title', 'Регистрация')
 @section('extrastyle')
 <link href="{{ URL::asset('assets/css/select2.min.css')}}" rel="stylesheet">
 <link href="{{ URL::asset('assets/css/switchery.min.css')}}" rel="stylesheet">

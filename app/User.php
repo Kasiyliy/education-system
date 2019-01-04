@@ -12,7 +12,17 @@ class User extends Authenticatable
     * @var array
     */
     protected $fillable = [
-        'firstname','lastname','login','group','description', 'email', 'password',
+
+        'id',
+        'firstname',
+        'lastname',
+        'login',
+        'group',
+        'description',
+        'email',
+        'password',
+        'student_id',
+
     ];
 
     /**
@@ -30,7 +40,12 @@ class User extends Authenticatable
 
     }
 
+
     public function quizes() {
         return $this->hasMany('App\Quiz','user_id');
+    }
+
+    public function student(){
+        return $this->hasOne('App\Student', 'user_id');
     }
 }

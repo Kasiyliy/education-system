@@ -8,11 +8,13 @@ class Subject extends Model {
    protected $table = 'subject';
    protected $fillable = ['name','code','department_id','description',];
 
+
    public static function boot()
    {
       parent::boot();
       static::deleting(function($subject) {
          $subject->quizes()->delete();
+
       });
    }
    public function department() {
