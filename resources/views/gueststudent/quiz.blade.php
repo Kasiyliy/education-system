@@ -37,7 +37,19 @@
                 </ul>
               </div>
               <div id="buttons" class="center-margin">
-                <a id="startButton" class="btn btn-primary text-white ">Начать</a>
+                @if(!isset($quizResult))
+                      <a id="startButton" class="btn btn-primary text-white ">Начать</a>
+                @else
+                    <p class="text-danger">Тест уже пройден!</p>
+                    <p class="
+                            @if($quizResult->percentage>=50)
+                            text-success
+                            @else
+                            text-danger
+                            @endif
+                            "
+                    >Ваш оценка - {{$quizResult->percentage}}</p>
+                @endif
                 <a id="finishButton" class="btn btn-success text-white d-none">Закончить</a>
               </div>
               <div>

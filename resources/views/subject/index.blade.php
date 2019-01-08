@@ -30,6 +30,7 @@
                       <thead>
                         <tr>
                           <th>Наименование</th>
+                          <th>Создатель</th>
                           <th>Код</th>
                           <th>Цена</th>
                           <th>Глоабльный курс</th>
@@ -41,6 +42,7 @@
                       @foreach($subjects as $subject)
                         <tr>
                           <td>{{$subject->name}}</td>
+                          <td>{{$subject->user->firstname.' '.$subject->user->lastname.' '.$subject->user->middlename}}</td>
                           <td>{{$subject->code}}</td>
                           <td>{{$subject->price}}</td>
                           <td>{{$subject->department->name}}</td>

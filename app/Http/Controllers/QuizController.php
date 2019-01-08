@@ -11,7 +11,7 @@ use App\Student;
 use App\Department;
 use App\Subject;
 use Validator;
-use App\Exam;
+use App\User;
 use App\Quiz;
 use Auth;
 use Carbon\Carbon;
@@ -121,12 +121,22 @@ class QuizController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         } else {
-            $quizes = DB::table('quizes')
-                ->select('quizes.id', 'quizes.name', 'subject.name as subjectName')
-                ->join('subject', 'subject.id', '=', 'quizes.subject_id')
-                ->where('quizes.subject_id', $data['subject_id'])
-                ->where('quizes.deleted_at', '=', null)
-                ->get();
+            if(Auth::user()->group == User::TEACHER){
+                $quizes = DB::table('quizes')
+                    ->select('quizes.id', 'quizes.name', 'subject.name as subjectName')
+                    ->join('subject', 'subject.id', '=', 'quizes.subject_id')
+                    ->where('quizes.subject_id', $data['subject_id'])
+                    ->where('quizes.deleted_at', '=', null)
+                    ->where('subject.user_id', '=', Auth::user()->id)
+                    ->get();
+            }else {
+                $quizes = DB::table('quizes')
+                    ->select('quizes.id', 'quizes.name', 'subject.name as subjectName')
+                    ->join('subject', 'subject.id', '=', 'quizes.subject_id')
+                    ->where('quizes.subject_id', $data['subject_id'])
+                    ->where('quizes.deleted_at', '=', null)
+                    ->get();
+            }
             $subjects = [];
             $departments = Department::select('id', 'name')->orderby('name', 'asc')->lists('name', 'id');
             return view('quiz.index', compact('departments', 'quizes', 'subjects'));

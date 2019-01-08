@@ -114,9 +114,12 @@ class StudentSubjectsController extends Controller
             return redirect()->back()->with(['error'  => 'Нет доступа!']);
         }
 
-        $quizResult = QuizResult::where('students_id', Auth::user()->student->id)->where('quiz_id' , $quiz->id);
-
-        return view('gueststudent.quiz')->with(compact('quiz'));
+        $quizResult = QuizResult::where('student_id', Auth::user()->student->id)->where('quiz_id' , $quiz->id)->get()->last();
+        if($quizResult){
+            return view('gueststudent.quiz')->with(compact('quiz' , 'quizResult'));
+        }else{
+            return view('gueststudent.quiz')->with(compact('quiz' ));
+        }
     }
 
     /**

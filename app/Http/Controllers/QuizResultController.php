@@ -79,7 +79,7 @@ class QuizResultController extends Controller
             }
         }
         $res = $rightAnswersCount * 100/$allQuestionsCount;
-        
+
         if($res < 0){
             $res = 0;
         }
@@ -87,7 +87,7 @@ class QuizResultController extends Controller
         $quizResult->student_id = Auth::user()->student->id;
         $quizResult->quiz_id = $quiz->id;
         $quizResult->percentage = $res;
-        //s$quizResult->save();
+        $quizResult->save();
 
         return Response()->json([
 			'error' => false,

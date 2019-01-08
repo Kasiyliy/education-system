@@ -45,9 +45,12 @@ class User extends Authenticatable
 
     }
 
-
     public function quizes() {
         return $this->hasMany('App\Quiz','user_id');
+    }
+
+    public function subjects() {
+        return $this->hasMany('App\Subject','user_id');
     }
 
     public function student(){
