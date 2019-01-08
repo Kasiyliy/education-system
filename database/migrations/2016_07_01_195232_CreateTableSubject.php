@@ -17,6 +17,7 @@ class CreateTableSubject extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('code', 20)->unique;
+            $table->double('price');
             $table->string('description', 250);
             $table->timestamps();
             $table->softDeletes();

@@ -116,7 +116,7 @@ class StudentController extends Controller {
 		}
 		$student = new Student;
 		$student->create($data);
-		$notification= array('title' => 'Добавление', 'body' => 'Студент успешно добавлен.');
+		$notification = array('title' => 'Добавление', 'body' => 'Студент успешно добавлен.');
 		return Redirect::route('student.create')->with("success",$notification);
 
 	}

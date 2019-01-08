@@ -12,7 +12,6 @@ use App\Department;
 use App\Subject;
 use Validator;
 use App\Institute;
-use App\Exam;
 use Carbon\Carbon;
 
 class ResultController extends Controller
@@ -20,12 +19,7 @@ class ResultController extends Controller
     public function __construct()
     {
         $this->middleware('teacher');
-
     }
-    protected $exams=[
-    'Midterm Exam' => 'Midterm Exam',
-    'Final Exam' => 'Final Exam',
-    ];
     public function getSubject()
     {
 

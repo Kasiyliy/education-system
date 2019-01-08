@@ -29,12 +29,12 @@
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>Name</th>
-                          <th>Code</th>
-                          <th>Credit</th>
-                          <th>Department</th>
-                          <th>Description</th>
-                          <th>Actions</th>
+                          <th>Наименование</th>
+                          <th>Код</th>
+                          <th>Цена</th>
+                          <th>Глоабльный курс</th>
+                          <th>Описание</th>
+                          <th>Действия</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -42,7 +42,7 @@
                         <tr>
                           <td>{{$subject->name}}</td>
                           <td>{{$subject->code}}</td>
-                          <td>{{$subject->credit}}</td>
+                          <td>{{$subject->price}}</td>
                           <td>{{$subject->department->name}}</td>
                           <td>{{$subject->description}}</td>
                           <td>

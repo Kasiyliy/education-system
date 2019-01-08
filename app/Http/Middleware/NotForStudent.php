@@ -16,8 +16,10 @@ class NotForStudent
      */
     public function handle($request, Closure $next)
     {
-        if($request->user()->group == User::STUDENT){
-            return redirect()->route('homestudent.guest');
+        if($request->user()){
+            if($request->user()->group == User::STUDENT){
+                return redirect()->route('homestudent.guest');
+            }
         }
         return $next($request);
     }

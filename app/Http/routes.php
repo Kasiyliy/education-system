@@ -19,9 +19,13 @@ Route::get('/user/logout',[ 'as' => 'user.logout','uses'=>'UserController@logout
 
 //Route::resource('homestudent','HomeStudentController');
 Route::get('/guest',[ 'as' => 'homestudent.guest','uses'=>'HomeStudentController@guest']);
-
+Route::get('/subjects',[ 'as' => 'homestudent.subjects','uses'=>'StudentSubjectsController@index']);
 Route::group(['prefix' => 'student', 'middleware' => ['for.student', 'auth']] , function (){
     Route::get('/my/subjects',[ 'as' => 'student.my.subjects','uses'=>'StudentSubjectsController@mySubjects']);
+    Route::get('/my/subjects/{id}',[ 'as' => 'student.my.subjects.specific','uses'=>'StudentSubjectsController@show']);
+    Route::get('/my/subjects/lesson/{id}',[ 'as' => 'student.my.subjects.specific.lesson','uses'=>'StudentSubjectsController@showLesson']);
+    Route::get('/my/subjects/quiz/{id}',[ 'as' => 'student.my.subjects.specific.quiz','uses'=>'StudentSubjectsController@showQuiz']);
+    Route::post('/quizresult', ['as' =>'quizresult.store' , 'uses' =>'QuizResultController@store']);
 });
 
 Route::group(['middleware' => ['not.for.student', 'auth']], function () {
@@ -68,8 +72,8 @@ Route::group(['middleware' => ['not.for.student', 'auth']], function () {
     Route::resource('question', 'QuestionController');
     Route::resource('lesson', 'LessonController');
 
-    //barcode generate
-    Route::get('/barcode', 'barcodeController@index');
-    Route::post('/barcode', 'barcodeController@generate');
+//    //barcode generate
+//    Route::get('/barcode', 'barcodeController@index');
+//    Route::post('/barcode', 'barcodeController@generate');
 
 });

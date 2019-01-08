@@ -49,7 +49,7 @@ class UserController extends Controller {
 					$institute=new Institute;
 					$institute->name="Учереждение";
 					Session::put('inName', $institute->name);
-					$notification= array('title' => 'Отсутсвие информации', 'body' => 'Пожалуйста введите информацию про учереждение.');
+					$notification= array('title' => 'Отсутствие информации', 'body' => 'Пожалуйста введите информацию про учереждение.');
 					return Redirect::to('/institute')->with('warning',$notification);
 
 				}
@@ -59,8 +59,7 @@ class UserController extends Controller {
 				Session::put('inNameShort', AppHelper::getShortName($institute->name));
 
 				if(Auth::user()->group == User::STUDENT and Auth::user()->student()->get()){
-                    $notification= array('title' => 'Логин', 'body' => 'Вы вошли в систему.');
-                    return Redirect::to('/guest')->with('success',$notification);
+                    return Redirect::to('/guest')->with('success',"Вы вошли в систему.");
                 }
                 $notification= array('title' => 'Логин', 'body' => 'Вы вошли в систему.');
                 return Redirect::to('/dashboard')->with('success',$notification);
@@ -119,10 +118,10 @@ class UserController extends Controller {
 
 		$students = Student::whereNull('user_id')->get();
 		
-		$studentList = Student::select('id','firstName')
+		$studentList = Student::select('id',DB::raw("concat(lastName ,' ', firstName, ' ', middleName) AS name"))
 		->whereNull('students.user_id')
-		->orderby('firstName','asc')
-		->lists('firstName', 'id');
+		->orderby('name','asc')
+		->lists('name', 'id');
 		
 		$studentWithAccounts = Student::leftJoin('users' , 'users.id' , '=' , 'students.user_id')
 		->select('students.user_id' , 'users.login' , 'students.firstName' , 'students.lastName')

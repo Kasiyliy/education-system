@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Subject extends Model {
    use SoftDeletes;
    protected $table = 'subject';
-   protected $fillable = ['name','code','department_id','description',];
+   protected $fillable = ['name','code','price','department_id','description',];
 
 
    public static function boot()
@@ -18,9 +18,14 @@ class Subject extends Model {
       });
    }
    public function department() {
-      return $this->belongsTo('App\Department');
+      return $this->belongsTo('App\Department','department_id');
    }
    public function quizes() {
       return $this->hasMany('App\Quiz','subject_id');
    }
+
+    public function lessons()
+    {
+        return $this->hasMany('App\Lesson','subject_id');
+    }
 }

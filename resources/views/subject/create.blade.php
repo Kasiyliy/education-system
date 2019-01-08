@@ -48,11 +48,11 @@
                         </div>
                       </div>
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="credit">Стоимость <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="price">Стоимость <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="credit" name="credit" required="required" placeholder="тг" value="{{old('credit')}}" class="form-control col-md-7 col-xs-12">
-                            <span class="text-danger">{{ $errors->first('credit') }}</span>
+                          <input type="text" id="price" name="price" required="required" placeholder="тг" value="{{old('price')}}" class="form-control col-md-7 col-xs-12">
+                            <span class="text-danger">{{ $errors->first('price') }}</span>
                         </div>
                       </div>
 

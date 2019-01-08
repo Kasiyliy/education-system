@@ -54,9 +54,9 @@ class SubjectController extends Controller
         $rules=[
          'name' => 'required',
          'code' => 'required|unique:subject,code',
-         'credit' => 'required|numeric',
+         'price' => 'required|numeric',
          'department_id' => 'required|numeric',
-         'description' => 'required|max:255'
+         'description' => 'required'
         ];
         $validator = \Validator::make($data, $rules);
         if ($validator->fails()) {

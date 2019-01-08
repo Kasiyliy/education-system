@@ -87,7 +87,7 @@
                                                     <form class="deleteForm" method="POST" action="{{URL::route('user.deleteAccount',$item->user_id)}}">
                                                        
                                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                        <button type="submit" class='btn btn-danger btn-xs btnDelete' href=''> <i class="glyphicon glyphicon-trash icon-white"></i></a>
+                                                        <button type="submit" class='btn btn-danger btn-xs btnDelete' href=''> <i class="glyphicon glyphicon-trash icon-white"></i></button>
                                                     </form>
                                                 </td>
                                             </tr>     

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Department;
+use App\Lesson;
+use App\Quiz;
+use App\QuizResult;
 use App\Registration;
 use App\Student;
 use App\Subject;
@@ -18,30 +21,21 @@ class StudentSubjectsController extends Controller
     public function mySubjects(){
         $student = Student::where('user_id' ,Auth::id())->first();
 
-        $regs = DB::select('select d.id as d_id , d.name as d_name, s.id as s_id , s.name as s_name from department d 
-                          inner join subject s on d.id = s.department_id 
-                          inner join registrations r on r.subject_id = s.id 
-                          where r.students_id = ?',[$student->id] );
+        $subjects = Subject::
+            join('registrations','registrations.subject_id' , '=' ,'subject.id')
+            ->where('registrations.students_id' , $student->id)
+            ->where('registrations.date_to_learn' , '<=', 'now()')
+            ->select('subject.*')
+            ->get();
 
-        $regMap = null;
-        $dIDs = array();
-        foreach($regs as $reg){
-            $dIDs[] = $reg->d_id;
-        }
-
-        $departments = Department::whereIn('id' , $dIDs)->get();
-        foreach ($departments as $department){
-            $regMap[$department->id] = array();
-        }
-        foreach($regs as $reg){
-            foreach ($departments as $department) {
-                if($reg->d_id == $department->id){
-                    $regMap[$department->id][] = Subject::where('id' , $reg->s_id )->get();
-                }
+        $sortedSubjectsArray = array();
+        foreach ($subjects as $subject){
+            if(!array_key_exists($subject->department_id,$sortedSubjectsArray)){
+                $sortedSubjectsArray[$subject->department_id] = array();
             }
+            $sortedSubjectsArray[$subject->department_id][] = ($subject);
         }
-
-        return view('gueststudent.my_subjects')->with(compact('departments' ,'regMap'));
+        return view('gueststudent.my_subjects')->with(compact('sortedSubjectsArray'));
 
     }
 
@@ -52,17 +46,9 @@ class StudentSubjectsController extends Controller
      */
     public function index()
     {
+        $subjects = Subject::all();
 
-        $users = DB::select('select d.id , d.name , s.id , s.name from department d 
-                          inner join subject s on d.id = s.department_id 
-                          inner join registrations r on r.subject_id = s.id 
-                          where r.students_id = ?',[Auth::user()->id] );
-
-        dd($users);
-//        select d.id , d.name , s.id , s.name from department d
-//        inner join subject s on d.id = s.department_id
-//        inner join registrations r on r.subject_id = s.id where r.students_id = 1;
-
+        return view("gueststudent.all_subjects")->with(compact('subjects'));
     }
 
     /**
@@ -94,7 +80,43 @@ class StudentSubjectsController extends Controller
      */
     public function show($id)
     {
-        //
+        $registration = Registration::where('students_id', Auth::user()->student->id)
+                                    ->where('subject_id' , $id)->get();
+        if(count($registration) == 0){
+            return redirect()->back()->with(['error'  => 'Нет доступа!']);
+        }
+
+
+        $subject = Subject::findOrFail($id);
+        $lessons = $subject->lessons()->orderBy('id' ,'asc')->get();
+
+        $quizes = $subject->quizes()->get();
+        return view('gueststudent.subject')->with(compact('subject', 'lessons','quizes'));
+    }
+
+    public function showLesson($id)
+    {
+        $lesson = Lesson::findOrFail($id);
+        return view('gueststudent.lesson')->with(compact('lesson'));
+    }
+
+    public function showQuiz($id)
+    {
+        try{
+            $quiz = Quiz::findOrFail($id);
+        } catch (\Exception $e){
+            return redirect()->back()->with(['error'  => 'Нет доступа!']);
+        }
+
+        $registration = Registration::where('students_id', Auth::user()->student->id)
+            ->where('subject_id' , $quiz->subject->id)->get();
+        if(count($registration) == 0){
+            return redirect()->back()->with(['error'  => 'Нет доступа!']);
+        }
+
+        $quizResult = QuizResult::where('students_id', Auth::user()->student->id)->where('quiz_id' , $quiz->id);
+
+        return view('gueststudent.quiz')->with(compact('quiz'));
     }
 
     /**
