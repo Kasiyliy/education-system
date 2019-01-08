@@ -127,7 +127,7 @@ class QuizController extends Controller
                     ->join('subject', 'subject.id', '=', 'quizes.subject_id')
                     ->where('quizes.subject_id', $data['subject_id'])
                     ->where('quizes.deleted_at', '=', null)
-                    ->where('subject.user_id', '=', Auth::user()->id)
+                    ->where('quizes.user_id', '=', Auth::user()->id)
                     ->get();
             }else {
                 $quizes = DB::table('quizes')
