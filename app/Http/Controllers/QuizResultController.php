@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Quiz;
 use App\QuizResult;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class QuizResultController extends Controller
 {
@@ -18,7 +20,17 @@ class QuizResultController extends Controller
      */
     public function index()
     {
-        //
+        $currentUser = Auth::user();
+        $quizResults = [];
+        if($currentUser->group == User::ADMIN){
+            $quizResults = QuizResult::all();
+        }else if($currentUser->group == User::STUDENT){
+            $quizResults = QuizResult::select('quiz_results.*')
+                ->join('quizes' , 'quizes.id', '=','quiz_results.quiz_id')
+                ->where('quizes.user_id' ,$currentUser->id )->get();
+        }
+
+        return view("results.index", compact('quizResults'));
     }
 
     /**
@@ -139,6 +151,8 @@ class QuizResultController extends Controller
      */
     public function destroy($id)
     {
-        //
+        QuizResult::destroy($id);
+        Session::flash("success" , ['title' =>'Удалено!', 'body' =>'Успешно!']);
+        return redirect()->back();
     }
 }

@@ -19,7 +19,6 @@ Route::group(['middleware' => ['language',]], function () {
     Route::post('/user/login', ['as' => 'user.login', 'uses' => 'UserController@login']);
     Route::get('/user/logout', ['as' => 'user.logout', 'uses' => 'UserController@logout']);
 
-//Route::resource('homestudent','HomeStudentController');
     Route::get('/guest', ['as' => 'homestudent.guest', 'uses' => 'HomeStudentController@guest']);
     Route::get('/subjects', ['as' => 'homestudent.subjects', 'uses' => 'StudentSubjectsController@index']);
     Route::group(['prefix' => 'student', 'middleware' => ['for.student', 'auth']], function () {
@@ -67,10 +66,8 @@ Route::group(['middleware' => ['language',]], function () {
         Route::get('quiz/by-subject-api', ['as' => 'quiz.index3', 'uses' => 'QuizController@index3']);
         Route::get('quiz/by-subject', ['as' => 'quiz.index2', 'uses' => 'QuizController@index2']);
         Route::get('quiz/{id}/questions/edit', ['as' => 'quiz.questions', 'uses' => 'QuizController@questions']);
-        Route::get('result-subject', ['as' => 'result.subject', 'uses' => 'ResultController@getSubject']);
-        Route::post('result-subject', ['as' => 'result.subject.post', 'uses' => 'ResultController@postSubject']);
-        Route::get('result-student', ['as' => 'result.individual', 'uses' => 'ResultController@getStudent']);
-        Route::post('result-student', ['as' => 'result.individual.post', 'uses' => 'ResultController@postStudent']);
+        Route::get('result-quiz', ['as' => 'result.quiz', 'uses' => 'QuizResultController@index']);
+        Route::post('result-quiz/{id}', ['as' => 'result.quiz.delete', 'uses' => 'QuizResultController@destroy']);
 
         Route::resource('quiz', 'QuizController');
         Route::post('quiz/{quizID}/question', ['as' => 'quiz.question.create', 'uses' => 'QuestionController@createQuestion']);

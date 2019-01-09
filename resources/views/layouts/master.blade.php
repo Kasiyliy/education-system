@@ -87,8 +87,8 @@
                   </li>
                   <li><a><i class="fa fa-file-text"></i> Результаты <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{URL::route('result.subject')}}"> Subject Wise </a></li>
-                      <li><a href="{{URL::route('result.individual')}}">Student Wise</a></li>
+                      <li><a href="{{URL::route('result.quiz')}}"> Результаты тестов</a></li>
+                      {{--<li><a href="{{URL::route('result.individual')}}">Student Wise</a></li>--}}
                       </ul>
                   </li>
                   <li><a><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i> Уроки <span class="fa fa-chevron-down"></span></a>

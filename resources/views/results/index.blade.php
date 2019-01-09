@@ -19,7 +19,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Глобальный курс<small> Информация о глобальных курсах</small></h2>
+                    <h2>Результаты<small> результаты тестов</small></h2>
 
                     <div class="clearfix"></div>
                   </div>
@@ -27,27 +27,28 @@
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>Название</th>
-                          <th>Код глобального курса</th>
-                          <th>Краткое описание глобального курса</th>
+                          <th>Студент</th>
+                          <th>Процентность</th>
+                          <th>Урок</th>
+                          <th>Время сдачи</th>
                           <th>Действия</th>
                         </tr>
                       </thead>
                       <tbody>
-                      @foreach($departments as $department)
-                        <tr>
-                          <td>{{$department->name}}</td>
-                          <td>{{$department->code}}</td>
-                          <td>{{$department->description}}</td>
-                          <td>
-                         <a title='Update' class='btn btn-info btn-xs btnUpdate' id='{{$department->id}}' href='{{URL::route('department.edit',$department->id)}}'> <i class="glyphicon glyphicon-check icon-white"></i></a>
-                         <form class="deleteForm" method="POST" action="{{URL::route('department.destroy',$department->id)}}">
-                           <input name="_method" type="hidden" value="DELETE">
-                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                             <button type="submit" class='btn btn-danger btn-xs btnDelete' href=''> <i class="glyphicon glyphicon-trash icon-white"></i></button>
-                       </form>
-                      </td>
-                        </tr>
+                      @foreach($quizResults as $quizResult)
+                          <tr>
+                              <td>{{$quizResult->student->user->firstname.' '.$quizResult->student->user->lastname}}</td>
+                              <td>{{$quizResult->percentage}}</td>
+                              <td>{{$quizResult->quiz->subject->department->name.' - '.$quizResult->quiz->subject->name}}</td>
+                              <td>{{$quizResult->created_at}}</td>
+                              <td>
+                                  <form action="{{URL::route("result.quiz.delete", ['id' => $quizResult->id])}}" method="post">
+                                      {{csrf_field()}}
+                                      <button type="submit" class="btn btn-danger" ><span class="fa fa-trash"></span></button>
+                                  </form>
+
+                              </td>
+                          </tr>
                       @endforeach
                       </tbody>
                     </table>
