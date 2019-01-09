@@ -8,10 +8,10 @@
       <div class="row">
         <div class="col-lg-10 mx-auto">
           <h5 class="">
-            <strong>Дорогой друг, Мади Красава asdasdasd</strong></br>
-            <strong>Мы рады приветствовать Вас!</strong></br>
-            <strong>Позвольте нам стать вашим путеводителем к успеху в приобретении ценных знаний! Ведь сегодня это неотъемлемый фактор развития.</strong> </br>
-            <strong>Мы искренне верим в то, что подготовленный специально для вас курс, откроет перед вами двери к новым вершинам !</strong></br>
+            <strong>{{trans('messages.welcome_word1')}}</strong></br>
+            <strong>{{trans('messages.welcome_word2')}}</strong></br>
+            <strong>{{trans('messages.welcome_word3')}}</strong></br>
+            <strong>{{trans('messages.welcome_word4')}}</strong>
           </h5>
           <hr class = "light my-4">
         </div>

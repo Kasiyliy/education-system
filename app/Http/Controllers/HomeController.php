@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Session;
 use App\Institute;
+use App;
 
 class HomeController extends Controller {
 
@@ -24,7 +25,6 @@ class HomeController extends Controller {
 
 	public function index()
 	{
-
         $user = auth()->user();
         if($user){
             return redirect()->to('/dashboard');
@@ -50,4 +50,10 @@ class HomeController extends Controller {
 		return view('lock',compact('user'));
 	}
 
+	public function setLang(Request $request){
+	    if($request->language =='en' || $request->language =='ru'){
+            Session::put('language', $request->language);
+        }
+	    return redirect()->back();
+    }
 }
