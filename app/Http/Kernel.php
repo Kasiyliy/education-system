@@ -15,6 +15,7 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+        \App\Http\Middleware\LocaleMiddleware::class,
     ];
 
     /**
@@ -54,5 +55,6 @@ class Kernel extends HttpKernel
         'for.student' => \App\Http\Middleware\ForStudent::class,
         'account' => \App\Http\Middleware\Account::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'language' =>\App\Http\Middleware\LocaleMiddleware::class,
     ];
 }

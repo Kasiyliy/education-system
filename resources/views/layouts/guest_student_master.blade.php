@@ -73,6 +73,26 @@
                         <a class="nav-link js-scroll-trigger" href="login">Вход</a>
                     </li>
                 @endif
+
+                <li class="nav-item">
+                    <form id="languageFormMain" method="get" action="{{URL::route('setlang')}}" >
+                        <select name="language" class="form-control" onchange="document.getElementById('languageFormMain').submit()">
+                            <option value="ru"
+                                @if(session('language')=='ru')
+                                    selected
+                                @endif
+                            >Русский</option>
+                            <option value="en"
+                                    @if(session('language')=='en')
+                                    selected
+                                    @endif
+                            >Английский</option>
+                        </select>
+                    </form>
+                </li>
+            </ul>
+            <ul class = "navbar-nav text-white my-2 my-lg-0">
+
             </ul>
         </div>
     </div>
@@ -105,19 +125,19 @@
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     }
-    $(document).ready(function() {
-    @if(Session::has('success'))
+    $(document).ready(function () {
+        @if(Session::has('success'))
         toastr.success("{{Session::get("success")}}");
-    @endif
-    @if(Session::has('error'))
+        @endif
+        @if(Session::has('error'))
         toastr.error("{{Session::get("error")}}");
-    @endif
-    @if(Session::has('warning'))
+        @endif
+        @if(Session::has('warning'))
         toastr.warning("{{Session::get("warning")}}");
-    @endif
-    @if(Session::has('info'))
+        @endif
+        @if(Session::has('info'))
         toastr.warning("{{Session::get("info")}}");
-    @endif
+        @endif
     });
 </script>
 @yield('scripts')
