@@ -32,17 +32,17 @@
 
         </div>
 
-        <div class="x_content container-fluid">
+        <div class="x_content container-fluid"  style="overflow: auto; height: 300px; ">
           <table id="datatable-buttons" class="table table-hover table-bordered">
             <thead>
             <tr>
               <th>Сообщение</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody >
             @foreach($messages as $message)
               <tr>
-                <td>
+                <td style="min-width: 100%;">
                   <p class="text-muted">
                     @if($message->sender_user_id == $subject->user->id)
                       Собеседник:
@@ -57,19 +57,19 @@
             @endforeach
             </tbody>
           </table>
-          <div>
-            <form method="post" action="{{URL::route('message.store')}}" class="form form-horizontal my-2 m-3">
-              {{csrf_field()}}
-              <input type="hidden" name="acceptor_user_id" value="{{$subject->user->id}}">
-              <input type="hidden" name="subject_id" value="{{$subject->id}}">
-              <br>
-              <textarea required name="content" class="form-control my-2" placeholder="Сообщение"></textarea>
-              <br>
-              <button class="form-control" type="submit">Отправить</button>
-            </form>
-          </div>
-        </div>
 
+        </div>
+        <div class="container-fluid">
+          <form method="post" action="{{URL::route('message.store')}}" class="form form-horizontal my-2 m-3">
+            {{csrf_field()}}
+            <input type="hidden" name="acceptor_user_id" value="{{$subject->user->id}}">
+            <input type="hidden" name="subject_id" value="{{$subject->id}}">
+            <br>
+            <textarea required name="content" class="form-control my-2" placeholder="Сообщение"></textarea>
+            <br>
+            <button class="form-control" type="submit">Отправить</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>

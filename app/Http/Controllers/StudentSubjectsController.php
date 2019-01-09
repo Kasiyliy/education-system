@@ -173,7 +173,7 @@ class StudentSubjectsController extends Controller
         $messages = Message::whereIn('acceptor_user_id' ,[$currentUser->id , $subject->user->id])
             ->whereIn('sender_user_id' ,[$currentUser->id , $subject->user->id])
             ->where('subject_id' ,$subject->id )
-            ->orderBy('created_at' ,'asc')->get();
+            ->orderBy('created_at' ,'desc')->get();
 
         return view('gueststudent.chat', compact('subject' , 'messages'));
     }
