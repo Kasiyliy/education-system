@@ -50,11 +50,6 @@ class Student extends Model
         return $this->hasMany('App\Registration', 'students_id');
     }
 
-    public function exams()
-    {
-        return $this->hasMany('App\Exam', 'students_id');
-    }
-
     public function results()
     {
         return $this->hasMany('App\Result', 'student_id');

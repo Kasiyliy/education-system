@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Department;
 use App\Lesson;
+use App\Message;
 use App\Quiz;
 use App\QuizResult;
 use App\Registration;
@@ -154,5 +155,26 @@ class StudentSubjectsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function chat($id)
+    {
+        $subject = Subject::findOrFail($id);
+
+        $currentUser = Auth::user();
+
+        $registration = Registration::where('students_id', $currentUser->student->id)
+            ->where('subject_id' , $id)->get();
+        if(count($registration) == 0){
+            return redirect()->back()->with(['error'  => 'Нет доступа!']);
+        }
+
+
+        $messages = Message::whereIn('acceptor_user_id' ,[$currentUser->id , $subject->user->id])
+            ->whereIn('sender_user_id' ,[$currentUser->id , $subject->user->id])
+            ->where('subject_id' ,$subject->id )
+            ->orderBy('created_at' ,'asc')->get();
+
+        return view('gueststudent.chat', compact('subject' , 'messages'));
     }
 }

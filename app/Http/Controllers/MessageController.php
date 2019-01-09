@@ -111,7 +111,7 @@ class MessageController extends Controller
         $messages = Message::whereIn('acceptor_user_id' ,[$currentUser->id , $student->user->id])
             ->whereIn('sender_user_id' ,[$currentUser->id , $student->user->id])
             ->where('subject_id' ,$subjectId )
-            ->orderBy('created_at' ,'desc')->get();
+            ->orderBy('created_at' ,'asc')->get();
         return view('chats.chat',compact('student','subject', 'messages'));
     }
 

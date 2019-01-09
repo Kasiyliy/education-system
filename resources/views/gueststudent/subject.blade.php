@@ -16,6 +16,7 @@
             <li class="list-group-item"><span class="fa fa-envelope"></span> {{Auth::user()->email}}</li>
             <li class="list-group-item"><span class="fa fa-address-book"></span> {{Auth::user()->student->firstName.' '.Auth::user()->student->lastName }}</li>
             <li class="list-group-item"><span class="fa fa-calendar-alt"></span> {{substr(Auth::user()->student->dob,0,10)}}</li>
+            <li class="list-group-item"><span class="fa fa-envelope"></span><a class="btn-link" href="{{URL::route('student.my.subjects.chat', ['id' => $subject->id])}}"> Перейти в чат с учителем</a></li>
           </ul>
         </div>
       </div>

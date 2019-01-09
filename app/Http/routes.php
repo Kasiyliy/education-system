@@ -24,9 +24,15 @@ Route::group(['prefix' => 'student', 'middleware' => ['for.student', 'auth']] , 
     Route::get('/my/subjects',[ 'as' => 'student.my.subjects','uses'=>'StudentSubjectsController@mySubjects']);
     Route::get('/my/subjects/{id}',[ 'as' => 'student.my.subjects.specific','uses'=>'StudentSubjectsController@show']);
     Route::get('/my/subjects/lesson/{id}',[ 'as' => 'student.my.subjects.specific.lesson','uses'=>'StudentSubjectsController@showLesson']);
+    Route::get('/my/subjects/{id}/chat',[ 'as' => 'student.my.subjects.chat','uses'=>'StudentSubjectsController@chat']);
     Route::get('/my/subjects/quiz/{id}',[ 'as' => 'student.my.subjects.specific.quiz','uses'=>'StudentSubjectsController@showQuiz']);
     Route::post('/quizresult', ['as' =>'quizresult.store' , 'uses' =>'QuizResultController@store']);
 });
+
+Route::group(['middleware' => ['auth']] , function (){
+    Route::resource('message', 'MessageController');
+});
+
 
 Route::group(['middleware' => ['not.for.student', 'auth']], function () {
     Route::get('/dashboard', ['as' => 'user.dashboard', 'uses' => 'DashboardController@index']);
@@ -71,7 +77,6 @@ Route::group(['middleware' => ['not.for.student', 'auth']], function () {
 
     Route::resource('lesson', 'LessonController');
 
-    Route::resource('message', 'MessageController');
     Route::get('message/{studentId}/{subjectId}', ['as' =>'message.show2' , 'uses' =>'MessageController@show2']);
 
 });

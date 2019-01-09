@@ -81,39 +81,5 @@
 <script src="{{ URL::asset('assets/js/jszip.min.js')}}"></script>
 <script src="{{ URL::asset('assets/js/pdfmake.min.js')}}"></script>
 <script src="{{ URL::asset('assets/js/vfs_fonts.js')}}"></script>
-  <script>
-
-      $(document).ready(function() {
-
-          //datatables code
-          var handleDataTableButtons = function() {
-              if ($("#datatable-buttons").length) {
-                  $("#datatable-buttons").DataTable({
-                      responsive: true,
-                      dom: "Bfrtip",
-                      buttons: [
-                          {
-                              extend: "copy",
-                              className: "btn-sm"
-                          },
-                      ],
-                      responsive: true
-                  });
-              }
-          };
-
-          TableManageButtons = function() {
-              "use strict";
-              return {
-                  init: function() {
-                      handleDataTableButtons();
-                  }
-              };
-          }();
-
-          TableManageButtons.init();
-
-      });
-  </script>
 
 @endsection
