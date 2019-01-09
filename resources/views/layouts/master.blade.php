@@ -76,7 +76,7 @@
                   @if(Gate::check('Admin') || Gate::check('Teacher'))
                   <li><a><i class="fa fa-envelope"></i> Сообщения <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{URL::route('quiz.create')}}">Люди</a></li>
+                      <li><a href="{{URL::route('message.index')}}">Люди</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-edit"></i> Тесты <span class="fa fa-chevron-down"></span></a>

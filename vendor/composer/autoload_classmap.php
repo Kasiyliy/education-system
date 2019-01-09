@@ -13,6 +13,7 @@ return array(
     'CreateAnswersTable' => $baseDir . '/database/migrations/2019_01_02_212117_create_answers_table.php',
     'CreateCacheTable' => $baseDir . '/database/migrations/2017_01_20_132715_create_cache_table.php',
     'CreateLessonsTable' => $baseDir . '/database/migrations/2019_01_03_022256_create_lessons_table.php',
+    'CreateMessagesTable' => $baseDir . '/database/migrations/2019_01_09_055637_create_messages_table.php',
     'CreateQuestionsTable' => $baseDir . '/database/migrations/2019_01_02_211003_create_questions_table.php',
     'CreateQuizResultsTable' => $baseDir . '/database/migrations/2019_01_08_110454_create_quiz_results_table.php',
     'CreateRegistrationsTable' => $baseDir . '/database/migrations/2016_08_31_172636_create_registrations_table.php',

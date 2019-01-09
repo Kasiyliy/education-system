@@ -45,7 +45,6 @@ Route::group(['middleware' => ['not.for.student', 'auth']], function () {
     Route::resource('subject', 'SubjectController');
     Route::get('subject/{deparment}/{semester}', ['as' => 'subject.DeptAndSem', 'uses' => 'SubjectController@subjetsByDptSem']);
 
-
     Route::resource('student', 'StudentController');
     Route::post('student/department', ['as' => 'student.department', 'uses' => 'StudentController@index2']);
     Route::get('students/subject/{subID}', ['as' => 'students.departmentAndsession', 'uses' => 'StudentController@studentList']);
@@ -55,7 +54,6 @@ Route::group(['middleware' => ['not.for.student', 'auth']], function () {
     Route::get('student-registration/{id}/delete', ['as' => 'student.registration.destroy', 'uses' => 'StudentController@regDestroy']);
     Route::get('registered-students', ['as' => 'student.registration.index', 'uses' => 'StudentController@regIndex']);
     Route::post('registered-students', ['as' => 'student.registration.list', 'uses' => 'StudentController@regList']);
-
 
     Route::get('quiz/by-subject-api', ['as' => 'quiz.index3', 'uses' => 'QuizController@index3']);
     Route::get('quiz/by-subject', ['as' => 'quiz.index2', 'uses' => 'QuizController@index2']);
@@ -70,10 +68,10 @@ Route::group(['middleware' => ['not.for.student', 'auth']], function () {
     Route::get('quiz/{id}/questions/index', ['as' => 'quiz.questions.index', 'uses' => 'QuestionController@index']);
 
     Route::resource('question', 'QuestionController');
+
     Route::resource('lesson', 'LessonController');
 
-//    //barcode generate
-//    Route::get('/barcode', 'barcodeController@index');
-//    Route::post('/barcode', 'barcodeController@generate');
+    Route::resource('message', 'MessageController');
+    Route::get('message/{studentId}/{subjectId}', ['as' =>'message.show2' , 'uses' =>'MessageController@show2']);
 
 });

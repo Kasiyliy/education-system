@@ -19,33 +19,46 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Чат <small> люди</small></h2>
+                    <h2>Чат с {{$student->firstName.' '.$student->lastName.' '.$student->middleName}}<small>Под курс: {{$subject->name}}</small></h2>
 
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>Студент</th>
-                          <th>Урок</th>
-                          <th>Действия</th>
-                        </tr>
+                      <tr>
+                        <th>Сообщение</th>
+                      </tr>
                       </thead>
                       <tbody>
-                      @foreach($students as $student)
+                      @foreach($messages as $message)
                         <tr>
-                          <td>{{$student->id}}</td>
-                          <td>{{$student->firstName.' '.$student->lastName.' '.$student->middleName}}</td>
-                          <td>{{$student->subjectName}}</td>
                           <td>
-                            <a href="{{URL::route('message.show2', ['studentId' => $student->id, 'subjectId' => $student->subjectId])}}" class="btn btn-primary">Перейти к чату</a>
+                            <p class="text-muted">
+                              @if($message->sender_user_id == $student->user_id)
+                                Собеседник:
+                              @else
+                                Я:
+                              @endif
+                              {{$message->created_at}}
+                            </p>
+                            {{$message->content}}
                           </td>
                         </tr>
                       @endforeach
                       </tbody>
                     </table>
+                    <div>
+                      <form method="post" action="{{URL::route('message.store')}}" class="form form-horizontal my-2 m-3">
+                        {{csrf_field()}}
+                        <input type="hidden" name="acceptor_user_id" value="{{$student->user_id}}">
+                        <input type="hidden" name="subject_id" value="{{$subject->id}}">
+                        <br>
+                        <textarea required name="content" class="form-control my-2" placeholder="Сообщение"></textarea>
+                        <br>
+                        <button class="form-control" type="submit">Отправить</button>
+                      </form>
+                    </div>
                   </div>
                 </div>
               <!-- row end -->
@@ -81,22 +94,6 @@
                       buttons: [
                           {
                               extend: "copy",
-                              className: "btn-sm"
-                          },
-                          {
-                              extend: "csv",
-                              className: "btn-sm"
-                          },
-                          {
-                              extend: "excel",
-                              className: "btn-sm"
-                          },
-                          {
-                              extend: "pdfHtml5",
-                              className: "btn-sm"
-                          },
-                          {
-                              extend: "print",
                               className: "btn-sm"
                           },
                       ],
