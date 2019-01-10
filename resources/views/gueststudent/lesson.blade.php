@@ -1,7 +1,15 @@
 @extends('layouts.guest_student_master')
 
 @section('title', 'ASTCGlobal')
+@section('styles')
+  <style>
+    video {
+      width: 100%;
+      height: auto;
+    }
 
+  </style>
+@endsection
 @section('content')
 
   <div class="container-fluid">
@@ -29,26 +37,36 @@
             <div class="card-body">
               <div class="embed-responsive embed-responsive-16by9">
                 <iframe class="embed-responsive-item" id="viewer"
-                        src="/assets/ViewerJS/#/{{$lesson->presentation}}" allowfullscreen
+                        src="/assets/ViewerJS/#/{{$lesson->lessonParts->first()->presentation}}" allowfullscreen
                         webkitallowfullscreen></iframe>
-                {{--<embed class="embed-responsive-item"--}}
-                {{--src="{{URL::to('/').'/'.$lesson->presentation }}"--}}
-                {{--frameborder="0"></embed>--}}
-                <iframe src='https://view.officeapps.live.com/op/embed.aspx?src={{URL::to('/') .'/'.$lesson->presentation}}'
-                        width='100%' height='600px' frameborder='0'/>
-
               </div>
+                  @if($lesson->lessonParts->first()->video)
+                  <div class="card my-1">
+                    <div class="card-body">
+                      <video  controls>
+                        <source src="/{{$lesson->lessonParts->first()->video}}" >
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                  </div>
+                  @endif
+                  @if($lesson->lessonParts->first()->audio)
+                  <div class="card my-1">
+                    <div class="card-body">
+                      <audio  controls>
+                        <source src="/{{$lesson->lessonParts->first()->audio}}" >
+                        Your browser does not support the video tag.
+                      </audio>
+                    </div>
+                  </div>
+                  @endif
+
             </div>
             <div class="card-footer">
               <span class="text-muted small">описание</span>
               <p class="text-dark m-0 text-center">{{$lesson->description}}</p>
             </div>
           </div>
-        </div>
-        <div class="content">
-
-
-
         </div>
       </div>
     </div>
@@ -59,11 +77,4 @@
 @section('scripts')
   <script src="{{ URL::asset('assets/js/validator.min.js')}}"></script>
 
-  <script>
-      $('#iframe').ready(function() {
-          setTimeout(function() {
-              $('#iframe').contents().find('#download').remove();
-          }, 100);
-      });
-  </script>
 @endsection

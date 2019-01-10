@@ -20,16 +20,21 @@ Route::group(['middleware' => ['language',]], function () {
     Route::post('/user/login', ['as' => 'user.login', 'uses' => 'UserController@login']);
     Route::get('/user/logout', ['as' => 'user.logout', 'uses' => 'UserController@logout']);
 
-//Route::resource('homestudent','HomeStudentController');
     Route::get('/guest', ['as' => 'homestudent.guest', 'uses' => 'HomeStudentController@guest']);
     Route::get('/subjects', ['as' => 'homestudent.subjects', 'uses' => 'StudentSubjectsController@index']);
     Route::group(['prefix' => 'student', 'middleware' => ['for.student', 'auth']], function () {
         Route::get('/my/subjects', ['as' => 'student.my.subjects', 'uses' => 'StudentSubjectsController@mySubjects']);
         Route::get('/my/subjects/{id}', ['as' => 'student.my.subjects.specific', 'uses' => 'StudentSubjectsController@show']);
         Route::get('/my/subjects/lesson/{id}', ['as' => 'student.my.subjects.specific.lesson', 'uses' => 'StudentSubjectsController@showLesson']);
+        Route::get('/my/subjects/{id}/chat', ['as' => 'student.my.subjects.chat', 'uses' => 'StudentSubjectsController@chat']);
         Route::get('/my/subjects/quiz/{id}', ['as' => 'student.my.subjects.specific.quiz', 'uses' => 'StudentSubjectsController@showQuiz']);
         Route::post('/quizresult', ['as' => 'quizresult.store', 'uses' => 'QuizResultController@store']);
     });
+
+    Route::group(['middleware' => ['auth']], function () {
+        Route::resource('message', 'MessageController');
+    });
+
 
     Route::group(['middleware' => ['not.for.student', 'auth']], function () {
         Route::get('/dashboard', ['as' => 'user.dashboard', 'uses' => 'DashboardController@index']);
@@ -63,21 +68,20 @@ Route::group(['middleware' => ['language',]], function () {
         Route::get('quiz/by-subject-api', ['as' => 'quiz.index3', 'uses' => 'QuizController@index3']);
         Route::get('quiz/by-subject', ['as' => 'quiz.index2', 'uses' => 'QuizController@index2']);
         Route::get('quiz/{id}/questions/edit', ['as' => 'quiz.questions', 'uses' => 'QuizController@questions']);
-        Route::get('result-subject', ['as' => 'result.subject', 'uses' => 'ResultController@getSubject']);
-        Route::post('result-subject', ['as' => 'result.subject.post', 'uses' => 'ResultController@postSubject']);
-        Route::get('result-student', ['as' => 'result.individual', 'uses' => 'ResultController@getStudent']);
-        Route::post('result-student', ['as' => 'result.individual.post', 'uses' => 'ResultController@postStudent']);
+        Route::get('result-quiz', ['as' => 'result.quiz', 'uses' => 'QuizResultController@index']);
+        Route::post('result-quiz/{id}', ['as' => 'result.quiz.delete', 'uses' => 'QuizResultController@destroy']);
 
         Route::resource('quiz', 'QuizController');
         Route::post('quiz/{quizID}/question', ['as' => 'quiz.question.create', 'uses' => 'QuestionController@createQuestion']);
         Route::get('quiz/{id}/questions/index', ['as' => 'quiz.questions.index', 'uses' => 'QuestionController@index']);
 
         Route::resource('question', 'QuestionController');
-        Route::resource('lesson', 'LessonController');
 
-//    //barcode generate
-//    Route::get('/barcode', 'barcodeController@index');
-//    Route::post('/barcode', 'barcodeController@generate');
+        Route::resource('lesson', 'LessonController');
+        Route::get('lesson-part/{id}', ['as' => 'lesson-part.index', 'uses'=>'LessonPartController@index']);
+        Route::post('lesson-part', ['as' => 'lesson-part.store', 'uses'=>'LessonPartController@store']);
+
+        Route::get('message/{studentId}/{subjectId}', ['as' => 'message.show2', 'uses' => 'MessageController@show2']);
 
     });
 });

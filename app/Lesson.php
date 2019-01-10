@@ -14,12 +14,15 @@ class Lesson extends Model
     protected $fillable = [
         'name',
         'description',
-        'presentation',
         'subject_id',
         'deleted_at',
     ];
 
     public function subject() {
         return $this->belongsTo('App\Subject','subject_id');
+    }
+
+    public function lessonParts() {
+        return $this->hasMany('App\LessonPart','lesson_id');
     }
 }

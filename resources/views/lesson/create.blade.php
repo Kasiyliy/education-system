@@ -33,10 +33,6 @@
                     'enctype' => 'multipart/form-data', 'class' => 'form-horizontal']) !!}
                     {{csrf_field()}}
                     <div class="form-group">
-                      <label for="presentation">Презентация</label>
-                      <input type="file" class="form-control" id="presentation" name="presentation" required>
-                    </div>
-                    <div class="form-group">
                       <label for="name">Наименование</label>
                       <input type="text" class="form-control" name="name" id="name" required>
                     </div>
@@ -66,8 +62,5 @@
 @section('extrascript')
 <script src="{{ URL::asset('assets/js/validator.min.js')}}"></script>
 
-   <script>
-
-   </script>
 
 @endsection

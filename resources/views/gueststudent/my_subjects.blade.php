@@ -28,7 +28,7 @@
                     </div>
 
                     @foreach($sortedSubjectsArray as $sortedSubjects)
-                        <div class="card my-2">
+                        <div class="card m-2">
                             <div class="card-header">
                                 <p class="text-center">{{$sortedSubjects[0]->department->name}}</p>
                             </div>
@@ -38,10 +38,9 @@
                             </div>
                         </div>
                         <div class="row">
+                            @foreach($sortedSubjects as $sortedSubject)
 
                             <div class="col-sm-4">
-
-                                @foreach($sortedSubjects as $sortedSubject)
                                 <div class="card">
                                     <div class="card-header">
                                         <p> <span class="text-muted small">Под курс #{{$sortedSubject->id}}</span>:  {{$sortedSubject->name}}</p>
@@ -54,9 +53,8 @@
                                         <a class="float-right btn btn-info text-white btn-xs" href="{{URL::route('student.my.subjects.specific' , ['id'=>$sortedSubject->id])}}">Начать</a>
                                     </div>
                                 </div>
-                                @endforeach
-
                             </div>
+                            @endforeach
                         </div>
                     @endforeach
                 </div>

@@ -56,4 +56,13 @@ class User extends Authenticatable
     public function student(){
         return $this->hasOne('App\Student', 'user_id');
     }
+
+    public function incomingMessages() {
+        return $this->hasMany('App\Message','acceptor_user_id');
+    }
+
+    public function outcomingMessages() {
+        return $this->hasMany('App\Message','sender_user_id');
+    }
+
 }

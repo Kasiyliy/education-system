@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Lesson;
 use App\Subject;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use Session;
 use Validator;
 use Storage;
@@ -32,7 +34,12 @@ class LessonController extends Controller
      */
     public function create()
     {
-        $subjects = Subject::all();
+        $subjects = [];
+        if(Auth::user()->group == User::ADMIN){
+            $subjects = Subject::all();
+        }else if(Auth::user()->group == User::TEACHER){
+            $subjects = Subject::where('user_id' , Auth::id())->get();
+        }
         if(count($subjects)==0){
             Session::flash('warning',['title' => 'Ошибка!' ,'body' =>'Не добавлены под курсы!']);
             return redirect()->back();
@@ -52,24 +59,25 @@ class LessonController extends Controller
         $rules = [
             'name' => 'required|max:255',
             'description' => 'required',
-            'presentation' => 'required|file|max:50000|mimes:pdf',
+//            'presentation' => 'required|file|max:50000|mimes:pdf',
             'subject_id' => 'required',
         ];
         $validator = Validator::make($data, $rules);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }else {
-            $presentation = $request->presentation;
-            $presentation_new_name = time() . $presentation->getClientOriginalName();
-            $fullPath = $presentation->move('assets/files/lessons', $presentation_new_name);
+//            $presentation = $request->presentation;
+//            $presentation_new_name = time() . $presentation->getClientOriginalName();
+//            $fullPath = $presentation->move('assets/files/lessons', $presentation_new_name);
             $lesson = new Lesson;
-            $lesson->presentation = $fullPath;
+//            $lesson->presentation = $fullPath;
             $lesson->name = $request->name;
             $lesson->description = $request->description;
             $lesson->subject_id = $request->subject_id;
             $lesson->save();
             Session::flash('success', ['title' => 'Успешно!' , 'body' =>'Урок сохранен!']);
-            return redirect()->route('lesson.index');
+
+            return redirect()->route('lesson-part.index', ['id'=> $lesson->id ]);
         }
     }
 
@@ -117,9 +125,9 @@ class LessonController extends Controller
     public function destroy($id)
     {
         $lesson = Lesson::findOrFail($id);
-        if(file_exists($lesson->presentation)){
-            unlink($lesson->presentation);
-        }
+//        if(file_exists($lesson->presentation)){
+//            unlink($lesson->presentation);
+//        }
         $lesson->delete();
         return redirect()->back();
     }

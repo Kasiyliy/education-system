@@ -4,8 +4,15 @@
 
 @section('content')
 
-  <div class="container-fluid">
-    <div class="row">
+  <div class="container">
+      <header class="jumbotron my-4">
+          <h1 class="display-3">Добро пожаловать в страницу списка курсов!</h1>
+          <p class="lead">
+              Мы надеемся, что тут есть что-то подходящее именно для вас!
+          </p>
+      </header>
+
+      <div class="row">
 
         @foreach($subjects as $subject)
             <div class="col-sm-4 my-2">
@@ -16,7 +23,7 @@
                     <div class="card-body">
                         <h1 class="card-title pricing-card-title">{{$subject->price}} <small class="text-muted">тг</small></h1>
                         <p>{{$subject->description}}</p>
-                        <button type="button" class="btn btn-lg btn-block btn-primary">Contact us</button>
+
                     </div>
                 </div>
             </div>
