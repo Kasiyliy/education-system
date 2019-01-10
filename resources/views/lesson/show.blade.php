@@ -4,7 +4,6 @@
 
 @section('content')
 
-    <
     <div class="right_col" role="main">
         <div class="">
 
@@ -36,8 +35,8 @@
                                         src="/assets/ViewerJS/#/{{$lesson->presentation}}" allowfullscreen
                                         webkitallowfullscreen></iframe>
                                 {{--<embed class="embed-responsive-item"--}}
-                                        {{--src="{{URL::to('/').'/'.$lesson->presentation }}"--}}
-                                        {{--frameborder="0"></embed>--}}
+                                {{--src="{{URL::to('/').'/'.$lesson->presentation }}"--}}
+                                {{--frameborder="0"></embed>--}}
 
                             </div>
 
@@ -62,4 +61,6 @@
                     });
                 </script>
 
-        </div>@endsection
+        @endsection
+        </div>
+    </div>

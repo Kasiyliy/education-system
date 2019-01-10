@@ -34,6 +34,8 @@
                 {{--<embed class="embed-responsive-item"--}}
                 {{--src="{{URL::to('/').'/'.$lesson->presentation }}"--}}
                 {{--frameborder="0"></embed>--}}
+                {{--<iframe src='https://view.officeapps.live.com/op/embed.aspx?src={{URL::to('/') .'/'.$lesson->presentation}}'--}}
+                        {{--width='100%' height='600px' frameborder='0'/>--}}
 
               </div>
             </div>

@@ -24,7 +24,7 @@ class QuizResultController extends Controller
         $quizResults = [];
         if($currentUser->group == User::ADMIN){
             $quizResults = QuizResult::all();
-        }else if($currentUser->group == User::STUDENT){
+        }else if($currentUser->group == User::TEACHER){
             $quizResults = QuizResult::select('quiz_results.*')
                 ->join('quizes' , 'quizes.id', '=','quiz_results.quiz_id')
                 ->where('quizes.user_id' ,$currentUser->id )->get();
