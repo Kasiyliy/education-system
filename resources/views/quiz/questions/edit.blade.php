@@ -106,6 +106,9 @@
     <script>
         $(document).ready(function () {
 
+            $('input[type="checkbox"]').on('change', function () {
+                $('input[type = "checkbox"]').not(this).prop('checked', false);
+            });
             var buttons = $('.mybutton');
 
             for(var i = 0; i < buttons.length; i++){
@@ -158,6 +161,9 @@
                 innerDiv.append(deleteBtn);
 
                 variants.append(innerDiv);
+                $('input[type="checkbox"]').on('change', function () {
+                    $('input[type = "checkbox"]').not(this).prop('checked', false);
+                });
             });
 
             var myForm = $('#myForm');
