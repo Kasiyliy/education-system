@@ -121,32 +121,36 @@ class StudentSubjectsController extends Controller
             $currentLessonPart->lesson_part_id = $firstLessonPart->id;
             $currentLessonPart->save();
         }
+
         $lessonPart = $currentLessonPart->lessonPart;
         return view('gueststudent.lesson')->with(compact('lesson','lessonPart','currentLessonPart'));
     }
 
     public function nextLessonPart($currentLessonPartId){
         $currentLessonPart = CurrentLesson::findOrFail($currentLessonPartId);
-        $lessonParts = $currentLessonPart->lessonPart->lesson->lessonParts->orderBy('id' , 'asc')->get();
+
+        $lessonParts = $currentLessonPart->lessonPart->lesson->lessonParts()->orderBy('id' , 'asc')->get();
+        $newLessonPartID = 0;
         $break = false;
         for ($i = 0; $i < count($lessonParts); $i++){
             if($break){
-                $currentLessonPartId = $lessonParts[$i]->id;
+                $newLessonPartID = $lessonParts[$i]->id;
                 break;
             }
-            if($lessonParts[$i]->id == $currentLessonPartId && $i + 1 == count($lessonParts)){
+            if($lessonParts[$i]->id == $currentLessonPart->lesson_part_id && $i + 1 != count($lessonParts)){
                 $break = true;
             }
         }
 
-        if($currentLessonPartId == $currentLessonPart->id){
+        if($newLessonPartID == $currentLessonPart->lesson_part_id || $newLessonPartID == 0){
             return Response()->json([
                 'error' => true,
                 'message' => "",
             ]);
         }else{
-            $currentLessonPart->lesson_part_id = $currentLessonPartId;
+            $currentLessonPart->lesson_part_id = $newLessonPartID;
             $currentLessonPart->save();
+            $currentLessonPart = CurrentLesson::with('lessonPart')->find($currentLessonPart->id);
             return Response()->json([
                 'error' => false,
                 'message' => $currentLessonPart,

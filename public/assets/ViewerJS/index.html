@@ -79,28 +79,28 @@ c;a?(e.title||(e.title=a.replace(/^.*[\\\/]/,"")),e.documentUrl=a,b(a,function(b
     <body>
         <div id = "viewer">
             <div id = "titlebar">
-                <div id = "documentName"></div>
-                <div id = "titlebarRight">
+                <div id = "documentName" style="display: none;"></div>
+                <div id = "titlebarRight" style="display: none;">
                     <button id = "presentation" class = "toolbarButton presentation" title = "Presentation"></button>
                     <button id = "fullscreen" class = "toolbarButton fullscreen" title = "Fullscreen"></button>
                     <button id = "download" class = "toolbarButton download" title = "Download"></button>
                 </div>
-           </div>
+            </div>
             <div id = "toolbarContainer">
-                <div id = "toolbar">
+                <div >
                     <div id = "toolbarLeft">
-                        <div id = "navButtons" class = "splitToolbarButton">
+                        <div id = "navButtons" class = "splitToolbarButton" style="display:none;">
                             <button id = "previous" class = "toolbarButton pageUp" title = "Previous Page"></button>
                             <div class="splitToolbarButtonSeparator"></div>
                             <button id = "next" class = "toolbarButton pageDown" title = "Next Page"></button>
                         </div>
-                        <label id = "pageNumberLabel" class = "toolbarLabel" for = "pageNumber">Page:</label>
-                        <input type = "number" id = "pageNumber" class = "toolbarField pageNumber"/>
-                        <span id = "numPages" class = "toolbarLabel"></span>
+                        <label style="display:none;"></label>
+                        <input type = "number" id = "pageNumber" class = "toolbarField pageNumber" style="display:none;"/>
+                        <span id = "numPages" class = "toolbarLabel" style="display:none;"></span>
                     </div>
-                    <div id = "toolbarMiddleContainer" class = "outerCenter">
+                    <div id = "toolbarMiddleContainer" class = "outerCenter" style="display:none;">
                         <div id = "toolbarMiddle" class = "innerCenter">
-                            <div id = 'zoomButtons' class = "splitToolbarButton">
+                            <div id = 'zoomButtons' class = "splitToolbarButton" style="display:none;">
                                 <button id = "zoomOut" class = "toolbarButton zoomOut" title = "Zoom Out"></button>
                                 <div class="splitToolbarButtonSeparator"></div>
                                 <button id = "zoomIn" class = "toolbarButton zoomIn" title = "Zoom In"></button>
@@ -124,7 +124,7 @@ c;a?(e.title||(e.title=a.replace(/^.*[\\\/]/,"")),e.documentUrl=a,b(a,function(b
                             </div>
                         </div>
                     </div>
-                    <div id = "toolbarRight">
+                    <div id = "toolbarRight" style="display: none;">
                     </div>
                 </div>
             </div>
@@ -132,8 +132,8 @@ c;a?(e.title||(e.title=a.replace(/^.*[\\\/]/,"")),e.documentUrl=a,b(a,function(b
                 <div id = "canvas"></div>
             </div>
             <div id = "overlayNavigator">
-                <div id = "previousPage"></div>
-                <div id = "nextPage"></div>
+                <div ></div>
+                <div ></div>
             </div>
             <div id = "overlayCloseButton">
             &#10006;
