@@ -73,26 +73,16 @@
                         <a class="nav-link js-scroll-trigger" href="login">Вход</a>
                     </li>
                 @endif
-
-                <li class="nav-item">
-                    <form id="languageFormMain" method="get" action="{{URL::route('setlang')}}" >
-                        <select name="language" class="form-control" onchange="document.getElementById('languageFormMain').submit()">
-                            <option value="ru"
-                                @if(session('language')=='ru')
-                                    selected
-                                @endif
-                            >Русский</option>
-                            <option value="en"
-                                    @if(session('language')=='en')
-                                    selected
-                                    @endif
-                            >Английский</option>
-                        </select>
-                    </form>
-                </li>
             </ul>
-            <ul class = "navbar-nav text-white my-2 my-lg-0">
-
+            <ul class="nav navbar-nav navbar-right" style="background: #0a0c0e">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="{{URL::route('setlangrus')}}">
+                        Рус</a>
+                </li>
+                <li class="nav-item" style = " border-left: 1px solid white">
+                    <a class="nav-link js-scroll-trigger" href="{{URL::route('setlangeng')}}">
+                        Анг</a>
+                </li>
             </ul>
         </div>
     </div>

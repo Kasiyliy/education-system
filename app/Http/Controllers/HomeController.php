@@ -50,10 +50,12 @@ class HomeController extends Controller {
 		return view('lock',compact('user'));
 	}
 
-	public function setLang(Request $request){
-	    if($request->language =='en' || $request->language =='ru'){
-            Session::put('language', $request->language);
-        }
+	public function setLangEng(){
+        Session::put('language', 'en');
 	    return redirect()->back();
+    }
+    public function setLangRus(){
+	    Session::put('language', 'ru');
+        return redirect()->back();
     }
 }
