@@ -22,12 +22,14 @@ Route::group(['middleware' => ['language',]], function () {
 
     Route::get('/guest', ['as' => 'homestudent.guest', 'uses' => 'HomeStudentController@guest']);
     Route::get('/subjects', ['as' => 'homestudent.subjects', 'uses' => 'StudentSubjectsController@index']);
+
     Route::group(['prefix' => 'student', 'middleware' => ['for.student', 'auth']], function () {
         Route::get('/my/subjects', ['as' => 'student.my.subjects', 'uses' => 'StudentSubjectsController@mySubjects']);
         Route::get('/my/subjects/{id}', ['as' => 'student.my.subjects.specific', 'uses' => 'StudentSubjectsController@show']);
         Route::get('/my/subjects/lesson/{id}', ['as' => 'student.my.subjects.specific.lesson', 'uses' => 'StudentSubjectsController@showLesson']);
         Route::get('/my/subjects/{id}/chat', ['as' => 'student.my.subjects.chat', 'uses' => 'StudentSubjectsController@chat']);
         Route::get('/my/subjects/quiz/{id}', ['as' => 'student.my.subjects.specific.quiz', 'uses' => 'StudentSubjectsController@showQuiz']);
+        Route::get('/lesson_part/next_question/{id}', ['as' => 'lesson_part.next_question', 'uses' => 'StudentSubjectsController@nextLessonPart']);
         Route::post('/quizresult', ['as' => 'quizresult.store', 'uses' => 'QuizResultController@store']);
     });
 

@@ -154,7 +154,7 @@
                 }
 
                 results.push({
-                    id : questionIndex,
+                    id : currentQuestionId,
                     selected : selected,
                 });
             }

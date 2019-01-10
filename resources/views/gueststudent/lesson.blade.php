@@ -34,28 +34,28 @@
               <span class="text-muted small">урок</span>
               <p class="text-dark m-0 text-center">{{$lesson->name}}</p>
             </div>
-            <div class="card-body">
+            <div class="card-body" id="lessonPart">
               <div class="embed-responsive embed-responsive-16by9">
                 <iframe class="embed-responsive-item" id="viewer"
-                        src="/assets/ViewerJS/#/{{$lesson->lessonParts->first()->presentation}}" allowfullscreen
+                        src="/assets/ViewerJS/#/{{$lessonPart->presentation}}" allowfullscreen
                         webkitallowfullscreen></iframe>
               </div>
-                  @if($lesson->lessonParts->first()->video)
+                  @if($lessonPart->video)
                   <div class="card my-1">
                     <div class="card-body">
                       <video  controls>
-                        <source src="/{{$lesson->lessonParts->first()->video}}" >
+                        <source src="/{{$lessonPart->video}}" >
                         Your browser does not support the video tag.
                       </video>
                     </div>
                   </div>
                   @endif
-                  @if($lesson->lessonParts->first()->audio)
+                  @if($lessonPart->audio)
                   <div class="card my-1">
                     <div class="card-body">
                       <audio  controls>
-                        <source src="/{{$lesson->lessonParts->first()->audio}}" >
-                        Your browser does not support the video tag.
+                        <source src="/{{$lessonPart->audio}}" >
+                        Your browser does not support the audio tag.
                       </audio>
                     </div>
                   </div>
@@ -76,5 +76,25 @@
 
 @section('scripts')
   <script src="{{ URL::asset('assets/js/validator.min.js')}}"></script>
+  <script>
+    $(document).ready(function () {
+        var currentQuestionId = {{$currentLessonPart->id}};
+        var url ="/lesson_part/next_question/";
+        if(false){
+            $.ajax({
+                method: "GET",
+                url: url + currentQuestionId,
+                dataType: "json",
+            }).done(function( msg ) {
+                if(msg.error == 0){
+                    currentQuestionId = msg.message.id;
+                    $('#lessonPart').html('');
 
+                }else{
+                    toastr.error("Возникла ошибка!");
+                }
+            });
+        }
+    });
+  </script>
 @endsection

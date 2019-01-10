@@ -90,8 +90,9 @@ class LessonController extends Controller
     public function show($id)
     {
         $lesson = Lesson::findOrFail($id);
-        return view('lesson.show')->with(compact('lesson'));
+        return view('lesson.show')->with(compact('lesson' ));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -125,9 +126,6 @@ class LessonController extends Controller
     public function destroy($id)
     {
         $lesson = Lesson::findOrFail($id);
-//        if(file_exists($lesson->presentation)){
-//            unlink($lesson->presentation);
-//        }
         $lesson->delete();
         return redirect()->back();
     }

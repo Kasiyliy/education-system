@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\CurrentLesson;
 use App\Department;
 use App\Lesson;
+use App\LessonPart;
 use Session;
 use App\Message;
 use App\Quiz;
@@ -98,12 +100,58 @@ class StudentSubjectsController extends Controller
 
     public function showLesson($id)
     {
+
         $lesson = Lesson::with('lessonParts')->findOrFail($id);
         if($lesson->lessonParts->count() == 0){
             Session::flash('warning',  'Урок еще не готов!');
             return redirect()->back();
         }
-        return view('gueststudent.lesson')->with(compact('lesson'));
+
+        $firstLessonPart = LessonPart::where('lesson_id' ,$lesson->id )->orderBy('id' ,'asc')->first();
+        $currentLessonPart = CurrentLesson::select('current_lessons.*')
+            ->join('lesson_parts', 'lesson_parts.id' , '=' ,'current_lessons.lesson_part_id')
+            ->join('lessons', 'lessons.id' , '=' ,'lesson_parts.lesson_id')
+            ->where( 'lesson_parts.lesson_id', $lesson->id )
+            ->where( 'current_lessons.user_id', Auth::id())
+            ->first();
+
+        if(!$currentLessonPart){
+            $currentLessonPart = new CurrentLesson();
+            $currentLessonPart->user_id = Auth::id();
+            $currentLessonPart->lesson_part_id = $firstLessonPart->id;
+            $currentLessonPart->save();
+        }
+        $lessonPart = $currentLessonPart->lessonPart;
+        return view('gueststudent.lesson')->with(compact('lesson','lessonPart','currentLessonPart'));
+    }
+
+    public function nextLessonPart($currentLessonPartId){
+        $currentLessonPart = CurrentLesson::findOrFail($currentLessonPartId);
+        $lessonParts = $currentLessonPart->lessonPart->lesson->lessonParts->orderBy('id' , 'asc')->get();
+        $break = false;
+        for ($i = 0; $i < count($lessonParts); $i++){
+            if($break){
+                $currentLessonPartId = $lessonParts[$i]->id;
+                break;
+            }
+            if($lessonParts[$i]->id == $currentLessonPartId && $i + 1 == count($lessonParts)){
+                $break = true;
+            }
+        }
+
+        if($currentLessonPartId == $currentLessonPart->id){
+            return Response()->json([
+                'error' => true,
+                'message' => "",
+            ]);
+        }else{
+            $currentLessonPart->lesson_part_id = $currentLessonPartId;
+            $currentLessonPart->save();
+            return Response()->json([
+                'error' => false,
+                'message' => $currentLessonPart,
+            ]);
+        }
     }
 
     public function showQuiz($id)

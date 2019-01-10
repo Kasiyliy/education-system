@@ -72,6 +72,7 @@ class QuizResultController extends Controller
             $answerIDs = $datum->selected;
             $rightOnes = 0;
             $selectedRightOnes = 0;
+
             foreach ($question->answers as $answer){
                 if($answer->right){
                     $rightOnes++;
@@ -94,6 +95,8 @@ class QuizResultController extends Controller
 
         if($res < 0){
             $res = 0;
+        }else{
+            $res = round($res);
         }
         $quizResult = new QuizResult;
         $quizResult->student_id = Auth::user()->student->id;

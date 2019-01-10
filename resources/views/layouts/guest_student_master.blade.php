@@ -28,6 +28,11 @@
 
     <!-- Custom styles for this template -->
     <link href="/assets/front/css/creative.min.css" rel="stylesheet">
+    <style>
+        #toast-container > div {
+            opacity:1;
+        }
+    </style>
     @yield('styles')
 
 </head>

@@ -17,7 +17,7 @@ class Subject extends Model
         parent::boot();
         static::deleting(function ($subject) {
             $subject->quizes()->delete();
-
+            $subject->lessons()->delete();
         });
     }
 
