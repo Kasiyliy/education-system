@@ -28,6 +28,11 @@
 
     <!-- Custom styles for this template -->
     <link href="/assets/front/css/creative.min.css" rel="stylesheet">
+    <style>
+        #toast-container > div {
+            opacity:1;
+        }
+    </style>
     @yield('styles')
 
 </head>
@@ -97,8 +102,6 @@
 <script src="/assets/front/vendor/scrollreveal/scrollreveal.min.js"></script>
 <script src="/assets/front/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 <script src="/assets/front/js/creative.min.js"></script>
-<script src="/assets/pdfjs/pdf.js"></script>
-<script src="/assets/pdfjs/pdf.worker.js"></script>
 <script src="{{ URL::asset('assets/js/toastr.min.js')}}"></script>
 
 <script>

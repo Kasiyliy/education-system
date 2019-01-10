@@ -11,6 +11,15 @@ class Lesson extends Model
 
     protected $dates = ['created_at','updated_at','deleted_at'];
     protected $table = 'lessons';
+
+    public static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($lesson) {
+            $lesson->lessonParts()->delete();
+        });
+    }
+
     protected $fillable = [
         'name',
         'description',

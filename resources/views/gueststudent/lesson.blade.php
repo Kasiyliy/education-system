@@ -7,18 +7,9 @@
             width: 100%;
             height: auto;
         }
-
     </style>
 @endsection
 @section('content')
-
-    <script>
-        var head = $("#iframe").contents().find("head");
-        var css = '<style type="text/css">' +
-            '.ndfHFb-c4YZDc-Wrql6b{display:none}; ' +
-            '</style>';
-        $(head).append(css);
-    </script>
 
     <div class="container-fluid">
         <div class="row">
@@ -46,35 +37,10 @@
                             <span class="text-muted small">урок</span>
                             <p class="text-dark m-0 text-center">{{$lesson->name}}</p>
                         </div>
-                        <div class="card-body">
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" id="viewer"
-                                        src="/assets/ViewerJS/#/{{$lesson->lessonParts->first()->presentation}}"
-                                        allowfullscreen
-                                        webkitallowfullscreen></iframe>
-                            </div>
-                            @if($lesson->lessonParts->first()->video)
-                                <div class="card my-1">
-                                    <div class="card-body">
-                                        <video controls>
-                                            <source src="/{{$lesson->lessonParts->first()->video}}">
-                                            Your browser does not support the video tag.
-                                        </video>
-                                    </div>
-                                </div>
-                            @endif
-                            @if($lesson->lessonParts->first()->audio)
-                                <div class="card my-1">
-                                    <div class="card-body">
-                                        <audio controls>
-                                            <source src="/{{$lesson->lessonParts->first()->audio}}">
-                                            Your browser does not support the video tag.
-                                        </audio>
-                                    </div>
-                                </div>
-                            @endif
+                        <div class="card-body" id="lessonPart">
 
                         </div>
+                        <button id="nextButton">Next</button>
                         <div class="card-footer">
                             <span class="text-muted small">описание</span>
                             <p class="text-dark m-0 text-center">{{$lesson->description}}</p>
@@ -89,4 +55,65 @@
 
 @section('scripts')
     <script src="{{ URL::asset('assets/js/validator.min.js')}}"></script>
+    <script>
+        $(document).ready(function () {
+            var currentLessonPartId = {{$currentLessonPart->id}};
+
+            constructFrame("{{$lessonPart->presentation}}" ,
+                "{{$lessonPart->video!= null ? $lessonPart->video : ""}}",
+                "{{$lessonPart->audio!= null ? $lessonPart->audio : ""}}");
+
+            var url = "/student/lesson_part/next_question/";
+
+            $('#nextButton').on('click', function(){
+                $.ajax({
+                    method: "GET",
+                    url: url + currentLessonPartId,
+                    dataType: "json",
+                }).done(function (msg) {
+                    if (msg.error === false) {
+                        currentLessonPartId = msg.message.id;
+                        constructFrame(msg.message.lesson_part.presentation, msg.message.lesson_part.video , msg.message.lesson_part.audio);
+                    } else {
+                        toastr.error("Возникла ошибка!");
+                    }
+                });
+            });
+
+
+            function constructFrame(presentation, video, audio) {
+                var form = "<div class=\"embed-responsive embed-responsive-16by9\">\n" +
+                    "                                <iframe class=\"embed-responsive-item\" id=\"viewer\"\n" +
+                    "                                        src=\"/assets/ViewerJS/#/" +presentation+ "\" allowfullscreen\n" +
+                    "                                        webkitallowfullscreen></iframe>\n" +
+                    "                            </div>\n";
+
+                if(video != null){
+                    if(video.length > 0){
+                        form+= "                            <div class=\"card my-1\">\n" +
+                            "                                <div class=\"card-body\">\n" +
+                            "                                    <video controls>\n" +
+                            "                                        <source src=\"/"+video+"\">\n" +
+                            "                                        Your browser does not support the video tag.\n" +
+                            "                                    </video>\n" +
+                            "                                </div>\n" +
+                            "                            </div>\n" ;
+                    }
+                }
+                if(audio != null){
+                    if(audio.length > 0){
+                        form+= "                            <div class=\"card my-1\">\n" +
+                            "                                <div class=\"card-body\">\n" +
+                            "                                    <audio controls>\n" +
+                            "                                        <source src=\"/"+audio+"\">\n" +
+                            "                                        Your browser does not support the audio tag.\n" +
+                            "                                    </audio>\n" +
+                            "                                </div>\n" +
+                            "                            </div>";
+                    }
+                }
+                $('#lessonPart').html(form);
+            }
+        });
+    </script>
 @endsection

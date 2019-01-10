@@ -289,6 +289,8 @@ class ComposerStaticInitc259141fde44f55a8d40a07803d5ccd3
         'App\\Http\\Helpers\\AppHelper' => __DIR__ . '/../..' . '/app/Http/Helpers/AppHelper.php',
         'CreateAnswersTable' => __DIR__ . '/../..' . '/database/migrations/2019_01_02_212117_create_answers_table.php',
         'CreateCacheTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_20_132715_create_cache_table.php',
+        'CreateCurrentLessonsTable' => __DIR__ . '/../..' . '/database/migrations/2019_01_10_223704_create_current_lessons_table.php',
+        'CreateCurrentQuestionsTable' => __DIR__ . '/../..' . '/database/migrations/2019_01_10_221733_create_current_questions_table.php',
         'CreateLessonPartsTable' => __DIR__ . '/../..' . '/database/migrations/2019_01_10_093721_create_lesson_parts_table.php',
         'CreateLessonsTable' => __DIR__ . '/../..' . '/database/migrations/2019_01_03_022256_create_lessons_table.php',
         'CreateMessagesTable' => __DIR__ . '/../..' . '/database/migrations/2019_01_09_055637_create_messages_table.php',

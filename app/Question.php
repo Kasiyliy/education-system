@@ -13,6 +13,14 @@ class Question extends Model
         'quiz_id',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+        static::deleting(function($question) {
+            $question->answers()->delete();
+        });
+    }
+
     public function quiz() {
         return $this->belongsTo('App\Quiz' , 'quiz_id');
     }
