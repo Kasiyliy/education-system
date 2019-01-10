@@ -36,6 +36,7 @@
                                     </ul>
                                 </div>
                             @endif
+                            <h2>Курс {{$question->quiz->subject->name}}</h2>
                                 {{ Form::open(array('url' => URL::route('question.update',['id' => $question->id]),
                                 'method' => 'PUT', 'class'=>'form-horizontal', 'id' => 'myForm')) }}
                                 <div class="row mx-auto" id="questions">

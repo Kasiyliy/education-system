@@ -33,23 +33,25 @@
                         </tr>
                       </thead>
                       <tbody>
-                      @foreach($lessons as $lesson)
-                        <tr>
-                          <td>{{$lesson->name}}</td>
-                          <td>{{$lesson->subject()->first()->name }}</td>
-                          <td>
-                            <a class="btn btn-success btn-xs">Изменить</a>
-                            <form style="display: inline;" action="{{URL::route('lesson.destroy', ['id' => $lesson->id])}}" method="POST">
-                              <input type="hidden" name="_method" value="DELETE">
-                              {{csrf_field()}}
-                              <button type="submit" class="btn btn-danger btn-xs">Удалить</button>
+                      @if($lessons)
+                        @foreach($lessons as $lesson)
+                          <tr>
+                            <td>{{$lesson->name}}</td>
+                            <td>{{$lesson->subject()->first()->name }}</td>
+                            <td>
+                              <a class="btn btn-success btn-xs">Изменить</a>
+                              <form style="display: inline;" action="{{URL::route('lesson.destroy', ['id' => $lesson->id])}}" method="POST">
+                                <input type="hidden" name="_method" value="DELETE">
+                                {{csrf_field()}}
+                                <button type="submit" class="btn btn-danger btn-xs">Удалить</button>
+                              </form>
+                              <a href="{{URL::route('lesson.show', ['id' => $lesson->id])}}" class="btn btn-info btn-xs">Посмотреть</a>
+                            </td>
                             </form>
-                            <a href="{{URL::route('lesson.show', ['id' => $lesson->id])}}" class="btn btn-info btn-xs">Посмотреть</a>
-                          </td>
-                       </form>
-                      </td>
-                        </tr>
-                      @endforeach
+                            </td>
+                          </tr>
+                        @endforeach
+                      @endif
                       </tbody>
                     </table>
                   </div>

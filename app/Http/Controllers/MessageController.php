@@ -100,7 +100,7 @@ class MessageController extends Controller
             ->where('students.id',$studentId)
             ->get();
         if(count($students) == 0){
-            $notification= array('title' => 'Ошибка', 'body' => 'Ошибка доступа!');
+            $notification= array('title' => 'Ошибка', 'body' => 'У студента нет аккаунта!');
             return redirect()->back()->with("error",$notification);;
         }
         if(!$student->user_id){

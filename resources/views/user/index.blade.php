@@ -162,12 +162,12 @@ $('.deleteForm').submit(function(e) {
   e.preventDefault();
   form=this;
   swal({
-      title: "User Deletion!",
-      text: 'Are you sure to delete this user?',
+      title: "Удаление пользователя!",
+      text: 'Вы уверены что хотите удалить пользователя?',
       type: "warning",
       showCancelButton: true,
       confirmButtonColor: "#cc3f44",
-      confirmButtonText: "Yes",
+      confirmButtonText: "Да",
       closeOnConfirm: true,
       html: false
   }, function( isConfirm ) {

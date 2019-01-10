@@ -14,10 +14,11 @@ class Question extends Model
     ];
 
     public function quiz() {
-        return $this->belongsTo('App\Quiz');
+        return $this->belongsTo('App\Quiz' , 'quiz_id');
     }
 
     public function answers() {
         return $this->hasMany('App\Answer','question_id');
     }
+
 }
