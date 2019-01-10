@@ -76,6 +76,8 @@ Route::group(['middleware' => ['language',]], function () {
         Route::resource('question', 'QuestionController');
 
         Route::resource('lesson', 'LessonController');
+        Route::get('lesson-part/{id}', ['as' => 'lesson-part.index', 'uses'=>'LessonPartController@index']);
+        Route::post('lesson-part', ['as' => 'lesson-part.store', 'uses'=>'LessonPartController@store']);
 
         Route::get('message/{studentId}/{subjectId}', ['as' => 'message.show2', 'uses' => 'MessageController@show2']);
 

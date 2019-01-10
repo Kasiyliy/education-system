@@ -33,7 +33,7 @@
           <div id="accordion">
 
             @foreach($lessons as $lesson )
-              <div class="card">
+              <div class="card my-3">
                 <div class="card-header" id="heading{{$lesson->id}}">
                   <h5 class="mb-0">
                     <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{$lesson->id}}" aria-controls="collapse{{$lesson->id}}">

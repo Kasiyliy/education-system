@@ -31,13 +31,9 @@
                             @endif
 
                             <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" id="viewer"
-                                        src="/assets/ViewerJS/#/{{$lesson->presentation}}" allowfullscreen
-                                        webkitallowfullscreen></iframe>
-                                {{--<embed class="embed-responsive-item"--}}
-                                {{--src="{{URL::to('/').'/'.$lesson->presentation }}"--}}
-                                {{--frameborder="0"></embed>--}}
-
+                                {{--<iframe class="embed-responsive-item" id="viewer"--}}
+                                        {{--src="/assets/ViewerJS/#/{{$lesson->presentation}}" allowfullscreen--}}
+                                        {{--webkitallowfullscreen></iframe>--}}
                             </div>
 
 

@@ -16,7 +16,6 @@ class CreateLessonsTable extends Migration
             $table->increments('id');
             $table->string('name', 255);
             $table->text('description');
-            $table->text('presentation');
             $table->integer('subject_id')->unsigned();
             $table->foreign('subject_id')
                 ->references('id')

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Department;
 use App\Lesson;
+use Session;
 use App\Message;
 use App\Quiz;
 use App\QuizResult;
@@ -97,7 +98,11 @@ class StudentSubjectsController extends Controller
 
     public function showLesson($id)
     {
-        $lesson = Lesson::findOrFail($id);
+        $lesson = Lesson::with('lessonParts')->findOrFail($id);
+        if($lesson->lessonParts->count() == 0){
+            Session::flash('warning',  'Урок еще не готов!');
+            return redirect()->back();
+        }
         return view('gueststudent.lesson')->with(compact('lesson'));
     }
 
