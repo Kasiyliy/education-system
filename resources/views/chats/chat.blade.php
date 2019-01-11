@@ -52,7 +52,7 @@
                             </table>
                         </div>
                         <div class="container-fluid">
-                            <form method="post" action="{{URL::route('message.store')}}"
+                            <form id = "chat_form" method="post" action="{{URL::route('message.store')}}"
                                   class="form form-horizontal my-2 m-3">
                                 {{csrf_field()}}
                                 <input type="hidden" name="acceptor_user_id" value="{{$student->user_id}}">
@@ -85,5 +85,28 @@
                 <script src="{{ URL::asset('assets/js/jszip.min.js')}}"></script>
                 <script src="{{ URL::asset('assets/js/pdfmake.min.js')}}"></script>
                 <script src="{{ URL::asset('assets/js/vfs_fonts.js')}}"></script>
+                <script type="text/javascript">
+
+                    var shiftDown = false;
+                    var chatForm = $("#chat_form");
+                    var messageBox = chatForm.children("textarea");
+
+                    $(document).keypress(function (e) {
+                        if(e.keyCode == 13) {
+                            if(messageBox.is(":focus") && !shiftDown) {
+                                e.preventDefault(); // prevent another \n from being entered
+                                chatForm.submit();
+                            }
+                        }
+                    });
+
+                    $(document).keydown(function (e) {
+                        if(e.keyCode == 16) shiftDown = true;
+                    });
+
+                    $(document).keyup(function (e) {
+                        if(e.keyCode == 16) shiftDown = false;
+                    });
+                </script>
 
 @endsection

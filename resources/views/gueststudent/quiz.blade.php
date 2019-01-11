@@ -227,6 +227,9 @@
                 answerValue.append(optionText);
                 answerDiv.append(answerValue);
                 content.append(answerDiv);
+                $('input[type="checkbox"]').on('change', function () {
+                    $('input[type = "checkbox"]').not(this).prop('checked', false);
+                });
             });
 
         }

@@ -36,19 +36,25 @@
                                     </ul>
                                 </div>
                             @endif
-                            <form method="post" id="myForm" action="{{URL::route('quiz.question.create',['quizID' => $quiz->id])}}" class="form-horizontal">
+                            <h2>Курс {{$quiz->subject->name}}</h2>
+                            <form method="post" id="myForm"
+                                  action="{{URL::route('quiz.question.create',['quizID' => $quiz->id])}}"
+                                  class="form-horizontal">
                                 <div class="row mx-auto" id="questions">
                                     {{csrf_field()}}
                                     <div class="form-group">
                                         <label for="question">Вопрос</label>
-                                        <textarea required rows="5" id="question" name="value" class="form-control"></textarea>
+                                        <textarea required rows="5" id="question" name="value"
+                                                  class="form-control"></textarea>
                                     </div>
                                     <div id="variants">
 
                                     </div>
                                     <a class="btn btn-default" id="addVariant">Добавить вариант</a>
                                 </div>
-                                <button type="submit" id="addQuestion" class="btn btn-primary pull-right">Сохранить вопрос</button>
+                                <button type="submit" id="addQuestion" class="btn btn-primary pull-right">Сохранить
+                                    вопрос
+                                </button>
                             </form>
                         </div>
 
@@ -80,14 +86,15 @@
     <script src="{{ URL::asset('assets/js/select2.full.min.js')}}"></script>
     <script src="{{ URL::asset('assets/js/validator.min.js')}}"></script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             var inputCounter = 0;
             var variants = $('#variants');
 
-            var addVariantBtn = $('#addVariant');
-            addVariantBtn.on('click' , function(){
 
-                var innerDiv  = document.createElement('div');
+            var addVariantBtn = $('#addVariant');
+            addVariantBtn.on('click', function () {
+
+                var innerDiv = document.createElement('div');
                 innerDiv.className = 'form-group';
 
                 var checkBoxDiv = document.createElement('div');
@@ -97,14 +104,14 @@
 
                 var checkBoxInput = document.createElement('input');
                 checkBoxInput.type = 'checkbox';
-                checkBoxInput.name = 'variantCBs['+inputCounter+']';
+                checkBoxInput.name = 'variantCBs[' + inputCounter + ']';
                 checkBoxLbl.append(checkBoxInput);
                 checkBoxLbl.innerHTML += 'Правильно';
 
                 var textInput = document.createElement('input');
                 textInput.type = 'text';
                 textInput.placeholder = 'Вариант ответа';
-                textInput.name = 'variants['+inputCounter+']';
+                textInput.name = 'variants[' + inputCounter + ']';
                 textInput.className = 'form-control';
                 textInput.required = true;
 
@@ -113,7 +120,7 @@
                 deleteBtn.className = 'btn btn-danger btn-xs pull-right';
                 deleteBtn.style.marginTop = '5px';
                 deleteBtn.innerText = 'X';
-                deleteBtn.addEventListener('click' , function(){
+                deleteBtn.addEventListener('click', function () {
                     if (innerDiv) {
                         innerDiv.parentNode.removeChild(innerDiv);
                     }
@@ -125,12 +132,15 @@
                 innerDiv.append(deleteBtn);
 
                 variants.append(innerDiv);
+                $('input[type="checkbox"]').on('change', function () {
+                    $('input[type = "checkbox"]').not(this).prop('checked', false);
+                });
             });
 
             var myForm = $('#myForm');
-            myForm.on('submit' , function(event){
+            myForm.on('submit', function (event) {
 
-                if($("input[type='checkbox']").length < 1){
+                if ($("input[type='checkbox']").length < 1) {
                     new PNotify({
                         title: 'Ошибка',
                         text: 'Добавьте хотя бы 1 вопрос',
@@ -138,8 +148,8 @@
                         styling: 'bootstrap3'
                     });
                     event.preventDefault();
-                }else{
-                    if($("input[type='checkbox']:checked").length == 0){
+                } else {
+                    if ($("input[type='checkbox']:checked").length == 0) {
                         new PNotify({
                             title: 'Ошибка',
                             text: 'Добавьте хотя бы 1 правильный ответ!',

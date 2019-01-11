@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Answer;
 use App\Question;
 use App\Quiz;
+use http\QueryString;
 use Validator;
 use Session;
+use DB;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -38,7 +40,7 @@ class QuestionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -49,7 +51,7 @@ class QuestionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -60,11 +62,12 @@ class QuestionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
+
         $question = Question::findOrFail($id);
         return view('quiz.questions.edit')->with(compact('question'));
     }
@@ -72,8 +75,8 @@ class QuestionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -82,7 +85,7 @@ class QuestionController extends Controller
         $question->answers()->delete();
         $data = $request->all();
         $rules = [
-            "variantCBs"    => "required|array|min:1",
+            "variantCBs" => "required|array|min:1",
             "variants" => "required|array|min:1",
             "value" => "required"
         ];
@@ -94,14 +97,14 @@ class QuestionController extends Controller
             $question->value = $request->value;
             $question->save();
 
-            foreach($request->variants as $key=>$val){
+            foreach ($request->variants as $key => $val) {
                 $answer = new Answer();
                 $answer->value = $request->variants[$key];
                 $answer->right = array_key_exists($key, $request->variantCBs);
                 $answer->question_id = $question->id;
                 $answer->save();
             }
-            Session::flash('success' , ['title' => 'Успешно!' , 'body' => 'Тест сохранен!']);
+            Session::flash('success', ['title' => 'Успешно!', 'body' => 'Тест сохранен!']);
             return redirect()->back();
 
         }
@@ -110,25 +113,26 @@ class QuestionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $question = Question::findOrFail($id);
-        if($question->answers()->count()>0){
+        if ($question->answers()->count() > 0) {
             $question->answers()->delete();
         }
         $question->delete();
         return redirect()->back();
     }
 
-    public function createQuestion(Request $request, $id){
+    public function createQuestion(Request $request, $id)
+    {
 
         $quiz = Quiz::findOrFail($id);
         $data = $request->all();
         $rules = [
-            "variantCBs"    => "required|array|min:1",
+            "variantCBs" => "required|array|min:1",
             "variants" => "required|array|min:1",
             "value" => "required"
         ];
@@ -142,14 +146,14 @@ class QuestionController extends Controller
             $question->quiz_id = $quiz->id;
             $question->save();
 
-            foreach($request->variants as $key=>$val){
+            foreach ($request->variants as $key => $val) {
                 $answer = new Answer();
                 $answer->value = $request->variants[$key];
                 $answer->right = array_key_exists($key, $request->variantCBs);
                 $answer->question_id = $question->id;
                 $answer->save();
             }
-            Session::flash('success' , ['title' => 'Успешно!' , 'body' => 'Тест сохранен!']);
+            Session::flash('success', ['title' => 'Успешно!', 'body' => 'Тест сохранен!']);
             return redirect()->back();
 
         }

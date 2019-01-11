@@ -36,6 +36,7 @@
                                     </ul>
                                 </div>
                             @endif
+                            <h2>Курс {{$question->quiz->subject->name}}</h2>
                                 {{ Form::open(array('url' => URL::route('question.update',['id' => $question->id]),
                                 'method' => 'PUT', 'class'=>'form-horizontal', 'id' => 'myForm')) }}
                                 <div class="row mx-auto" id="questions">
@@ -105,6 +106,9 @@
     <script>
         $(document).ready(function () {
 
+            $('input[type="checkbox"]').on('change', function () {
+                $('input[type = "checkbox"]').not(this).prop('checked', false);
+            });
             var buttons = $('.mybutton');
 
             for(var i = 0; i < buttons.length; i++){
@@ -157,6 +161,9 @@
                 innerDiv.append(deleteBtn);
 
                 variants.append(innerDiv);
+                $('input[type="checkbox"]').on('change', function () {
+                    $('input[type = "checkbox"]').not(this).prop('checked', false);
+                });
             });
 
             var myForm = $('#myForm');
