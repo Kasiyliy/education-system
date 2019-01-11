@@ -39,7 +39,7 @@
                   <h5 class="mb-0">
                     <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{$lesson->id}}" aria-controls="collapse{{$lesson->id}}">
                       {{$lesson->name}} <span class="fa fa-arrow-circle-down text-danger"></span>
-                      @if(!$dontShowQuiz)
+                      @if($show)
                         <span class="text-muted">урок пройден</span>
                       @endif
                     </button>
@@ -84,7 +84,7 @@
                       @endif
                     </button>
                     </h5>
-                  @if($dontShowQuiz)
+                  @if(!$show)
                     <span class="text-muted">урок еще не пройден</span>
                   @endif
 
@@ -96,7 +96,7 @@
 
                   </div>
                   <a
-                     @if(!$dontShowQuiz)
+                     @if($show)
                      class="btn btn-success btn-xs m-2 float-right text-white"
                      href="{{URL::route('student.my.subjects.specific.quiz', ['id' => $quiz->id])}}"
                     @else

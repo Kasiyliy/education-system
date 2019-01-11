@@ -93,7 +93,7 @@ class StudentSubjectsController extends Controller
 
         $subject = Subject::findOrFail($id);
         $lessons = $subject->lessons()->orderBy('id' ,'asc')->get();
-        $dontShowQuiz = false;
+        $show = false;
         foreach ($lessons as $lesson){
             $currentLessonPart = CurrentLesson::select('current_lessons.*')
                 ->join('lesson_parts', 'lesson_parts.id' , '=' ,'current_lessons.lesson_part_id')
@@ -103,14 +103,14 @@ class StudentSubjectsController extends Controller
                 ->first();
 
             if($currentLessonPart){
-                if(!$currentLessonPart->completed){
-                    $dontShowQuiz = true;
+                if($currentLessonPart->completed){
+                    $show = true;
                 }
             }
         }
         $quizes = $subject->quizes()->get();
-        //dd($quizes, Auth::user());
-        return view('gueststudent.subject')->with(compact('subject', 'lessons','quizes','dontShowQuiz'));
+
+        return view('gueststudent.subject')->with(compact('subject', 'lessons','quizes','show'));
     }
 
     public function showLesson($id)
