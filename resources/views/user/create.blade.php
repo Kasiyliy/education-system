@@ -75,7 +75,6 @@
                                 <span class="input-group-addon"><i class="fa fa-info blue"></i></span>
                                 <select class="form-control"  name="group" required="required">
 
-                                  <option value="Admin">Администратор</option>
                                   <option value="Teacher">Учитель</option>
                                   <option value="Student">Студент</option>
                                 </select>

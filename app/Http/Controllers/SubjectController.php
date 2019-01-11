@@ -64,7 +64,7 @@ class SubjectController extends Controller
         $rules = [
             'name' => 'required',
             'code' => 'required|unique:subject,code',
-            'price' => 'required|numeric',
+            'price' => 'required',
             'department_id' => 'required|numeric',
             'description' => 'required'
         ];
@@ -126,7 +126,7 @@ class SubjectController extends Controller
         $rules = [
             'name' => 'required',
             'code' => 'required',
-            'credit' => 'required|numeric',
+            'price' => 'required',
             'department_id' => 'required|numeric',
             'description' => 'required|max:255'
         ];
