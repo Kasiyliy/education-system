@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\CurrentLesson;
-use App\Department;
 use App\Lesson;
 use App\LessonPart;
-use phpDocumentor\Reflection\Types\Boolean;
 use Session;
 use App\Message;
 use App\Quiz;
@@ -16,9 +14,7 @@ use App\Student;
 use App\Subject;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class StudentSubjectsController extends Controller
 {
@@ -26,8 +22,7 @@ class StudentSubjectsController extends Controller
     public function mySubjects(){
         $student = Student::where('user_id' ,Auth::id())->first();
 
-        $subjects = Subject::
-            join('registrations','registrations.subject_id' , '=' ,'subject.id')
+        $subjects = Subject::join('registrations','registrations.subject_id' , '=' ,'subject.id')
             ->where('registrations.students_id' , $student->id)
             ->where('registrations.date_to_learn' , '<=', 'now()')
             ->select('subject.*')

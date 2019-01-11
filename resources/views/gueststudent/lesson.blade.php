@@ -157,7 +157,7 @@
                     if (audio.length > 0) {
                         form1 += "                            <div class=\"card my-1\">\n" +
                             "                                <div class=\"card-body\">\n" +
-                            "                                    <audio controls autoplay='autoplay'>\n" +
+                            "                                    <audio controls autoplay='autoplay'  controlsList=\"nodownload\">\n" +
                             "                                        <source src=\"/" + audio + "\">\n" +
                             "                                        Your browser does not support the audio tag.\n" +
                             "                                    </audio>\n" +
@@ -176,7 +176,7 @@
                     if (video.length > 0) {
                         form1 += "                            <div class=\"card my-1\">\n" +
                             "                                <div class=\"card-body\">\n" +
-                            "                                    <video controls>\n" +
+                            "                                    <video controls  controlsList=\"nodownload\">\n" +
                             "                                        <source src=\"/" + video + "\">\n" +
                             "                                        Your browser does not support the video tag.\n" +
                             "                                    </video>\n" +

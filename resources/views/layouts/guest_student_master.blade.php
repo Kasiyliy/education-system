@@ -57,8 +57,9 @@
                        aria-haspopup="true" aria-expanded="false">Курсы</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{{URL::route('homestudent.subjects')}}">Все курсы</a>
-                        @if(Auth::check(\App\User::STUDENT))
+                        @if(Auth::user()->student)
                             <a class="dropdown-item" href="{{URL::route('student.my.subjects')}}">Мои курсы</a>
+
                         @endif
                     </div>
                 </li>
@@ -70,6 +71,12 @@
                     <a class="nav-link js-scroll-trigger" href="/guest#contact">Контакты</a>
                 </li>
                 @if(Auth::check())
+                    @if(!Auth::user()->student)
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="{{URL::route('user.dashboard')}}">Админ панель</a>
+                        </li>
+                    @endif
+
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="{{URL::route('user.logout')}}">Выход</a>
                     </li>
