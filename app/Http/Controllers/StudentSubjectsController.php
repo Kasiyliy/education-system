@@ -109,6 +109,7 @@ class StudentSubjectsController extends Controller
             }
         }
         $quizes = $subject->quizes()->get();
+        //dd($quizes, Auth::user());
         return view('gueststudent.subject')->with(compact('subject', 'lessons','quizes','dontShowQuiz'));
     }
 
