@@ -21,6 +21,7 @@
         </div>
       </div>
       <div class="col-sm-9">
+
         <div class="container-fluid">
           <div class="card my-4">
             <div class="card-body">
