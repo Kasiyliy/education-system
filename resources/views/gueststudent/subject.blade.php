@@ -79,7 +79,7 @@
                   <h5 class="mb-0">
                     <button class="btn btn-link" data-toggle="collapse" data-target="#collapsequiz{{$quiz->id}}" aria-controls="collapsequiz{{$quiz->id}}">
                       {{$quiz->name}} <span class="fa fa-arrow-circle-down text-danger"></span>
-                      @if($quiz->quizResults()->where('student_id' , Auth::user()->student_id)->get())
+                      @if($quiz->quizResults()->where('student_id' , Auth::user()->student_id)->get()->first())
                         <span class="text-muted">тест пройден!</span>
                       @endif
                     </button>
@@ -112,7 +112,7 @@
           </div>
         </div>
 
-        @if($quiz->quizResults()->where('student_id' , Auth::user()->student_id)->get())
+        @if($quiz->quizResults()->where('student_id' , Auth::user()->student_id)->get()->first())
           <div class="container-fluid">
             <div class="card my-4">
               <div class="card-body">
