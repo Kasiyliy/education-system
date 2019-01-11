@@ -35,13 +35,13 @@ class LessonController extends Controller
     public function create()
     {
         $subjects = [];
-        if(Auth::user()->group == User::ADMIN){
+        if (Auth::user()->group == User::ADMIN) {
             $subjects = Subject::all();
-        }else if(Auth::user()->group == User::TEACHER){
-            $subjects = Subject::where('user_id' , Auth::id())->get();
+        } else if (Auth::user()->group == User::TEACHER) {
+            $subjects = Subject::where('user_id', Auth::id())->get();
         }
-        if(count($subjects)==0){
-            Session::flash('warning',['title' => 'Ошибка!' ,'body' =>'Не добавлены под курсы!']);
+        if (count($subjects) == 0) {
+            Session::flash('warning', ['title' => 'Ошибка!', 'body' => 'Не добавлены под курсы!']);
             return redirect()->back();
         }
         return view('lesson.create', compact('subjects'));
@@ -50,7 +50,7 @@ class LessonController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -65,7 +65,7 @@ class LessonController extends Controller
         $validator = Validator::make($data, $rules);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
-        }else {
+        } else {
 //            $presentation = $request->presentation;
 //            $presentation_new_name = time() . $presentation->getClientOriginalName();
 //            $fullPath = $presentation->move('assets/files/lessons', $presentation_new_name);
@@ -74,30 +74,38 @@ class LessonController extends Controller
             $lesson->name = $request->name;
             $lesson->description = $request->description;
             $lesson->subject_id = $request->subject_id;
-            $lesson->save();
-            Session::flash('success', ['title' => 'Успешно!' , 'body' =>'Урок сохранен!']);
 
-            return redirect()->route('lesson-part.index', ['id'=> $lesson->id ]);
+            $checkForExist = Lesson::select('*')
+                ->where('subject_id', '=', $lesson->subject_id)
+                ->count();
+            if ($checkForExist == null) {
+                $lesson->save();
+                Session::flash('success', ['title' => 'Добавление!', 'body' => 'Урок сохранен!']);
+                return redirect()->route('lesson-part.index', ['id' => $lesson->id]);
+            } else {
+                $notification = array('title' => 'Добавление!', 'body' => 'У под курса уже есть урок!');
+                return redirect()->back()->with('error' , $notification);
+            }
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $lesson = Lesson::findOrFail($id);
-        return view('lesson.show')->with(compact('lesson' ));
+        return view('lesson.show')->with(compact('lesson'));
     }
 
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -108,8 +116,8 @@ class LessonController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -120,7 +128,7 @@ class LessonController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

@@ -31,7 +31,7 @@ class QuizController extends Controller
     {
         $subjects = [];
         $departments = Department::select('id', 'name')->orderby('name', 'asc')->lists('name', 'id');
-        return view('quiz.create', compact('departments',  'subjects'));
+        return view('quiz.create', compact('departments', 'subjects'));
     }
 
     public function Store(Request $request)
@@ -53,10 +53,17 @@ class QuizController extends Controller
             $quiz->subject_id = $data['subject_id'];
             $quiz->user_id = Auth::id();
 
-            $quiz->save();
-
-            $notification = array('title' => 'Data Stored!', 'body' => 'Quiz created!');
-            return redirect()->back()->with("success", $notification);
+            $checkForExist = Quiz::select('*')
+                ->where('subject_id', '=', $quiz->subject_id)
+                ->count();
+            if ($checkForExist == null) {
+                $quiz->save();
+                $notification = array('title' => 'Добавление!', 'body' => 'Тест добавлен!');
+                return redirect()->back()->with("success", $notification);
+            } else {
+                $notification = array('title' => 'Добавление!', 'body' => 'У курса уже есть урок!');
+                return redirect()->back()->with("error", $notification);
+            }
         }
     }
 
@@ -69,7 +76,8 @@ class QuizController extends Controller
 
     }
 
-    public function questions($id){
+    public function questions($id)
+    {
         $quiz = Quiz::findOrFail($id);
         return view('quiz.questions.create')->with(compact('quiz'));
     }
@@ -121,7 +129,7 @@ class QuizController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         } else {
-            if(Auth::user()->group == User::TEACHER){
+            if (Auth::user()->group == User::TEACHER) {
                 $quizes = DB::table('quizes')
                     ->select('quizes.id', 'quizes.name', 'subject.name as subjectName')
                     ->join('subject', 'subject.id', '=', 'quizes.subject_id')
@@ -129,7 +137,7 @@ class QuizController extends Controller
                     ->where('quizes.deleted_at', '=', null)
                     ->where('quizes.user_id', '=', Auth::user()->id)
                     ->get();
-            }else {
+            } else {
                 $quizes = DB::table('quizes')
                     ->select('quizes.id', 'quizes.name', 'subject.name as subjectName')
                     ->join('subject', 'subject.id', '=', 'quizes.subject_id')
@@ -151,7 +159,7 @@ class QuizController extends Controller
 
             'name' => 'required|max:255',
             'description' => 'required',
-            'subject_id' =>'required',
+            'subject_id' => 'required',
         ];
         $validator = Validator::make($data, $rules);
         if ($validator->fails()) {
@@ -164,17 +172,19 @@ class QuizController extends Controller
         }
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $subjects = Subject::select('id', 'name')->orderby('name', 'asc')->lists('name', 'id');
         $quiz = Quiz::findOrFail($id);
-        return view('quiz.edit')->with(compact('quiz' , 'subjects'));
+        return view('quiz.edit')->with(compact('quiz', 'subjects'));
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
 
-        $quiz = Quiz::where('id' , $id)->first();
+        $quiz = Quiz::where('id', $id)->first();
         $quiz->delete();
-        $notification= array('title' => 'Удаление', 'body' => 'Тест удален.');
+        $notification = array('title' => 'Удаление', 'body' => 'Тест удален.');
         return Response()->json([
             'success' => true,
             'message' => $notification
