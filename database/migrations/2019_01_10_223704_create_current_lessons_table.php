@@ -14,6 +14,7 @@ class CreateCurrentLessonsTable extends Migration
     {
         Schema::create('current_lessons', function (Blueprint $table) {
             $table->increments('id');
+            $table->boolean('completed')->default(false);
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')
                 ->references('id')

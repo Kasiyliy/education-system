@@ -40,7 +40,6 @@
                         <div class="card-body" id="lessonPart">
 
                         </div>
-                        <button id="nextButton">Next</button>
                         <div class="card-footer">
                             <span class="text-muted small">описание</span>
                             <p class="text-dark m-0 text-center">{{$lesson->description}}</p>
@@ -59,60 +58,93 @@
         $(document).ready(function () {
             var currentLessonPartId = {{$currentLessonPart->id}};
 
-            constructFrame("{{$lessonPart->presentation}}" ,
+            constructFrame("{{$lessonPart->presentation}}",
                 "{{$lessonPart->video!= null ? $lessonPart->video : ""}}",
-                "{{$lessonPart->audio!= null ? $lessonPart->audio : ""}}");
+                "{{$lessonPart->audio!= null ? $lessonPart->audio : ""}}",
+                {{$lessonPart->seconds}}
+            );
 
             var url = "/student/lesson_part/next_question/";
 
-            $('#nextButton').on('click', function(){
-                $.ajax({
-                    method: "GET",
-                    url: url + currentLessonPartId,
-                    dataType: "json",
-                }).done(function (msg) {
-                    if (msg.error === false) {
-                        currentLessonPartId = msg.message.id;
-                        constructFrame(msg.message.lesson_part.presentation, msg.message.lesson_part.video , msg.message.lesson_part.audio);
-                    } else {
-                        toastr.error("Возникла ошибка!");
-                    }
-                });
-            });
 
+            function constructFrame(presentation, video, audio, timeleft) {
+                if(isNaN(timeleft)){
+                    timeleft =  parseInt(timeleft);
+                }
 
-            function constructFrame(presentation, video, audio) {
-                var form = "<div class=\"embed-responsive embed-responsive-16by9\">\n" +
+                var form = "<p id='countdowntimer' class='text-muted text-center'></p>";
+                form += "<div class=\"embed-responsive embed-responsive-16by9\">\n" +
                     "                                <iframe class=\"embed-responsive-item\" id=\"viewer\"\n" +
-                    "                                        src=\"/assets/ViewerJS/#/" +presentation+ "\" allowfullscreen\n" +
+                    "                                        src=\"/assets/ViewerJS/#/" + presentation + "\" allowfullscreen\n" +
                     "                                        webkitallowfullscreen></iframe>\n" +
                     "                            </div>\n";
 
-                if(video != null){
-                    if(video.length > 0){
-                        form+= "                            <div class=\"card my-1\">\n" +
+                if (video != null) {
+                    if (video.length > 0) {
+                        form += "                            <div class=\"card my-1\">\n" +
                             "                                <div class=\"card-body\">\n" +
                             "                                    <video controls>\n" +
-                            "                                        <source src=\"/"+video+"\">\n" +
+                            "                                        <source src=\"/" + video + "\">\n" +
                             "                                        Your browser does not support the video tag.\n" +
                             "                                    </video>\n" +
                             "                                </div>\n" +
-                            "                            </div>\n" ;
+                            "                            </div>\n";
                     }
                 }
-                if(audio != null){
-                    if(audio.length > 0){
-                        form+= "                            <div class=\"card my-1\">\n" +
+                if (audio != null) {
+                    if (audio.length > 0) {
+                        form += "                            <div class=\"card my-1\">\n" +
                             "                                <div class=\"card-body\">\n" +
                             "                                    <audio controls>\n" +
-                            "                                        <source src=\"/"+audio+"\">\n" +
+                            "                                        <source src=\"/" + audio + "\">\n" +
                             "                                        Your browser does not support the audio tag.\n" +
                             "                                    </audio>\n" +
                             "                                </div>\n" +
                             "                            </div>";
                     }
                 }
+                var downloadTimer = setInterval(function(){
+                    timeleft--;
+                    document.getElementById("countdowntimer").textContent = timeleft;
+                    if(timeleft <= 30){
+                        document.getElementById("countdowntimer").className = 'text-danger text-center'
+                    }
+                    if(timeleft==30){
+                        toastr.warning("Осталось меньше 30 секунд!");
+                    }
+                    if(timeleft==15){
+                        toastr.warning("Осталось меньше 15 секунд!");
+                    }
+                    if(timeleft <= 0)
+                    {
+                        clearInterval(downloadTimer);
+                        $.ajax({
+                            method: "GET",
+                            url: url + currentLessonPartId,
+                            dataType: "json",
+                        }).done(function (msg) {
+                            if (msg.error === false) {
+                                if(msg.message.length != 0){
+                                    currentLessonPartId = msg.message.id;
+                                    constructFrame(msg.message.lesson_part.presentation, msg.message.lesson_part.video, msg.message.lesson_part.audio,msg.message.lesson_part.seconds);
+                                }else{
+                                    constructEnd();
+                                }
+                            } else {
+                                toastr.error("Возникла ошибка!");
+
+                            }
+                        });
+                    }
+                },1000);
                 $('#lessonPart').html(form);
+            }
+
+            function constructEnd(){
+                var lastFrame  = "<div class='jumbotron'> " +
+                    "<p class='text-center'>Ваш урок окончен! Просим вас перейти по ссылке <a class='btn btn-success' href='{{URL::route('student.my.subjects.specific', ['id' =>$lesson->subject->id])}}' >к курсу</a></p>" +
+                    "</div>";
+                $('#lessonPart').html(lastFrame);
             }
         });
     </script>

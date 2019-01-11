@@ -39,7 +39,7 @@
 
 <body id="page-top">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
     <div class="container-fluid" style='width:90%'>
         <a class="navbar-brand js-scroll-trigger" href="#page-top">
             <img src="/assets/images/PNGGold.png" alt="ASTC GLOBAL" width='120px' class="img img-responsive">

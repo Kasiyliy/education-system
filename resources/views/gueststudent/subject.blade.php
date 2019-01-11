@@ -21,6 +21,7 @@
         </div>
       </div>
       <div class="col-sm-9">
+
         <div class="container-fluid">
           <div class="card my-4">
             <div class="card-body">
@@ -38,6 +39,9 @@
                   <h5 class="mb-0">
                     <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{$lesson->id}}" aria-controls="collapse{{$lesson->id}}">
                       {{$lesson->name}} <span class="fa fa-arrow-circle-down text-danger"></span>
+                      @if(!$dontShowQuiz)
+                        <span class="text-muted">урок пройден</span>
+                      @endif
                     </button>
                   </h5>
                 </div>
@@ -65,6 +69,7 @@
         </div>
 
 
+
         <div class="content">
           <div id="accordion1">
 
@@ -74,15 +79,30 @@
                   <h5 class="mb-0">
                     <button class="btn btn-link" data-toggle="collapse" data-target="#collapsequiz{{$quiz->id}}" aria-controls="collapsequiz{{$quiz->id}}">
                       {{$quiz->name}} <span class="fa fa-arrow-circle-down text-danger"></span>
+                      @if($quiz->quizResults()->where('student_id' , Auth::user()->student_id)->get())
+                        <span class="text-muted">тест пройден!</span>
+                      @endif
                     </button>
-                  </h5>
+                    </h5>
+                  @if($dontShowQuiz)
+                    <span class="text-muted">урок еще не пройден</span>
+                  @endif
+
                 </div>
 
                 <div id="collapsequiz{{$quiz->id}}" class="collapse" aria-labelledby="headingquiz{{$quiz->id}}" data-parent="#accordion1">
                   <div class="card-body">
                     {{$quiz->description}}
+
                   </div>
-                  <a class="btn btn-success btn-xs m-2 float-right text-white" href="{{URL::route('student.my.subjects.specific.quiz', ['id' => $quiz->id])}}">
+                  <a
+                     @if(!$dontShowQuiz)
+                     class="btn btn-success btn-xs m-2 float-right text-white"
+                     href="{{URL::route('student.my.subjects.specific.quiz', ['id' => $quiz->id])}}"
+                    @else
+                     class="btn btn-danger btn-xs m-2 float-right text-white"
+                    @endif
+                    >
                     Открыть
                   </a>
                 </div>
@@ -91,6 +111,17 @@
 
           </div>
         </div>
+
+        @if($quiz->quizResults()->where('student_id' , Auth::user()->student_id)->get())
+          <div class="container-fluid">
+            <div class="card my-4">
+              <div class="card-body">
+                <btn class="text-white m-0 text-center btn btn-success w-100">Получить сертификат!</btn>
+              </div>
+            </div>
+          </div>
+        @endif
+
 
       </div>
     </div>

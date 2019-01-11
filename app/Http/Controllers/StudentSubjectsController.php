@@ -6,6 +6,7 @@ use App\CurrentLesson;
 use App\Department;
 use App\Lesson;
 use App\LessonPart;
+use phpDocumentor\Reflection\Types\Boolean;
 use Session;
 use App\Message;
 use App\Quiz;
@@ -90,12 +91,23 @@ class StudentSubjectsController extends Controller
             return redirect()->back()->with(['error'  => 'Нет доступа!']);
         }
 
-
         $subject = Subject::findOrFail($id);
         $lessons = $subject->lessons()->orderBy('id' ,'asc')->get();
+        $dontShowQuiz = false;
+        foreach ($lessons as $lesson){
+            $currentLessonPart = CurrentLesson::select('current_lessons.*')
+                ->join('lesson_parts', 'lesson_parts.id' , '=' ,'current_lessons.lesson_part_id')
+                ->join('lessons', 'lessons.id' , '=' ,'lesson_parts.lesson_id')
+                ->where( 'lesson_parts.lesson_id', $lesson->id )
+                ->where( 'current_lessons.user_id', Auth::id())
+                ->first();
 
+            if(!$currentLessonPart->completed){
+                $dontShowQuiz = true;
+            }
+        }
         $quizes = $subject->quizes()->get();
-        return view('gueststudent.subject')->with(compact('subject', 'lessons','quizes'));
+        return view('gueststudent.subject')->with(compact('subject', 'lessons','quizes','dontShowQuiz'));
     }
 
     public function showLesson($id)
@@ -120,6 +132,9 @@ class StudentSubjectsController extends Controller
             $currentLessonPart->user_id = Auth::id();
             $currentLessonPart->lesson_part_id = $firstLessonPart->id;
             $currentLessonPart->save();
+        }else if($currentLessonPart->completed){
+            Session::flash('success',  'Вы уже прошли урок!');
+            return redirect()->back();
         }
 
         $lessonPart = $currentLessonPart->lessonPart;
@@ -143,6 +158,14 @@ class StudentSubjectsController extends Controller
         }
 
         if($newLessonPartID == $currentLessonPart->lesson_part_id || $newLessonPartID == 0){
+            if($newLessonPartID == 0){
+                $currentLessonPart->completed = true;
+                $currentLessonPart->save();
+                return Response()->json([
+                    'error' => false,
+                    'message' => "",
+                ]);
+            }
             return Response()->json([
                 'error' => true,
                 'message' => "",
