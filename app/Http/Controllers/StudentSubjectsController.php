@@ -137,11 +137,20 @@ class StudentSubjectsController extends Controller
             $currentLessonPart->save();
         }else if($currentLessonPart->completed){
             Session::flash('success',  'Вы уже прошли урок!');
-            return redirect()->back();
+            return redirect()->route('student.my.subjects.specific' ,['id' => $lesson->subject->id]);
         }
 
         $lessonPart = $currentLessonPart->lessonPart;
-        return view('gueststudent.lesson')->with(compact('lesson','lessonPart','currentLessonPart'));
+        $otherLessonParts = [];
+        if($lesson->lessonParts){
+            foreach($lesson->lessonParts as $lp){
+                if($lessonPart->id <= $lp->id){
+                    break;
+                }
+                $otherLessonParts[] = $lp;
+            }
+        }
+        return view('gueststudent.lesson')->with(compact('lesson','lessonPart','currentLessonPart','otherLessonParts'));
     }
 
     public function nextLessonPart($currentLessonPartId){

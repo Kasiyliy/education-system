@@ -38,7 +38,7 @@
                             <p class="text-dark m-0 text-center">{{$lesson->name}}</p>
                         </div>
                         <div class="container-fluid">
-                            <div class="text-center">
+                            <div class="text-center my-2">
                                 <a class="btn btn-success btn-sm my-2 float-left" id="btnLeft"><span class="fa fa-arrow-left text-white"></span></a>
                                 <span id='countdowntimer' class='text-muted text-center'></span>
                                 <a class="btn btn-success btn-sm my-2 float-right" id="btnRight"><span class="fa fa-arrow-right text-white"></span></a>
@@ -66,34 +66,96 @@
     <script src="{{ URL::asset('assets/js/validator.min.js')}}"></script>
     <script>
         $(document).ready(function () {
+            var form = "";
+            var arrayIds = [];
 
-            $('#btnRight').click(function () {
-                alert('Right');
-            });
-            $('#btnLeft').click(function () {
-                alert('Left');
-            });
-            var currentLessonPartId = {{$currentLessonPart->id}};
+            var currentLessonPartCheckerId = {{$currentLessonPart->id}};
+            var currentLessonPartId = {{$lessonPart->id}};
+            var sliderLessonPartId = currentLessonPartId;
+            @foreach($otherLessonParts as $oLp)
+                constructFrame(
+                    "{{$oLp->id}}",
+                    "{{$oLp->presentation}}",
+                    "{{$oLp->video!= null ? $oLp->video : ""}}",
+                    "{{$oLp->audio!= null ? $oLp->audio : ""}}",
+                        {{$oLp->seconds}}
+                );
+            @endforeach
 
-            constructFrame("{{$lessonPart->presentation}}",
+            constructFrame(
+                "{{$lessonPart->id}}",
+                "{{$lessonPart->presentation}}",
                 "{{$lessonPart->video!= null ? $lessonPart->video : ""}}",
                 "{{$lessonPart->audio!= null ? $lessonPart->audio : ""}}",
                 {{$lessonPart->seconds}}
             );
+            arrayIds.forEach(function(id){
+                if(id != currentLessonPartId){
+                    var lessonPartFrame = 'lessonPart';
+                    var div = document.getElementById(lessonPartFrame + id);
+                    div.style.display = 'none';
+                }
+            });
+            $('#btnRight').click(function () {
+                var lessonPartFrame = 'lessonPart';
+                var index = arrayIds.indexOf(sliderLessonPartId);
+                if(index!=arrayIds.length-1){
+                    var div = document.getElementById(lessonPartFrame + sliderLessonPartId);
+                    div.style.display = 'none';
+                    div = document.getElementById(lessonPartFrame + arrayIds[index+1]);
+                    div.style.display = 'block';
+                    sliderLessonPartId = arrayIds[index+1];
+                }
+            });
+
+            function checkIfInLimit(){
+                return;
+                if(arrayIds.indexOf(sliderLessonPartId) == 0){
+                    $('#btnLeft').classList.remove('btn-success');
+                    $('#btnLeft').classList.add('btn-danger');
+                }else{
+                    $('#btnLeft').classList.add('btn-success');
+                    $('#btnLeft').classList.remove('btn-danger');
+                }
+
+                if(arrayIds.indexOf(sliderLessonPartId) == arrayIds.length-1){
+                    $('#btnRight').classList.remove('btn-success');
+                    $('#btnRight').classList.add('btn-danger');
+                }else{
+                    $('#btnRight').classList.add('btn-success');
+                    $('#btnRight').classList.remove('btn-danger');
+                }
+            }
+
+            $('#btnLeft').click(function () {
+                var lessonPartFrame = 'lessonPart';
+                var index = arrayIds.indexOf(sliderLessonPartId);
+                if(index!=0){
+                    var div = document.getElementById(lessonPartFrame + sliderLessonPartId);
+                    div.style.display = 'none';
+                    div = document.getElementById(lessonPartFrame + arrayIds[index-1]);
+                    div.style.display = 'block';
+                    sliderLessonPartId = arrayIds[index-1];
+                }
+            });
 
             var url = "/student/lesson_part/next_question/";
 
 
-            function constructFrame(presentation, video, audio, timeleft) {
+            function constructFrame(id,presentation, video, audio, timeleft) {
                 if(isNaN(timeleft)){
                     timeleft =  parseInt(timeleft);
                 }
-
-                var form = "";
-
+                arrayIds.push(id);
+                var oldSlide = document.getElementById('lessonPart' + currentLessonPartId);
+                if(oldSlide !=null){
+                    oldSlide.style.display = 'none';
+                }
+                var form1 ="";
+                form1 += "<div id='lessonPart"+id+"'>";
                 if (audio != null) {
                     if (audio.length > 0) {
-                        form += "                            <div class=\"card my-1\">\n" +
+                        form1 += "                            <div class=\"card my-1\">\n" +
                             "                                <div class=\"card-body\">\n" +
                             "                                    <audio controls autoplay='autoplay'>\n" +
                             "                                        <source src=\"/" + audio + "\">\n" +
@@ -104,7 +166,7 @@
                     }
                 }
 
-                form += "<div class=\"embed-responsive embed-responsive-16by9\">\n" +
+                form1 += "<div class=\"embed-responsive embed-responsive-16by9\">\n" +
                     "                                <iframe class=\"embed-responsive-item\" id=\"viewer\"\n" +
                     "                                        src=\"/assets/ViewerJS/#/" + presentation + "\" allowfullscreen\n" +
                     "                                        webkitallowfullscreen></iframe>\n" +
@@ -112,7 +174,7 @@
 
                 if (video != null) {
                     if (video.length > 0) {
-                        form += "                            <div class=\"card my-1\">\n" +
+                        form1 += "                            <div class=\"card my-1\">\n" +
                             "                                <div class=\"card-body\">\n" +
                             "                                    <video controls>\n" +
                             "                                        <source src=\"/" + video + "\">\n" +
@@ -122,7 +184,7 @@
                             "                            </div>\n";
                     }
                 }
-
+                form1 +="</div>";
                 var downloadTimer = setInterval(function(){
                     timeleft--;
                     document.getElementById("countdowntimer").textContent = timeleft;
@@ -140,13 +202,13 @@
                         clearInterval(downloadTimer);
                         $.ajax({
                             method: "GET",
-                            url: url + currentLessonPartId,
+                            url: url + currentLessonPartCheckerId,
                             dataType: "json",
                         }).done(function (msg) {
                             if (msg.error === false) {
                                 if(msg.message.length != 0){
-                                    currentLessonPartId = msg.message.id;
-                                    constructFrame(msg.message.lesson_part.presentation, msg.message.lesson_part.video, msg.message.lesson_part.audio,msg.message.lesson_part.seconds);
+                                    currentLessonPartCheckerId = msg.message.id;
+                                    constructFrame(msg.message.lesson_part.id,msg.message.lesson_part.presentation, msg.message.lesson_part.video, msg.message.lesson_part.audio,msg.message.lesson_part.seconds);
                                 }else{
                                     constructEnd();
                                 }
@@ -157,8 +219,12 @@
                         });
                     }
                 },1000);
-                $('#lessonPart').html(form);
+                form += form1;
+                $('#lessonPart').append(form1);
+                checkIfInLimit();
             }
+
+
 
             function constructEnd(){
                 var lastFrame  = "<div class='jumbotron'> " +
