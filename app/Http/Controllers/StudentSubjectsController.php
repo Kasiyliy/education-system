@@ -102,8 +102,10 @@ class StudentSubjectsController extends Controller
                 ->where( 'current_lessons.user_id', Auth::id())
                 ->first();
 
-            if(!$currentLessonPart->completed){
-                $dontShowQuiz = true;
+            if($currentLessonPart){
+                if(!$currentLessonPart->completed){
+                    $dontShowQuiz = true;
+                }
             }
         }
         $quizes = $subject->quizes()->get();
