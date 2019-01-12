@@ -58,7 +58,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item"
                            href="{{URL::route('homestudent.subjects')}}">{{trans('messages.courses')}}</a>
-                        @if(Auth::check(\App\User::STUDENT))
+                        @if(Auth::user()->student)
                             <a class="dropdown-item"
                                href="{{URL::route('student.my.subjects')}}">{{trans('messages.mycourses')}}</a>
                         @endif
@@ -75,6 +75,12 @@
                     <a class="nav-link js-scroll-trigger" href="{{URL::route('contacts')}}">{{trans('messages.contacts')}}</a>
                 </li>
                 @if(Auth::check())
+                    @if(!Auth::user()->student)
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="{{URL::route('user.dashboard')}}">Админ панель</a>
+                        </li>
+                    @endif
+
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger"
                            href="{{URL::route('user.logout')}}">{{trans('messages.signout')}}</a>

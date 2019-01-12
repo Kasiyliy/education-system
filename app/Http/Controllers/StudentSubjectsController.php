@@ -27,10 +27,9 @@ class StudentSubjectsController extends Controller
     {
         $student = Student::where('user_id', Auth::id())->first();
 
-        $subjects = Subject::
-        join('registrations', 'registrations.subject_id', '=', 'subject.id')
-            ->where('registrations.students_id', $student->id)
-            ->where('registrations.date_to_learn', '<=', 'now()')
+        $subjects = Subject::join('registrations','registrations.subject_id' , '=' ,'subject.id')
+            ->where('registrations.students_id' , $student->id)
+            ->where('registrations.date_to_learn' , '<=', 'now()')
             ->select('subject.*')
             ->where('registrations.deleted_at', '=', null)
             ->get();
@@ -147,13 +146,22 @@ class StudentSubjectsController extends Controller
             $currentLessonPart->user_id = Auth::id();
             $currentLessonPart->lesson_part_id = $firstLessonPart->id;
             $currentLessonPart->save();
-        } else if ($currentLessonPart->completed) {
-            Session::flash('success', 'Вы уже прошли урок!');
-            return redirect()->back();
+        }else if($currentLessonPart->completed){
+            Session::flash('success',  'Вы уже прошли урок!');
+            return redirect()->route('student.my.subjects.specific' ,['id' => $lesson->subject->id]);
         }
 
         $lessonPart = $currentLessonPart->lessonPart;
-        return view('gueststudent.lesson')->with(compact('lesson', 'lessonPart', 'currentLessonPart'));
+        $otherLessonParts = [];
+        if($lesson->lessonParts){
+            foreach($lesson->lessonParts as $lp){
+                if($lessonPart->id <= $lp->id){
+                    break;
+                }
+                $otherLessonParts[] = $lp;
+            }
+        }
+        return view('gueststudent.lesson')->with(compact('lesson','lessonPart','currentLessonPart','otherLessonParts'));
     }
 
     public function nextLessonPart($currentLessonPartId)
