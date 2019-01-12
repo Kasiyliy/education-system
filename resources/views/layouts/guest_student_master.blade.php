@@ -30,7 +30,7 @@
     <link href="/assets/front/css/creative.min.css" rel="stylesheet">
     <style>
         #toast-container > div {
-            opacity:1;
+            opacity: 1;
         }
     </style>
     @yield('styles')
@@ -39,9 +39,9 @@
 
 <body id="page-top">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
+<nav class="navbar navbar-expand-lg navbar-dark  fixed-top" style="background-color: black" id="mainNav">
     <div class="container-fluid" style='width:90%'>
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">
+        <a class="navbar-brand js-scroll-trigger" href="/">
             <img src="/assets/images/PNGGold.png" alt="ASTC GLOBAL" width='120px' class="img img-responsive">
         </a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
@@ -54,39 +54,45 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="true" aria-expanded="false">Курсы</a>
+                       aria-haspopup="true" aria-expanded="false">{{trans('messages.courses')}}</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{URL::route('homestudent.subjects')}}">Все курсы</a>
+                        <a class="dropdown-item"
+                           href="{{URL::route('homestudent.subjects')}}">{{trans('messages.courses')}}</a>
                         @if(Auth::check(\App\User::STUDENT))
-                            <a class="dropdown-item" href="{{URL::route('student.my.subjects')}}">Мои курсы</a>
+                            <a class="dropdown-item"
+                               href="{{URL::route('student.my.subjects')}}">{{trans('messages.mycourses')}}</a>
                         @endif
                     </div>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/guest#portfolio">Отзывы</a>
+                    <a class="nav-link js-scroll-trigger" href="/guest#portfolio">{{trans('messages.feedback')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/guest#contact">Контакты</a>
+                    <a class="nav-link js-scroll-trigger" href="{{URL::route('ourvalues')}}">{{trans('messages.nashicennosti')}}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="{{URL::route('contacts')}}">{{trans('messages.contacts')}}</a>
                 </li>
                 @if(Auth::check())
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="{{URL::route('user.logout')}}">Выход</a>
+                        <a class="nav-link js-scroll-trigger"
+                           href="{{URL::route('user.logout')}}">{{trans('messages.signout')}}</a>
                     </li>
                 @else
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="login">Вход</a>
+                        <a class="nav-link js-scroll-trigger" href="/login">{{trans('messages.signin')}}</a>
                     </li>
                 @endif
             </ul>
-            <ul class="nav navbar-nav navbar-right" style="background: #0a0c0e">
+            <ul class="nav navbar-nav navbar-right">
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="{{URL::route('setlangrus')}}">
-                        Рус</a>
+                    <b><a class="nav-link js-scroll-trigger" href="{{URL::route('setlangrus')}}">
+                            РУС</a></b>
                 </li>
-                <li class="nav-item" style = " border-left: 1px solid white">
-                    <a class="nav-link js-scroll-trigger" href="{{URL::route('setlangeng')}}">
-                        Анг</a>
+                <li class="nav-item" style=" border-left: 1px solid white">
+                    <b> <a class="nav-link js-scroll-trigger" href="{{URL::route('setlangeng')}}">
+                            ENG</a></b>
                 </li>
             </ul>
         </div>

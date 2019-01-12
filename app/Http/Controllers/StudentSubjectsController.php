@@ -23,19 +23,21 @@ use Illuminate\Support\Facades\DB;
 class StudentSubjectsController extends Controller
 {
 
-    public function mySubjects(){
-        $student = Student::where('user_id' ,Auth::id())->first();
+    public function mySubjects()
+    {
+        $student = Student::where('user_id', Auth::id())->first();
 
         $subjects = Subject::
-            join('registrations','registrations.subject_id' , '=' ,'subject.id')
-            ->where('registrations.students_id' , $student->id)
-            ->where('registrations.date_to_learn' , '<=', 'now()')
+        join('registrations', 'registrations.subject_id', '=', 'subject.id')
+            ->where('registrations.students_id', $student->id)
+            ->where('registrations.date_to_learn', '<=', 'now()')
             ->select('subject.*')
+            ->where('registrations.deleted_at', '=', null)
             ->get();
 
         $sortedSubjectsArray = array();
-        foreach ($subjects as $subject){
-            if(!array_key_exists($subject->department_id,$sortedSubjectsArray)){
+        foreach ($subjects as $subject) {
+            if (!array_key_exists($subject->department_id, $sortedSubjectsArray)) {
                 $sortedSubjectsArray[$subject->department_id] = array();
             }
             $sortedSubjectsArray[$subject->department_id][] = ($subject);
@@ -52,8 +54,18 @@ class StudentSubjectsController extends Controller
     public function index()
     {
         $subjects = Subject::all();
+        $departments = Department::all();
 
-        return view("gueststudent.all_subjects")->with(compact('subjects'));
+        return view("gueststudent.all_subjects")->with(compact('subjects'))->with(compact('departments'));
+    }
+
+    public function showSubjects($id)
+    {
+        $subjects = Subject::select('*')
+        ->where('department_id' , '=' , $id)
+        ->get();
+        return view('gueststudent.department_subject')->with(compact('subjects'));
+
     }
 
     /**
@@ -69,7 +81,7 @@ class StudentSubjectsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -80,88 +92,89 @@ class StudentSubjectsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $registration = Registration::where('students_id', Auth::user()->student->id)
-                                    ->where('subject_id' , $id)->get();
-        if(count($registration) == 0){
-            return redirect()->back()->with(['error'  => 'Нет доступа!']);
+            ->where('subject_id', $id)->get();
+        if (count($registration) == 0) {
+            return redirect()->back()->with(['error' => 'Нет доступа!']);
         }
 
         $subject = Subject::findOrFail($id);
-        $lessons = $subject->lessons()->orderBy('id' ,'asc')->get();
+        $lessons = $subject->lessons()->orderBy('id', 'asc')->get();
         $show = false;
-        foreach ($lessons as $lesson){
+        foreach ($lessons as $lesson) {
             $currentLessonPart = CurrentLesson::select('current_lessons.*')
-                ->join('lesson_parts', 'lesson_parts.id' , '=' ,'current_lessons.lesson_part_id')
-                ->join('lessons', 'lessons.id' , '=' ,'lesson_parts.lesson_id')
-                ->where( 'lesson_parts.lesson_id', $lesson->id )
-                ->where( 'current_lessons.user_id', Auth::id())
+                ->join('lesson_parts', 'lesson_parts.id', '=', 'current_lessons.lesson_part_id')
+                ->join('lessons', 'lessons.id', '=', 'lesson_parts.lesson_id')
+                ->where('lesson_parts.lesson_id', $lesson->id)
+                ->where('current_lessons.user_id', Auth::id())
                 ->first();
 
-            if($currentLessonPart){
-                if($currentLessonPart->completed){
+            if ($currentLessonPart) {
+                if ($currentLessonPart->completed) {
                     $show = true;
                 }
             }
         }
         $quizes = $subject->quizes()->get();
 
-        return view('gueststudent.subject')->with(compact('subject', 'lessons','quizes','show'));
+        return view('gueststudent.subject')->with(compact('subject', 'lessons', 'quizes', 'show'));
     }
 
     public function showLesson($id)
     {
 
         $lesson = Lesson::with('lessonParts')->findOrFail($id);
-        if($lesson->lessonParts->count() == 0){
-            Session::flash('warning',  'Урок еще не готов!');
+        if ($lesson->lessonParts->count() == 0) {
+            Session::flash('warning', 'Урок еще не готов!');
             return redirect()->back();
         }
 
-        $firstLessonPart = LessonPart::where('lesson_id' ,$lesson->id )->orderBy('id' ,'asc')->first();
+        $firstLessonPart = LessonPart::where('lesson_id', $lesson->id)->orderBy('id', 'asc')->first();
         $currentLessonPart = CurrentLesson::select('current_lessons.*')
-            ->join('lesson_parts', 'lesson_parts.id' , '=' ,'current_lessons.lesson_part_id')
-            ->join('lessons', 'lessons.id' , '=' ,'lesson_parts.lesson_id')
-            ->where( 'lesson_parts.lesson_id', $lesson->id )
-            ->where( 'current_lessons.user_id', Auth::id())
+            ->join('lesson_parts', 'lesson_parts.id', '=', 'current_lessons.lesson_part_id')
+            ->join('lessons', 'lessons.id', '=', 'lesson_parts.lesson_id')
+            ->where('lesson_parts.lesson_id', $lesson->id)
+            ->where('current_lessons.user_id', Auth::id())
             ->first();
 
-        if(!$currentLessonPart){
+        if (!$currentLessonPart) {
             $currentLessonPart = new CurrentLesson();
             $currentLessonPart->user_id = Auth::id();
             $currentLessonPart->lesson_part_id = $firstLessonPart->id;
             $currentLessonPart->save();
-        }else if($currentLessonPart->completed){
-            Session::flash('success',  'Вы уже прошли урок!');
+        } else if ($currentLessonPart->completed) {
+            Session::flash('success', 'Вы уже прошли урок!');
             return redirect()->back();
         }
 
         $lessonPart = $currentLessonPart->lessonPart;
-        return view('gueststudent.lesson')->with(compact('lesson','lessonPart','currentLessonPart'));
+        return view('gueststudent.lesson')->with(compact('lesson', 'lessonPart', 'currentLessonPart'));
     }
 
-    public function nextLessonPart($currentLessonPartId){
+    public function nextLessonPart($currentLessonPartId)
+    {
         $currentLessonPart = CurrentLesson::findOrFail($currentLessonPartId);
 
-        $lessonParts = $currentLessonPart->lessonPart->lesson->lessonParts()->orderBy('id' , 'asc')->get();
+        $lessonParts = $currentLessonPart->lessonPart->lesson->lessonParts()->orderBy('id', 'asc')->get();
         $newLessonPartID = 0;
         $break = false;
-        for ($i = 0; $i < count($lessonParts); $i++){
-            if($break){
+        for ($i = 0; $i < count($lessonParts); $i++) {
+            if ($break) {
                 $newLessonPartID = $lessonParts[$i]->id;
                 break;
             }
-            if($lessonParts[$i]->id == $currentLessonPart->lesson_part_id && $i + 1 != count($lessonParts)){
+            if ($lessonParts[$i]->id == $currentLessonPart->lesson_part_id && $i + 1 != count($lessonParts)) {
                 $break = true;
             }
         }
 
-        if($newLessonPartID == $currentLessonPart->lesson_part_id || $newLessonPartID == 0){
-            if($newLessonPartID == 0){
+        if ($newLessonPartID == $currentLessonPart->lesson_part_id || $newLessonPartID == 0) {
+            if ($newLessonPartID == 0) {
                 $currentLessonPart->completed = true;
                 $currentLessonPart->save();
                 return Response()->json([
@@ -173,7 +186,7 @@ class StudentSubjectsController extends Controller
                 'error' => true,
                 'message' => "",
             ]);
-        }else{
+        } else {
             $currentLessonPart->lesson_part_id = $newLessonPartID;
             $currentLessonPart->save();
             $currentLessonPart = CurrentLesson::with('lessonPart')->find($currentLessonPart->id);
@@ -186,30 +199,30 @@ class StudentSubjectsController extends Controller
 
     public function showQuiz($id)
     {
-        try{
+        try {
             $quiz = Quiz::findOrFail($id);
-        } catch (\Exception $e){
-            return redirect()->back()->with(['error'  => 'Нет доступа!']);
+        } catch (\Exception $e) {
+            return redirect()->back()->with(['error' => 'Нет доступа!']);
         }
 
         $registration = Registration::where('students_id', Auth::user()->student->id)
-            ->where('subject_id' , $quiz->subject->id)->get();
-        if(count($registration) == 0){
-            return redirect()->back()->with(['error'  => 'Нет доступа!']);
+            ->where('subject_id', $quiz->subject->id)->get();
+        if (count($registration) == 0) {
+            return redirect()->back()->with(['error' => 'Нет доступа!']);
         }
 
-        $quizResult = QuizResult::where('student_id', Auth::user()->student->id)->where('quiz_id' , $quiz->id)->get()->last();
-        if($quizResult){
-            return view('gueststudent.quiz')->with(compact('quiz' , 'quizResult'));
-        }else{
-            return view('gueststudent.quiz')->with(compact('quiz' ));
+        $quizResult = QuizResult::where('student_id', Auth::user()->student->id)->where('quiz_id', $quiz->id)->get()->last();
+        if ($quizResult) {
+            return view('gueststudent.quiz')->with(compact('quiz', 'quizResult'));
+        } else {
+            return view('gueststudent.quiz')->with(compact('quiz'));
         }
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -220,8 +233,8 @@ class StudentSubjectsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -232,7 +245,7 @@ class StudentSubjectsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -247,17 +260,17 @@ class StudentSubjectsController extends Controller
         $currentUser = Auth::user();
 
         $registration = Registration::where('students_id', $currentUser->student->id)
-            ->where('subject_id' , $id)->get();
-        if(count($registration) == 0){
-            return redirect()->back()->with(['error'  => 'Нет доступа!']);
+            ->where('subject_id', $id)->get();
+        if (count($registration) == 0) {
+            return redirect()->back()->with(['error' => 'Нет доступа!']);
         }
 
 
-        $messages = Message::whereIn('acceptor_user_id' ,[$currentUser->id , $subject->user->id])
-            ->whereIn('sender_user_id' ,[$currentUser->id , $subject->user->id])
-            ->where('subject_id' ,$subject->id )
-            ->orderBy('created_at' ,'desc')->get();
+        $messages = Message::whereIn('acceptor_user_id', [$currentUser->id, $subject->user->id])
+            ->whereIn('sender_user_id', [$currentUser->id, $subject->user->id])
+            ->where('subject_id', $subject->id)
+            ->orderBy('created_at', 'desc')->get();
 
-        return view('gueststudent.chat', compact('subject' , 'messages'));
+        return view('gueststudent.chat', compact('subject', 'messages'));
     }
 }

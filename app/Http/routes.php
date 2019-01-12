@@ -15,6 +15,8 @@ Route::group(['middleware' => ['language',]], function () {
     Route::get('/login', array('as' => 'home', 'uses' => 'HomeController@index'));
     Route::get('/setlangrus', array('as' => 'setlangrus', 'uses' => 'HomeController@setLangRus'));
     Route::get('/setlangeng', array('as' => 'setlangeng', 'uses' => 'HomeController@setLangEng'));
+    Route::get('/ourvalues', array('as' => 'ourvalues', 'uses' => 'HomeController@ourvalues'));
+    Route::get('/contacts', array('as' => 'contacts', 'uses' => 'HomeController@contacts'));
     Route::get('/lock', array('as' => 'lock', 'uses' => 'HomeController@lock'));
 
     Route::post('/user/login', ['as' => 'user.login', 'uses' => 'UserController@login']);
@@ -22,6 +24,8 @@ Route::group(['middleware' => ['language',]], function () {
 
     Route::get('/guest', ['as' => 'homestudent.guest', 'uses' => 'HomeStudentController@guest']);
     Route::get('/subjects', ['as' => 'homestudent.subjects', 'uses' => 'StudentSubjectsController@index']);
+
+    Route::get('/subjects/{id}', ['as' => 'subjects.specific', 'uses' => 'StudentSubjectsController@showSubjects']);
 
     Route::group(['prefix' => 'student', 'middleware' => ['for.student', 'auth']], function () {
         Route::get('/my/subjects', ['as' => 'student.my.subjects', 'uses' => 'StudentSubjectsController@mySubjects']);
