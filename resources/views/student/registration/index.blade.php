@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 
-@section('title', 'Студент')
+@section('title', 'Слушатели')
 @section('extrastyle')
 <link href="{{ URL::asset('assets/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
 <link href="{{ URL::asset('assets/css/responsive.dataTables.min.css')}}" rel="stylesheet">
@@ -21,7 +21,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Студенты<small> Список зарегестрированных студентов.</small></h2>
+                        <h2>{{trans('messages.student')}}</h2>
 
                         <div class="clearfix"></div>
                     </div>
@@ -31,7 +31,7 @@
                             <form class="" method="POST" action="{{URL::route('student.registration.list')}}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="col-md-4 col-sm-12 col-xs-12">
-                                    <label for="subject_id">Под курс: <span class="required">*</span></label>
+                                    <label for="subject_id">{{trans('messages.courses')}}: <span class="required">*</span></label>
                                     {!!Form::select('subject_id', $subjects, $selectSub, ['placeholder' => 'Выберите под курс','class'=>'select2_single subject form-control has-feedback-left','tabindex'=>'-1','id'=>'subject_id']) !!}
                                     <i class="fa fa-home form-control-feedback left" aria-hidden="true"></i>
 
@@ -39,7 +39,7 @@
 
                                 <div class="col-md-2 col-sm-12 col-xs-12">
                                     <br>
-                                    <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-check"></i> Поиск</button>
+                                    <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-check"></i>{{trans('messages.find')}}</button>
                                 </div>
                             </form>
                         </div>

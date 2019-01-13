@@ -187,6 +187,7 @@ class UserController extends Controller {
 			$user->create($data);
 
 			$notification= array('title' => 'Информация сохранена', 'body' => 'Пользователь успешно добавлен.');
+
 			return Redirect::route('user.create')->with("success",$notification);
 		}
 	}
@@ -252,6 +253,9 @@ class UserController extends Controller {
 
 			$user = User::findOrFail(auth()->user()->id);
 			$user->fill($data)->save();
+
+            $name=$user->firstname.' '.$user->lastname;
+            Session::put('name', $name);
 
 			$notification= array('title' => 'Изменение', 'body' => 'Информация успешно изменена');
 			return Redirect::back()->with('success',$notification);

@@ -78,9 +78,13 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
      cooperation with our clients and partners.
 ',
 
-    'feedback' => '',
+    'feedback' => 'Feedback',
     'feedback_text1' => 'Please, contact',
     'feedback_text2' => '',
+
+
+    'find' => 'Find',
+    'login' => 'Login',
 
 
 ]

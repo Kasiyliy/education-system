@@ -1,19 +1,12 @@
 @extends('layouts.guest_student_master')
 
 @section('title', 'ASTCGlobal')
-@section('style')
-    <style>
-        #iskrenne {
-            margin-left: 100px;
-        }
-    </style>
-@endsection
 @section('content')
 
     <header class="masthead text-center text-white d-flex">
         <div class="container my-auto">
-            <div class="row container"
-                 style="font-color:white; background-color: #1d1e29;    background: rgb(0, 0, 0); background: rgba(0, 0, 0, .5);">
+            <div class="row"
+                 style="font-color:white;   background: rgb(0, 0, 0); background: rgba(0, 0, 0, .5);">
                 <div class="col-lg-12 mx-auto">
                     <h5 class="">
                         <strong>{{trans('messages.welcome_word1')}}</strong></br>
