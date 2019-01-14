@@ -24,6 +24,7 @@ class CreateLessonPartsTable extends Migration
             $table->integer('seconds')->unsigned();
             $table->boolean('completed')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

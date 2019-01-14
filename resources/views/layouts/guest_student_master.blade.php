@@ -58,9 +58,11 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item"
                            href="{{URL::route('homestudent.subjects')}}">{{trans('messages.courses')}}</a>
-                        @if(Auth::check(\App\User::STUDENT))
+                        @if(Auth::check())
+                        @if(Auth::user()->student)
                             <a class="dropdown-item"
                                href="{{URL::route('student.my.subjects')}}">{{trans('messages.mycourses')}}</a>
+                        @endif
                         @endif
                     </div>
                 </li>
