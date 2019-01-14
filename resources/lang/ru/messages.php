@@ -14,6 +14,10 @@ return [
     'signin' => 'Вход',
     'signout' => 'Выход',
 
+
+    'teachercontrol' => 'Контроль учителей',
+    'teachercontrolteacher' => 'Учителя',
+
     'main_menu' => 'Меню',
 
     'disciplina' => 'Дисциплина',

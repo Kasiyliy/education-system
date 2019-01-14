@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="container">
-            <div class="row text-center mx-a">
+            <div class="row mx-a">
                 <div class="col-lg-3">
                     <i class="fas fa-4x fa-file-alt text-primary mb-3 sr-icon-1"></i>
                     <h5 class="mb-3">{{trans('messages.help_text1')}}</h5>

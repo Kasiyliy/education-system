@@ -15,7 +15,7 @@
                 <hr class="my-4">
             </div>
         </div>
-        <div class="row">
+        <div class="row mx-1">
 
             @foreach($departments as $department)
 

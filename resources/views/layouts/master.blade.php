@@ -51,70 +51,114 @@
                                 <li><a><i class="fa fa-home"></i> {{trans('messages.disciplina')}} <span
                                                 class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="{{URL::route('department.create')}}">{{trans('messages.add_disciplina')}}</a></li>
-                                        <li><a href="{{URL::route('department.index')}}">{{trans('messages.all_disciplina')}}</a></li>
+                                        <li>
+                                            <a href="{{URL::route('department.create')}}">{{trans('messages.add_disciplina')}}</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{URL::route('department.index')}}">{{trans('messages.all_disciplina')}}</a>
+                                        </li>
 
                                     </ul>
                                 </li>
                             @endcan
                             @if(Gate::check('Admin') || Gate::check('Teacher'))
-                                <li><a><i class="fa fa-book"></i>{{trans('messages.courses')}}<span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-book"></i>{{trans('messages.courses')}}<span
+                                                class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="{{URL::route('subject.create')}}">{{trans('messages.add_course')}}</a></li>
-                                        <li><a href="{{URL::route('subject.index')}}">{{trans('messages.my_courses')}}</a></li>
+                                        <li>
+                                            <a href="{{URL::route('subject.create')}}">{{trans('messages.add_course')}}</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{URL::route('subject.index')}}">{{trans('messages.my_courses')}}</a>
+                                        </li>
                                     </ul>
                                 </li>
                             @endif
                             @can('Admin')
-                                <li><a><i class="fa fa-users"></i>{{trans('messages.student')}}<span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-users"></i>{{trans('messages.student')}}<span
+                                                class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="{{URL::route('student.create')}}">{{trans('messages.add_student')}}</a></li>
-                                        <li><a href="{{URL::route('student.index')}}">{{trans('messages.all_student')}}</a></li>
-                                        <li><a href="{{URL::route('student.registration.create')}}">{{trans('messages.register_student')}}</a></li>
-                                        <li><a href="{{URL::route('student.registration.index')}}">{{trans('messages.all_registered_student')}}</a></li>
+                                        <li>
+                                            <a href="{{URL::route('student.create')}}">{{trans('messages.add_student')}}</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{URL::route('student.index')}}">{{trans('messages.all_student')}}</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{URL::route('student.registration.create')}}">{{trans('messages.register_student')}}</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{URL::route('student.registration.index')}}">{{trans('messages.all_registered_student')}}</a>
+                                        </li>
                                     </ul>
                                 </li>
                             @endcan
                             @if(Gate::check('Admin') || Gate::check('Teacher'))
-                                <li><a><i class="fa fa-envelope"></i>{{trans('messages.messages')}} <span class="fa fa-chevron-down"></span></a>
+
+                                <li><a><i class="fa fa-lock"></i>{{trans('messages.teachercontrol')}}<span
+                                                class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="{{URL::route('message.index')}}">{{trans('messages.my_messages')}}</a></li>
+                                        <li>
+                                            <a href="{{URL::route('teacher.control')}}">{{trans('messages.teachercontrolteacher')}}</a>
+                                        </li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-edit"></i> {{trans('messages.test')}} <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-envelope"></i>{{trans('messages.messages')}} <span
+                                                class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="{{URL::route('quiz.create')}}">{{trans('messages.add_test')}}</a></li>
-                                        <li><a href="{{URL::route('quiz.index')}}">{{trans('messages.list_test')}}</a></li>
+                                        <li>
+                                            <a href="{{URL::route('message.index')}}">{{trans('messages.my_messages')}}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a><i class="fa fa-edit"></i> {{trans('messages.test')}} <span
+                                                class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="{{URL::route('quiz.create')}}">{{trans('messages.add_test')}}</a>
+                                        </li>
+                                        <li><a href="{{URL::route('quiz.index')}}">{{trans('messages.list_test')}}</a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-file-text"></i>{{trans('messages.result')}}<span
                                                 class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="{{URL::route('result.quiz')}}">{{trans('messages.test_result')}}</a></li>
+                                        <li>
+                                            <a href="{{URL::route('result.quiz')}}">{{trans('messages.test_result')}}</a>
+                                        </li>
                                         {{--<li><a href="{{URL::route('result.individual')}}">Student Wise</a></li>--}}
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i>{{trans('messages.presentation')}}<span
+                                <li><a><i class="fa fa-file-powerpoint-o"
+                                          aria-hidden="true"></i>{{trans('messages.presentation')}}<span
                                                 class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="{{URL::route('lesson.create')}}">{{trans('messages.add_presentation')}}</a></li>
-                                        <li><a href="{{URL::route('lesson.index')}}">{{trans('messages.list_presentation')}}</a></li>
+                                        <li>
+                                            <a href="{{URL::route('lesson.create')}}">{{trans('messages.add_presentation')}}</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{URL::route('lesson.index')}}">{{trans('messages.list_presentation')}}</a>
+                                        </li>
                                     </ul>
                                 </li>
 
                             @endif
                             @can('Admin')
-                                <li><a><i class="fa fa-users"></i>{{trans('messages.user')}}<span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-users"></i>{{trans('messages.user')}}<span
+                                                class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="{{URL::route('user.create')}}">{{trans('messages.add_user')}}</a>
                                         </li>
-                                        <li><a href="{{URL::route('user.index')}}">{{trans('messages.user_list')}}</a></li>
+                                        <li><a href="{{URL::route('user.index')}}">{{trans('messages.user_list')}}</a>
+                                        </li>
 
-                                        <li><a href="{{URL::route('user.addstudent')}}">{{trans('messages.add_student_user')}}</a>
+                                        <li>
+                                            <a href="{{URL::route('user.addstudent')}}">{{trans('messages.add_student_user')}}</a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a href="{{URL::route('institute.index')}}"><i class="fa fa-building"></i>{{trans('messages.about_us')}}</a>
+                                <li><a href="{{URL::route('institute.index')}}"><i
+                                                class="fa fa-building"></i>{{trans('messages.about_us')}}</a>
 
                                 </li>
                             @endcan
@@ -161,7 +205,7 @@
                     <ul class="nav navbar-nav navbar-right">
 
                         <li>
-                            <a style="text-color:white;"  href="{{URL::route('setlangrus')}}">
+                            <a style="text-color:white;" href="{{URL::route('setlangrus')}}">
                                 РУС</a>
                         </li>
                         <li style=" border-left: 1px solid white">

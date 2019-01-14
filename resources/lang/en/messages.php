@@ -14,6 +14,9 @@ return [
     'signin' => 'Log in',
     'signout' => 'Log out',
 
+    'teachercontrol' => 'Teacher control',
+    'teachercontrolteacher' => 'Teacher',
+
     'main_menu' => 'Menu',
 
     'disciplina' => 'Discipline',
