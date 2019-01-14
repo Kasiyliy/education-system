@@ -39,7 +39,7 @@
                             <td>{{$lesson->name}}</td>
                             <td>{{$lesson->subject()->first()->name }}</td>
                             <td>
-                              <a class="btn btn-success btn-xs">Изменить</a>
+                              <a class="btn btn-success btn-xs" href="{{URL::route('lesson.edit' ,['id'=>$lesson->id])}}">Изменить</a>
                               <form style="display: inline;" action="{{URL::route('lesson.destroy', ['id' => $lesson->id])}}" method="POST">
                                 <input type="hidden" name="_method" value="DELETE">
                                 {{csrf_field()}}

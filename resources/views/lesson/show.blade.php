@@ -30,6 +30,39 @@
                                 </div>
                             @endif
 
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>Часть урока
+                                            <small> добавить</small>
+                                        </h2>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        {!! Form::open(['route' => 'lesson-part.store', 'method' => 'POST',
+                                        'enctype' => 'multipart/form-data', 'class' => 'form-horizontal']) !!}
+                                        {{csrf_field()}}
+                                        <div class="form-group">
+                                            <label for="presentation">Презентация (1-стр pdf)</label>
+                                            <input type="file" class="form-control" id="presentation" name="presentation" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="audio">Аудио</label>
+                                            <input type="file" class="form-control" id="audio" name="audio">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="video">Видео</label>
+                                            <input type="file" class="form-control" id="video" name="video">
+                                        </div>
+                                        <input type="hidden" name="lesson_id" value="{{$lesson->id}}">
+                                        <div class="form-group">
+                                            <label for="seconds">Секунды</label>
+                                            <input type="number" min="0" name="seconds" id="seconds" required>
+                                        </div>
+                                        {!! Form::submit('Добавить', ['class' => 'btn btn-info']) !!}
+                                        {!! Form::close() !!}
+                                    </div>
+                                </div>
+
                             <div class="panel-group" id="accordion">
                                 @foreach($lesson->lessonParts as $lessonPart)
                                     <div class="panel panel-default">
@@ -75,6 +108,20 @@
                                                                 </div>
                                                             </div>
                                                         @endif
+                                                    </div>
+                                                    <div class="col-sm-12 text-center">
+                                                        <form action="{{URL::route('lesson-part.destroy' ,['id' => $lessonPart->id] )}}" method="post">
+                                                            {{csrf_field()}}
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <a type="submit" class="btn btn-warning form-control" href="{{URL::route('lesson-part.edit', ['id' => $lessonPart->id])}}" >Изменить</a>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <button type="submit" class="btn btn-danger form-control" >Удалить</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                 </div>
 

@@ -91,6 +91,9 @@ Route::group(['middleware' => ['language',]], function () {
 
         Route::resource('lesson', 'LessonController');
         Route::get('lesson-part/{id}', ['as' => 'lesson-part.index', 'uses'=>'LessonPartController@index']);
+        Route::post('lesson-part/{id}', ['as' => 'lesson-part.destroy', 'uses'=>'LessonPartController@destroy']);
+        Route::get('lesson-part/edit/{id}', ['as' => 'lesson-part.edit', 'uses'=>'LessonPartController@edit']);
+        Route::post('lesson-part/update/{id}', ['as' => 'lesson-part.update', 'uses'=>'LessonPartController@update']);
         Route::post('lesson-part', ['as' => 'lesson-part.store', 'uses'=>'LessonPartController@store']);
 
         Route::get('message/{studentId}/{subjectId}', ['as' => 'message.show2', 'uses' => 'MessageController@show2']);

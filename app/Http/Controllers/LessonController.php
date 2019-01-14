@@ -59,18 +59,13 @@ class LessonController extends Controller
         $rules = [
             'name' => 'required|max:255',
             'description' => 'required',
-//            'presentation' => 'required|file|max:50000|mimes:pdf',
             'subject_id' => 'required',
         ];
         $validator = Validator::make($data, $rules);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         } else {
-//            $presentation = $request->presentation;
-//            $presentation_new_name = time() . $presentation->getClientOriginalName();
-//            $fullPath = $presentation->move('assets/files/lessons', $presentation_new_name);
             $lesson = new Lesson;
-//            $lesson->presentation = $fullPath;
             $lesson->name = $request->name;
             $lesson->description = $request->description;
             $lesson->subject_id = $request->subject_id;
@@ -110,7 +105,9 @@ class LessonController extends Controller
      */
     public function edit($id)
     {
-        //
+        $lesson = Lesson::findOrFail($id);
+
+        return view('lesson.edit')->with('lesson' ,$lesson);
     }
 
     /**
@@ -122,7 +119,23 @@ class LessonController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $rules = [
+            'name' => 'required|max:255',
+            'description' => 'required',
+        ];
+
+        $validator = Validator::make($data, $rules);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        } else {
+            $lesson = Lesson::findOrFail($id);
+            $lesson->name = $request->name;
+            $lesson->description = $request->description;
+            $lesson->save();
+            $notification = array('title' => 'Изменение!', 'body' => 'Изменения внесены!');
+            return redirect()->back()->with('success', $notification);
+        }
     }
 
     /**
