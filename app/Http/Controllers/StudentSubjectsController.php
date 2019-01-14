@@ -25,8 +25,12 @@ class StudentSubjectsController extends Controller
 
     public function mySubjects()
     {
-        $student = Student::where('user_id', Auth::id())->first();
 
+        $student = Student::where('user_id', Auth::id())->first();
+        if(!$student){
+            Session::flash('warning',  'У вас нету курсов!');
+            return redirect()->back();
+        }
         $subjects = Subject::join('registrations','registrations.subject_id' , '=' ,'subject.id')
             ->where('registrations.students_id' , $student->id)
             ->where('registrations.date_to_learn' , '<=', 'now()')

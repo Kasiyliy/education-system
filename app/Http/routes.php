@@ -44,14 +44,14 @@ Route::group(['middleware' => ['language',]], function () {
 
     Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth']], function () {
 
-        Route::get('/institute', ['as' => 'institute.index', 'uses' => 'InstituteController@index']);
-        Route::post('/institute', ['as' => 'institute', 'uses' => 'InstituteController@save']);
         Route::get('/teacher/control', ['as' => 'teacher.control', 'uses' => 'TeacherControlController@index']);
 
     });
 
     Route::group(['middleware' => ['not.for.student', 'auth']], function () {
         Route::get('/dashboard', ['as' => 'user.dashboard', 'uses' => 'DashboardController@index']);
+        Route::get('/institute', ['as' => 'institute.index', 'uses' => 'InstituteController@index']);
+        Route::post('/institute', ['as' => 'institute', 'uses' => 'InstituteController@save']);
 
         Route::resource('user', 'UserController');
         Route::get('/settings', ['as' => 'user.settings', 'uses' => 'UserController@settings']);

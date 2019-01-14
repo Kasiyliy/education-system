@@ -17,6 +17,8 @@ return [
     'teachercontrol' => 'Teacher control',
     'teachercontrolteacher' => 'Teacher',
 
+    'adminpanel' => 'Admin panel',
+
     'main_menu' => 'Menu',
 
     'disciplina' => 'Discipline',

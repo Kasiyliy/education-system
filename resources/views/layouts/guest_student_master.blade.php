@@ -81,10 +81,9 @@
                        href="{{URL::route('help')}}">{{trans('messages.help')}}</a>
                 </li>
                 @if(Auth::check())
-                    @if(!Auth::user()->student)
+                    @if(Gate::check('Admin'))
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="{{URL::route('user.dashboard')}}">Админ
-                                панель</a>
+                            <a class="nav-link js-scroll-trigger" href="{{URL::route('user.dashboard')}}">{{trans('messages.adminpanel')}}</a>
                         </li>
                     @endif
 

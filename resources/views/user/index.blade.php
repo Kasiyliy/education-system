@@ -37,7 +37,7 @@
                             <h2>Пользователь
                                 <small> Информация обо всех пользователях.</small>
                             </h2>
-                            <a href="{{URL::Route('user.create')}}" class="btn btn-primary pull-right"><i
+                            <a href="{{URL::Route('user.create')}}" class="btn btn-success pull-right"><i
                                         class="fa fa-plus"></i> Новый пользователь </a>
 
                             <div class="clearfix"></div>

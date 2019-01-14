@@ -92,9 +92,6 @@
                                         </li>
                                     </ul>
                                 </li>
-                            @endcan
-                            @if(Gate::check('Admin') || Gate::check('Teacher'))
-
                                 <li><a><i class="fa fa-lock"></i>{{trans('messages.teachercontrol')}}<span
                                                 class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
@@ -103,6 +100,10 @@
                                         </li>
                                     </ul>
                                 </li>
+                            @endcan
+                            @if(Gate::check('Admin') || Gate::check('Teacher'))
+
+
                                 <li><a><i class="fa fa-envelope"></i>{{trans('messages.messages')}} <span
                                                 class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">

@@ -18,31 +18,56 @@
             </div>
         </div>
         <div class="container">
-            <div class="row mx-a">
-                <div class="col-lg-3">
+            <div class="row mx-a text-justify ">
+                <div class="col-lg-6 text-center" style="padding-top: 70px;border-right: 3px solid black">
                     <i class="fas fa-4x fa-file-alt text-primary mb-3 sr-icon-1"></i>
                     <h5 class="mb-3">{{trans('messages.help_text1')}}</h5>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-6 text-center">
+                </div>
+            </div>
+
+            <div class="row mx-a text-justify">
+
+                <div class="col-lg-6 text-center" style="padding-top: 70px;border-right: 3px solid black">
+                </div>
+                <div class="col-lg-6 text-center">
                     <i class="fas fa-4x fa-file-alt text-primary mb-3 sr-icon-1"></i>
                     <h5 class="mb-3">{{trans('messages.help_text2')}}</h5>
                 </div>
-                <div class="col-lg-2">
+            </div>
+
+            <div class="row mx-a text-justify">
+                <div class="col-lg-6 text-center" style="padding-top: 70px;border-right: 3px solid black">
                     <i class="fas fa-4x fa-file-alt text-primary mb-3 sr-icon-2"></i>
                     <h5 class="mb-3">{{trans('messages.help_text3')}}</h5>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-6 text-center">
+                </div>
+            </div>
+
+            <div class="row mx-a text-justify" >
+                <div class="col-lg-6 text-center" style="padding-top: 70px;border-right: 3px solid black">
+                </div>
+                <div class="col-lg-6 text-center">
                     <i class="fas fa-4x fa-file-alt text-primary mb-3 sr-icon-3"></i>
                     <h5 class="mb-3">{{trans('messages.help_text4')}}
                         <a>{{trans('messages.help')}}</a></h5>
                 </div>
-                <div class="col-lg-3">
+            </div>
+
+            <div class="row mx-a text-justify" >
+                <div class="col-lg-6 text-center" style="padding-top: 70px;border-right: 3px solid black">
                     <i class="fas fa-4x fa-heart text-primary mb-3 sr-icon-4"></i>
                     <h5 class="mb-3">{{trans('messages.help_text5')}}</h5>
+                </div>
+                <div class="col-lg-6 text-center">
                 </div>
             </div>
         </div>
     </section>
+
+    
     </body>
     @include('layouts.guest_student_footer')
 @endsection
@@ -60,6 +85,7 @@
 @endsection
 
 <style>
+
     header.masthead2 {
         padding-top: 10rem;
         padding-bottom: calc(10rem - 56px);
@@ -71,7 +97,7 @@
     @media (min-width: 992px) {
         header.masthead2 {
             height: 100vh;
-            min-height: 650px;
+            min-height: 670px;
             padding-top: 0;
             padding-bottom: 0;
         }

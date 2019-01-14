@@ -19,6 +19,8 @@ class CreateTableSubject extends Migration
             $table->string('code', 20)->unique;
             $table->string('price');
             $table->string('description', 250);
+            $table->string('points', 250);
+            $table->string('plans', 250);
             $table->timestamps();
             $table->softDeletes();
             $table->integer('department_id')->unsigned();

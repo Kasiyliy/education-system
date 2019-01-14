@@ -66,7 +66,10 @@ class SubjectController extends Controller
             'code' => 'required|unique:subject,code',
             'price' => 'required',
             'department_id' => 'required|numeric',
-            'description' => 'required'
+            'description' => 'required',
+            'points' => 'required',
+            'plans' => 'required'
+
         ];
         $data['user_id'] = Auth::user()->id;
 
