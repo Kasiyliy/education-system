@@ -46,7 +46,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <div class="m-2">
-                                                            
+
                                                             <div class="embed-responsive embed-responsive-16by9">
                                                                 <embed src="/{{$lessonPart->presentation}}" class="embed-responsive-item" />
                                                             </div>
