@@ -8,8 +8,22 @@
         <div class="container my-auto">
         </div>
     </header>
+    <body>
+        <div class="container rounded contacts">
+            <h5 class="text-center">{{trans('messages.contact')}}</h5>
+            <b>{{trans('messages.too_global')}}  </b>   "{{$institute->name}}"<br/>
+            <b>E-mail:   </b>   {{$institute->email}}<br/>
+            <b>{{trans('messages.telephone')}}:   </b>   {{$institute->phoneNo}}<br/>
+            <b>{{trans('messages.address')}}  </b>{{$institute->address}}<br/>
+        </div>
+    </body>
     @include('layouts.guest_student_footer')
 @endsection
+
+
+
+
+
 
 @section('scripts')
     <script src="{{ URL::asset('assets/js/validator.min.js')}}"></script>
@@ -25,6 +39,17 @@
 
 <style>
 
+    .contacts{
+        position: center;
+        margin: 10%;
+        border: 1px solid black;
+        font-family: "Gill Sans";
+        padding-top: 3%;
+        padding-bottom: 3%;
+    }
+    .contacts b{
+        padding-left: 20%;
+    }
     header.masthead2 {
         padding-top: 10rem;
         padding-bottom: calc(10rem - 56px);
@@ -33,41 +58,12 @@
         background-size: cover;
     }
 
-    header.masthead2 hr {
-        margin-top: 30px;
-        margin-bottom: 30px;
-    }
-
-    header.masthead2 h1 {
-        font-size: 2rem;
-    }
-
-    header.masthead2 p {
-        font-weight: 300;
-    }
-
-    @media (min-width: 768px) {
-        header.masthead2 p {
-            font-size: 1.15rem;
-        }
-    }
-
     @media (min-width: 992px) {
         header.masthead2 {
             height: 200px;
             min-height: 750px;
             padding-top: 0;
             padding-bottom: 0;
-        }
-
-        header.masthead2 h1 {
-            font-size: 3rem;
-        }
-    }
-
-    @media (min-width: 1200px) {
-        header.masthead2 h1 {
-            font-size: 4rem;
         }
     }
 </style>

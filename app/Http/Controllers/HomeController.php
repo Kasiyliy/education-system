@@ -71,6 +71,16 @@ class HomeController extends Controller
 
     public function contacts()
     {
-        return view('gueststudent.contacts');
+        $institute = Institute::select('*')->first();
+        if (!$institute) {
+            $institute = new Institute;
+            $institute->name = "Название учереждения";
+        }
+        return view('gueststudent.contacts' , compact('error', 'institute'));
+    }
+
+    public function help()
+    {
+        return view('gueststudent.help');
     }
 }

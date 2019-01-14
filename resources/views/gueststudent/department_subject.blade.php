@@ -23,7 +23,8 @@
 
                     <div class="container col-sm-12" style="margin-bottom: 30px;">
                         <div class="card">
-                            <div class="card-header" style=" background-image: linear-gradient(to bottom , #ECEAEF, #B2ABB3)">
+                            <div class="card-header"
+                                 style=" background-image: linear-gradient(to bottom , #ECEAEF, #B2ABB3)">
                                 <p>
                                     <span class="text-muted small">{{trans('messages.courses')}} #{{$subject->id}}</span>: {{$subject->name}}
                                 </p>
@@ -32,6 +33,16 @@
                                 <span class="text-muted small">{{trans('messages.opisanie')}}:</span>
                                 <p class="">{{$subject->description}}</p>
                             </div>
+                            @if(Auth::check(\App\User::STUDENT))
+                                <button id="gocourse" type="submit"
+                                        href="{{URL::route('student.my.subjects.specific' , ['id'=>$subject->id])}}"
+                                        class='btn btn-success'>Go
+                                </button>
+                            @else
+                                <button id="infoadmin" type="submit" onclick="openForm()"
+                                        class='btn btn-info open-button'>Go
+                                </button>
+                            @endif
                         </div>
                     </div>
                 @endforeach
@@ -41,9 +52,61 @@
 
     @include('layouts.guest_student_footer')
 
-@endsection
-<style>
 
+
+
+@endsection
+
+
+<div class="form-popup center-block" id="myForm">
+    <form action="" class="form-container">
+        <label><b>{{trans('messages.cannot_course')}}</b></label>
+        <span class="close">&times;</span>
+    </form>
+</div>
+
+<style>
+    .open-button {
+        color: white;
+        border: none;
+        cursor: pointer;
+        opacity: 0.8;
+        bottom: 23px;
+        right: 28px;
+    }
+
+    .form-popup {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    }
+
+    .form-container {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .form-container .btn:hover, .open-button:hover {
+        opacity: 1;
+    }
 
     div.masthead6 {
         background-image: url("/assets/images/1.jpg");
@@ -90,3 +153,23 @@
         }
     }
 </style>
+
+
+<script src="{{ URL::asset('assets/js/jquery.min.js')}}"></script>
+
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+
+    var span = document.getElementsByClassName("close")[0];
+
+    span.onclick = function () {
+        document.getElementById("myForm").style.display = "none";
+    }
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            document.getElementById("myForm").style.display = "none";
+        }
+    }
+</script>

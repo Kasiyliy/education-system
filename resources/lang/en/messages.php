@@ -85,6 +85,20 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
 
     'find' => 'Find',
     'login' => 'Login',
+    'too_global' => 'LLP',
+    'address' => 'Address: Almaty, Kazakhstan',
+    'telephone' => 'Phone',
+    'contact' => 'Contact information',
+    'help' => 'Help',
+    'cannot_course' => 'You cannot complete this course. Please contact the site administrator.',
+
+
+    'help_text' => 'Road map',
+    'help_text1' => 'Welcome!',
+    'help_text2' => 'Register with us.',
+    'help_text3' => 'Start training.',
+    'help_text4' => 'In case of access problems, please, kindly address the administrator.',
+    'help_text5' => 'Test will be available after training complation followed by the certificate.',
 
 
 ]

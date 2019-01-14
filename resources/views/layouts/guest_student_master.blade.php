@@ -69,15 +69,22 @@
                     <a class="nav-link js-scroll-trigger" href="/guest#portfolio">{{trans('messages.feedback')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="{{URL::route('ourvalues')}}">{{trans('messages.nashicennosti')}}</a>
+                    <a class="nav-link js-scroll-trigger"
+                       href="{{URL::route('ourvalues')}}">{{trans('messages.nashicennosti')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="{{URL::route('contacts')}}">{{trans('messages.contacts')}}</a>
+                    <a class="nav-link js-scroll-trigger"
+                       href="{{URL::route('contacts')}}">{{trans('messages.contacts')}}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger"
+                       href="{{URL::route('help')}}">{{trans('messages.help')}}</a>
                 </li>
                 @if(Auth::check())
                     @if(!Auth::user()->student)
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="{{URL::route('user.dashboard')}}">Админ панель</a>
+                            <a class="nav-link js-scroll-trigger" href="{{URL::route('user.dashboard')}}">Админ
+                                панель</a>
                         </li>
                     @endif
 

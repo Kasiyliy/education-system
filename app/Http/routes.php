@@ -17,6 +17,7 @@ Route::group(['middleware' => ['language',]], function () {
     Route::get('/setlangeng', array('as' => 'setlangeng', 'uses' => 'HomeController@setLangEng'));
     Route::get('/ourvalues', array('as' => 'ourvalues', 'uses' => 'HomeController@ourvalues'));
     Route::get('/contacts', array('as' => 'contacts', 'uses' => 'HomeController@contacts'));
+    Route::get('/help', array('as' => 'help', 'uses' => 'HomeController@help'));
     Route::get('/lock', array('as' => 'lock', 'uses' => 'HomeController@lock'));
 
     Route::post('/user/login', ['as' => 'user.login', 'uses' => 'UserController@login']);

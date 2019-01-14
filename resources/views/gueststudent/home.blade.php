@@ -32,54 +32,6 @@
             </div>
         </div>
     </header>
-    <section id="services">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Путеводитель. Road map.</h2>
-                    <hr class="my-4">
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-5 text-center">
-                    <div class="service-box mt-5 mx-auto">
-                        <i class="fas fa-4x fa-file-alt text-primary mb-3 sr-icon-1"></i>
-                        <h3 class="mb-3">Мы рады привествовать вас! Welcome!</h3>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-5 text-center">
-                    <div class="service-box mt-5 mx-auto">
-                        <i class="fas fa-4x fa-file-alt text-primary mb-3 sr-icon-1"></i>
-                        <h3 class="mb-3">Зарегестрируйтесь. Register with us.</h3>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-5 text-center">
-                    <div class="service-box mt-5 mx-auto">
-                        <i class="fas fa-4x fa-file-alt text-primary mb-3 sr-icon-2"></i>
-                        <h3 class="mb-3">Начните обучение. Start training.</h3>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-5 text-center">
-                    <div class="service-box mt-5 mx-auto">
-                        <i class="fas fa-4x fa-file-alt text-primary mb-3 sr-icon-3"></i>
-                        <h3 class="mb-3">В случае отсутствия доступа пожалуйста, обратитесь к администратору сайта.
-                            <a>Помощь</a>
-                        In case of access problems, please, kindly address the administrator.
-                            <a>Help</a></h3>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-5 text-center">
-                    <div class="service-box mt-5 mx-auto">
-                        <i class="fas fa-4x fa-heart text-primary mb-3 sr-icon-4"></i>
-                        <h3 class="mb-3">Тест Будет доступен после прохождения обучения, по результатам которого будет выдан сертификат.
-                         Test will be available after training complation followed by the certificate.</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
 
 
