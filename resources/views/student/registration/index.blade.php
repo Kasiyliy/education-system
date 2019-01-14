@@ -39,7 +39,7 @@
 
                                 <div class="col-md-2 col-sm-12 col-xs-12">
                                     <br>
-                                    <button type="submit" class="btn btn-lg btn-primary"><i class="fa fa-check"></i> Поиск</button>
+                                    <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-check"></i> Поиск</button>
                                 </div>
                             </form>
                         </div>
