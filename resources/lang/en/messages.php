@@ -83,9 +83,8 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
      cooperation with our clients and partners.
 ',
 
-    'feedback' => 'Feedback',
-    'feedback_text1' => 'Please, contact',
-    'feedback_text2' => '',
+    'feedback_text1' => 'Please, contact us!',
+    'feedback_text2' => 'Your feedback is important!',
 
 
     'find' => 'Find',
@@ -104,6 +103,15 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
     'help_text3' => 'Start training.',
     'help_text4' => 'In case of access problems, please, kindly address the administrator.',
     'help_text5' => 'Test will be available after training complation followed by the certificate.',
+
+    'help_text6' => 'If you have some problem, Please contact to Administrator.',
+    'help_text7' => 'We`ll never share your email with anyone else.',
+
+    'name' => 'Name',
+    'surname' => 'Surname',
+    'email' => 'E-mail address',
+    'password' => 'Password',
+    'send' => 'Send',
 
 
 ]
