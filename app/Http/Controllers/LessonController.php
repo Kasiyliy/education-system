@@ -23,7 +23,13 @@ class LessonController extends Controller
      */
     public function index()
     {
-        $lessons = Lesson::all();
+        $lessons = [];
+        if(Auth::user()->group == User::ADMIN){
+            $lessons = Lesson::all();
+        }else if(Auth::user()->group == User::TEACHER){
+            $lessons = Lesson::join('subject', 'subject.id' , '=' ,'lessons.subject_id')
+            ->where('subject.user_id' , Auth::id())->get();
+        }
         return view('lesson.index', compact('lessons'));
     }
 

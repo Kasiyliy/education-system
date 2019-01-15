@@ -37,7 +37,7 @@
                       @foreach($students as $student)
                         <tr>
                           <td>{{$student->id}}</td>
-                          <td>{{$student->firstName.' '.$student->lastName.' '.$student->middleName}}</td>
+                          <td>{{$student->firstName.' '.$student->lastName.' '.$student->middleName}} <span class="badge">{{$student->unread}}</span></td>
                           <td>{{$student->subjectName}}</td>
                           <td>
                             <a href="{{URL::route('message.show2', ['studentId' => $student->id, 'subjectId' => $student->subjectId])}}" class="btn btn-primary">Перейти к чату</a>
@@ -76,6 +76,7 @@
           var handleDataTableButtons = function() {
               if ($("#datatable-buttons").length) {
                   $("#datatable-buttons").DataTable({
+                      "ordering": false,
                       responsive: true,
                       dom: "Bfrtip",
                       buttons: [

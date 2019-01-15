@@ -48,6 +48,10 @@
                                     <div class="card-body">
                                         <span class="text-muted small">Описание:</span>
                                         <p class="text-center">{{$sortedSubject->description}}</p>
+
+                                        @if($sortedSubject->unread)
+                                        <p class="text-danger">{{$sortedSubject->unread}} сообщений от учителя</p>
+                                        @endif
                                     </div>
                                     <div class="card-footer">
                                         <a class="float-right btn btn-info text-white btn-xs" href="{{URL::route('student.my.subjects.specific' , ['id'=>$sortedSubject->id])}}">Начать</a>

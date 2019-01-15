@@ -104,7 +104,11 @@
                             @if(Gate::check('Admin') || Gate::check('Teacher'))
 
 
-                                <li><a><i class="fa fa-envelope"></i>{{trans('messages.messages')}} <span
+                                <li><a><i class="fa fa-envelope"></i>{{trans('messages.messages')}}
+                                        @if(($count = App\Message::where('read', false)->where('acceptor_user_id', Auth::id())->count())> 0)
+                                            <span class="badge">{{$count}}</span>
+                                        @endif
+                                        <span
                                                 class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li>
