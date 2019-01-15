@@ -37,7 +37,7 @@
     <!-- Footer Text -->
 
     <!-- Copyright --><br/><br/><br/><br/>
-    <div class="footer-copyright text-center py-3 text-light">© 2018 Powered by: ZMA Incorp</a>
+    <div class="footer-copyright text-center py-3 text-light">© {{date('Y')}} Powered by: ZMA Incorp</a>
     </div>
     <!-- Copyright -->
 

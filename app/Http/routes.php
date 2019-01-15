@@ -20,6 +20,7 @@ Route::group(['middleware' => ['language',]], function () {
     Route::get('/help', array('as' => 'help', 'uses' => 'HomeController@help'));
     Route::post('/help/feedback', array('as' => 'help.feedback', 'uses' => 'HelpFeedbackController@helpfeedback'));
     Route::get('/lock', array('as' => 'lock', 'uses' => 'HomeController@lock'));
+    Route::get('/certificate', array('as' => 'certificate', 'uses' => 'CertificateController@index'));
 
     Route::post('/user/login', ['as' => 'user.login', 'uses' => 'UserController@login']);
     Route::get('/user/logout', ['as' => 'user.logout', 'uses' => 'UserController@logout']);
