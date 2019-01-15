@@ -77,44 +77,44 @@
         </div>
     </section>
 
-    <form id="help1" action = "{{URL::route('help.feedback')}}" method = "post" novalidate>
-        <div class="container">
-            <div class="text-center">
-                <label>{{trans('messages.help_text6')}}</label>
-            </div>
-            {{csrf_field()}}
-            <div class="row">
-                <div class="col">
-                    <label for="name">{{trans('messages.name')}}</label>
-                    <input type="text" name = "name" class="form-control" placeholder="{{trans('messages.name')}}">
-                    <span class="text-danger">{{ $errors->first('name') }}</span>
+        <form id="help1"   action = "{{URL::route('help.feedback')}}" method = "post" >
+            <div class="container">
+                <div class="text-center">
+                    <label>{{trans('messages.help_text6')}}</label>
                 </div>
-                <div class="col">
-                    <label for="surname">{{trans('messages.surname')}}</label>
-                    <input type="text" name = "surname" class="form-control" placeholder="{{trans('messages.surname')}}">
-                    <span class="text-danger">{{ $errors->first('surname') }}</span>
+                {{csrf_field()}}
+                <div class="row">
+                    <div class="col">
+                        <label for="name">{{trans('messages.name')}}</label>
+                        <input type="text" name = "name" class="form-control" placeholder="{{trans('messages.name')}}" required>
+                        <span class="text-danger">{{ $errors->first('name') }}</span>
+                    </div>
+                    <div class="col">
+                        <label for="surname">{{trans('messages.surname')}}</label>
+                        <input type="text" name = "surname" class="form-control" placeholder="{{trans('messages.surname')}}" required>
+                        <span class="text-danger">{{ $errors->first('surname') }}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="email">{{trans('messages.email')}}</label>
+                        <input type="email" name = "email" class="form-control" aria-describedby="emailHelp"
+                               placeholder="{{trans('messages.email')}}" required>
+                        <span class="text-danger">{{ $errors->first('email') }}</span>
+                        <small id="emailHelp" class="form-text">{{trans('messages.help_text7')}}</small>
+                        <label for="message">{{trans('messages.messages')}}</label>
+                        <textarea required rows="5" type="text" name = "message" class="form-control" placeholder="{{trans('messages.messages')}}"></textarea>
+                        <span class="text-danger">{{ $errors->first('message') }}</span>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="container">
+                        <button type="submit" class="btn btn-success col-md-12">{{trans('messages.send')}}</button>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <label for="email">{{trans('messages.email')}}</label>
-                    <input type="email" name = "email" class="form-control" aria-describedby="emailHelp"
-                           placeholder="{{trans('messages.email')}}">
-                    <span class="text-danger">{{ $errors->first('email') }}</span>
-                    <small id="emailHelp" class="form-text">{{trans('messages.help_text7')}}</small>
-                    <label for="message">{{trans('messages.messages')}}</label>
-                    <input type="text" name = "message" class="form-control" placeholder="{{trans('messages.messages')}}">
-                    <span class="text-danger">{{ $errors->first('message') }}</span>
-                </div>
-            </div>
-            <br/>
-            <div class="row">
-                <div class="container">
-                    <button type="submit" class="btn btn-success col-md-12">{{trans('messages.send')}}</button>
-                </div>
-            </div>
-        </div>
-    </form>
+        </form>
 
     </body>
     @include('layouts.guest_student_footer')
