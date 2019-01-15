@@ -33,7 +33,6 @@ class HomeController extends Controller
     {
         $user = auth()->user();
         if (!$user)
-
             return redirect()->to('/')->with('warning', 'Сессия завершена, пожалуйста войдите в система снова.');
         auth()->logout();
 
@@ -64,12 +63,22 @@ class HomeController extends Controller
             $institute = new Institute;
             $institute->name = "Название учереждения";
         }
-        return view('gueststudent.contacts' , compact('error', 'institute'));
+        return view('gueststudent.contacts', compact('error', 'institute'));
     }
 
     public function help()
     {
         return view('gueststudent.help');
+    }
+
+    public function feedback()
+    {
+        return view('gueststudent.feedback');
+    }
+
+    public function certificates(){
+        $certificates = 1;
+        return view('certificate.index')->with(compact('certificates'));
     }
 
 }

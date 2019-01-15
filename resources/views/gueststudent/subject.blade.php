@@ -125,20 +125,26 @@
                 </div>
 
                 @if($show)
-                    @if($quizResult = \App\QuizResult::where('quiz_id', $quiz->id)->where('student_id' , Auth::user()->student->id)->first())
-                        <div class="container-fluid">
-                            <div class="card my-4">
-                                <div class="card-body">
-                                    @if($quizResult->percentage > 75)
-                                    <a class="text-white m-0 text-center btn btn-success w-100">Получить сертификат!
-                                    </a>
-                                    @else
-                                        <a href="{{URL::route('help')}}#help1" class="text-white m-0 text-center btn btn-danger w-100">Свяжитесь с администратором! У вас недостаточный результат для получения сертификата...
-                                        </a>
-                                    @endif
+                    @if($quizes->count() > 0)
+                        @if($quizResult = \App\QuizResult::where('quiz_id', $quiz->id)->where('student_id' , Auth::user()->student->id)->first())
+                            <div class="container-fluid">
+                                <div class="card my-4">
+                                    <div class="card-body">
+                                        @if($quizResult->percentage > 75)
+                                            <a class="text-white m-0 text-center btn btn-success w-100">Получить
+                                                сертификат!
+                                            </a>
+                                        @else
+                                            <a href="{{URL::route('help')}}#help1"
+                                               class="text-white m-0 text-center btn btn-danger w-100">Свяжитесь с
+                                                администратором! У вас недостаточный результат для получения
+                                                сертификата...
+                                            </a>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                     @endif
                 @endif
 

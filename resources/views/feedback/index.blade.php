@@ -30,17 +30,35 @@
                                 <thead>
                                 <tr>
                                     <th>ФИО</th>
+                                    <th>E-mail</th>
+                                    <th>Сообщение</th>
                                     <th>Вход</th>
                                     <th>Время</th>
+                                    <th>Действия</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @if($teacherControls)
-                                    @foreach($teacherControls as $teacherControl)
+                                @if($feedbacks)
+                                    @foreach($feedbacks as $feedback)
                                         <tr>
-                                            <td>{{$teacherControl->user->firstname. " ".$teacherControl->user->lastname}}</td>
-                                            <td>{{$teacherControl->entered ? "Зашел" : "Вышел" }}</td>
-                                            <td>{{$teacherControl->created_at }}</td>
+                                            <td>{{$feedback->name. " ".$feedback->surname}}</td>
+                                            <td>{{$feedback->email}}</td>
+                                            <td>{{$feedback->message}}</td>
+                                            <td>{{$feedback->feedback ? "Отзыв" : "Помощь" }}</td>
+                                            <td>{{$feedback->created_at }}</td>
+                                            <td>
+                                                <a title='Update' class='btn btn-info btn-xs btnUpdate'
+                                                   id='{{$feedback->id}}'
+                                                   href='{{URL::route('feedback.answer',$feedback->id)}}'> <i
+                                                            class="glyphicon glyphicon-envelope icon-white"></i></a>
+                                                <form class="deleteForm" method="POST"
+                                                      action="{{URL::route('feedback.destroy',$feedback->id)}}">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <button type="submit" class='btn btn-danger btn-xs btnDelete'><i
+                                                                class="glyphicon glyphicon-trash icon-white"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @endif
@@ -57,7 +75,6 @@
         </div>
     </div>
 @endsection
-
 @section('extrascript')
     <!-- dataTables -->
     <script src="{{ URL::asset('assets/js/jquery.dataTables.min.js')}}"></script>

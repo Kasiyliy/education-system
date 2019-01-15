@@ -108,12 +108,19 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
     'help_text6' => 'If you have some problem, Please contact to Administrator.',
     'help_text7' => 'We`ll never share your email with anyone else.',
 
+
+    'feedback_text1' => 'Please, contact us!',
+    'feedback_text2' => 'Your feedback is important !.',
+    'feedback_text3' => 'Write a feedback.',
+
     'name' => 'Name',
     'surname' => 'Surname',
     'email' => 'E-mail address',
     'password' => 'Password',
     'send' => 'Send',
 
+    'certificate' => 'Certificate Registry',
+    'certificate_all' => 'Certificate',
 
 ]
 ?>

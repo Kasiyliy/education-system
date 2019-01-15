@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use App\User;
 use Closure;
 
-class Teacher
+class Student
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,9 @@ class Teacher
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user()->group != User::TEACHER && $request->user()->group != User::ADMIN) {
+        if ($request->user()->group != User::Student && $request->user()->group != User::Student) {
             $notification = array('title' => 'Доступ запрещен!', 'body' => 'У вас нет прав доступа!');
-            return redirect()->route('user.dashboard')->with('error', $notification);
+            return redirect()->route('/')->with('error', $notification);
         }
         return $next($request);
     }

@@ -17,8 +17,16 @@ Route::group(['middleware' => ['language',]], function () {
     Route::get('/setlangeng', array('as' => 'setlangeng', 'uses' => 'HomeController@setLangEng'));
     Route::get('/ourvalues', array('as' => 'ourvalues', 'uses' => 'HomeController@ourvalues'));
     Route::get('/contacts', array('as' => 'contacts', 'uses' => 'HomeController@contacts'));
+    Route::get('/feedback', array('as' => 'feedback', 'uses' => 'HomeController@feedback'));
+
+    Route::get('/feedback_admin', array('as' => 'feedback.admin', 'uses' => 'HelpFeedbackController@index'));
+    Route::post('/feedback_admin/{id}', array('as' => 'feedback.destroy', 'uses' => 'HelpFeedbackController@destroy'));
+    Route::get('/feedback_admin/{id}', array('as' => 'feedback.answer', 'uses' => 'HelpFeedbackController@answer'));
+    Route::post('/feedback/send_answer', array('as' => 'feedback.send_answer', 'uses' => 'HelpFeedbackController@sendanswer'));
+
     Route::get('/help', array('as' => 'help', 'uses' => 'HomeController@help'));
-    Route::post('/help/feedback', array('as' => 'help.feedback', 'uses' => 'HelpFeedbackController@helpfeedback'));
+    Route::post('/help_send', array('as' => 'help.feedback', 'uses' => 'HelpFeedbackController@helpfeedback'));
+    Route::post('/feedback_send', array('as' => 'help.feedback_send', 'uses' => 'HelpFeedbackController@feedbacksend'));
     Route::get('/lock', array('as' => 'lock', 'uses' => 'HomeController@lock'));
 
     Route::post('/user/login', ['as' => 'user.login', 'uses' => 'UserController@login']);
@@ -45,6 +53,7 @@ Route::group(['middleware' => ['language',]], function () {
 
     Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth']], function () {
 
+        Route::get('/certificate/index', ['as' => 'certificate.index', 'uses' => 'HomeController@certificates']);
         Route::get('/teacher/control', ['as' => 'teacher.control', 'uses' => 'TeacherControlController@index']);
 
     });
