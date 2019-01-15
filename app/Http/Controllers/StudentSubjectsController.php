@@ -31,11 +31,21 @@ class StudentSubjectsController extends Controller
             Session::flash('warning',  'У вас нету курсов!');
             return redirect()->back();
         }
-        $subjects = Subject::join('registrations','registrations.subject_id' , '=' ,'subject.id')
+        $subjects = Subject::select('subject.id','subject.name','subject.description','subject.department_id',DB::raw('count(messages.id) as unread'))
+            ->join('registrations','registrations.subject_id' , '=' ,'subject.id')
+            ->leftJoin('messages',function($join)
+            {
+                $join->on('messages.acceptor_user_id', '=', DB::raw(Auth::id()));
+                $join->on('messages.read', '=', DB::raw('false'));
+                $join->on('subject.user_id', '=', 'messages.sender_user_id');
+            })
             ->where('registrations.students_id' , $student->id)
             ->where('registrations.date_to_learn' , '<=', 'now()')
-            ->select('subject.*')
             ->where('registrations.deleted_at', '=', null)
+            ->groupBy('subject.id')
+            ->groupBy('subject.name')
+            ->groupBy('subject.description')
+            ->groupBy('subject.department_id')
             ->get();
 
         $sortedSubjectsArray = array();
@@ -282,6 +292,16 @@ class StudentSubjectsController extends Controller
             ->whereIn('sender_user_id', [$currentUser->id, $subject->user->id])
             ->where('subject_id', $subject->id)
             ->orderBy('created_at', 'desc')->get();
+
+        $unReadMessages = Message::where('acceptor_user_id' ,$currentUser->id)
+            ->where('sender_user_id' ,$subject->user->id)
+            ->where('subject_id' ,$subject->id )
+            ->where('read' ,false)
+            ->orderBy('created_at' ,'desc')->get();
+        foreach ($unReadMessages as $unRead){
+            $unRead->read = true;
+            $unRead->save();
+        }
 
         return view('gueststudent.chat', compact('subject', 'messages'));
     }

@@ -32,6 +32,7 @@
         #toast-container > div {
             opacity: 1;
         }
+
     </style>
     @yield('styles')
 
@@ -87,6 +88,10 @@
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="{{URL::route('user.dashboard')}}">{{trans('messages.adminpanel')}}</a>
                         </li>
+                    @elseif(Gate::check('Teacher'))
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="{{URL::route('user.dashboard')}}">{{trans('messages.teacherpanel')}}</a>
+                        </li>
                     @endif
 
                     <li class="nav-item">
@@ -125,6 +130,22 @@
 <script src="{{ URL::asset('assets/js/toastr.min.js')}}"></script>
 
 <script>
+    window.onscroll = function() {myFunction()};
+
+    // Get the navbar
+    var navbar = document.getElementById("mainNav");
+
+    var sticky = navbar.offsetTop;
+
+    // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function myFunction() {
+        if (window.pageYOffset >= sticky+5) {
+            navbar.classList.add("fixed-top")
+        } else {
+            navbar.classList.remove("fixed-top");
+        }
+    }
+    myFunction();
     toastr.options = {
         "closeButton": true,
         "debug": false,

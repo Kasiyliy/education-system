@@ -18,7 +18,8 @@ return [
     'teachercontrol' => 'Контроль учителей',
     'teachercontrolteacher' => 'Учителя',
 
-    'adminpanel' => 'Панель Администратора',
+    'adminpanel' => 'Панель администратора',
+    'teacherpanel' => 'Панель учителя',
 
     'main_menu' => 'Меню',
 

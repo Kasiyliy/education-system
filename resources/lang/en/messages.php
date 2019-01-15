@@ -18,6 +18,7 @@ return [
     'teachercontrolteacher' => 'Teacher',
 
     'adminpanel' => 'Admin panel',
+    'teacherpanel' => 'Teacher panel',
 
     'main_menu' => 'Menu',
 

@@ -7,6 +7,7 @@ use App\Student;
 use App\Subject;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
 use Validator;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
@@ -21,15 +22,32 @@ class MessageController extends Controller
     public function index()
     {
         $currentUser = Auth::user();
-        $students = Student::select('students.*', 'subject.name as subjectName', 'subject.id as subjectId')->distinct()
+        $students = Student::select('students.id','students.firstName' , 'students.lastName' , 'students.middleName',  'subject.name as subjectName', 'subject.id as subjectId', DB::raw('count(m.id) as unread'))
             ->join('registrations' , 'registrations.students_id' , '=' , 'students.id')
             ->join('subject', 'subject.id' , '=' ,'registrations.subject_id')
             ->join('users', 'users.id' , '=' ,'subject.user_id')
+            ->join('users as u2', 'u2.id' , '=' ,'students.user_id')
+            ->leftJoin('messages as m',  function($join)
+            {
+                $join->on('m.acceptor_user_id', '=', DB::raw(Auth::id()));
+                $join->on('m.read', '=', DB::raw('false'));
+                $join->on('u2.id', '=', 'm.sender_user_id');
+            })
             ->where('users.id',$currentUser->id )
             ->where('registrations.deleted_at',null)
             ->where('subject.deleted_at',null)
             ->where('users.deleted_at',null)
+            ->orderBy('unread' , 'desc')
+            ->groupBy('students.id')
+            ->groupBy('students.firstName')
+            ->groupBy('students.lastName')
+            ->groupBy('students.middleName')
+            ->groupBy('subjectName')
+            ->groupBy('subjectId')
             ->get();
+
+
+
         return view('chats.index' , compact('students'));
     }
 
@@ -112,6 +130,18 @@ class MessageController extends Controller
             ->whereIn('sender_user_id' ,[$currentUser->id , $student->user->id])
             ->where('subject_id' ,$subjectId )
             ->orderBy('created_at' ,'desc')->get();
+
+        $unReadMessages = Message::where('acceptor_user_id' ,$currentUser->id)
+            ->where('sender_user_id' ,$student->user->id)
+            ->where('subject_id' ,$subjectId )
+            ->where('read' ,false)
+            ->orderBy('created_at' ,'desc')->get();
+        foreach ($unReadMessages as $unRead){
+            $unRead->read = true;
+            $unRead->save();
+        }
+
+
         return view('chats.chat',compact('student','subject', 'messages'));
     }
 
