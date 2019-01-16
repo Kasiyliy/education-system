@@ -69,7 +69,7 @@
                                         <td>
                                             <a title='Update' class='btn btn-info btn-xs btnUpdate'
                                                id='{{$user->id}}'
-                                               href='{{URL::route('user.settings',$user->id)}}'> <i
+                                               href='{{URL::route('user.settings',['id' => $user->id])}}'> <i
                                                         class="glyphicon glyphicon-check icon-white"></i></a>
                                             <form class="deleteForm" method="POST"
                                                   action="{{URL::route('user.destroy',$user->id)}}">

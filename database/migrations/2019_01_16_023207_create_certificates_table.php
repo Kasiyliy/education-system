@@ -16,9 +16,18 @@ class CreateCertificatesTable extends Migration
 
             $table->increments('id');
 
-            $table->integer('Goden');
+            $table->integer('goden_do');
             $table->text('inspired_by');
             $table->text('on_behalf_and_for');
+
+            $table->text('text1');
+            $table->text('text2');
+            $table->text('text3');
+            $table->text('text4');
+            $table->text('text5');
+            $table->text('text6');
+            $table->text('text7');
+
             $table->integer('subject_id')->unsigned()->nullable();
             $table->foreign('subject_id')
                 ->references('id')

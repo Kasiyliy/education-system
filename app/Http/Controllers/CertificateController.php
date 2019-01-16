@@ -60,15 +60,37 @@ class CertificateController extends Controller
 
         $x = 120;
         $y = 5;
-        $pdf->SetXY($y, $x);
-        $pdf->Write(0, "TO VALUABLE PARTICIPANT");
-        $pdf->SetXY($y, $x += 7.5);
-        $pdf->Write(0, "  OF THE ONLINE SEMINAR ");
-        $pdf->SetXY($y, $x += 7.5);
-        $pdf->Write(0, "      SPRING - SUMMER    ");
-        $pdf->SetXY($y, $x += 7.5);
-        $pdf->Write(0, " SEASONAL PREPARATION  ");
-        $pdf->SetXY($y, $x += 7.5);
+        if($certificate_data->text1 != null) {
+            $pdf->SetXY($y, $x);
+            $pdf->Write(0, $certificate_data->text1);
+            $pdf->SetXY($y, $x += 7.5);
+        }
+        if($certificate_data->text2 != null) {
+            $pdf->Write(0, $certificate_data->text2);
+            $pdf->SetXY($y, $x += 7.5);
+        }
+        if($certificate_data->text3 != null) {
+            $pdf->Write(0, $certificate_data->text3);
+            $pdf->SetXY($y, $x += 7.5);
+        }
+        if($certificate_data->text4 != null) {
+            $pdf->Write(0, $certificate_data->text4);
+            $pdf->SetXY($y, $x += 7.5);
+        }
+        if($certificate_data->text5 != null) {
+            $pdf->SetXY($y, $x);
+            $pdf->Write(0, $certificate_data->text5);
+            $pdf->SetXY($y, $x += 7.5);
+        }
+        if($certificate_data->text6 != null) {
+            $pdf->Write(0, $certificate_data->text6);
+            $pdf->SetXY($y, $x += 7.5);
+        }
+        if($certificate_data->text7 != null) {
+            $pdf->Write(0, $certificate_data->text7);
+            $pdf->SetXY($y, $x += 7.5);
+        }
+
         $pdf->SetFont('Arial', 'B', '20');
         $pdf->SetTextColor(255, 255, 255);
         $pdf->Write(0, $NAME);
@@ -77,8 +99,8 @@ class CertificateController extends Controller
         $pdf->SetFont('Arial', 'I', '15');
         $pdf->Write(0, '            ' . date('F Y'));
 
-        $pdf->SetFont('Arial', 'B', '14');
-        $x = 105;
+        $pdf->SetFont('Arial', 'B', '10');
+        $x = 115;
         $y = 276;
         $pdf->SetTextColor(0, 0, 0);
         $pdf->SetXY($x, $y);

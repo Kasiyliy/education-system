@@ -20,7 +20,7 @@ class LessonPartController extends Controller
             'seconds' => 'required|numeric',
             'presentation' => 'required|file|mimes:pdf',
             'information' => 'required',
-            'audio' => 'file|mimes:mpga,wav',
+            'audio' => 'file|mimes:mp3',
             'video' => 'file|mimes:mp4,mov,avi,wmv',
             'lesson_id' => 'required|numeric',
         ];
