@@ -19,6 +19,7 @@ class LessonPartController extends Controller
         $rules = [
             'seconds' => 'required|numeric',
             'presentation' => 'required|file|mimes:pdf',
+            'information' => 'required',
             'audio' => 'file|mimes:mpga,wav',
             'video' => 'file|mimes:mp4,mov,avi,wmv',
             'lesson_id' => 'required|numeric',
@@ -46,6 +47,7 @@ class LessonPartController extends Controller
             }
             $lessonPart->lesson_id = $request->lesson_id;
             $lessonPart->seconds = $request->seconds;
+            $lessonPart->information = $request->information;
             $lessonPart->save();
             Session::flash('success', ['title' => 'Успешно!' , 'body' =>'Часть урока сохранена!']);
             return redirect()->back();
@@ -76,6 +78,7 @@ class LessonPartController extends Controller
         $rules = [
             'seconds' => 'required|numeric',
             'presentation' => 'required|file|mimes:pdf',
+            'information' => 'required',
             'audio' => 'file|mimes:mpga,wav',
             'video' => 'file|mimes:mp4,mov,avi,wmv',
         ];
@@ -120,6 +123,7 @@ class LessonPartController extends Controller
                 $lessonPart->video = $videoFullPath;
             }
             $lessonPart->seconds = $request->seconds;
+            $lessonPart->information = $request->information;
             $lessonPart->save();
             Session::flash('success', ['title' => 'Успешно!' , 'body' =>'Часть урока обновлена!']);
             return redirect()->route('lesson.show', ['id' => $lessonPart->lesson_id]);

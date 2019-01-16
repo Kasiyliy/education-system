@@ -13,29 +13,13 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-3">
-                <div class="card m-2 my-4">
-                    <div class="card-header text-center">
-                        Профиль
-                    </div>
-                    <ul class="list-group">
-                        <li class="list-group-item text-muted"><span class="fa fa-user"></span> {{Auth::user()->login}}
-                            <i class="fa fa-dashboard fa-1x"></i></li>
-                        <li class="list-group-item"><span class="fa fa-envelope"></span> {{Auth::user()->email}}</li>
-                        <li class="list-group-item"><span
-                                    class="fa fa-address-book"></span> {{Auth::user()->student->firstName.' '.Auth::user()->student->lastName }}
-                        </li>
-                        <li class="list-group-item"><span
-                                    class="fa fa-calendar-alt"></span> {{substr(Auth::user()->student->dob,0,10)}}</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-sm-9">
+            <div class="col-sm-12">
                 <div class="container-fluid">
                     <div class="card my-4">
                         <div class="card-header">
                             <span class="text-muted small">урок</span>
                             <p class="text-dark m-0 text-center">{{$lesson->name}}</p>
+                            <a class='btn btn-success' href='{{URL::route('student.my.subjects.specific', ['id' =>$lesson->subject->id])}}' >к курсу</a>
                         </div>
                         <div class="container-fluid">
                             <div class="text-center my-2">
@@ -65,16 +49,48 @@
 @section('scripts')
     <script src="{{ URL::asset('assets/js/validator.min.js')}}"></script>
     <script>
-        $(document).ready(function () {
-            var form = "";
-            var arrayIds = [];
 
-            var currentLessonPartCheckerId = {{$currentLessonPart->id}};
-            var currentLessonPartId = {{$lessonPart->id}};
-            var sliderLessonPartId = currentLessonPartId;
+
+        var form = "";
+        var arrayIds = [];
+
+        var currentLessonPartCheckerId = {{$currentLessonPart->id}};
+        var currentLessonPartId = {{$lessonPart->id}};
+        var sliderLessonPartId = currentLessonPartId;
+
+
+        function checkIfInLimit(){
+            if(arrayIds.indexOf(sliderLessonPartId) == 0){
+                $('#btnLeft').removeClass('btn-success');
+                $('#btnLeft').classList.add('btn-danger');
+            }else{
+                $('#btnLeft').classList.add('btn-success');
+                $('#btnLeft').removeClass('btn-danger');
+            }
+
+            if(arrayIds.indexOf(sliderLessonPartId) == arrayIds.length-1){
+                $('#btnRight').removeClass('btn-success');
+                $('#btnRight').addClass('btn-danger');
+            }else{
+                $('#btnRight').addClass('btn-success');
+                $('#btnRight').removeClass('btn-danger');
+            }
+        }
+
+        function clear(){
+            for(var i = 0 ; i < arrayIds.length; i++){
+                var oldSlide = document.getElementById('lessonPart' + arrayIds[i]);
+                if(oldSlide !=null){
+                    oldSlide.style.display = 'none';
+                }
+            }
+        }
+
+        $(document).ready(function () {
             @foreach($otherLessonParts as $oLp)
                 constructFrame(
                     "{{$oLp->id}}",
+                    "{{$oLp->information}}",
                     "{{$oLp->presentation}}",
                     "{{$oLp->video!= null ? $oLp->video : ""}}",
                     "{{$oLp->audio!= null ? $oLp->audio : ""}}",
@@ -84,6 +100,7 @@
 
             constructFrame(
                 "{{$lessonPart->id}}",
+                "{{$lessonPart->information}}",
                 "{{$lessonPart->presentation}}",
                 "{{$lessonPart->video!= null ? $lessonPart->video : ""}}",
                 "{{$lessonPart->audio!= null ? $lessonPart->audio : ""}}",
@@ -96,41 +113,12 @@
                     div.style.display = 'none';
                 }
             });
-            $('#btnRight').click(function () {
-                var lessonPartFrame = 'lessonPart';
-                var index = arrayIds.indexOf(sliderLessonPartId);
-                if(index!=arrayIds.length-1){
-                    var div = document.getElementById(lessonPartFrame + sliderLessonPartId);
-                    div.style.display = 'none';
-                    div = document.getElementById(lessonPartFrame + arrayIds[index+1]);
-                    div.style.display = 'block';
-                    sliderLessonPartId = arrayIds[index+1];
-                }
-            });
-
-            function checkIfInLimit(){
-                return;
-                if(arrayIds.indexOf(sliderLessonPartId) == 0){
-                    $('#btnLeft').classList.remove('btn-success');
-                    $('#btnLeft').classList.add('btn-danger');
-                }else{
-                    $('#btnLeft').classList.add('btn-success');
-                    $('#btnLeft').classList.remove('btn-danger');
-                }
-
-                if(arrayIds.indexOf(sliderLessonPartId) == arrayIds.length-1){
-                    $('#btnRight').classList.remove('btn-success');
-                    $('#btnRight').classList.add('btn-danger');
-                }else{
-                    $('#btnRight').classList.add('btn-success');
-                    $('#btnRight').classList.remove('btn-danger');
-                }
-            }
-
             $('#btnLeft').click(function () {
                 var lessonPartFrame = 'lessonPart';
                 var index = arrayIds.indexOf(sliderLessonPartId);
-                if(index!=0){
+
+                if(index>0){
+                    clear();
                     var div = document.getElementById(lessonPartFrame + sliderLessonPartId);
                     div.style.display = 'none';
                     div = document.getElementById(lessonPartFrame + arrayIds[index-1]);
@@ -139,10 +127,25 @@
                 }
             });
 
+            $('#btnRight').click(function () {
+                var lessonPartFrame = 'lessonPart';
+                var index = arrayIds.indexOf(sliderLessonPartId);
+
+                if(index<arrayIds.length-1){
+                    clear();
+                    var div = document.getElementById(lessonPartFrame + sliderLessonPartId);
+                    div.style.display = 'none';
+                    div = document.getElementById(lessonPartFrame + arrayIds[index+1]);
+                    div.style.display = 'block';
+                    sliderLessonPartId = arrayIds[index+1];
+                }
+            });
+
+
             var url = "/student/lesson_part/next_question/";
 
 
-            function constructFrame(id,presentation, video, audio, timeleft) {
+            function constructFrame(id,information, presentation, video, audio, timeleft) {
                 if(isNaN(timeleft)){
                     timeleft =  parseInt(timeleft);
                 }
@@ -151,30 +154,26 @@
                 if(oldSlide !=null){
                     oldSlide.style.display = 'none';
                 }
+
+                currentLessonPartId = id;
+                sliderLessonPartId = id;
                 var form1 ="";
                 form1 += "<div id='lessonPart"+id+"'>";
-                if (audio != null) {
-                    if (audio.length > 0) {
-                        form1 += "                            <div class=\"card my-1\">\n" +
-                            "                                <div class=\"card-body\">\n" +
-                            "                                    <audio controls autoplay='autoplay'  controlsList=\"nodownload\">\n" +
-                            "                                        <source src=\"/" + audio + "\">\n" +
-                            "                                        Your browser does not support the audio tag.\n" +
-                            "                                    </audio>\n" +
-                            "                                </div>\n" +
-                            "                            </div>";
-                    }
-                }
 
-                form1 += "<div class=\"embed-responsive embed-responsive-16by9\">\n" +
+                form1 += "<div class='row'>" +
+                    "<div class='col-sm-3'><p class='text-center m-2'>Информация:" + information+"</p></div>" +
+                    " <div class='col-sm-9'><div class=\"embed-responsive embed-responsive-16by9\">\n" +
                     "                                <iframe class=\"embed-responsive-item\" id=\"viewer\"\n" +
                     "                                        src=\"/assets/ViewerJS/#/" + presentation + "\" allowfullscreen\n" +
                     "                                        webkitallowfullscreen></iframe>\n" +
-                    "                            </div>\n";
+                    "                            </div></div>\n" +
+                    "</div>"
+                     ;
 
+                form1 += "<div class='row'>";
                 if (video != null) {
                     if (video.length > 0) {
-                        form1 += "                            <div class=\"card my-1\">\n" +
+                        form1 += "                            <div class=\" col-sm-6 card my-1\">\n" +
                             "                                <div class=\"card-body\">\n" +
                             "                                    <video controls  controlsList=\"nodownload\">\n" +
                             "                                        <source src=\"/" + video + "\">\n" +
@@ -184,7 +183,20 @@
                             "                            </div>\n";
                     }
                 }
-                form1 +="</div>";
+
+                if (audio != null) {
+                    if (audio.length > 0) {
+                        form1 += "                            <div class=\" col-sm-6 card my-1\">\n" +
+                            "                                <div class=\"card-body\">\n" +
+                            "                                    <audio controls autoplay='autoplay'  controlsList=\"nodownload\">\n" +
+                            "                                        <source src=\"/" + audio + "\">\n" +
+                            "                                        Your browser does not support the audio tag.\n" +
+                            "                                    </audio>\n" +
+                            "                                </div>\n" +
+                            "                            </div>";
+                    }
+                }
+                form1 +="</div></div>";
                 var downloadTimer = setInterval(function(){
                     timeleft--;
                     document.getElementById("countdowntimer").textContent = timeleft;
@@ -208,7 +220,8 @@
                             if (msg.error === false) {
                                 if(msg.message.length != 0){
                                     currentLessonPartCheckerId = msg.message.id;
-                                    constructFrame(msg.message.lesson_part.id,msg.message.lesson_part.presentation, msg.message.lesson_part.video, msg.message.lesson_part.audio,msg.message.lesson_part.seconds);
+                                    clear();
+                                    constructFrame(msg.message.lesson_part.id,msg.message.lesson_part.information,msg.message.lesson_part.presentation, msg.message.lesson_part.video, msg.message.lesson_part.audio,msg.message.lesson_part.seconds);
                                 }else{
                                     constructEnd();
                                 }
@@ -219,18 +232,22 @@
                         });
                     }
                 },1000);
-                form += form1;
+                form = form +form1 ;
                 $('#lessonPart').append(form1);
-                checkIfInLimit();
             }
 
 
 
             function constructEnd(){
-                var lastFrame  = "<div class='jumbotron'> " +
+                var lastFrame  = "<div class='jumbotron' id='lastFrame'> " +
                     "<p class='text-center'>Ваш урок окончен! Просим вас перейти по ссылке <a class='btn btn-success' href='{{URL::route('student.my.subjects.specific', ['id' =>$lesson->subject->id])}}' >к курсу</a></p>" +
                     "</div>";
+
                 $('#lessonPart').html(lastFrame);
+                $('#btnRight').removeClass('btn-success');
+                $('#btnRight').addClass('btn-danger');
+                $('#btnLeft').removeClass('btn-success');
+                $('#btnLeft').addClass('btn-danger');
             }
         });
     </script>
