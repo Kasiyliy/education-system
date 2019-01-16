@@ -31,13 +31,25 @@
                                 <tr>
                                     <th>IdNo сертификата</th>
                                     <th>ФИО</th>
+                                    <th>{{trans('messages.teacher')}}</th>
+                                    <th>{{trans('messages.courses')}}</th>
                                     <th>Дата получения</th>
                                     <th>Годен до</th>
                                 </tr>
                                 </thead>
-                                <tbody>
 
-                                </tbody>
+                                @foreach($certificates as $certificate)
+                                    <tbody>
+
+                                    <td>{{$certificate->IdNo}}</td>
+                                    <td>{{$certificate->studentfirstname}} {{$certificate->studentlastname}}</td>
+                                    <td>{{$certificate->teacherfirstname}} {{$certificate->teacherlastname}}</td>
+                                    <td>{{$certificate->subjectname}}</td>
+                                    <td>{{$certificate->created_at->format('F j, Y h:m A')}}</td>
+                                    <td>{{$certificate->goden_do}}</td>
+
+                                    </tbody>
+                                @endforeach
                             </table>
                         </div>
                     </div>

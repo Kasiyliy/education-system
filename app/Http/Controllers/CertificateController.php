@@ -22,7 +22,7 @@ class CertificateController extends Controller
     public function give($IdNo)
     {
 
-        $id = 'SN: SPC'.$IdNo;
+        $id = 'SN: '.$IdNo;
 
         $data = StudentCertificate::select('*')
             ->where('IdNo', '=', $IdNo)

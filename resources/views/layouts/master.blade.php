@@ -169,7 +169,7 @@
                                             class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li>
-                                        <a href="{{URL::route('certificate.show')}}">{{trans('messages.add_user')}}</a>
+                                        <a href="{{URL::route('certificate.show')}}">{{trans('messages.certificate_all')}}</a>
                                     </li>
                                     @can('Admin')
                                         <li><a href="{{URL::route('certificate.index')}}">

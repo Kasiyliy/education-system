@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Certificate;
 use Carbon\Carbon;
+use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Subject;
@@ -18,7 +19,7 @@ class GiveCertificateController extends Controller
     public function update($id)
     {
         $certificate = Certificate::select('*')
-            ->where('id', '=', $id)
+            ->where('subject_id', '=', $id)
             ->first();
         $subject_id = $id;
         if ($certificate == null) {
@@ -40,6 +41,7 @@ class GiveCertificateController extends Controller
             'on_behalf_and_for' => 'required|max:20'
         ];
         $validator = Validator::make($data, $rules);
+
         if ($validator->fails()) {
             return Redirect::back()->withInput()->withErrors($validator);
         } else {

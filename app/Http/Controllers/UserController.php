@@ -227,9 +227,11 @@ class UserController extends Controller
      *
      * @return Response
      */
-    public function settings()
+    public function settings($id)
     {
-        $user = auth()->user();
+        $user = User::settings('*')
+            ->where('id' , '=' , $id)
+            ->first();
         return view('user.settings', compact('user'));
     }
 
