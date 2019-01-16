@@ -29,21 +29,14 @@
                             <table id="datatable-buttons" class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
+                                    <th>IdNo сертификата</th>
                                     <th>ФИО</th>
-                                    <th>Вход</th>
-                                    <th>Время</th>
+                                    <th>Дата получения</th>
+                                    <th>Годен до</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @if($teacherControls)
-                                    @foreach($teacherControls as $teacherControl)
-                                        <tr>
-                                            <td>{{$teacherControl->user->firstname. " ".$teacherControl->user->lastname}}</td>
-                                            <td>{{$teacherControl->entered ? "Зашел" : "Вышел" }}</td>
-                                            <td>{{$teacherControl->created_at }}</td>
-                                        </tr>
-                                    @endforeach
-                                @endif
+
                                 </tbody>
                             </table>
                         </div>

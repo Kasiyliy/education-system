@@ -74,6 +74,17 @@
                                     </ul>
                                 </li>
                             @endif
+                            @can('Teacher')
+                                <li><a><i class="fa fa-users"></i>{{trans('messages.student')}}<span
+                                                class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li>
+                                            <a href="{{URL::route('teacher_student.index', ['id' => Auth::user()->id ])}}">
+                                                {{trans('messages.all_student')}}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endcan
                             @can('Admin')
                                 <li><a><i class="fa fa-users"></i>{{trans('messages.student')}}<span
                                                 class="fa fa-chevron-down"></span></a>
@@ -102,26 +113,32 @@
                                 </li>
                             @endcan
                             @if(Gate::check('Admin') || Gate::check('Teacher'))
-
-
-                                <li><a><i class="fa fa-envelope"></i>{{trans('messages.messages')}}
+                                <li>
+                                    <a>
+                                        <i class="fa fa-envelope"></i>{{trans('messages.messages')}}
                                         @if(($count = App\Message::where('read', false)->where('acceptor_user_id', Auth::id())->count())> 0)
                                             <span class="badge">{{$count}}</span>
                                         @endif
-                                        <span
-                                                class="fa fa-chevron-down"></span></a>
+                                        <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li>
                                             <a href="{{URL::route('message.index')}}">{{trans('messages.my_messages')}}</a>
                                         </li>
+                                        @can('Admin')
+                                            <li>
+                                                <a href="{{URL::route('feedback.admin')}}">{{trans('messages.feedback')}}</a>
+                                            </li>
+                                        @endcan
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> {{trans('messages.test')}} <span
                                                 class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="{{URL::route('quiz.create')}}">{{trans('messages.add_test')}}</a>
+                                        <li>
+                                            <a href="{{URL::route('quiz.create')}}">{{trans('messages.add_test')}}</a>
                                         </li>
-                                        <li><a href="{{URL::route('quiz.index')}}">{{trans('messages.list_test')}}</a>
+                                        <li>
+                                            <a href="{{URL::route('quiz.index')}}">{{trans('messages.list_test')}}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -148,13 +165,28 @@
                                 </li>
 
                             @endif
+                            <li><a><i class="fa fa-file-text"></i>{{trans('messages.certificate_all')}}<span
+                                            class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li>
+                                        <a href="{{URL::route('certificate.show')}}">{{trans('messages.add_user')}}</a>
+                                    </li>
+                                    @can('Admin')
+                                        <li><a href="{{URL::route('certificate.index')}}">
+                                                {{trans('messages.certificate')}}</a>
+                                        </li>
+                                    @endcan
+                                </ul>
+                            </li>
                             @can('Admin')
                                 <li><a><i class="fa fa-users"></i>{{trans('messages.user')}}<span
                                                 class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="{{URL::route('user.create')}}">{{trans('messages.add_user')}}</a>
+                                        <li>
+                                            <a href="{{URL::route('user.create')}}">{{trans('messages.add_user')}}</a>
                                         </li>
-                                        <li><a href="{{URL::route('user.index')}}">{{trans('messages.user_list')}}</a>
+                                        <li>
+                                            <a href="{{URL::route('user.index')}}">{{trans('messages.user_list')}}</a>
                                         </li>
 
                                         <li>
@@ -162,20 +194,12 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a href="{{URL::route('institute.index')}}"><i
-                                                class="fa fa-building"></i>{{trans('messages.about_us')}}</a>
-
+                                <li><a href="{{URL::route('institute.index')}}">
+                                        <i class="fa fa-building"></i>{{trans('messages.about_us')}}</a>
                                 </li>
                             @endcan
-
-
                         </ul>
                     </div>
-                    <div class="menu_section">
-                        <h3></h3>
-
-                    </div>
-
                 </div>
                 <!-- /sidebar menu -->
 
@@ -244,65 +268,67 @@
                 </nav>
             </div>
         </div>
+
         <!-- /top navigation -->
 
         <!--Child Page Content Start  -->
 
-    @yield('content')
+        @yield('content')
+    </div>
+</div>
+<!--Child Page Content End  -->
 
-    <!--Child Page Content End  -->
+@include('layouts.footer')
 
-    @include('layouts.footer')
+<!-- jQuery -->
+<script src="{{ URL::asset('assets/js/jquery.min.js')}}"></script>
+<!-- Bootstrap -->
+<script src="{{ URL::asset('assets/js/bootstrap.min.js')}}"></script>
+<!-- FastClick -->
+<script src="{{ URL::asset('assets/js/fastclick.js')}}"></script>
+<!-- NProgress -->
+<script src="{{ URL::asset('assets/js/nprogress.js')}}"></script>
 
-    <!-- jQuery -->
-        <script src="{{ URL::asset('assets/js/jquery.min.js')}}"></script>
-        <!-- Bootstrap -->
-        <script src="{{ URL::asset('assets/js/bootstrap.min.js')}}"></script>
-        <!-- FastClick -->
-        <script src="{{ URL::asset('assets/js/fastclick.js')}}"></script>
-        <!-- NProgress -->
-        <script src="{{ URL::asset('assets/js/nprogress.js')}}"></script>
+<script src="{{ URL::asset('assets/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
 
-        <script src="{{ URL::asset('assets/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
+<script src="{{ URL::asset('assets/js/pnotify.js')}}"></script>
+<script src="{{ URL::asset('assets/js/pnotify.buttons.js')}}"></script>
 
-        <script src="{{ URL::asset('assets/js/pnotify.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/pnotify.buttons.js')}}"></script>
+@yield("extrascript")
+<!-- Custom Theme Scripts -->
+<script src="{{ URL::asset('assets/js/custom.min.js')}}"></script>
+<script src="{{ URL::asset('assets/js/app.js')}}"></script>
 
-    @yield("extrascript")
-    <!-- Custom Theme Scripts -->
-        <script src="{{ URL::asset('assets/js/custom.min.js')}}"></script>
-        <script src="{{ URL::asset('assets/js/app.js')}}"></script>
+<!-- PNotify -->
+<script>
+    $(document).ready(function () {
+        @if(Session::has('success'))
+        new PNotify({
+            title: '{{Session::get("success")["title"]}}',
+            text: '{{Session::get("success")["body"]}}',
+            type: 'success',
+            styling: 'bootstrap3'
+        });
+        @endif
+        @if(Session::has('error'))
+        new PNotify({
+            title: '{{Session::get("error")["title"]}}',
+            text: '{{Session::get("error")["body"]}}',
+            type: 'error',
+            styling: 'bootstrap3'
+        });
+        @endif
+        @if(Session::has('warning'))
+        new PNotify({
+            title: '{{Session::get("warning")["title"]}}',
+            text: '{{Session::get("warning")["body"]}}',
+            styling: 'bootstrap3'
+        });
+        @endif
 
-        <!-- PNotify -->
-        <script>
-            $(document).ready(function () {
-                @if(Session::has('success'))
-                new PNotify({
-                    title: '{{Session::get("success")["title"]}}',
-                    text: '{{Session::get("success")["body"]}}',
-                    type: 'success',
-                    styling: 'bootstrap3'
-                });
-                @endif
-                @if(Session::has('error'))
-                new PNotify({
-                    title: '{{Session::get("error")["title"]}}',
-                    text: '{{Session::get("error")["body"]}}',
-                    type: 'error',
-                    styling: 'bootstrap3'
-                });
-                @endif
-                @if(Session::has('warning'))
-                new PNotify({
-                    title: '{{Session::get("warning")["title"]}}',
-                    text: '{{Session::get("warning")["body"]}}',
-                    styling: 'bootstrap3'
-                });
-                @endif
-
-            });
-        </script>
-        <!-- /PNotify -->
+    });
+</script>
+<!-- /PNotify -->
 
 </body>
 </html>

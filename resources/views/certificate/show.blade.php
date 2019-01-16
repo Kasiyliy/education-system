@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Под курсы')
+@section('title', 'Глобальный курс')
 @section('extrastyle')
     <link href="{{ URL::asset('assets/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{ URL::asset('assets/css/responsive.dataTables.min.css')}}" rel="stylesheet">
@@ -19,8 +19,8 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Уроки
-                                <small> Информация обо всех уроках.</small>
+                            <h2>Глобальный курс
+                                <small> Информация о глобальных курсах</small>
                             </h2>
 
                             <div class="clearfix"></div>
@@ -29,21 +29,24 @@
                             <table id="datatable-buttons" class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>ФИО</th>
-                                    <th>Вход</th>
-                                    <th>Время</th>
+                                    <th>Название</th>
+                                    <th>Краткое описание курса</th>
+                                    <th>Действия</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @if($teacherControls)
-                                    @foreach($teacherControls as $teacherControl)
-                                        <tr>
-                                            <td>{{$teacherControl->user->firstname. " ".$teacherControl->user->lastname}}</td>
-                                            <td>{{$teacherControl->entered ? "Зашел" : "Вышел" }}</td>
-                                            <td>{{$teacherControl->created_at }}</td>
-                                        </tr>
-                                    @endforeach
-                                @endif
+                                @foreach($subjects as $subject)
+                                    <tr>
+                                        <td>{{$subject->name}}</td>
+                                        <td>{{$subject->description}}</td>
+                                        <td>
+                                            <a title='Update' class='btn btn-info btn-xs btnUpdate'
+                                               id='{{$subject->id}}'
+                                               href='{{URL::route('certificate.update',$subject->id)}}'> <i
+                                                        class="glyphicon glyphicon-check icon-white"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -57,7 +60,6 @@
         </div>
     </div>
 @endsection
-
 @section('extrascript')
     <!-- dataTables -->
     <script src="{{ URL::asset('assets/js/jquery.dataTables.min.js')}}"></script>

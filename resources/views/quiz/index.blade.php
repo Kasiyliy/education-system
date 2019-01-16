@@ -67,7 +67,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="item form-group">
-                                                <input type="submit" value="Поиск" class="btn btn-lg btn-info center-margin">
+                                                <input type="submit" value="Поиск"
+                                                       class="btn btn-lg btn-info center-margin">
                                             </div>
                                         </div>
                                     </div>
@@ -93,10 +94,12 @@
                                                 <td>{{$quiz->name}}</td>
                                                 <td>{{$quiz->subjectName}}</td>
                                                 <td>
-                                                    <a  href="{{URL::route('quiz.questions', ['id' => $quiz->id])}}" class='btn btn-xs btn-success'
+                                                    <a href="{{URL::route('quiz.questions', ['id' => $quiz->id])}}"
+                                                       class='btn btn-xs btn-success'
                                                        data-id='{{$quiz->id}}'> Добавить вопрос</a>
-                                                    <a href="{{URL::route('quiz.questions.index', ['id' => $quiz->id])}}" class='btn btn-xs btn-success'
-                                                       >Вопросы</a>
+                                                    <a href="{{URL::route('quiz.questions.index', ['id' => $quiz->id])}}"
+                                                       class='btn btn-xs btn-success'
+                                                    >Вопросы</a>
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -60,16 +60,17 @@
                         <a class="dropdown-item"
                            href="{{URL::route('homestudent.subjects')}}">{{trans('messages.courses')}}</a>
                         @if(Auth::check())
-                        @if(Auth::user()->student)
-                            <a class="dropdown-item"
-                               href="{{URL::route('student.my.subjects')}}">{{trans('messages.mycourses')}}</a>
-                        @endif
+                            @if(Auth::user()->student)
+                                <a class="dropdown-item"
+                                   href="{{URL::route('student.my.subjects')}}">{{trans('messages.mycourses')}}</a>
+                            @endif
                         @endif
                     </div>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/guest#portfolio">{{trans('messages.feedback')}}</a>
+                    <a class="nav-link js-scroll-trigger"
+                       href="{{URL::route('feedback')}}">{{trans('messages.feedback')}}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger"
@@ -86,11 +87,13 @@
                 @if(Auth::check())
                     @if(Gate::check('Admin'))
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="{{URL::route('user.dashboard')}}">{{trans('messages.adminpanel')}}</a>
+                            <a class="nav-link js-scroll-trigger"
+                               href="{{URL::route('user.dashboard')}}">{{trans('messages.adminpanel')}}</a>
                         </li>
                     @elseif(Gate::check('Teacher'))
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="{{URL::route('user.dashboard')}}">{{trans('messages.teacherpanel')}}</a>
+                            <a class="nav-link js-scroll-trigger"
+                               href="{{URL::route('user.dashboard')}}">{{trans('messages.teacherpanel')}}</a>
                         </li>
                     @endif
 
@@ -130,7 +133,9 @@
 <script src="{{ URL::asset('assets/js/toastr.min.js')}}"></script>
 
 <script>
-    window.onscroll = function() {myFunction()};
+    window.onscroll = function () {
+        myFunction()
+    };
 
     // Get the navbar
     var navbar = document.getElementById("mainNav");
@@ -139,12 +144,13 @@
 
     // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
     function myFunction() {
-        if (window.pageYOffset >= sticky+5) {
+        if (window.pageYOffset >= sticky + 5) {
             navbar.classList.add("fixed-top")
         } else {
             navbar.classList.remove("fixed-top");
         }
     }
+
     myFunction();
     toastr.options = {
         "closeButton": true,

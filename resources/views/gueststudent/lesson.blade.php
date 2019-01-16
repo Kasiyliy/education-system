@@ -39,9 +39,9 @@
                         </div>
                         <div class="container-fluid">
                             <div class="text-center my-2">
-                                <a class="btn btn-success btn-sm my-2 float-left" id="btnLeft"><span class="fa fa-arrow-left text-white"></span></a>
+                                <a class="btn btn-success btn-sm my-2 float-left" id="btnLeft"><span class="fa fa-arrow-left text-white">Previous</span></a>
                                 <span id='countdowntimer' class='text-muted text-center'></span>
-                                <a class="btn btn-success btn-sm my-2 float-right" id="btnRight"><span class="fa fa-arrow-right text-white"></span></a>
+                                <a class="btn btn-success btn-sm my-2 float-right" id="btnRight"><span class = "text-white">Next</span><span class="fa fa-arrow-right text-white"></span></a>
                             </div>
                             <div class="col-sm-12">
                                 <div class="card-body" id="lessonPart">

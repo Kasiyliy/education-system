@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 use Session;
 use App\Institute;
+use App\Department;
 use App;
 
 class HomeController extends Controller
@@ -33,7 +35,6 @@ class HomeController extends Controller
     {
         $user = auth()->user();
         if (!$user)
-
             return redirect()->to('/')->with('warning', 'Сессия завершена, пожалуйста войдите в система снова.');
         auth()->logout();
 
@@ -64,12 +65,30 @@ class HomeController extends Controller
             $institute = new Institute;
             $institute->name = "Название учереждения";
         }
-        return view('gueststudent.contacts' , compact('error', 'institute'));
+        return view('gueststudent.contacts', compact('error', 'institute'));
     }
 
     public function help()
     {
         return view('gueststudent.help');
+    }
+
+    public function feedback()
+    {
+        return view('gueststudent.feedback');
+    }
+
+    public function certificates(){
+        $certificates = 1;
+        return view('certificate.index')->with(compact('certificates'));
+    }
+
+
+    public function subject_certificate(){
+        $subjects = App\Subject::select('*')
+        ->where('user_id' , '=' , Auth::user()->id)
+        ->get();
+        return view('certificate.show' , compact('subjects'));
     }
 
 }
