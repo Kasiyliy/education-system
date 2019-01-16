@@ -105,7 +105,6 @@ class LessonPartController extends Controller
             }
 
 
-            dd();
             $presentation = $request->presentation;
             $presentation_new_name = time() . $presentation->getClientOriginalName();
             $presentationFullPath = $presentation->move('assets/files/lessons/presentations', $presentation_new_name);
