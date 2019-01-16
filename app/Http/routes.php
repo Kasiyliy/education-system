@@ -28,7 +28,6 @@ Route::group(['middleware' => ['language',]], function () {
     Route::post('/help_send', array('as' => 'help.feedback', 'uses' => 'HelpFeedbackController@helpfeedback'));
     Route::post('/feedback_send', array('as' => 'help.feedback_send', 'uses' => 'HelpFeedbackController@feedbacksend'));
     Route::get('/lock', array('as' => 'lock', 'uses' => 'HomeController@lock'));
-    Route::get('/certificate', array('as' => 'certificate', 'uses' => 'CertificateController@index'));
 
     Route::post('/user/login', ['as' => 'user.login', 'uses' => 'UserController@login']);
     Route::get('/user/logout', ['as' => 'user.logout', 'uses' => 'UserController@logout']);
@@ -46,6 +45,8 @@ Route::group(['middleware' => ['language',]], function () {
         Route::get('/my/subjects/quiz/{id}', ['as' => 'student.my.subjects.specific.quiz', 'uses' => 'StudentSubjectsController@showQuiz']);
         Route::get('/lesson_part/next_question/{id}', ['as' => 'lesson_part.next_question', 'uses' => 'StudentSubjectsController@nextLessonPart']);
         Route::post('/quizresult', ['as' => 'quizresult.store', 'uses' => 'QuizResultController@store']);
+        Route::get('/certificate/{id}', array('as' => 'certificate', 'uses' => 'CertificateController@give'));
+        Route::post('/certificate/{student_id}/{course_id}', ['as' => 'certificate.put_info', 'uses' => 'GiveCertificateController@put_info']);
     });
 
     Route::group(['middleware' => ['auth']], function () {
@@ -76,6 +77,13 @@ Route::group(['middleware' => ['language',]], function () {
         Route::resource('subject', 'SubjectController');
         Route::get('subject/{deparment}/{semester}', ['as' => 'subject.DeptAndSem', 'uses' => 'SubjectController@subjetsByDptSem']);
 
+        Route::get('student/MyStudents/{id}', ['as' => 'teacher_student.index', 'uses' => 'StudentController@teacherStudentList']);
+
+        Route::get('/certificate/information', ['as' => 'certificate.information', 'uses' => 'GiveCertificateController@index']);
+
+        Route::get('/certificate/update/{id}', ['as' => 'certificate.update', 'uses' => 'GiveCertificateController@update']);
+        Route::post('/certificate/change/{certificate_id}/{subject_id}', ['as' => 'certificate.change', 'uses' => 'GiveCertificateController@change']);
+        Route::get('/certificate/show', ['as' => 'certificate.show', 'uses' => 'HomeController@subject_certificate']);
 
         Route::resource('student', 'StudentController');
         Route::post('student/department', ['as' => 'student.department', 'uses' => 'StudentController@index2']);

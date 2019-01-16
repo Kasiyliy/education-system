@@ -74,6 +74,17 @@
                                     </ul>
                                 </li>
                             @endif
+                            @can('Teacher')
+                                <li><a><i class="fa fa-users"></i>{{trans('messages.student')}}<span
+                                                class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li>
+                                            <a href="{{URL::route('teacher_student.index', ['id' => Auth::user()->id ])}}">
+                                                {{trans('messages.all_student')}}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endcan
                             @can('Admin')
                                 <li><a><i class="fa fa-users"></i>{{trans('messages.student')}}<span
                                                 class="fa fa-chevron-down"></span></a>
@@ -123,9 +134,11 @@
                                 <li><a><i class="fa fa-edit"></i> {{trans('messages.test')}} <span
                                                 class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="{{URL::route('quiz.create')}}">{{trans('messages.add_test')}}</a>
+                                        <li>
+                                            <a href="{{URL::route('quiz.create')}}">{{trans('messages.add_test')}}</a>
                                         </li>
-                                        <li><a href="{{URL::route('quiz.index')}}">{{trans('messages.list_test')}}</a>
+                                        <li>
+                                            <a href="{{URL::route('quiz.index')}}">{{trans('messages.list_test')}}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -152,22 +165,34 @@
                                 </li>
 
                             @endif
+                            <li><a><i class="fa fa-file-text"></i>{{trans('messages.certificate_all')}}<span
+                                            class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li>
+                                        <a href="{{URL::route('certificate.show')}}">{{trans('messages.add_user')}}</a>
+                                    </li>
+                                    @can('Admin')
+                                        <li><a href="{{URL::route('certificate.index')}}">
+                                                {{trans('messages.certificate')}}</a>
+                                        </li>
+                                    @endcan
+                                </ul>
+                            </li>
                             @can('Admin')
                                 <li><a><i class="fa fa-users"></i>{{trans('messages.user')}}<span
                                                 class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="{{URL::route('user.create')}}">{{trans('messages.add_user')}}</a>
+                                        <li>
+                                            <a href="{{URL::route('user.create')}}">{{trans('messages.add_user')}}</a>
                                         </li>
-                                        <li><a href="{{URL::route('user.index')}}">{{trans('messages.user_list')}}</a>
+                                        <li>
+                                            <a href="{{URL::route('user.index')}}">{{trans('messages.user_list')}}</a>
                                         </li>
 
                                         <li>
                                             <a href="{{URL::route('user.addstudent')}}">{{trans('messages.add_student_user')}}</a>
                                         </li>
                                     </ul>
-                                </li>
-                                <li><a href="{{URL::route('certificate.index')}}">
-                                        <i class="fa fa-file-text"></i>{{trans('messages.certificate')}}</a>
                                 </li>
                                 <li><a href="{{URL::route('institute.index')}}">
                                         <i class="fa fa-building"></i>{{trans('messages.about_us')}}</a>

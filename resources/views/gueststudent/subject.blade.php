@@ -20,8 +20,9 @@
                         </li>
                         <li class="list-group-item"><span
                                     class="fa fa-calendar-alt"></span> {{substr(Auth::user()->student->dob,0,10)}}</li>
-                        <li class="list-group-item"><span class="fa fa-envelope"></span><a class="btn-link"
-                                                                                           href="{{URL::route('student.my.subjects.chat', ['id' => $subject->id])}}">
+                        <li class="list-group-item"><span class="fa fa-envelope"></span>
+                            <a class="btn-link"
+                               href="{{URL::route('student.my.subjects.chat', ['id' => $subject->id])}}">
                                 Перейти в чат с учителем</a></li>
                     </ul>
                 </div>
@@ -124,6 +125,7 @@
                     </div>
                 </div>
 
+
                 @if($show)
                     @if($quizes->count() > 0)
                         @if($quizResult = \App\QuizResult::where('quiz_id', $quiz->id)->where('student_id' , Auth::user()->student->id)->first())
@@ -131,9 +133,13 @@
                                 <div class="card my-4">
                                     <div class="card-body">
                                         @if($quizResult->percentage > 75)
-                                            <a class="text-white m-0 text-center btn btn-success w-100">Получить
-                                                сертификат!
-                                            </a>
+                                            <form method="POST" action="{{URL::route('certificate.put_info',
+                                            ['student_id' => Auth::user()->id , 'course_id' => $subject->id])}}">
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <button class="text-white m-0 text-center btn btn-success w-100">
+                                                    Получить сертификат!
+                                                </button>
+                                            </form>
                                         @else
                                             <a href="{{URL::route('help')}}#help1"
                                                class="text-white m-0 text-center btn btn-danger w-100">Свяжитесь с
