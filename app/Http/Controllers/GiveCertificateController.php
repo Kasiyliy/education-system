@@ -124,7 +124,7 @@ class GiveCertificateController extends Controller
             $certificate->teacher_id = $teacher_id;
             $certificate->goden_do = $converteddate;
             $certificate->save();
-            return redirect()->route('certificate' ,compact($IdNo));
+            return redirect()->route('certificate' ,compact('IdNo'));
 
         } else {
             $certificate_id = $certificate->IdNo;

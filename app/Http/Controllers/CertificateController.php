@@ -62,32 +62,32 @@ class CertificateController extends Controller
         $y = 5;
         if($certificate_data->text1 != null) {
             $pdf->SetXY($y, $x);
-            $pdf->Write(0, $certificate_data->text1);
+            $pdf->Write(0, strtoupper($certificate_data->text1));
             $pdf->SetXY($y, $x += 7.5);
         }
         if($certificate_data->text2 != null) {
-            $pdf->Write(0, $certificate_data->text2);
+            $pdf->Write(0, strtoupper($certificate_data->text2));
             $pdf->SetXY($y, $x += 7.5);
         }
         if($certificate_data->text3 != null) {
-            $pdf->Write(0, $certificate_data->text3);
+            $pdf->Write(0, strtoupper($certificate_data->text3));
             $pdf->SetXY($y, $x += 7.5);
         }
         if($certificate_data->text4 != null) {
-            $pdf->Write(0, $certificate_data->text4);
+            $pdf->Write(0, strtoupper($certificate_data->text4));
             $pdf->SetXY($y, $x += 7.5);
         }
         if($certificate_data->text5 != null) {
             $pdf->SetXY($y, $x);
-            $pdf->Write(0, $certificate_data->text5);
+            $pdf->Write(0, strtoupper($certificate_data->text5));
             $pdf->SetXY($y, $x += 7.5);
         }
         if($certificate_data->text6 != null) {
-            $pdf->Write(0, $certificate_data->text6);
+            $pdf->Write(0, strtoupper($certificate_data->text6));
             $pdf->SetXY($y, $x += 7.5);
         }
         if($certificate_data->text7 != null) {
-            $pdf->Write(0, $certificate_data->text7);
+            $pdf->Write(0, strtoupper($certificate_data->text7));
             $pdf->SetXY($y, $x += 7.5);
         }
 
@@ -97,14 +97,14 @@ class CertificateController extends Controller
         $pdf->SetTextColor(255, 255, 0);
         $pdf->SetXY($y, $x += 7.5);
         $pdf->SetFont('Arial', 'I', '15');
-        $pdf->Write(0, '            ' . date('F Y'));
+        $pdf->Write(0, '            ' .  date('F Y',strtotime($certificate_data->created_at)));
 
         $pdf->SetFont('Arial', 'B', '10');
         $x = 115;
         $y = 276;
         $pdf->SetTextColor(0, 0, 0);
         $pdf->SetXY($x, $y);
-        $pdf->Write(0, "INSPIRED BY " . $IB);///print this output
+        $pdf->Write(0, "INSPIRED BY: " . $IB);///print this output
         $pdf->SetXY($x, $y + 6.5);
         $pdf->Write(0, "POWERED BY: " . $PB);///print this output
         $pdf->SetXY($x, $y + 13);
