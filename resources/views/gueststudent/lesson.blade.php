@@ -13,29 +13,13 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-3">
-                <div class="card m-2 my-4">
-                    <div class="card-header text-center">
-                        Профиль
-                    </div>
-                    <ul class="list-group">
-                        <li class="list-group-item text-muted"><span class="fa fa-user"></span> {{Auth::user()->login}}
-                            <i class="fa fa-dashboard fa-1x"></i></li>
-                        <li class="list-group-item"><span class="fa fa-envelope"></span> {{Auth::user()->email}}</li>
-                        <li class="list-group-item"><span
-                                    class="fa fa-address-book"></span> {{Auth::user()->student->firstName.' '.Auth::user()->student->lastName }}
-                        </li>
-                        <li class="list-group-item"><span
-                                    class="fa fa-calendar-alt"></span> {{substr(Auth::user()->student->dob,0,10)}}</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-sm-9">
+            <div class="col-sm-12">
                 <div class="container-fluid">
                     <div class="card my-4">
                         <div class="card-header">
                             <span class="text-muted small">урок</span>
                             <p class="text-dark m-0 text-center">{{$lesson->name}}</p>
+                            <a class='btn btn-success' href='{{URL::route('student.my.subjects.specific', ['id' =>$lesson->subject->id])}}' >к курсу</a>
                         </div>
                         <div class="container-fluid">
                             <div class="text-center my-2">
@@ -155,30 +139,21 @@
                 }
                 var form1 ="";
                 form1 += "<div id='lessonPart"+id+"'>";
-                if (audio != null) {
-                    if (audio.length > 0) {
-                        form1 += "                            <div class=\"card my-1\">\n" +
-                            "                                <div class=\"card-body\">\n" +
-                            "                                    <audio controls autoplay='autoplay'  controlsList=\"nodownload\">\n" +
-                            "                                        <source src=\"/" + audio + "\">\n" +
-                            "                                        Your browser does not support the audio tag.\n" +
-                            "                                    </audio>\n" +
-                            "                                </div>\n" +
-                            "                            </div>";
-                    }
-                }
 
-                form1 += "<div class=\"embed-responsive embed-responsive-16by9\">\n" +
+                form1 += "<div class='row'>" +
+                    "<div class='col-sm-3'><p class='text-center m-2'>Информация:" + information+"</p></div>" +
+                    " <div class='col-sm-9'><div class=\"embed-responsive embed-responsive-16by9\">\n" +
                     "                                <iframe class=\"embed-responsive-item\" id=\"viewer\"\n" +
                     "                                        src=\"/assets/ViewerJS/#/" + presentation + "\" allowfullscreen\n" +
                     "                                        webkitallowfullscreen></iframe>\n" +
-                    "                            </div>\n" +
-                    "                            <p class='text-center'>" + information+"</p>" ;
+                    "                            </div></div>\n" +
+                    "</div>"
+                     ;
 
-
+                form1 += "<div class='row'>";
                 if (video != null) {
                     if (video.length > 0) {
-                        form1 += "                            <div class=\"card my-1\">\n" +
+                        form1 += "                            <div class=\" col-sm-6 card my-1\">\n" +
                             "                                <div class=\"card-body\">\n" +
                             "                                    <video controls  controlsList=\"nodownload\">\n" +
                             "                                        <source src=\"/" + video + "\">\n" +
@@ -188,7 +163,20 @@
                             "                            </div>\n";
                     }
                 }
-                form1 +="</div>";
+
+                if (audio != null) {
+                    if (audio.length > 0) {
+                        form1 += "                            <div class=\" col-sm-6 card my-1\">\n" +
+                            "                                <div class=\"card-body\">\n" +
+                            "                                    <audio controls autoplay='autoplay'  controlsList=\"nodownload\">\n" +
+                            "                                        <source src=\"/" + audio + "\">\n" +
+                            "                                        Your browser does not support the audio tag.\n" +
+                            "                                    </audio>\n" +
+                            "                                </div>\n" +
+                            "                            </div>";
+                    }
+                }
+                form1 +="</div></div>";
                 var downloadTimer = setInterval(function(){
                     timeleft--;
                     document.getElementById("countdowntimer").textContent = timeleft;
@@ -225,7 +213,6 @@
                 },1000);
                 form += form1;
                 $('#lessonPart').append(form1);
-                checkIfInLimit();
             }
 
 
