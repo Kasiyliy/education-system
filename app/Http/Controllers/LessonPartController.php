@@ -18,7 +18,7 @@ class LessonPartController extends Controller
         $data = $request->all();
         $rules = [
             'seconds' => 'required|numeric',
-            'presentation' => 'required|file|mimes:jpg , pdf',
+            'presentation' => 'required|mimes:jpg,jpeg,png',
             'information' => 'required',
             'audio' => 'file|mimes:mpga,wav,mp3',
             'video' => 'file|mimes:mp4,mov,avi,wmv',
@@ -77,7 +77,7 @@ class LessonPartController extends Controller
         $data = $request->all();
         $rules = [
             'seconds' => 'required|numeric',
-            'presentation' => 'required|file|mimes: jpg , pdf',
+            'presentation' => 'required|mimes: jpg,jpeg,png',
             'information' => 'required',
             'audio' => 'file|mimes:mpga,wav,mp3',
             'video' => 'file|mimes:mp4,mov,avi,wmv',
