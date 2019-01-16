@@ -25,6 +25,93 @@
                             <form class="form-horizontal form-label-left" novalidate method="post"
                                   action="{{URL::route('certificate.change',['certificate_id' => $certificate->id  , 'subject_id' => $subject_id])}}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="text1">Годен <span
+                                                class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="text1" type="text" class="form-control col-md-7 col-xs-12"
+                                               name="text1"
+                                               value="{{$certificate->text1}}" placeholder="text1">
+                                        <span class="text-danger">{{ $errors->first('text1') }}</span>
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="text2">Годен <span
+                                                class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="text2" type="text" class="form-control col-md-7 col-xs-12"
+                                               name="text2"
+                                               value="{{$certificate->text2}}" placeholder="text2">
+                                        <span class="text-danger">{{ $errors->first('text2') }}</span>
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="text3">Годен <span
+                                                class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="text3" type="text" class="form-control col-md-7 col-xs-12"
+                                               name="text3"
+                                               value="{{$certificate->text3}}" placeholder="text3">
+                                        <span class="text-danger">{{ $errors->first('text3') }}</span>
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="text4">Годен <span
+                                                class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="text4" type="text" class="form-control col-md-7 col-xs-12"
+                                               name="text4"
+                                               value="{{$certificate->text4}}" placeholder="text4">
+                                        <span class="text-danger">{{ $errors->first('text4') }}</span>
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="text5">Годен <span
+                                                class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="text5" type="text" class="form-control col-md-7 col-xs-12"
+                                               name="text5"
+                                               value="{{$certificate->text5}}" placeholder="text5">
+                                        <span class="text-danger">{{ $errors->first('text5') }}</span>
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="text6">Годен <span
+                                                class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="text6" type="text" class="form-control col-md-7 col-xs-12"
+                                               name="text6"
+                                               value="{{$certificate->text6}}" placeholder="text6">
+                                        <span class="text-danger">{{ $errors->first('text6') }}</span>
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="text7">Годен <span
+                                                class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="text7" type="text" class="form-control col-md-7 col-xs-12"
+                                               name="text7"
+                                               value="{{$certificate->text7}}" placeholder="text7">
+                                        <span class="text-danger">{{ $errors->first('text7') }}</span>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
                                 <div class="item form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Годен <span
                                                 class="required">*</span>

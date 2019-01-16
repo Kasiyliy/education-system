@@ -163,9 +163,9 @@
                 form1 += "<div class='row'>" +
                     "<div class='col-sm-3'><p class='text-center m-2'>Информация:" + information+"</p></div>" +
                     " <div class='col-sm-9'><div class=\"embed-responsive embed-responsive-16by9\">\n" +
-                    "                                <iframe class=\"embed-responsive-item\" id=\"viewer\"\n" +
-                    "                                        src=\"/assets/ViewerJS/#/" + presentation + "\" allowfullscreen\n" +
-                    "                                        webkitallowfullscreen></iframe>\n" +
+                    "                                <img class=\"embed-responsive-item\" id=\"viewer\"\n" +
+                    "                                        src=\"/" + presentation + "\" allowfullscreen\n" +
+                    "                                        webkitallowfullscreen></img>\n" +
                     "                            </div></div>\n" +
                     "</div>"
                      ;

@@ -36,9 +36,18 @@ class GiveCertificateController extends Controller
     {
         $data = $request->all();
         $rules = [
-            'goden' => 'required|max:20',
+            'goden' => 'integer|max:20',
             'inspired_by' => 'required|max:20',
-            'on_behalf_and_for' => 'required|max:20'
+            'on_behalf_and_for' => 'required|max:20',
+
+            'text1' => 'string|max:37',
+            'text2' => 'string|max:37',
+            'text3' => 'string|max:37',
+            'text4' => 'string|max:37',
+            'text5' => 'string|max:37',
+            'text6' => 'string|max:37',
+            'text7' => 'string|max:37',
+
         ];
         $validator = Validator::make($data, $rules);
 
@@ -50,6 +59,13 @@ class GiveCertificateController extends Controller
                 $certificate->goden_do = $request->goden;
                 $certificate->inspired_by = $request->inspired_by;
                 $certificate->on_behalf_and_for = $request->on_behalf_and_for;
+                $certificate->text1 = $request->text1;
+                $certificate->text2 = $request->text2;
+                $certificate->text3 = $request->text3;
+                $certificate->text4 = $request->text4;
+                $certificate->text5 = $request->text5;
+                $certificate->text6 = $request->text6;
+                $certificate->text7 = $request->text7;
                 $certificate->subject_id = $subject_id;
                 $certificate->save();
                 $notification = array('title' => 'Изменение', 'body' => 'Сертификат успешно изменен');
@@ -59,6 +75,13 @@ class GiveCertificateController extends Controller
                 $certificate->goden_do = $request->goden;
                 $certificate->inspired_by = $request->inspired_by;
                 $certificate->on_behalf_and_for = $request->on_behalf_and_for;
+                $certificate->text1 = $request->text1;
+                $certificate->text2 = $request->text2;
+                $certificate->text3 = $request->text3;
+                $certificate->text4 = $request->text4;
+                $certificate->text5 = $request->text5;
+                $certificate->text6 = $request->text6;
+                $certificate->text7 = $request->text7;
                 $certificate->subject_id = $subject_id;
                 $certificate->save();
                 $notification = array('title' => 'Изменение', 'body' => 'Сертификат успешно изменен');
@@ -101,7 +124,7 @@ class GiveCertificateController extends Controller
             $certificate->teacher_id = $teacher_id;
             $certificate->goden_do = $converteddate;
             $certificate->save();
-            return redirect()->route('certificate' ,compact($IdNo));
+            return redirect()->route('certificate' ,compact('IdNo'));
 
         } else {
             $certificate_id = $certificate->IdNo;
