@@ -50,6 +50,10 @@
                                 <label for="seconds">Секунды</label>
                                 <input type="number" min="0" name="seconds" value="{{$lessonPart->seconds}}" id="seconds" required>
                             </div>
+                            <div class="form-group">
+                                <label for="information">Информация</label>
+                                <textarea class="form-control" name="information" id="information" required>{{$lessonPart->information}}</textarea>
+                            </div>
                             {!! Form::submit('Изменить', ['class' => 'btn btn-info']) !!}
                                 </form>
                         </div>

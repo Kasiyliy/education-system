@@ -75,6 +75,7 @@
             @foreach($otherLessonParts as $oLp)
                 constructFrame(
                     "{{$oLp->id}}",
+                    "{{$oLp->information}}",
                     "{{$oLp->presentation}}",
                     "{{$oLp->video!= null ? $oLp->video : ""}}",
                     "{{$oLp->audio!= null ? $oLp->audio : ""}}",
@@ -84,6 +85,7 @@
 
             constructFrame(
                 "{{$lessonPart->id}}",
+                "{{$lessonPart->information}}",
                 "{{$lessonPart->presentation}}",
                 "{{$lessonPart->video!= null ? $lessonPart->video : ""}}",
                 "{{$lessonPart->audio!= null ? $lessonPart->audio : ""}}",
@@ -142,7 +144,7 @@
             var url = "/student/lesson_part/next_question/";
 
 
-            function constructFrame(id,presentation, video, audio, timeleft) {
+            function constructFrame(id,information, presentation, video, audio, timeleft) {
                 if(isNaN(timeleft)){
                     timeleft =  parseInt(timeleft);
                 }
@@ -170,7 +172,9 @@
                     "                                <iframe class=\"embed-responsive-item\" id=\"viewer\"\n" +
                     "                                        src=\"/assets/ViewerJS/#/" + presentation + "\" allowfullscreen\n" +
                     "                                        webkitallowfullscreen></iframe>\n" +
-                    "                            </div>\n";
+                    "                            </div>\n" +
+                    "                            <p class='text-center'>" + information+"</p>" ;
+
 
                 if (video != null) {
                     if (video.length > 0) {
@@ -208,7 +212,7 @@
                             if (msg.error === false) {
                                 if(msg.message.length != 0){
                                     currentLessonPartCheckerId = msg.message.id;
-                                    constructFrame(msg.message.lesson_part.id,msg.message.lesson_part.presentation, msg.message.lesson_part.video, msg.message.lesson_part.audio,msg.message.lesson_part.seconds);
+                                    constructFrame(msg.message.lesson_part.id,msg.message.lesson_part.information,msg.message.lesson_part.presentation, msg.message.lesson_part.video, msg.message.lesson_part.audio,msg.message.lesson_part.seconds);
                                 }else{
                                     constructEnd();
                                 }

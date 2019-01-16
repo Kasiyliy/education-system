@@ -9,8 +9,8 @@ use setasign\Fpdi\Fpdi;
 
 class CertificateController extends Controller
 {
-    public function index(){
-        $id = abs( crc32( uniqid() ) );
+    public function index(Request $request){
+        $id = 'SPC'.abs(crc32( uniqid() ));
 
         $NAME = "Kasya Vasya Aykhan";
         $SN = $id;

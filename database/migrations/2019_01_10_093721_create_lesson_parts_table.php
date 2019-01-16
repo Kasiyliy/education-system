@@ -21,6 +21,7 @@ class CreateLessonPartsTable extends Migration
             $table->text('audio')->nullable();
             $table->text('video')->nullable();
             $table->text('presentation');
+            $table->text('information');
             $table->integer('seconds')->unsigned();
             $table->boolean('completed')->default(false);
             $table->timestamps();
