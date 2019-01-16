@@ -20,7 +20,7 @@ class LessonPartController extends Controller
             'seconds' => 'required|numeric',
             'presentation' => 'required|file|mimes:pdf',
             'information' => 'required',
-            'audio' => 'file|mimes:mpga,wav',
+            'audio' => 'file|mimes:mpga,wav,mp3',
             'video' => 'file|mimes:mp4,mov,avi,wmv',
             'lesson_id' => 'required|numeric',
         ];
@@ -79,7 +79,7 @@ class LessonPartController extends Controller
             'seconds' => 'required|numeric',
             'presentation' => 'required|file|mimes:pdf',
             'information' => 'required',
-            'audio' => 'file|mimes:mpga,wav',
+            'audio' => 'file|mimes:mpga,wav,mp3',
             'video' => 'file|mimes:mp4,mov,avi,wmv',
         ];
         $validator = Validator::make($data, $rules);

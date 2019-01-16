@@ -58,6 +58,10 @@
                                             <label for="seconds">Секунды</label>
                                             <input type="number" min="0" name="seconds" id="seconds" required>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="information">Информация</label>
+                                            <textarea class="form-control" name="information" id="information" required></textarea>
+                                        </div>
                                         {!! Form::submit('Добавить', ['class' => 'btn btn-info']) !!}
                                         {!! Form::close() !!}
                                     </div>
