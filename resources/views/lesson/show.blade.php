@@ -60,7 +60,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="information">Информация</label>
-                                            <textarea  class="form-control" name="information" id="information" required></textarea>
+                                            <textarea class="form-control" name="information" id="information" required></textarea>
                                         </div>
                                         {!! Form::submit('Добавить', ['class' => 'btn btn-info']) !!}
                                         {!! Form::close() !!}
