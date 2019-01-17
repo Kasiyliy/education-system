@@ -23,6 +23,7 @@
                         </div>
                         <div class="container-fluid">
                             <div class="text-center my-2">
+                                <p class="text-muted text-center" id="slideOutOf"></p>
                                 <a class="btn btn-success btn-sm my-2 float-left" id="btnLeft"><span class="fa fa-arrow-left text-white">Previous</span></a>
                                 <span id='countdowntimer' class='text-muted text-center'></span>
                                 <a class="btn btn-success btn-sm my-2 float-right" id="btnRight"><span class = "text-white">Next</span><span class="fa fa-arrow-right text-white"></span></a>
@@ -59,23 +60,6 @@
         var sliderLessonPartId = currentLessonPartId;
 
 
-        function checkIfInLimit(){
-            if(arrayIds.indexOf(sliderLessonPartId) == 0){
-                $('#btnLeft').removeClass('btn-success');
-                $('#btnLeft').classList.add('btn-danger');
-            }else{
-                $('#btnLeft').classList.add('btn-success');
-                $('#btnLeft').removeClass('btn-danger');
-            }
-
-            if(arrayIds.indexOf(sliderLessonPartId) == arrayIds.length-1){
-                $('#btnRight').removeClass('btn-success');
-                $('#btnRight').addClass('btn-danger');
-            }else{
-                $('#btnRight').addClass('btn-success');
-                $('#btnRight').removeClass('btn-danger');
-            }
-        }
 
         function clear(){
             for(var i = 0 ; i < arrayIds.length; i++){
@@ -94,7 +78,8 @@
                     "{{$oLp->presentation}}",
                     "{{$oLp->video!= null ? $oLp->video : ""}}",
                     "{{$oLp->audio!= null ? $oLp->audio : ""}}",
-                        {{$oLp->seconds}}
+                        {{$oLp->seconds}},
+                false
                 );
             @endforeach
 
@@ -116,8 +101,8 @@
             $('#btnLeft').click(function () {
                 var lessonPartFrame = 'lessonPart';
                 var index = arrayIds.indexOf(sliderLessonPartId);
-
                 if(index>0){
+
                     clear();
                     var div = document.getElementById(lessonPartFrame + sliderLessonPartId);
                     div.style.display = 'none';
@@ -125,6 +110,7 @@
                     div.style.display = 'block';
                     sliderLessonPartId = arrayIds[index-1];
                 }
+                checkSliderSituation();
             });
 
             $('#btnRight').click(function () {
@@ -139,13 +125,18 @@
                     div.style.display = 'block';
                     sliderLessonPartId = arrayIds[index+1];
                 }
+                checkSliderSituation();
             });
 
+
+            function checkSliderSituation(){
+                $('slideOutOf').html((arrayIds.indexOf(sliderLessonPartId) + 1) + '/'+ arrayIds.length );
+            }
 
             var url = "/student/lesson_part/next_question/";
 
 
-            function constructFrame(id,information, presentation, video, audio, timeleft) {
+            function constructFrame(id,information, presentation, video, audio, timeleft , checker = true) {
                 if(isNaN(timeleft)){
                     timeleft =  parseInt(timeleft);
                 }
@@ -160,20 +151,21 @@
                 var form1 ="";
                 form1 += "<div id='lessonPart"+id+"'>";
 
-                form1 += "<div class='row'>" +
-                    "<div class='col-sm-3'><p class='text-center m-2'>Информация:" + information+"</p></div>" +
-                    " <div class='col-sm-9'><div class=\"embed-responsive embed-responsive-16by9\">\n" +
-                    "                                <img class=\"embed-responsive-item\" id=\"viewer\"\n" +
-                    "                                        src=\"/" + presentation + "\" allowfullscreen\n" +
-                    "                                        webkitallowfullscreen></img>\n" +
-                    "                            </div></div>\n" +
-                    "</div>"
-                     ;
 
-                form1 += "<div class='row'>";
+                form1 += "<div class='row'>" +
+                    "<div class='col-sm-12'><p class='text-center m-2'>Информация:" + information+"</p></div>" ;
+
+                if(presentation != null){
+                    form1 +=   " <div class='col-sm-12'><div class=\"embed-responsive embed-responsive-16by9\">\n" +
+                        "                                <img class=\"embed-responsive-item\" id=\"viewer\"\n" +
+                        "                                        src=\"/" + presentation + "\" allowfullscreen\n" +
+                        "                                        webkitallowfullscreen></img>\n" +
+                        "                            </div></div>\n" ;
+                }
+
                 if (video != null) {
                     if (video.length > 0) {
-                        form1 += "                            <div class=\" col-sm-6 card my-1\">\n" +
+                        form1 += "                            <div class=\" col-sm-12 card my-1\">\n" +
                             "                                <div class=\"card-body\">\n" +
                             "                                    <video controls  controlsList=\"nodownload\">\n" +
                             "                                        <source src=\"/" + video + "\">\n" +
@@ -183,10 +175,11 @@
                             "                            </div>\n";
                     }
                 }
+                form1 +="</div>";
 
                 if (audio != null) {
                     if (audio.length > 0) {
-                        form1 += "                            <div class=\" col-sm-6 card my-1\">\n" +
+                        form1 += "                            <div class=\" col-sm-12 card my-1\">\n" +
                             "                                <div class=\"card-body\">\n" +
                             "                                    <audio controls autoplay='autoplay'  controlsList=\"nodownload\">\n" +
                             "                                        <source src=\"/" + audio + "\">\n" +
@@ -196,44 +189,49 @@
                             "                            </div>";
                     }
                 }
-                form1 +="</div></div>";
-                var downloadTimer = setInterval(function(){
-                    timeleft--;
-                    document.getElementById("countdowntimer").textContent = timeleft;
-                    if(timeleft <= 30){
-                        document.getElementById("countdowntimer").className = 'text-danger text-center'
-                    }
-                    if(timeleft==30){
-                        toastr.warning("Осталось меньше 30 секунд!");
-                    }
-                    if(timeleft==15){
-                        toastr.warning("Осталось меньше 15 секунд!");
-                    }
-                    if(timeleft <= 0)
-                    {
-                        clearInterval(downloadTimer);
-                        $.ajax({
-                            method: "GET",
-                            url: url + currentLessonPartCheckerId,
-                            dataType: "json",
-                        }).done(function (msg) {
-                            if (msg.error === false) {
-                                if(msg.message.length != 0){
-                                    currentLessonPartCheckerId = msg.message.id;
-                                    clear();
-                                    constructFrame(msg.message.lesson_part.id,msg.message.lesson_part.information,msg.message.lesson_part.presentation, msg.message.lesson_part.video, msg.message.lesson_part.audio,msg.message.lesson_part.seconds);
-                                }else{
-                                    constructEnd();
-                                }
-                            } else {
-                                toastr.error("Возникла ошибка!");
+                form1 +="</div>";
+                if(checker){
+                    var downloadTimer = setInterval(function(){
+                        if(sliderLessonPartId == currentLessonPartId){
+                            timeleft--;
+                        }
+                        document.getElementById("countdowntimer").textContent = timeleft;
+                        if(timeleft <= 30){
+                            document.getElementById("countdowntimer").className = 'text-danger text-center'
+                        }
+                        if(timeleft==30){
+                            toastr.warning("Осталось меньше 30 секунд!");
+                        }
+                        if(timeleft==15){
+                            toastr.warning("Осталось меньше 15 секунд!");
+                        }
+                        if(timeleft <= 0)
+                        {
+                            clearInterval(downloadTimer);
+                            $.ajax({
+                                method: "GET",
+                                url: url + currentLessonPartCheckerId,
+                                dataType: "json",
+                            }).done(function (msg) {
+                                if (msg.error === false) {
+                                    if(msg.message.length != 0){
+                                        currentLessonPartCheckerId = msg.message.id;
+                                        clear();
+                                        constructFrame(msg.message.lesson_part.id,msg.message.lesson_part.information,msg.message.lesson_part.presentation, msg.message.lesson_part.video, msg.message.lesson_part.audio,msg.message.lesson_part.seconds);
+                                    }else{
+                                        constructEnd();
+                                    }
+                                } else {
+                                    toastr.error("Возникла ошибка!");
 
-                            }
-                        });
-                    }
-                },1000);
+                                }
+                            });
+                        }
+                    },1000);
+                }
                 form = form +form1 ;
                 $('#lessonPart').append(form1);
+                checkSliderSituation();
             }
 
 

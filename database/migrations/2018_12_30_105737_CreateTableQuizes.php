@@ -15,7 +15,7 @@ class CreateTableQuizes extends Migration
         Schema::create('quizes', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->string('name', 255);
+            $table->string('name', 191);
             $table->text('description');
             $table->integer('subject_id')->unsigned();
             $table->foreign('subject_id')
