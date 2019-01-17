@@ -19,8 +19,8 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Уроки
-                                <small> Информация обо всех уроках.</small>
+                            <h2>{{trans('messages.sertificate_text10')}}
+                                <small>{{trans('messages.sertificate_text11')}}</small>
                             </h2>
 
                             <div class="clearfix"></div>
@@ -29,12 +29,12 @@
                             <table id="datatable-buttons" class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>IdNo сертификата</th>
-                                    <th>ФИО</th>
-                                    <th>{{trans('messages.teacher')}}</th>
-                                    <th>{{trans('messages.courses')}}</th>
-                                    <th>Дата получения</th>
-                                    <th>Годен до</th>
+                                    <th>{{trans('messages.sertificate_text12')}}</th>
+                                    <th>{{trans('messages.sertificate_text13')}}</th>
+                                    <th>{{trans('messages.sertificate_text14')}}</th>
+                                    <th>{{trans('messages.sertificate_text15')}}</th>
+                                    <th>{{trans('messages.sertificate_text16')}}</th>
+                                    <th>{{trans('messages.sertificate_text17')}}</th>
                                 </tr>
                                 </thead>
 

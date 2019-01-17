@@ -41,8 +41,8 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Вопрос</th>
-                                    <th>Действие</th>
+                                    <th>{{trans('messages.test_text11')}}</th>
+                                    <th>{{trans('messages.button_action')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,11 +52,11 @@
                                             <td>{{$question->id}}</td>
                                             <td>{{$question->value}}</td>
                                             <td>
-                                                <a href="{{URL::route('question.edit',['id' =>$question->id])}}" class="btn btn-success btn-xs">Изменить</a>
+                                                <a href="{{URL::route('question.edit',['id' =>$question->id])}}" class="btn btn-success btn-xs">{{trans('messages.button_change')}}</a>
                                                 <form style="display: inline;" class="form-inline" method="post" action="{{URL::route('question.destroy',['id' =>$question->id])}}">
                                                     {!! Form::token() !!}
                                                     <input type="hidden" name="_method" value="DELETE">
-                                                    <button type="submit" class="btn btn-danger btn-xs">Удалить</button>
+                                                    <button type="submit" class="btn btn-danger btn-xs">{{trans('messages.button_delete')}}</button>
                                                 </form>
                                             </td>
                                         </tr>

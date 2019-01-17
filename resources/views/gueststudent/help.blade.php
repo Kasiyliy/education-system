@@ -30,7 +30,7 @@
         <div class="container">
             <div class="row mx-a text-justify ">
                 <div class="col-lg-6 text-center" style="padding-top: 70px;border-right: 3px solid black">
-                    <i class="fas fa-4x fa-file-alt text-primary mb-3 sr-icon-1"></i>
+                    <i class="far fa-4x fa-smile-beam text-primary mb-3 sr-icon-1"></i>
                     <h5 class="mb-3">{{trans('messages.help_text1')}}</h5>
                 </div>
                 <div class="col-lg-6 text-center">
@@ -42,14 +42,14 @@
                 <div class="col-lg-6 text-center" style="padding-top: 70px;border-right: 3px solid black">
                 </div>
                 <div class="col-lg-6 text-center">
-                    <i class="fas fa-4x fa-file-alt text-primary mb-3 sr-icon-1"></i>
+                    <i class="fas fa-4x fa-user-edit text-primary mb-3 sr-icon-1"></i>
                     <h5 class="mb-3">{{trans('messages.help_text2')}}</h5>
                 </div>
             </div>
 
             <div class="row mx-a text-justify">
                 <div class="col-lg-6 text-center" style="padding-top: 70px;border-right: 3px solid black">
-                    <i class="fas fa-4x fa-file-alt text-primary mb-3 sr-icon-2"></i>
+                    <i class="fas fa-4x fa-book-reader text-primary mb-3 sr-icon-2"></i>
                     <h5 class="mb-3">{{trans('messages.help_text3')}}</h5>
                 </div>
                 <div class="col-lg-6 text-center">
@@ -60,15 +60,14 @@
                 <div class="col-lg-6 text-center" style="padding-top: 70px;border-right: 3px solid black">
                 </div>
                 <div class="col-lg-6 text-center">
-                    <i class="fas fa-4x fa-file-alt text-primary mb-3 sr-icon-3"></i>
-                    <h5 class="mb-3">{{trans('messages.help_text4')}}
-                        <a>{{trans('messages.help')}}</a></h5>
+                    <i class="far fa-4x fa-question-circle text-primary mb-3 sr-icon-3"></i>
+                    <h5 class="mb-3">{{trans('messages.help_text4')}}</h5>
                 </div>
             </div>
 
             <div class="row mx-a text-justify">
                 <div class="col-lg-6 text-center" style="padding-top: 70px;border-right: 3px solid black">
-                    <i class="fas fa-4x fa-heart text-primary mb-3 sr-icon-4"></i>
+                    <i class="fas fa-4x fa-file-alt text-primary mb-3 sr-icon-4"></i>
                     <h5 class="mb-3">{{trans('messages.help_text5')}}</h5>
                 </div>
                 <div class="col-lg-6 text-center">
@@ -157,6 +156,9 @@
         -webkit-transition: 1s;
         transition: 1s;
         border: none;
+        position: fixed;
+        bottom: 30px;
+        right:30px;
     }
 
     header.masthead2 {

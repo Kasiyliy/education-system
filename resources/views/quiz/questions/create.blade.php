@@ -20,7 +20,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Тесты</h2>
+                            <h2>{{trans('messages.test_text1')}}</h2>
 
                             <div class="clearfix"></div>
                         </div>
@@ -36,24 +36,23 @@
                                     </ul>
                                 </div>
                             @endif
-                            <h2>Курс {{$quiz->subject->name}}</h2>
+                            <h2>{{trans('messages.test_text4')}} {{$quiz->subject->name}}</h2>
                             <form method="post" id="myForm"
                                   action="{{URL::route('quiz.question.create',['quizID' => $quiz->id])}}"
                                   class="form-horizontal">
                                 <div class="row mx-auto" id="questions">
                                     {{csrf_field()}}
                                     <div class="form-group">
-                                        <label for="question">Вопрос</label>
+                                        <label for="question">{{trans('messages.test_text11')}}</label>
                                         <textarea required rows="5" id="question" name="value"
                                                   class="form-control"></textarea>
                                     </div>
                                     <div id="variants">
 
                                     </div>
-                                    <a class="btn btn-default" id="addVariant">Добавить вариант</a>
+                                    <a class="btn btn-default" id="addVariant">{{trans('messages.test_text14')}}</a>
                                 </div>
-                                <button type="submit" id="addQuestion" class="btn btn-primary pull-right">Сохранить
-                                    вопрос
+                                <button type="submit" id="addQuestion" class="btn btn-primary pull-right">{{trans('messages.button_save')}}
                                 </button>
                             </form>
                         </div>
@@ -106,11 +105,11 @@
                 checkBoxInput.type = 'checkbox';
                 checkBoxInput.name = 'variantCBs[' + inputCounter + ']';
                 checkBoxLbl.append(checkBoxInput);
-                checkBoxLbl.innerHTML += 'Правильно';
+                checkBoxLbl.innerHTML += '{{trans('messages.test_text12')}}';
 
                 var textInput = document.createElement('input');
                 textInput.type = 'text';
-                textInput.placeholder = 'Вариант ответа';
+                textInput.placeholder = '{{trans('messages.test_text13')}}';
                 textInput.name = 'variants[' + inputCounter + ']';
                 textInput.className = 'form-control';
                 textInput.required = true;

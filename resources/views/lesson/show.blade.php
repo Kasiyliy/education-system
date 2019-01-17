@@ -13,8 +13,8 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Урок
-                                <small> посмотреть</small>
+                            <h2>{{trans('messages.presentation_text17')}}
+                                <small> {{trans('messages.presentation_text18')}}</small>
                             </h2>
                             <div class="clearfix"></div>
                         </div>
@@ -32,8 +32,7 @@
 
                                 <div class="x_panel">
                                     <div class="x_title">
-                                        <h2>Часть урока
-                                            <small> добавить</small>
+                                        <h2>{{trans('messages.presentation_text6')}}
                                         </h2>
                                         <div class="clearfix"></div>
                                     </div>
@@ -42,28 +41,27 @@
                                         'enctype' => 'multipart/form-data', 'class' => 'form-horizontal']) !!}
                                         {{csrf_field()}}
                                         <div class="form-group">
-                                            <label for="presentation">Презентация (1-стр pdf)</label>
+                                            <label for="presentation">{{trans('messages.presentation_text7')}}</label>
                                             <input type="file" class="form-control" id="presentation" name="presentation" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="audio">Аудио</label>
+                                            <label for="audio">{{trans('messages.presentation_text8')}}</label>
                                             <input type="file" class="form-control" id="audio" name="audio">
                                         </div>
                                         <div class="form-group">
-                                            <label for="video">Видео</label>
+                                            <label for="video">{{trans('messages.presentation_text9')}}</label>
                                             <input type="file" class="form-control" id="video" name="video">
                                         </div>
                                         <input type="hidden" name="lesson_id" value="{{$lesson->id}}">
                                         <div class="form-group">
-                                            <label for="seconds">Секунды</label>
+                                            <label for="seconds">{{trans('messages.presentation_text10')}}</label>
                                             <input type="number" min="0" name="seconds" id="seconds" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="information">Информация</label>
+                                            <label for="information">{{trans('messages.presentation_text11')}}</label>
                                             <textarea class="form-control" name="information" id="information" required></textarea>
                                         </div>
-                                        {!! Form::submit('Добавить', ['class' => 'btn btn-info']) !!}
-                                        {!! Form::close() !!}
+                                        <button type = "submit" class = "btn btn-success">{{trans('messages.button_create')}}</button>
                                     </div>
                                 </div>
 
@@ -93,7 +91,7 @@
                                                         @if($lessonPart->audio)
                                                             <div class="card my-1">
                                                                 <div class="card-body  my-2">
-                                                                    <p>Аудио: <span class="glyphicon glyphicon-music "></span></p>
+                                                                    <p>{{trans('messages.presentation_text8')}}: <span class="glyphicon glyphicon-music "></span></p>
                                                                     <audio controls>
                                                                         <source src="/{{$lessonPart->audio}}">
                                                                         Your browser does not support the audio tag.
@@ -104,7 +102,7 @@
                                                         @if($lessonPart->video)
                                                             <div class="card m-2">
                                                                 <div class="card-body">
-                                                                    <p>Видео: <span class="glyphicon glyphicon-facetime-video "></span></p>
+                                                                    <p>{{trans('messages.presentation_text9')}}: <span class="glyphicon glyphicon-facetime-video "></span></p>
                                                                     <video controls style="width: 100%;">
                                                                         <source src="/{{$lessonPart->video}}">
                                                                         Your browser does not support the video tag.
@@ -119,10 +117,10 @@
                                                             <br>
                                                             <div class="row">
                                                                 <div class="col-sm-6">
-                                                                    <a type="submit" class="btn btn-warning form-control" href="{{URL::route('lesson-part.edit', ['id' => $lessonPart->id])}}" >Изменить</a>
+                                                                    <a type="submit" class="btn btn-warning form-control" href="{{URL::route('lesson-part.edit', ['id' => $lessonPart->id])}}" >{{trans('messages.button_change')}}</a>
                                                                 </div>
                                                                 <div class="col-sm-6">
-                                                                    <button type="submit" class="btn btn-danger form-control" >Удалить</button>
+                                                                    <button type="submit" class="btn btn-danger form-control" >{{trans('messages.button_delete')}}</button>
                                                                 </div>
                                                             </div>
                                                         </form>

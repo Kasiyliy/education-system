@@ -17,7 +17,7 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>Добавление студента<small class="text-danger"> * поля не заполнены.
+						<h2>{{trans('messages.student_text1')}}<small class="text-danger"> * {{trans('messages.student_text11')}}.
 						</small></h2>
 						<div class="clearfix"></div>
 					</div>
@@ -25,17 +25,17 @@
 
 						<form id="myForm" class="form-horizontal form-label-left" novalidate method="post" action="{{URL::route('student.store')}}" enctype="multipart/form-data">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-									<h3 class="text-info">Информация о студенте</h3>
+									<h3 class="text-info">{{trans('messages.student_text2')}}</h3>
 									<div class="row">
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<label for="firstName">Имя: <span class="text-danger">*</span></label>
+											<label for="firstName">{{trans('messages.student_text3')}}: <span class="text-danger">*</span></label>
 											<input type="text" id="firstName" class="form-control has-feedback-left" name="firstName" required />
 											<i class="fa fa-user form-control-feedback left" aria-hidden="true"></i>
 											<span id="msg_firstName" class="text-danger" >{{ $errors->first('firstName') }}</span>
 										</div>
 
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<label for="middleName">Отчество :</label>
+											<label for="middleName">{{trans('messages.student_text5')}}:</label>
 											<input type="text" id="middleName" class="form-control has-feedback-left" name="middleName" data-parsley-trigger="change" required />
 											<i class="fa fa-user form-control-feedback left" aria-hidden="true"></i>
 											<span id="msg_middleName" class="text-danger" >{{ $errors->first('middleName') }}</span>
@@ -44,7 +44,7 @@
 									</div>
 									<div class="row">
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<label for="lastName">Фамилия: <span class="text-danger">*</span></label>
+											<label for="lastName">{{trans('messages.student_text4')}}: <span class="text-danger">*</span></label>
 											<input type="text" id="lastName" class="form-control has-feedback-left" name="lastName" required />
 											<i class="fa fa-user form-control-feedback left" aria-hidden="true"></i>
 											<span id="msg_lastName" class="text-danger" >{{ $errors->first('lastName') }}</span>
@@ -52,10 +52,10 @@
 										</div>
 
 										<div class="col-md-2 col-sm-6 col-xs-12">
-											<label for="gender">Пол: <span class="text-danger">*</span></label>
+											<label for="gender">{{trans('messages.student_text6')}}: <span class="text-danger">*</span></label>
 											<p>
-												муж.:
-												<input type="radio" class="flat" name="gender" id="genderM" value="Male" checked="" required /> жен.:
+												{{trans('messages.student_text61')}}.:
+												<input type="radio" class="flat" name="gender" id="genderM" value="Male" checked="" required /> {{trans('messages.student_text62')}}.:
 												<input type="radio" class="flat" name="gender" id="genderF" value="Female" />
 											</p>
 										</div>
@@ -63,13 +63,13 @@
 									<div class="row">
 
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<label for="dob">Дата рождения: <span class="text-danger">*</span></label>
+											<label for="dob">{{trans('messages.student_text7')}}: <span class="text-danger">*</span></label>
 											<input type="text" name="dob" id="dob" class="form-control has-feedback-left" data-inputmask="'mask': '99/99/9999'" required>
 											<i class="fa fa-calendar form-control-feedback left" aria-hidden="true"></i>
 											<span id="msg_dob" class="text-danger" >{{ $errors->first('dob') }}</span>
 										</div>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<label for="mobileNo">Мобильный телефон: <span class="text-danger">*</span></label>
+											<label for="mobileNo">{{trans('messages.student_text8')}}: <span class="text-danger">*</span></label>
 											<input type="text" id="mobileNo" class="form-control has-feedback-left" data-inputmask="'mask': '+7 9999999999'" name="mobileNo" required />
 											<i class="fa fa-phone form-control-feedback left" aria-hidden="true"></i>
 											<span id="msg_mobileNo" class="text-danger" >{{ $errors->first('mobileNo') }}</span>
@@ -77,7 +77,7 @@
 										</div>
 									</div>
 									<br> <br>
-										<button type="submit" class="btn btn-primary">Добавить</button>
+										<button type="submit" class="btn btn-success">{{trans('messages.button_create')}}</button>
 
 
 								</form>

@@ -14,8 +14,10 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Тест "{{$quiz->name}}"
-                                <small> изменить</small>
+                            <h2>
+                                {{trans('messages.test_text1')}} "{{$quiz->name}}"
+                                <small>
+                                    {{trans('messages.test_text6')}}</small>
                             </h2>
 
                             <div class="clearfix"></div>
@@ -35,14 +37,16 @@
                             {!! Form::open(['route' => ['quiz.update',$quiz->id], 'method' => 'PUT']) !!}
 
                             <div class="form-group">
-                                {!! Form::label('name', 'Наименование') !!}
+
+                                {{trans('messages.test_text2')}}
                                 <span class="required">*</span>
                                 {!! Form::text('name', $quiz->name, ['class' => 'form-control' , 'required' => true ]) !!}
                                 <span class="text-danger">{{ $errors->first('name') }}</span>
                             </div>
 
                             <div class="form-group">
-                                {!! Form::label('description', 'Описание') !!}
+
+                                {{trans('messages.test_text5')}}
                                 <span class="required">*</span>
                                 {!! Form::textarea('description', $quiz->description, ['class' => 'form-control', 'required' => true ]) !!}
                                 <span class="text-danger">{{ $errors->first('description') }}</span>
@@ -50,7 +54,8 @@
                             <div class="form-group">
 
                                 <div class="item form-group">
-                                    <label class="control-label" for="subject_id">Под курс <span
+                                    <label class="control-label" for="subject_id">
+                                        {{trans('messages.test_text4')}} <span
                                                 class="required">*</span>
                                     </label>
 
@@ -61,9 +66,9 @@
 
                             </div>
 
-                            {!! Form::submit('Изменить', ['class' => 'btn btn-info']) !!}
+                            <button type='submit' placeholder=''
+                                    class='btn btn-success'>{{trans('messages.test_text6')}}</button>
 
-                            {!! Form::close() !!}
                         </div>
                     </div>
                     <!-- row end -->
@@ -71,8 +76,10 @@
 
                 </div>
             </div>
-            <!-- /page content -->
-            @endsection
-            @section('extrascript')
-                <script src="{{ URL::asset('assets/js/validator.min.js')}}"></script>
+        </div>
+    </div>
+    <!-- /page content -->
+@endsection
+@section('extrascript')
+    <script src="{{ URL::asset('assets/js/validator.min.js')}}"></script>
 @endsection

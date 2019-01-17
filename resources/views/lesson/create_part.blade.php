@@ -14,8 +14,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Часть урока
-                                <small> добавить</small>
+                            <h2>{{trans('messages.presentation_text6')}}
                             </h2>
                             <div class="clearfix"></div>
                         </div>
@@ -34,28 +33,28 @@
                             'enctype' => 'multipart/form-data', 'class' => 'form-horizontal']) !!}
                             {{csrf_field()}}
                             <div class="form-group">
-                                <label for="presentation">Презентация (1-стр pdf)</label>
+                                <label for="presentation">{{trans('messages.presentation_text7')}}</label>
                                 <input type="file" class="form-control" id="presentation" name="presentation" required>
                             </div>
                             <div class="form-group">
-                                <label for="audio">Аудио</label>
+                                <label for="audio">{{trans('messages.presentation_text8')}}</label>
                                 <input type="file" class="form-control" id="audio" name="audio">
                             </div>
                             <div class="form-group">
-                                <label for="video">Видео</label>
+                                <label for="video">{{trans('messages.presentation_text9')}}</label>
                                 <input type="file" class="form-control" id="video" name="video">
                             </div>
                                 <input type="hidden" name="lesson_id" value="{{$lesson->id}}">
                             <div class="form-group">
-                                <label for="seconds">Секунды</label>
+                                <label for="seconds">{{trans('messages.presentation_text10')}}</label>
                                 <input type="number" min="0" name="seconds" id="seconds" required>
                             </div>
                             <div class="form-group">
-                                <label for="information">Информация</label>
+                                <label for="information">{{trans('messages.presentation_text11')}}</label>
                                 <textarea  class="form-control" name="information" id="information" required></textarea>
                             </div>
-                            {!! Form::submit('Добавить', ['class' => 'btn btn-info']) !!}
-                            {!! Form::close() !!}
+                                <button type="submit" class = "btn btn-success">{{trans('messages.button_create')}}</button>
+
                         </div>
                     </div>
                     <!-- row end -->

@@ -34,11 +34,11 @@
                     <div class="x_panel">
                         <div class="x_title">
 
-                            <h2>Пользователь
-                                <small> Информация обо всех пользователях.</small>
+                            <h2>{{trans('messages.user_text12')}}
+                                <small> {{trans('messages.user_text13')}}</small>
                             </h2>
                             <a href="{{URL::Route('user.create')}}" class="btn btn-success pull-right"><i
-                                        class="fa fa-plus"></i> Новый пользователь </a>
+                                        class="fa fa-plus"></i> {{trans('messages.user_text14')}} </a>
 
                             <div class="clearfix"></div>
                         </div>
@@ -47,13 +47,13 @@
                                 <thead>
                                 <tr>
 
-                                    <th>ФИО</th>
-                                    <th>Логин</th>
-                                    <th>Группа</th>
-                                    <th>Email</th>
-                                    <th>Информация</th>
-                                    <th>Добавлен</th>
-                                    <th>Действия</th>
+                                    <th>{{trans('messages.user_text15')}}</th>
+                                    <th>{{trans('messages.user_text16')}}</th>
+                                    <th>{{trans('messages.user_text17')}}</th>
+                                    <th>E-mail</th>
+                                    <th>{{trans('messages.user_text18')}}</th>
+                                    <th>{{trans('messages.user_text19')}}</th>
+                                    <th>{{trans('messages.button_action')}}</th>
 
                                 </tr>
                                 </thead>

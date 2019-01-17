@@ -19,8 +19,8 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Глобальный курс
-                                <small> Информация о глобальных курсах</small>
+                            <h2>{{trans('messages.disciplina')}}
+                                <small>{{trans('messages.disciplina_text1')}}</small>
                             </h2>
 
                             <div class="clearfix"></div>
@@ -29,10 +29,10 @@
                             <table id="datatable-buttons" class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>Название</th>
-                                    <th>Код глобального курса</th>
-                                    <th>Краткое описание глобального курса</th>
-                                    <th>Действия</th>
+                                    <th>{{trans('messages.disciplina_text2')}}</th>
+                                    <th>{{trans('messages.disciplina_text3')}}</th>
+                                    <th>{{trans('messages.disciplina_text4')}}</th>
+                                    <th>{{trans('messages.button_action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

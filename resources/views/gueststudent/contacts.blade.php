@@ -10,7 +10,6 @@
     </header>
     <body>
         <div class="container rounded contacts">
-            <h5 class="text-center">{{trans('messages.contact')}}</h5>
             <b>{{trans('messages.too_global')}}  </b>   "{{$institute->name}}"<br/>
             <b>E-mail:   </b>   {{$institute->email}}<br/>
             <b>{{trans('messages.telephone')}}:   </b>   {{$institute->phoneNo}}<br/>

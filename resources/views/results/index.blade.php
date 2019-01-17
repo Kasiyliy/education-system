@@ -19,7 +19,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Результаты<small> результаты тестов</small></h2>
+                    <h2>{{trans('messages.result_text1')}}<small>{{trans('messages.result_text2')}}</small></h2>
 
                     <div class="clearfix"></div>
                   </div>
@@ -27,11 +27,11 @@
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>Студент</th>
-                          <th>Процентность</th>
-                          <th>Урок</th>
-                          <th>Время сдачи</th>
-                          <th>Действия</th>
+                          <th>{{trans('messages.result_text3')}}</th>
+                          <th>{{trans('messages.result_text4')}}</th>
+                          <th>{{trans('messages.result_text5')}}</th>
+                          <th>{{trans('messages.result_text6')}}</th>
+                          <th>{{trans('messages.button_action')}}</th>
                         </tr>
                       </thead>
                       <tbody>

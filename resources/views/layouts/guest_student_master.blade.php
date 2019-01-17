@@ -32,6 +32,9 @@
         #toast-container > div {
             opacity: 1;
         }
+        .asc{
+            display: inline;
+        }
 
     </style>
     @yield('styles')
@@ -108,12 +111,10 @@
                 @endif
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="nav-item">
-                    <b><a class="nav-link js-scroll-trigger" href="{{URL::route('setlangrus')}}">
+                <li class="nav-item asc">
+                    <b><a class="nav-link js-scroll-trigger asc" href="{{URL::route('setlangrus')}}">
                             РУС</a></b>
-                </li>
-                <li class="nav-item" style=" border-left: 1px solid white">
-                    <b> <a class="nav-link js-scroll-trigger" href="{{URL::route('setlangeng')}}">
+                    <b style = "border-left: 2px solid white;"> <a class="nav-link js-scroll-trigger asc" style = "margin-left: 5px" href="{{URL::route('setlangeng')}}">
                             ENG</a></b>
                 </li>
             </ul>

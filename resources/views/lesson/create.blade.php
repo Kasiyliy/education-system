@@ -14,7 +14,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Урок<small> добавить</small></h2>
+                    <h2>{{trans('messages.presentation_text1')}}<small> {{trans('messages.presentation_text2')}}</small></h2>
 
                     <div class="clearfix"></div>
                   </div>
@@ -33,23 +33,23 @@
                     'enctype' => 'multipart/form-data', 'class' => 'form-horizontal']) !!}
                     {{csrf_field()}}
                     <div class="form-group">
-                      <label for="name">Наименование</label>
+                      <label for="name">{{trans('messages.presentation_text3')}}</label>
                       <input type="text" class="form-control" name="name" id="name" required>
                     </div>
                     <div class="form-group">
-                      <label for="description">Описание</label>
+                      <label for="description">{{trans('messages.presentation_text4')}}</label>
                       <textarea rows="5" class="form-control" name="description" id="description" required></textarea>
                     </div>
                     <div class="form-group">
-                      <label for="description">Под курсы</label>
+                      <label for="description">{{trans('messages.presentation_text5')}}</label>
                       <select name="subject_id" class="form-control">
                         @foreach($subjects as $subject)
                           <option value="{{$subject->id}}">{{$subject->name}}</option>
                         @endforeach
                       </select>
                     </div>
-                    {!! Form::submit('Добавить', ['class' => 'btn btn-info']) !!}
-                    {!! Form::close() !!}
+                      <button type = "submit" class = 'btn btn-success'>{{trans('messages.button_create')}}</button>
+
                   </div>
                 </div>
               <!-- row end -->

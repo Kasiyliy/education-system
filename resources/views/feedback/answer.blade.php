@@ -15,8 +15,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Message
-                                <small>Send the answer for the message</small>
+                            <h2>{{trans('messages.feedback_text7')}}
                             </h2>
 
                             <div class="clearfix"></div>
@@ -37,7 +36,7 @@
                                 </div>
                                 <div class="item form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                           for="answer">Message<span class="required">*</span>
+                                           for="answer">{{trans('messages.feedback_text7')}}<span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <textarea readonly rows="5" id="message" required="required" name="message"
@@ -47,7 +46,7 @@
 
                                 <div class="item form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                           for="answer">Ответ<span class="required">*</span>
+                                           for="answer">{{trans('messages.feedback_text10')}}<span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <textarea id="answer" required="required" name="answer"
@@ -59,7 +58,7 @@
                                 <div class="form-group">
                                     <div class="col-md-6 col-md-offset-3">
                                         <button id="send" type="submit" class="btn btn-success"><i class="fa fa-check">
-                                                Отправить</i></button>
+                                                {{trans('messages.chat_text8')}}</i></button>
                                     </div>
                                 </div>
                                 <div class="form-group">

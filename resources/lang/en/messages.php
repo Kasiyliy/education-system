@@ -14,8 +14,8 @@ return [
     'signin' => 'Log in',
     'signout' => 'Log out',
 
-    'teachercontrol' => 'Teacher control',
-    'teachercontrolteacher' => 'Teacher',
+    'teachercontrol' => 'Instructor control',
+    'teachercontrolteacher' => 'Instructor',
 
     'adminpanel' => 'Admin panel',
     'teacherpanel' => 'Teacher panel',
@@ -38,7 +38,7 @@ return [
     'all_registered_student' => 'Registered participants',
 
 
-    'messages' => 'Messages',
+    'messages' => 'Message',
     'my_messages' => 'My messages',
     'otpravitel' => 'Sender',
 
@@ -86,10 +86,11 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
 
     'feedback_text1' => 'Please, contact us!',
     'feedback_text2' => 'Your feedback is important!',
+    'feedback_text3' => 'Your feedback!',
 
 
     'find' => 'Find',
-    'login' => 'Login',
+    'login' => 'Log in',
     'too_global' => 'LLP',
     'address' => 'Address: Almaty, Kazakhstan',
     'telephone' => 'Phone',
@@ -102,16 +103,12 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
     'help_text1' => 'Welcome!',
     'help_text2' => 'Register with us.',
     'help_text3' => 'Start training.',
-    'help_text4' => 'In case of access problems, please, kindly address the administrator.',
-    'help_text5' => 'Test will be available after training complation followed by the certificate.',
+    'help_text4' => 'In case of access problems, please kindly address the administrator.',
+    'help_text5' => 'Test will be available after training completion followed by the certificate.',
 
-    'help_text6' => 'If you have some problem, Please contact to Administrator.',
-    'help_text7' => 'We`ll never share your email with anyone else.',
+    'help_text6' => 'If you have any further questions, please contact the administrator.',
+    'help_text7' => 'Information is confidence.',
 
-
-    'feedback_text1' => 'Please, contact us!',
-    'feedback_text2' => 'Your feedback is important !.',
-    'feedback_text3' => 'Write a feedback.',
 
     'name' => 'Name',
     'surname' => 'Surname',
@@ -121,6 +118,8 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
 
     'certificate' => 'Certificate Registry',
     'certificate_all' => 'Certificate',
+
+    'company' => '',
 
 ]
 ?>

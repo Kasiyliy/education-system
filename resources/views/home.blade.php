@@ -88,6 +88,7 @@
         background-repeat: no-repeat;
         background-size: 100%;
         color: white;
+        height: 100%;
     }
 
 
@@ -95,6 +96,16 @@
         body.masthead6 {
             height: 100px;
             min-height: 300px;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+    }
+    @media (min-width: 10px) {
+        body.masthead6 {
+            height: 1000px;
+            min-height: 100%;
+            background-position: center;
+            background-size: cover;
             padding-top: 0;
             padding-bottom: 0;
         }

@@ -23,7 +23,7 @@
 
                             <div class="x_title">
                                 <h2>
-                                    Тесты
+                                    {{trans('messages.test_text1')}}
                                 </h2>
 
                                 <label class="pull-right">
@@ -45,7 +45,8 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="item form-group">
-                                            <label class="control-label" for="subject_id">Наименование<span
+                                            <label class="control-label" for="subject_id">
+                                                {{trans('messages.test_text2')}}<span
                                                         class="required">*</span>
                                             </label>
 
@@ -56,7 +57,8 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="item form-group">
-                                            <label class="control-label " for="department">Глобальный курс <span
+                                            <label class="control-label " for="department">
+                                                {{trans('messages.test_text3')}}<span
                                                         class="required">*</span>
                                             </label>
 
@@ -68,7 +70,8 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="item form-group">
-                                            <label class="control-label" for="subject_id">Под курс <span
+                                            <label class="control-label" for="subject_id">
+                                                {{trans('messages.test_text4')}} <span
                                                         class="required">*</span>
                                             </label>
 
@@ -84,7 +87,8 @@
 
                                     <div class="col-md-12">
                                         <div class="item form-group">
-                                            <label class="control-label" for="description">Краткое описание теста<span class="required">*</span>
+                                            <label class="control-label" for="description">
+                                                {{trans('messages.test_text5')}}<span class="required">*</span>
                                             </label>
 
                                             <textarea id="description" required="required" name="description" class="form-control col-md-7 col-xs-12">{{old('description')}}</textarea>
@@ -97,7 +101,8 @@
 
                                         <button id="btnsave" type="submit"
                                                 class="btn btn-success btn-attend center-margin"><i class="fa fa-check">
-                                                Сохранить</i></button>
+
+                                                {{trans('messages.button_save')}}</i></button>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -108,10 +113,14 @@
                                                 <thead>
                                                 <tr>
                                                     <th>Id</th>
-                                                    <th>Наименование</th>
-                                                    <th>Урок</th>
-                                                    <th>Изменить</th>
-                                                    <th>Удалить</th>
+                                                    <th>
+                                                        {{trans('messages.test_text2')}}</th>
+                                                    <th>
+                                                        {{trans('messages.test_text3')}}</th>
+                                                    <th>
+                                                        {{trans('messages.test_text6')}}</th>
+                                                    <th>
+                                                        {{trans('messages.test_text7')}}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody id="quizBody">
@@ -179,11 +188,11 @@
 
                         <!-- /validator -->
                         $(".department").select2({
-                            placeholder: "Выберите глобальный курс",
+                            placeholder: "",
                             allowClear: true
                         });
                         $(".subject").select2({
-                            placeholder: "Выберите урок",
+                            placeholder: "",
 
                             allowClear: true
                         });
@@ -272,7 +281,7 @@
                             var cell3 = row.insertCell(3);
                             var editBtn = document.createElement('a');
                             editBtn.className = 'btn btn-warning';
-                            editBtn.innerHTML = 'изменить';
+                            editBtn.innerHTML = '{{trans('messages.test_text6')}}';
                             editBtn.href = '/quiz/' + id + '/edit';
                             cell3.appendChild(editBtn);
 
@@ -280,7 +289,7 @@
                             var cell4 = row.insertCell(4);
                             var refBtn = document.createElement('a');
                             refBtn.className = 'btn btn-danger';
-                            refBtn.innerHTML = 'удалить';
+                            refBtn.innerHTML = '{{trans('messages.test_text7')}}';
 
                             refBtn.addEventListener('click' , function(){
                                 deleteModel(id);

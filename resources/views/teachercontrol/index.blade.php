@@ -19,8 +19,8 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Уроки
-                                <small> Информация обо всех уроках.</small>
+                            <h2>{{trans('messages.teacher_text1')}}
+                                <small>{{trans('messages.teacher_text2')}}.</small>
                             </h2>
 
                             <div class="clearfix"></div>
@@ -29,9 +29,9 @@
                             <table id="datatable-buttons" class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>ФИО</th>
-                                    <th>Вход</th>
-                                    <th>Время</th>
+                                    <th>{{trans('messages.teacher_text3')}}</th>
+                                    <th>{{trans('messages.teacher_text4')}}</th>
+                                    <th>{{trans('messages.teacher_text5')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -39,7 +39,14 @@
                                     @foreach($teacherControls as $teacherControl)
                                         <tr>
                                             <td>{{$teacherControl->user->firstname. " ".$teacherControl->user->lastname}}</td>
-                                            <td>{{$teacherControl->entered ? "Зашел" : "Вышел" }}</td>
+                                            <td>@if($teacherControl->entered == 0)
+                                                    {{trans('messages.teacher_text7')}}
+
+                                                @else
+                                                    {{trans('messages.teacher_text6')}}
+                                                    
+                                                @endif
+                                            </td>
                                             <td>{{$teacherControl->created_at }}</td>
                                         </tr>
                                     @endforeach

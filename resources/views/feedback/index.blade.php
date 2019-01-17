@@ -19,8 +19,8 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Уроки
-                                <small> Информация обо всех уроках.</small>
+                            <h2>{{trans('messages.feedback_text7')}}
+                                <small> {{trans('messages.feedback_text8')}}.</small>
                             </h2>
 
                             <div class="clearfix"></div>
@@ -29,12 +29,12 @@
                             <table id="datatable-buttons" class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>ФИО</th>
+                                    <th>{{trans('messages.feedback_text9')}}</th>
                                     <th>E-mail</th>
-                                    <th>Сообщение</th>
-                                    <th>Вход</th>
-                                    <th>Время</th>
-                                    <th>Действия</th>
+                                    <th>{{trans('messages.feedback_text4')}}</th>
+                                    <th>{{trans('messages.feedback_text5')}}</th>
+                                    <th>{{trans('messages.feedback_text6')}}</th>
+                                    <th>{{trans('messages.button_action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

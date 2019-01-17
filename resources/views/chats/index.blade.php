@@ -19,7 +19,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Чат <small> люди</small></h2>
+                    <h2>{{trans('messages.chat_text1')}}</h2>
 
                     <div class="clearfix"></div>
                   </div>
@@ -28,9 +28,9 @@
                       <thead>
                         <tr>
                           <th>ID</th>
-                          <th>Студент</th>
-                          <th>Урок</th>
-                          <th>Действия</th>
+                          <th>{{trans('messages.chat_text2')}}</th>
+                          <th>{{trans('messages.chat_text3')}}</th>
+                          <th>{{trans('messages.button_action')}}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -40,7 +40,7 @@
                           <td>{{$student->firstName.' '.$student->lastName.' '.$student->middleName}} <span class="badge">{{$student->unread}}</span></td>
                           <td>{{$student->subjectName}}</td>
                           <td>
-                            <a href="{{URL::route('message.show2', ['studentId' => $student->id, 'subjectId' => $student->subjectId])}}" class="btn btn-primary">Перейти к чату</a>
+                            <a href="{{URL::route('message.show2', ['studentId' => $student->id, 'subjectId' => $student->subjectId])}}" class="btn btn-success">{{trans('messages.chat_text4')}}</a>
                           </td>
                         </tr>
                       @endforeach

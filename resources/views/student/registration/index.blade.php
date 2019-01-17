@@ -32,7 +32,7 @@
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="col-md-4 col-sm-12 col-xs-12">
                                     <label for="subject_id">{{trans('messages.courses')}}: <span class="required">*</span></label>
-                                    {!!Form::select('subject_id', $subjects, $selectSub, ['placeholder' => 'Выберите под курс','class'=>'select2_single subject form-control has-feedback-left','tabindex'=>'-1','id'=>'subject_id']) !!}
+                                    {!!Form::select('subject_id', $subjects, $selectSub, ['placeholder' => '','class'=>'select2_single subject form-control has-feedback-left','tabindex'=>'-1','id'=>'subject_id']) !!}
                                     <i class="fa fa-home form-control-feedback left" aria-hidden="true"></i>
 
                                 </div>
@@ -49,9 +49,9 @@
                                 <table id="datatable-buttons" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>ФИО</th>
-                                            <th>ID no</th>
-                                            <th>Действаия</th>
+                                            <th>{{trans('messages.registration_text4')}}</th>
+                                            <th>{{trans('messages.registration_text8')}}</th>
+                                            <th>{{trans('messages.button_action')}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -104,7 +104,7 @@
 $(document).ready(function() {
 
     $(".subject").select2({
-        placeholder: "Выберите под курс",
+        placeholder: "",
         allowClear: true
     });
     //datatables code
@@ -152,8 +152,8 @@ $(document).ready(function() {
     TableManageButtons.init();
     @if($selectSub!="" && count($students)==0)
     new PNotify({
-        title: "Извлечение",
-        text: 'Никаких студентов нет!',
+        title: "",
+        text: '',
         styling: 'bootstrap3'
     });
     @endif
@@ -162,12 +162,12 @@ $(document).ready(function() {
         e.preventDefault();
         var that=$(this);
         swal({
-            title: "Отмена добавления!",
-            text: 'Вы уверены что хотите удалить студента от этого курса?',
+            title: "{{trans('messages.cancel')}}!",
+            text: '{{trans('messages.cancel_text1')}}?',
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#cc3f44",
-            confirmButtonText: "Да",
+            confirmButtonText: "{{trans('messages.yes')}}",
             closeOnConfirm: true,
             html: false
         }, function( isConfirm ) {

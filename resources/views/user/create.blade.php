@@ -16,8 +16,8 @@
                     <div class="x_panel">
                         <div class="x_title">
 
-                            <h2>Пользователь
-                                <small> Основная информация по пользователю.</small>
+                            <h2>{{trans('messages.user_text1')}}
+                                <small> {{trans('messages.user_text2')}}</small>
                             </h2>
 
                             <div class="clearfix"></div>
@@ -30,7 +30,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
 
-                                            <label class="control-label" for="firstname">Имя <span
+                                            <label class="control-label" for="firstname">{{trans('messages.user_text3')}} <span
                                                         class="required">*</span>
                                             </label>
                                             <div class="input-group">
@@ -46,7 +46,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
 
-                                            <label class="control-label" for="lastname">Фамилия <span
+                                            <label class="control-label" for="lastname">{{trans('messages.user_text4')}} <span
                                                         class="required">*</span>
                                             </label>
                                             <div class="input-group">
@@ -62,7 +62,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
 
-                                            <label class="control-label" for="login">Логин<span
+                                            <label class="control-label" for="login">{{trans('messages.user_text5')}}<span
                                                         class="required">*</span>
                                             </label>
                                             <div class="input-group">
@@ -79,15 +79,15 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
 
-                                            <label class="control-label" for="group">Группа<span
+                                            <label class="control-label" for="group">{{trans('messages.user_text6')}}<span
                                                         class="required">*</span>
                                             </label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-info green"></i></span>
                                                 <select class="form-control" name="group" required="required">
 
-                                                    <option value="Teacher">Учитель</option>
-                                                    <option value="Student">Студент</option>
+                                                    <option value="Teacher">{{trans('messages.user_text10')}}</option>
+                                                    <option value="Student">{{trans('messages.user_text11')}}</option>
                                                 </select>
                                             </div>
                                             <span class="text-danger">{{ $errors->first('group') }}</span>
@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="control-label" for="email">Email
+                                            <label class="control-label" for="email">E-mail
                                             </label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i
@@ -111,7 +111,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
 
-                                            <label class="control-label" for="description">Описание
+                                            <label class="control-label" for="description">{{trans('messages.user_text7')}}
                                             </label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-info green"></i></span>
@@ -128,7 +128,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
 
-                                            <label class="control-label" for="password">Пароль<span
+                                            <label class="control-label" for="password">{{trans('messages.user_text8')}}<span
                                                         class="required">*</span>
                                             </label>
                                             <div class="input-group">
@@ -142,7 +142,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
 
-                                            <label class="control-label" for="confirmpassword">Подтверждение пороля<span
+                                            <label class="control-label" for="confirmpassword">{{trans('messages.user_text9')}}<span
                                                         class="required">*</span>
                                             </label>
                                             <div class="input-group">
@@ -157,7 +157,7 @@
                                 <div class="row">
 
                                     <button type="submit" class="btn btn-success pull-right"><i class="fa fa-plus">
-                                            Сохранить</i></button>
+                                            {{trans('messages.button_save')}}</i></button>
                                 </div>
                             </form>
                         </div>

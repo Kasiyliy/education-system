@@ -30,7 +30,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Тесты</h2>
+                            <h2>{{trans('messages.test_text1')}}</h2>
 
                             <div class="clearfix"></div>
                         </div>
@@ -43,7 +43,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="item form-group">
-                                                <label class="control-label " for="department">Глобальный курс <span
+                                                <label class="control-label " for="department">{{trans('messages.test_text3')}} <span
                                                             class="required">*</span>
                                                 </label>
 
@@ -55,7 +55,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="item form-group">
-                                                <label class="control-label" for="subject_id">Под курс <span
+                                                <label class="control-label" for="subject_id">{{trans('messages.test_text4')}} <span
                                                             class="required">*</span>
                                                 </label>
 
@@ -67,7 +67,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="item form-group">
-                                                <input type="submit" value="Поиск"
+                                                <input type="submit" value="{{trans('messages.test_text8')}}"
                                                        class="btn btn-lg btn-info center-margin">
                                             </div>
                                         </div>
@@ -82,9 +82,9 @@
                                         <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Наименование</th>
-                                            <th>Урок</th>
-                                            <th>Действие</th>
+                                            <th>{{trans('messages.test_text2')}}</th>
+                                            <th>{{trans('messages.test_text4')}}</th>
+                                            <th>{{trans('messages.button_action')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -96,10 +96,10 @@
                                                 <td>
                                                     <a href="{{URL::route('quiz.questions', ['id' => $quiz->id])}}"
                                                        class='btn btn-xs btn-success'
-                                                       data-id='{{$quiz->id}}'> Добавить вопрос</a>
+                                                       data-id='{{$quiz->id}}'>{{trans('messages.test_text9')}}</a>
                                                     <a href="{{URL::route('quiz.questions.index', ['id' => $quiz->id])}}"
                                                        class='btn btn-xs btn-success'
-                                                    >Вопросы</a>
+                                                    >{{trans('messages.test_text10')}}</a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -142,11 +142,11 @@
         $(document).ready(function () {
 
             $(".department").select2({
-                placeholder: "Select Department",
+                placeholder: "",
                 allowClear: true
             });
             $(".subject").select2({
-                placeholder: "Select Subject",
+                placeholder: "",
                 allowClear: true
             });
             // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':

@@ -15,8 +15,8 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Под курс
-                                <small> Оснавная информация о под курсе.</small>
+                            <h2>{{trans('messages.course_text1')}}
+                                <small> {{trans('messages.course_text2')}}</small>
                             </h2>
 
                             <div class="clearfix"></div>
@@ -27,27 +27,26 @@
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input name="_method" type="hidden" value="PATCH">
                                 <div class="item form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="department">Глобальный
-                                        курс <span class="required">*</span>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="department">{{trans('messages.course_text3')}}<span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        {!!Form::select('department_id', $departments, $subject->department_id, ['placeholder' => 'Выберите глобальный курс','class'=>'form-control col-md-7 col-xs-12','required'=>'required'])!!}
+                                        {!!Form::select('department_id', $departments, $subject->department_id, ['placeholder' => '','class'=>'form-control col-md-7 col-xs-12','required'=>'required'])!!}
                                         <span class="text-danger">{{ $errors->first('department') }}</span>
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Название <span
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('messages.course_text4')}}<span
                                                 class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input id="name" type="text" class="form-control col-md-7 col-xs-12" name="name"
-                                               value="{{$subject->name}}" placeholder="Название под курса"
+                                               value="{{$subject->name}}" placeholder="{{trans('messages.course_text4')}}"
                                                required="required" type="text">
                                         <span class="text-danger">{{ $errors->first('name') }}</span>
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="code">Код <span
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="code">{{trans('messages.course_text5')}}<span
                                                 class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -57,12 +56,12 @@
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="credit">Стоимость
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="credit">{{trans('messages.course_text6')}}
                                         <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input type="text" id="price" name="price" required="required"
-                                               placeholder="12000" value="{{$subject->price}}"
+                                               placeholder="" value="{{$subject->price}}"
                                                class="form-control col-md-7 col-xs-12">
                                         <span class="text-danger">{{ $errors->first('price') }}</span>
                                     </div>
@@ -70,7 +69,7 @@
 
 
                                 <div class="item form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Описание
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">{{trans('messages.course_text7')}}
                                         <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -81,7 +80,7 @@
                                 </div>
 
                                 <div class="item form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="points">Цель
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="points">{{trans('messages.course_text8')}}
                                         <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -92,7 +91,7 @@
                                 </div>
 
                                 <div class="item form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plans">План
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plans">{{trans('messages.course_text9')}}
                                         <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -105,7 +104,7 @@
                                 <div class="form-group">
                                     <div class="col-md-6 col-md-offset-3">
                                         <button id="send" type="submit" class="btn btn-success"><i class="fa fa-check">
-                                                Изменить</i></button>
+                                                {{trans('messages.button_change')}}</i></button>
                                     </div>
                                 </div>
                             </form>

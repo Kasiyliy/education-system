@@ -14,7 +14,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Урок<small> Оснавная информация о уроке.</small></h2>
+                    <h2>{{trans('messages.presentation_text15')}}<small> {{trans('messages.presentation_text16')}}</small></h2>
                     <div class="clearfix"></div>
                   </div>
 
@@ -35,14 +35,14 @@
                     {{csrf_field()}}
                         <input name="_method" type="hidden" value="PUT">
                         <div class="form-group">
-                      <label for="name">Наименование</label>
+                      <label for="name">{{trans('messages.presentation_text3')}}</label>
                       <input type="text" class="form-control" value="{{$lesson->name}}" name="name" id="name" required>
                     </div>
                     <div class="form-group">
-                      <label for="description">Описание</label>
+                      <label for="description">{{trans('messages.presentation_text4')}}</label>
                       <textarea rows="5" class="form-control"  name="description" id="description" required>{{$lesson->description}}</textarea>
                     </div>
-                    {!! Form::submit('Изменить', ['class' => 'btn btn-info']) !!}
+                        <button type = "submit" class = "btn btn-success">{{trans('messages.button_change')}}</button>
                     </form>
                   </div>
 

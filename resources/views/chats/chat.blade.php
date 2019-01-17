@@ -19,8 +19,8 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Чат с {{$student->firstName.' '.$student->lastName.' '.$student->middleName}}
-                                <small>Под курс: {{$subject->name}}</small>
+                            <h2>{{trans('messages.chat_text5')}} {{$student->firstName.' '.$student->lastName.' '.$student->middleName}}
+                                <small>{{trans('messages.chat_text6')}}: {{$subject->name}}</small>
                             </h2>
 
                             <div class="clearfix"></div>
@@ -29,7 +29,7 @@
                             <table id="datatable-buttons" class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>Сообщение</th>
+                                    <th>{{trans('messages.chat_text7')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -38,9 +38,9 @@
                                         <td>
                                             <p class="text-muted">
                                                 @if($message->sender_user_id == $student->user_id)
-                                                    Собеседник:
+                                                    {{trans('messages.chat_text10')}}:
                                                 @else
-                                                    Я:
+                                                    {{trans('messages.chat_text9')}}:
                                                 @endif
                                                 {{$message->created_at}}
                                             </p>
@@ -59,9 +59,9 @@
                                 <input type="hidden" name="subject_id" value="{{$subject->id}}">
                                 <br>
                                 <textarea required name="content" class="form-control my-2"
-                                          placeholder="Сообщение"></textarea>
+                                          placeholder="{{trans('messages.chat_text7')}}"></textarea>
                                 <br>
-                                <button class="form-control" type="submit">Отправить</button>
+                                <button class="form-control" type="submit">{{trans('messages.chat_text8')}}</button>
                             </form>
                         </div>
                     </div>

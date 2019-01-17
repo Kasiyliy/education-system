@@ -19,7 +19,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Уроки<small> Информация обо всех уроках.</small></h2>
+                    <h2>{{trans('messages.presentation_text12')}}</h2>
 
                     <div class="clearfix"></div>
                   </div>
@@ -27,9 +27,9 @@
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>Наименование</th>
-                          <th>Под курс</th>
-                          <th>Действия</th>
+                          <th>{{trans('messages.presentation_text13')}}</th>
+                          <th>{{trans('messages.presentation_text14')}}</th>
+                          <th>{{trans('messages.button_action')}}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -39,13 +39,13 @@
                             <td>{{$lesson->name}}</td>
                             <td>{{$lesson->subject()->first()->name }}</td>
                             <td>
-                              <a class="btn btn-success btn-xs" href="{{URL::route('lesson.edit' ,['id'=>$lesson->id])}}">Изменить</a>
+                              <a class="btn btn-success btn-xs" href="{{URL::route('lesson.edit' ,['id'=>$lesson->id])}}">{{trans('messages.button_change')}}</a>
                               <form style="display: inline;" action="{{URL::route('lesson.destroy', ['id' => $lesson->id])}}" method="POST">
                                 <input type="hidden" name="_method" value="DELETE">
                                 {{csrf_field()}}
-                                <button type="submit" class="btn btn-danger btn-xs">Удалить</button>
+                                <button type="submit" class="btn btn-danger btn-xs">{{trans('messages.button_delete')}}</button>
                               </form>
-                              <a href="{{URL::route('lesson.show', ['id' => $lesson->id])}}" class="btn btn-info btn-xs">Посмотреть</a>
+                              <a href="{{URL::route('lesson.show', ['id' => $lesson->id])}}" class="btn btn-info btn-xs">{{trans('messages.button_see')}}</a>
                             </td>
                             </form>
                             </td>

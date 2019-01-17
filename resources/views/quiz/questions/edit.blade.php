@@ -20,7 +20,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Варианты вопросов теста</h2>
+                            <h2>{{trans('messages.test_text15')}}</h2>
 
                             <div class="clearfix"></div>
                         </div>
@@ -42,7 +42,7 @@
                                 <div class="row mx-auto" id="questions">
                                     {{csrf_field()}}
                                     <div class="form-group">
-                                        <label for="question">Вопрос</label>
+                                        <label for="question">{{trans('messages.test_text11')}}</label>
                                         <textarea required rows="5" id="question" name="value"class="form-control">{{$question->value}}</textarea>
                                     </div>
                                     <div id="variants">
@@ -57,9 +57,9 @@
                                                                   @if($answer->right)
                                                                     checked
                                                                   @endif
-                                                                  name="variantCBs[{{$i}}]">Правильно</label>
+                                                                  name="variantCBs[{{$i}}]">{{trans('messages.test_text12')}}</label>
                                                 </div>
-                                                <input type="text" placeholder="Вариант ответа" name="variants[{{$i}}]"
+                                                <input type="text" placeholder="{{trans('messages.test_text13')}}" name="variants[{{$i}}]"
                                                        class="form-control" value="{{$answer->value}}" required=""><a
                                                         class="btn btn-danger btn-xs pull-right mybutton"
                                                         style="margin-top: 5px;">X</a></div>
@@ -68,10 +68,9 @@
                                             @endphp
                                         @endforeach
                                     </div>
-                                    <a class="btn btn-default" id="addVariant">Добавить вариант</a>
+                                    <a class="btn btn-default" id="addVariant">{{trans('messages.test_text14')}}</a>
                                 </div>
-                                <button type="submit" id="addQuestion" class="btn btn-primary pull-right">Сохранить
-                                    изменения в вопросе
+                                <button type="submit" id="addQuestion" class="btn btn-primary pull-right">{{trans('messages.button_save')}}
                                 </button>
                             {{ Form::close() }}
                         </div>
