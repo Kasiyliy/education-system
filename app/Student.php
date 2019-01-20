@@ -36,7 +36,6 @@ class Student extends Model
         parent::boot();
         static::deleting(function ($student) {
             $student->registered()->delete();
-            $student->exams()->delete();
         });
     }
 

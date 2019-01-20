@@ -20,7 +20,7 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <form class="form-label-left" novalidate method="post" action="{{URL::route('user.settings')}}">
+                    <form class="form-label-left" novalidate method="post" action="{{URL::route('user.postsettings')}}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="for" value="info">
                       <div class="row">
@@ -107,7 +107,7 @@
 
                     <hr>
 
-                    <form class="form-label-left" novalidate method="post" action="{{URL::route('user.settings')}}">
+                    <form class="form-label-left" novalidate method="post" action="{{URL::route('user.postsettings')}}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="for" value="password">
                       <div class="row">

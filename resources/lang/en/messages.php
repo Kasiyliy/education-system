@@ -119,7 +119,213 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
     'certificate' => 'Certificate Registry',
     'certificate_all' => 'Certificate',
 
-    'company' => '',
+
+
+    'company' => 'Organization',
+    'company_text1' => 'Main Information about organization',
+    'company_text2' => 'Name',
+    'company_text3' => 'Date of foundation',
+    'company_text4' => 'Web- Site',
+    'company_text5' => 'E-mail',
+    'company_text6' => 'Phone number',
+    'company_text7' => 'Address',
+
+
+    'disciplina_text1' => 'Main Information about discipline',
+    'disciplina_text2' => 'Name',
+    'disciplina_text3' => 'Code of the discipline',
+    'disciplina_text4' => 'Brief description',
+
+
+    'course_text1' => 'Course',
+    'course_text2' => 'Main information about the course',
+    'course_text3' => 'Select discipline',
+    'course_text4' => 'Course name',
+    'course_text5' => 'Course code',
+    'course_text6' => 'Price',
+    'course_text7' => 'Course description',
+    'course_text8' => 'Course objective',
+    'course_text9' => 'Plan',
+    'course_text10' => 'Author',
+
+    'student_text1' => 'Add students',
+    'student_text11' => 'Field(s) is empty',
+    'student_text2' => 'Information about student',
+    'student_text3' => 'First Name',
+    'student_text4' => 'Surname',
+    'student_text5' => 'Paternal Name',
+    'student_text6' => 'Sex',
+    'student_text61' => 'Male',
+    'student_text62' => 'Female',
+    'student_text7' => 'Date of birth',
+    'student_text8' => 'Mobile number',
+    'student_text9' => 'First name and Family name',
+    'student_text111' => 'Change student information',
+    'student_text112' => 'Change student information',
+
+
+    'registration_text1' => 'Student registration',
+    'registration_text2' => 'Sign- up student for the course',
+    'registration_text21' => 'oops',
+    'registration_text22' => 'Problems appeared with your entry',
+    'registration_text3' => 'Course',
+    'registration_text4' => 'Fist name and Family name',
+    'registration_text5' => 'Date',
+    'registration_text6' => 'Sign',
+    'registration_text7' => 'Please select the course',
+    'registration_text8' => 'Id No',
+
+
+    'teacher_text1' => 'Instructor',
+    'teacher_text2' => 'Session info',
+    'teacher_text3' => 'Name and Family name',
+    'teacher_text4' => 'Start/End of session',
+    'teacher_text5' => 'Time',
+    'teacher_text6' => 'Started',
+    'teacher_text7' => 'Completed',
+
+
+    'chat_text1' => 'All chats',
+    'chat_text2' => 'Student',
+    'chat_text3' => 'Course',
+    'chat_text4' => 'Open chat',
+    'chat_text5' => 'Chat',
+    'chat_text6' => 'Course',
+    'chat_text7' => 'Message',
+    'chat_text8' => 'Sender',
+    'chat_text9' => 'Me',
+    'chat_text10' => 'response',
+
+
+    'feedback_text7' => 'Feedback',
+    'feedback_text8' => 'Feedback info',
+    'feedback_text9' => 'First name and Family name',
+    'feedback_text4' => 'Message',
+    'feedback_text5' => 'Type',
+    'feedback_text6' => 'Time',
+    'feedback_text10' => 'Response',
+
+
+    'test_text1' => 'Test',
+    'test_text2' => 'Name',
+    'test_text3' => 'Discipline',
+    'test_text4' => 'Course',
+    'test_text5' => 'Brief description of the test',
+    'test_text6' => 'Change',
+    'test_text7' => 'Delete',
+    'test_text8' => 'Find',
+    'test_text9' => 'Add question',
+    'test_text10' => 'Questions',
+    'test_text11' => 'Question',
+    'test_text12' => 'Correct',
+    'test_text13' => 'Answer',
+    'test_text14' => 'Add another answer',
+    'test_text15' => 'Type of test question',
+
+
+    'result_text1' => 'Results',
+    'result_text2' => 'Test Results',
+    'result_text3' => 'Student',
+    'result_text4' => 'Percentage',
+    'result_text5' => 'Course',
+    'result_text6' => 'Test Completion',
+
+
+    'presentation_text1' => 'Presentation',
+    'presentation_text2' => 'Add',
+    'presentation_text3' => 'Name',
+    'presentation_text4' => 'Description',
+    'presentation_text5' => 'Course',
+
+    'presentation_text6' => 'Add presentation element',
+    'presentation_text7' => 'Slide (1-page jpg)',
+    'presentation_text8' => 'Audio',
+    'presentation_text9' => 'Video',
+    'presentation_text10' => 'Duration(sec.)',
+    'presentation_text11' => 'Text',
+
+    'presentation_text12' => 'List of presentations',
+    'presentation_text13' => 'Name',
+    'presentation_text14' => 'Course',
+
+    'presentation_text15' => 'Presentation',
+    'presentation_text16' => 'Main info about presentation',
+
+    'presentation_text17' => 'Presentation',
+    'presentation_text18' => 'View',
+    'presentation_text19' => 'Back to the course',
+
+
+    'sertificate_text1' => 'Certificates',
+    'sertificate_text2' => 'Course name',
+
+    'sertificate_text3' => 'Text',
+    'sertificate_text4' => 'Course name',
+
+    'sertificate_text5' => 'Certificate validity',
+    'sertificate_text6' => 'Change certificate',
+    'sertificate_text7' => 'Enter certificate info',
+    'sertificate_text8' => 'Inspired',
+    'sertificate_text9' => 'On behalf and for',
+
+    'sertificate_text10' => 'Certificate registry',
+    'sertificate_text11' => 'All certificates information',
+    'sertificate_text12' => 'Certificate Id No',
+    'sertificate_text13' => 'First name and Last name',
+    'sertificate_text14' => 'Instructor',
+    'sertificate_text15' => 'Course',
+    'sertificate_text16' => 'Date of issue',
+    'sertificate_text17' => 'Certificate validity',
+
+
+    'user_text1' => 'User',
+    'user_text2' => 'Main user information',
+    'user_text3' => 'Name',
+    'user_text4' => 'Family name',
+    'user_text5' => 'Log in',
+    'user_text6' => 'Group',
+    'user_text7' => 'Description',
+    'user_text8' => 'Password',
+    'user_text9' => 'Password verification',
+
+    'user_text10' => 'Instructor',
+    'user_text11' => 'Student',
+
+    'user_text12' => 'List of users',
+    'user_text13' => 'All users info',
+    'user_text14' => 'New user',
+    'user_text15' => 'Name and Family name',
+    'user_text16' => 'Log in',
+    'user_text17' => 'Group',
+    'user_text18' => 'Information',
+    'user_text19' => 'Date of registry',
+
+
+    'user_text20' => 'Assign account for user',
+    'user_text21' => 'Select student',
+    'user_text22' => 'Select account',
+    'user_text23' => 'Assign',
+    'user_text24' => 'User name',
+    'user_text25' => 'Log in',
+
+
+
+
+    'button_delete' => 'Delete',
+    'button_change' => 'Change',
+    'button_save' => 'Save',
+    'button_create' => 'Add',
+    'button_subscribe' => 'Sign',
+    'button_see' => 'View',
+
+    'button_action' => 'Actions',
+
+    'validation_error' => 'Validation error',
+    'yes' => 'Yes',
+    'no' => 'No',
+    'cancel' => 'Cancel',
+    'cancel_text1' => 'Are you sure you want to delete student?'
+
 
 ]
 ?>

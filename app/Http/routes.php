@@ -67,7 +67,8 @@ Route::group(['middleware' => ['language',]], function () {
 
         Route::resource('user', 'UserController');
         Route::get('/settings/{id}', ['as' => 'user.settings', 'uses' => 'UserController@settings']);
-        Route::post('/settings', ['as' => 'user.settings', 'uses' => 'UserController@postSettings']);
+        Route::post('/settings',[ 'as' => 'user.postsettings','uses'=>'UserController@postSettings']);
+
         Route::get('/addstudent', ['as' => 'user.addstudent', 'uses' => 'UserController@addstudent']);
         Route::post('/addstudent', ['as' => 'user.addstudent', 'uses' => 'UserController@createstudent']);
         Route::post('/addstudent/deleteAccount/{user_id}', ['as' => 'user.deleteAccount', 'uses' => 'UserController@deleteAccount']);

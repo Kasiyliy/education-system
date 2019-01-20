@@ -229,7 +229,7 @@ class UserController extends Controller
      */
     public function settings($id)
     {
-        $user = User::settings('*')
+        $user = User::select('*')
             ->where('id' , '=' , $id)
             ->first();
         return view('user.settings', compact('user'));

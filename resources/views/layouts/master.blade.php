@@ -205,7 +205,7 @@
 
                 <!-- /menu footer buttons -->
                 <div class="sidebar-footer hidden-small">
-                    <a href="{{URL::route('user.settings')}}" data-toggle="tooltip" data-placement="top"
+                    <a href="{{URL::route('user.settings',['id' => Auth::user()->id])}}" data-toggle="tooltip" data-placement="top"
                        title="Настройки">
                         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                     </a>
@@ -249,7 +249,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu">
                                 <li>
-                                    <a href="{{URL::route('user.settings')}}"><i class="glyphicon glyphicon-cog"></i>
+                                    <a href="{{URL::route('user.settings',['id' => Auth::user()->id])}}"><i class="glyphicon glyphicon-cog"></i>
                                         Настройки</a>
                                 </li>
                                 <li>
