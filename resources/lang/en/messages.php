@@ -1,10 +1,16 @@
 <?php
 return [
-    'welcome_word1' => 'Dear friend',
-    'welcome_word2' => 'We welcome you! ',
-    'welcome_word3' => ' Let us be your guide to success in acquiring valuable knowledge!After all, today it is an integral factor of development .',
-    'welcome_word4' => 'We sincerely believe that the course prepared especially for you will open the doors for you to new heights!',
-    'welcome_word5' => 'Sincerely yours,',
+    'welcome_word1' => 'Greetings to You dear Friend!',
+    'welcome_word2' => 'We are happy to welcome ayou today,',
+    'welcome_word3' => 'Please allow us to guide You through this jorney to get the treasured expertice, as today it is valued and indespensible factor of development.',
+    'welcome_word4' => 'Our finest course is designed and tailored especially for You. We do believe that it will give You yhe path for soaring new hights.',
+    'welcome_word5' => 'We look forward with our hearts and minds for Your prosperous future.',
+    'welcome_word6' => 'Sincerely yours,',
+
+
+
+
+
 
     'courses' => 'Courses',
     'mycourses' => 'My Courses',
@@ -148,9 +154,9 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
     'course_text9' => 'Plan',
     'course_text10' => 'Author',
 
-    'student_text1' => 'Add students',
+    'student_text1' => 'Add participants',
     'student_text11' => 'Field(s) is empty',
-    'student_text2' => 'Information about student',
+    'student_text2' => 'Information about participant',
     'student_text3' => 'First Name',
     'student_text4' => 'Surname',
     'student_text5' => 'Paternal Name',
@@ -164,8 +170,8 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
     'student_text112' => 'Change student information',
 
 
-    'registration_text1' => 'Student registration',
-    'registration_text2' => 'Sign- up student for the course',
+    'registration_text1' => 'Participant registration',
+    'registration_text2' => 'Sign- up participant for the course',
     'registration_text21' => 'oops',
     'registration_text22' => 'Problems appeared with your entry',
     'registration_text3' => 'Course',
@@ -192,9 +198,11 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
     'chat_text5' => 'Chat',
     'chat_text6' => 'Course',
     'chat_text7' => 'Message',
-    'chat_text8' => 'Sender',
+    'chat_text8' => 'Send',
     'chat_text9' => 'Me',
     'chat_text10' => 'response',
+    'chat_text11' => 'Feedback',
+    'chat_text12' => 'Help',
 
 
     'feedback_text7' => 'Feedback',
@@ -284,7 +292,7 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
     'user_text4' => 'Family name',
     'user_text5' => 'Log in',
     'user_text6' => 'Group',
-    'user_text7' => 'Description',
+    'user_text7' => 'Additional information',
     'user_text8' => 'Password',
     'user_text9' => 'Password verification',
 
@@ -297,7 +305,7 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
     'user_text15' => 'Name and Family name',
     'user_text16' => 'Log in',
     'user_text17' => 'Group',
-    'user_text18' => 'Information',
+    'user_text18' => 'Extra information',
     'user_text19' => 'Date of registry',
 
 

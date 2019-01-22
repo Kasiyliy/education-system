@@ -79,7 +79,7 @@ class SubjectController extends Controller
         } else {
 
             $this->subject->create($data);
-            $notification = array('title' => 'Информация сохранена', 'body' => 'Под курс успешно добавлен.');
+            $notification = array('title' => 'Информация сохранена', 'body' => 'Курс успешно добавлен.');
             return Redirect::route('subject.create')->with("success", $notification);
         }
     }
@@ -140,7 +140,7 @@ class SubjectController extends Controller
             try {
                 $subject = Subject::findOrFail($id);
                 $subject->fill($data)->save();
-                $notification = array('title' => 'Изменение', 'body' => 'Под курс успешно изменен.');
+                $notification = array('title' => 'Изменение', 'body' => 'Курс успешно изменен.');
                 return Redirect::route('subject.index')->with("success", $notification);
             } catch (Exception $e) {
                 $notification = array('title' => 'Изменение', 'body' => "никаких записей нету.");
@@ -160,7 +160,7 @@ class SubjectController extends Controller
     {
         $subject = Subject::findOrFail($id);
         $subject->delete();
-        $notification = array('title' => 'Удаление', 'body' => 'Под курс успешно удален.');
+        $notification = array('title' => 'Удаление', 'body' => 'Курс успешно удален.');
         return Redirect::route('subject.index')->with("success", $notification);
 
     }

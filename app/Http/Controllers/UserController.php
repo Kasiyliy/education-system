@@ -169,7 +169,7 @@ class UserController extends Controller
             $student = Student::findOrFail($request->student_id);
             $student->user_id = $request->user_id;
             $student->save();
-            $notification = array('title' => 'Информация сохранена', 'body' => 'Стдуент успешно зарегестрирован на аккаунт.');
+            $notification = array('title' => 'Информация сохранена', 'body' => 'Аккаунт успешно привязан к слушателю.');
             return Redirect::route('user.addstudent')->with("success", $notification);
         }
     }

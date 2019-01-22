@@ -297,7 +297,7 @@ class StudentController extends Controller
             }
         }
         Registration::insert($toBeRegisterStudents);
-        $notification = array('title' => ' Добавление ', 'body' => $newRegistration . ' Студент успешно зарегестрирован на под курс.');
+        $notification = array('title' => ' Добавление ', 'body' => $newRegistration . ' Студент успешно зарегестрирован на курс.');
 
 
         if ($alreadyRegistered) {
@@ -344,7 +344,7 @@ class StudentController extends Controller
     {
         $student = Registration::findOrFail($id);
         $student->delete();
-        $notification = array('title' => 'Удаление', 'body' => 'Отмена добавления на подкурс.');
+        $notification = array('title' => 'Удаление', 'body' => 'Отмена добавления на курс.');
         return Response()->json([
             'success' => true,
             'message' => $notification

@@ -52,7 +52,7 @@
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
-                          <button id="send" type="submit" class="btn btn-success"><i class="fa fa-check"> {{trans('messages.button_change')}}</i></button>
+                          <button id="send" type="submit" class="btn btn-success"><i class="fa fa-check"> {{trans('messages.button_save')}}</i></button>
                         </div>
                       </div>
                       <div class="form-group">

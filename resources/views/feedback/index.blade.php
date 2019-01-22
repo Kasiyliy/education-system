@@ -44,7 +44,13 @@
                                             <td>{{$feedback->name. " ".$feedback->surname}}</td>
                                             <td>{{$feedback->email}}</td>
                                             <td>{{$feedback->message}}</td>
-                                            <td>{{$feedback->feedback ? "Отзыв" : "Помощь" }}</td>
+                                            <td>@if($feedback->feedback == 0)
+                                                    {{trans('messages.chat_text12')}}
+
+                                                @else
+                                                    {{trans('messages.chat_text11')}}
+
+                                                @endif</td>
                                             <td>{{$feedback->created_at }}</td>
                                             <td>
                                                 <a title='Update' class='btn btn-info btn-xs btnUpdate'

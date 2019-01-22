@@ -128,7 +128,6 @@
 
     @media (min-width: 992px) {
         header.masthead1 {
-            height: 100vh;
             min-height: 650px;
             padding-top: 0;
             padding-bottom: 0;

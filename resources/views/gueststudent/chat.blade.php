@@ -67,7 +67,7 @@
             <br>
             <textarea required name="content" class="form-control my-2" placeholder="Сообщение"></textarea>
             <br>
-            <button class="form-control" type="submit">Отправить</button>
+            <button class="form-control btn btn-success" type="submit">Отправить</button>
           </form>
         </div>
       </div>

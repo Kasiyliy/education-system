@@ -110,7 +110,7 @@
 
                                 <br><br>
                                 <button type="submit" name=""
-                                        class="btn btn-success">{{trans('messages.button_change')}}</button>
+                                        class="btn btn-success">{{trans('messages.button_save')}}</button>
 
                             </form>
                         </div>

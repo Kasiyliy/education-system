@@ -47,7 +47,7 @@ class LessonController extends Controller
             $subjects = Subject::where('user_id', Auth::id())->get();
         }
         if (count($subjects) == 0) {
-            Session::flash('warning', ['title' => 'Ошибка!', 'body' => 'Не добавлены под курсы!']);
+            Session::flash('warning', ['title' => 'Ошибка!', 'body' => 'Не добавлены курсы!']);
             return redirect()->back();
         }
         return view('lesson.create', compact('subjects'));
@@ -81,10 +81,10 @@ class LessonController extends Controller
                 ->count();
             if ($checkForExist == null) {
                 $lesson->save();
-                Session::flash('success', ['title' => 'Добавление!', 'body' => 'Урок сохранен!']);
+                Session::flash('success', ['title' => 'Добавление!', 'body' => 'Сохранено!']);
                 return redirect()->route('lesson-part.index', ['id' => $lesson->id]);
             } else {
-                $notification = array('title' => 'Добавление!', 'body' => 'У под курса уже есть урок!');
+                $notification = array('title' => 'Добавление!', 'body' => 'У курса уже есть урок!');
                 return redirect()->back()->with('error' , $notification);
             }
         }

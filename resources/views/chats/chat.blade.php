@@ -61,7 +61,7 @@
                                 <textarea required name="content" class="form-control my-2"
                                           placeholder="{{trans('messages.chat_text7')}}"></textarea>
                                 <br>
-                                <button class="form-control" type="submit">{{trans('messages.chat_text8')}}</button>
+                                <button class="form-control btn btn-success" type="submit">{{trans('messages.chat_text8')}}</button>
                             </form>
                         </div>
                     </div>

@@ -9,6 +9,7 @@ use App\Http\Requests;
 
 class TeacherControlController extends Controller
 {
+
     public function index()
     {
         $teacherControls = TeacherControl::all();

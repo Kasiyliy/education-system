@@ -12,19 +12,18 @@
                         <strong>{{trans('messages.welcome_word1')}}</strong></br>
                         <strong>{{trans('messages.welcome_word2')}}</strong></br>
                         <strong>{{trans('messages.welcome_word3')}}</strong></br>
-                        <strong>{{trans('messages.welcome_word4')}}</strong>
+                        <strong>{{trans('messages.welcome_word4')}}</strong></br>
+                        <strong>{{trans('messages.welcome_word5')}}</strong>
                     </h5>
                     <hr class="light my-4">
                 </div>
                 <div class="col-lg-10" id="iskrenne" style="margin-left:100px;">
                     <p class="text-white text-right">
-                        {{trans('messages.welcome_word5')}}</br>
+                        {{trans('messages.welcome_word6')}}<br>
                         @if(session('language') == 'ru')
-                            Команда </br>
-                            ASTC Global</br>
+                            Команда ASTC Global<br>
                         @else
-                            ASTC Global</br>
-                            team</br>
+                            ASTC Global team<br>
                         @endif
 
                     </p>
