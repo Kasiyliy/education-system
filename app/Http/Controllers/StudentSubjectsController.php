@@ -40,7 +40,7 @@ class StudentSubjectsController extends Controller
                 $join->on('subject.user_id', '=', 'messages.sender_user_id');
             })
             ->where('registrations.students_id' , $student->id)
-            ->where('registrations.date_to_learn' , '<=', 'now()')
+            ->where('registrations.date_to_learn' , '>=', 'now()')
             ->where('registrations.deleted_at', '=', null)
             ->groupBy('subject.id')
             ->groupBy('subject.name')
