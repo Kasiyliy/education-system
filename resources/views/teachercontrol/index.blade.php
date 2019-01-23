@@ -37,18 +37,20 @@
                                 <tbody>
                                 @if($teacherControls)
                                     @foreach($teacherControls as $teacherControl)
-                                        <tr>
-                                            <td>{{$teacherControl->user->firstname. " ".$teacherControl->user->lastname}}</td>
-                                            <td>@if($teacherControl->entered == 0)
-                                                    {{trans('messages.teacher_text7')}}
+                                        @if($teacherControl->user)
+                                            <tr>
+                                                <td>{{$teacherControl->user->firstname. " ".$teacherControl->user->lastname}}</td>
+                                                <td>@if($teacherControl->entered == 0)
+                                                        {{trans('messages.teacher_text7')}}
 
-                                                @else
-                                                    {{trans('messages.teacher_text6')}}
-                                                    
-                                                @endif
-                                            </td>
-                                            <td>{{$teacherControl->created_at }}</td>
-                                        </tr>
+                                                    @else
+                                                        {{trans('messages.teacher_text6')}}
+
+                                                    @endif
+                                                </td>
+                                                <td>{{$teacherControl->created_at }}</td>
+                                            </tr>
+                                        @endif
                                     @endforeach
                                 @endif
                                 </tbody>
