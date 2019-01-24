@@ -216,6 +216,10 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
+        if($user->group == User::ADMIN){
+            $notification = array('title' => 'Удаление', 'body' => 'Невозможно удалить Админа.');
+            return Redirect::route('user.index')->with("warning", $notification);
+        }
         $user->delete();
 
         $notification = array('title' => 'Удаление', 'body' => 'Пользователь успешно удален.');
