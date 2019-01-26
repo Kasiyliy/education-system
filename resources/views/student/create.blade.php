@@ -29,14 +29,14 @@
 									<div class="row">
 										<div class="col-md-6 col-sm-6 col-xs-12">
 											<label for="firstName">{{trans('messages.student_text3')}}: <span class="text-danger">*</span></label>
-											<input type="text" id="firstName" class="form-control has-feedback-left" name="firstName" required />
+											<input type="text" id="firstName" class="form-control has-feedback-left" name="firstName" value="{{old('firstName')}}" required />
 											<i class="fa fa-user form-control-feedback left" aria-hidden="true"></i>
 											<span id="msg_firstName" class="text-danger" >{{ $errors->first('firstName') }}</span>
 										</div>
 
 										<div class="col-md-6 col-sm-6 col-xs-12">
 											<label for="middleName">{{trans('messages.student_text5')}}:</label>
-											<input type="text" id="middleName" class="form-control has-feedback-left" name="middleName" data-parsley-trigger="change" required />
+											<input type="text" id="middleName" class="form-control has-feedback-left" name="middleName" value="{{old('middleName')}}" data-parsley-trigger="change" required />
 											<i class="fa fa-user form-control-feedback left" aria-hidden="true"></i>
 											<span id="msg_middleName" class="text-danger" >{{ $errors->first('middleName') }}</span>
 
@@ -45,7 +45,7 @@
 									<div class="row">
 										<div class="col-md-6 col-sm-6 col-xs-12">
 											<label for="lastName">{{trans('messages.student_text4')}}: <span class="text-danger">*</span></label>
-											<input type="text" id="lastName" class="form-control has-feedback-left" name="lastName" required />
+											<input type="text" id="lastName" class="form-control has-feedback-left" name="lastName" value="{{old('lastName')}}" required />
 											<i class="fa fa-user form-control-feedback left" aria-hidden="true"></i>
 											<span id="msg_lastName" class="text-danger" >{{ $errors->first('lastName') }}</span>
 
@@ -70,7 +70,7 @@
 										</div>
 										<div class="col-md-6 col-sm-6 col-xs-12">
 											<label for="mobileNo">{{trans('messages.student_text8')}}: <span class="text-danger">*</span></label>
-											<input type="text" id="mobileNo" class="form-control has-feedback-left" data-inputmask="'mask': '+7 9999999999'" name="mobileNo" required />
+											<input type="text" id="mobileNo" class="form-control has-feedback-left" data-inputmask="'mask': '+7 9999999999'" value="{{old('mobileNo')}}" name="mobileNo" required />
 											<i class="fa fa-phone form-control-feedback left" aria-hidden="true"></i>
 											<span id="msg_mobileNo" class="text-danger" >{{ $errors->first('mobileNo') }}</span>
 

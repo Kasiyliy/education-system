@@ -23,7 +23,7 @@
                         @if(session('language') == 'en')
                             ASTC Global team<br>
                         @else
-                            Команда ASTC Global<br>
+                            команда ASTC Global<br>
                         @endif
 
                     </p>
