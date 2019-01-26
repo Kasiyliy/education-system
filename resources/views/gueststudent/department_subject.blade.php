@@ -26,7 +26,7 @@
                             <div class="card-header"
                                  style=" background-image: linear-gradient(to bottom , #ECEAEF, #B2ABB3)">
                                 <p>
-                                    <span class="text-muted small">{{trans('messages.courses')}}</span>: {{$subject->name}}
+                                    <span class="text-muted small"></span>: {{$subject->name}}
                                 </p>
                             </div>
                             <div class="card-body">
