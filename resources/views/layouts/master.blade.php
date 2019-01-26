@@ -194,6 +194,16 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <li><a href="{{URL::route('instruction.show')}}">
+                                        <i class="fa fa-file-text"></i>{{trans('messages.instruction_text1')}}</a>
+                                </li>
+                            @endcan
+                            @can('Teacher')
+                                <li><a href="{{URL::route('instruction.show')}}">
+                                        <i class="fa fa-file-text"></i>{{trans('messages.instruction_text2')}}</a>
+                                </li>
+                            @endcan
+                            @can('Admin')
                                 <li><a href="{{URL::route('institute.index')}}">
                                         <i class="fa fa-building"></i>{{trans('messages.about_us')}}</a>
                                 </li>
@@ -205,7 +215,8 @@
 
                 <!-- /menu footer buttons -->
                 <div class="sidebar-footer hidden-small">
-                    <a href="{{URL::route('user.settings',['id' => Auth::user()->id])}}" data-toggle="tooltip" data-placement="top"
+                    <a href="{{URL::route('user.settings',['id' => Auth::user()->id])}}" data-toggle="tooltip"
+                       data-placement="top"
                        title="Настройки">
                         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                     </a>
@@ -249,7 +260,8 @@
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu">
                                 <li>
-                                    <a href="{{URL::route('user.settings',['id' => Auth::user()->id])}}"><i class="glyphicon glyphicon-cog"></i>
+                                    <a href="{{URL::route('user.settings',['id' => Auth::user()->id])}}"><i
+                                                class="glyphicon glyphicon-cog"></i>
                                         Настройки</a>
                                 </li>
                                 <li>

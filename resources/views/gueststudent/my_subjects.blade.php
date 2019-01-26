@@ -43,7 +43,7 @@
                             <div class="col-sm-4">
                                 <div class="card">
                                     <div class="card-header">
-                                        <p> <span class="text-muted small">Под курс #{{$sortedSubject->id}}</span>:  {{$sortedSubject->name}}</p>
+                                        <p> <span class="text-muted small"></span>:  {{$sortedSubject->name}}</p>
                                     </div>
                                     <div class="card-body">
                                         <span class="text-muted small">Описание:</span>

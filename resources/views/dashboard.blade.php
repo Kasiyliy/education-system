@@ -11,15 +11,15 @@
             <!-- /top tiles -->
             <div class="row tile_count text-center">
               <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-2x fa-home green"></i> Глобальный курс</span>
+              <span class="count_top"><i class="fa fa-2x fa-home green"></i>{{trans('messages.disciplina')}}</span>
                 <div class="count red">{{$total["department"]}}</div>
               </div>
               <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
-                <span class="count_top"><i class="fa fa-2x fa-users green"></i> Добавленные студенты</span>
+                <span class="count_top"><i class="fa fa-2x fa-users green"></i>{{trans('messages.student')}}</span>
                 <div class="count blue">{{$total["admitted"]}}</div>
               </div>
               <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-2x fa-book green"></i> Под курсы</span>
+              <span class="count_top"><i class="fa fa-2x fa-book green"></i>{{trans('messages.courses')}}</span>
                 <div class="count red">{{$total["subject"]}}</div>
               </div>
             </div>
