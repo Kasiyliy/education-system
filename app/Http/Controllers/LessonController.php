@@ -27,8 +27,8 @@ class LessonController extends Controller
         if(Auth::user()->group == User::ADMIN){
             $lessons = Lesson::all();
         }else if(Auth::user()->group == User::TEACHER){
-            $lessons = Lesson::join('subject', 'subject.id' , '=' ,'lessons.subject_id')
-            ->where('subject.user_id' , Auth::id())->get();
+            $lessons = Lesson::select('lessons.*')->join('subject', 'subject.id' , '=' ,'lessons.subject_id')
+                ->where('subject.user_id' , Auth::id())->get();
         }
         return view('lesson.index', compact('lessons'));
     }
