@@ -151,9 +151,9 @@
                 var form1 ="";
                 form1 += "<div class='row' id='lessonPart"+id+"'>";
 
-                form1 += "<div class='col-xs-8'><div class='row'>";
+                form1 += "<div class='col-sm-8'><div class='row'>";
 
-                form1 +=   " <div class='col-xs-12'><div class=\"embed-responsive embed-responsive-16by9\">\n" +
+                form1 +=   " <div class='col-sm-12'><div class=\"embed-responsive embed-responsive-16by9\">\n" +
                     "                                <img class=\"embed-responsive-item\" id=\"viewer\"\n" +
                     "                                        src=\"/" + presentation + "\" allowfullscreen\n" +
                     "                                        webkitallowfullscreen></img>\n" +
@@ -161,7 +161,7 @@
 
 
 
-                form1 += "                            <div class=\" col-xs-12 card my-1\">\n" +
+                form1 += "                            <div class=\" col-sm-12 card my-1\">\n" +
                     "                                <div class=\"card-body\">\n" +
                     "                                    <audio controls " + (currentLessonPartId==sliderLessonPartId? "autoplay='autoplay'" : "") +  " controlsList=\"nodownload\">\n" +
                     "                                        <source src=\"/" + audio + "\">\n" +
@@ -172,9 +172,9 @@
 
                 form1 += "</div></div>";
 
-                form1 += "<div class='col-xs-4'><div class='row'>";
+                form1 += "<div class='col-sm-4'><div class='row'>";
 
-                form1 += "  <div class=\" col-xs-12 card my-1\">\n" +
+                form1 += "  <div class=\" col-sm-12 card my-1\">\n" +
                     "                                <div class=\"card-body\">\n" +
                     "                                    <video controls  controlsList=\"nodownload\">\n" +
                     "                                        <source src=\"/" + video + "\">\n" +
@@ -184,7 +184,7 @@
                     "                            </div>\n";
 
                 form1 +=
-                    "<div class='col-xs-12' style='height: 400px; overflow-y:auto'><p class='text-center m-2'>Информация:`" + information+"`</p></div>" ;
+                    "<div class='col-sm-12' style='height: 400px; overflow-y:auto'><p class='text-center m-2'>Информация:`" + information+"`</p></div>" ;
 
                 form1 += "</div></div>";
 
