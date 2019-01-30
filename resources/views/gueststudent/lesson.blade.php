@@ -73,22 +73,22 @@
         $(document).ready(function () {
             @foreach($otherLessonParts as $oLp)
                 constructFrame(
-                    "{{$oLp->id}}",
-                    "{{$oLp->information}}",
-                    "{{$oLp->presentation}}",
-                    "{{$oLp->video!= null ? $oLp->video : ""}}",
-                    "{{$oLp->audio!= null ? $oLp->audio : ""}}",
-                        {{$oLp->seconds}},
+                    `{{$oLp->id}}`,
+                    `{{$oLp->information}}`,
+                    `{{$oLp->presentation}}`,
+                    `{{$oLp->video!= null ? $oLp->video : ""}}`,
+                    `{{$oLp->audio!= null ? $oLp->audio : ""}}`,
+                    {{$oLp->seconds}},
                 false
                 );
             @endforeach
 
             constructFrame(
                 "{{$lessonPart->id}}",
-                "{{$lessonPart->information}}",
-                "{{$lessonPart->presentation}}",
-                "{{$lessonPart->video!= null ? $lessonPart->video : ""}}",
-                "{{$lessonPart->audio!= null ? $lessonPart->audio : ""}}",
+                `{{$lessonPart->information}}`,
+                `{{$lessonPart->presentation}}`,
+                `{{$lessonPart->video!= null ? $lessonPart->video : ""}}`,
+                `{{$lessonPart->audio!= null ? $lessonPart->audio : ""}}`,
                 {{$lessonPart->seconds}}
             );
             arrayIds.forEach(function(id){
@@ -153,7 +153,7 @@
 
 
                 form1 += "<div class='row'>" +
-                    "<div class='col-sm-12'><p class='text-center m-2'>Информация:" + information+"</p></div>" ;
+                    "<div class='col-sm-12'><p class='text-center m-2'>Информация:`" + information+"`</p></div>" ;
 
                 if(presentation != null){
                     form1 +=   " <div class='col-sm-12'><div class=\"embed-responsive embed-responsive-16by9\">\n" +
