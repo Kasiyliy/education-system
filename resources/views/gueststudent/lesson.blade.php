@@ -167,7 +167,7 @@
 
                 form1 += "</div>";
 
-                form1 += "<div class='col-sm-8 row'>";
+                form1 += "<div class='col-sm-7 row'>";
 
                 form1 +=   " <div class='col-sm-12'><div class=\"embed-responsive embed-responsive-16by9\">\n" +
                     "                                <img class=\"embed-responsive-item\" id=\"viewer\"\n" +
