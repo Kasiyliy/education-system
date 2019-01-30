@@ -107,7 +107,7 @@
                     var div = document.getElementById(lessonPartFrame + sliderLessonPartId);
                     div.style.display = 'none';
                     div = document.getElementById(lessonPartFrame + arrayIds[index-1]);
-                    div.style.display = 'block';
+                    div.removeAttribute('style');
                     sliderLessonPartId = arrayIds[index-1];
                 }
                 checkSliderSituation();
