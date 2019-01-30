@@ -153,46 +153,38 @@
 
                 form1 += "<div class='col-sm-8'><div class='row'>";
 
-                if(presentation!=null ){
-                    form1 +=   " <div class='col-sm-12'><div class=\"embed-responsive embed-responsive-16by9\">\n" +
-                        "                                <img class=\"embed-responsive-item\" id=\"viewer\"\n" +
-                        "                                        src=\"/" + presentation + "\" allowfullscreen\n" +
-                        "                                        webkitallowfullscreen></img>\n" +
-                        "                            </div></div>\n" ;
-                }
+                form1 +=   " <div class='col-sm-12'><div class=\"embed-responsive embed-responsive-16by9\">\n" +
+                    "                                <img class=\"embed-responsive-item\" id=\"viewer\"\n" +
+                    "                                        src=\"/" + presentation + "\" allowfullscreen\n" +
+                    "                                        webkitallowfullscreen></img>\n" +
+                    "                            </div></div>\n" ;
 
 
 
-                if(audio!=null){
-                    form1 += "                            <div class=\" col-sm-12 card my-1\">\n" +
-                        "                                <div class=\"card-body\">\n" +
-                        "                                    <audio controls " + (currentLessonPartId==sliderLessonPartId? "autoplay='autoplay'" : "") +  " controlsList=\"nodownload\">\n" +
-                        "                                        <source src=\"/" + audio + "\">\n" +
-                        "                                        Your browser does not support the audio tag.\n" +
-                        "                                    </audio>\n" +
-                        "                                </div>\n" +
-                        "                            </div>";
-                }
+                form1 += "                            <div class=\" col-sm-12 card my-1\">\n" +
+                    "                                <div class=\"card-body\">\n" +
+                    "                                    <audio controls " + (currentLessonPartId==sliderLessonPartId? "autoplay='autoplay'" : "") +  " controlsList=\"nodownload\">\n" +
+                    "                                        <source src=\"/" + audio + "\">\n" +
+                    "                                        Your browser does not support the audio tag.\n" +
+                    "                                    </audio>\n" +
+                    "                                </div>\n" +
+                    "                            </div>";
 
                 form1 += "</div></div>";
 
                 form1 += "<div class='col-sm-4'><div class='row'>";
 
-                if(video!=null){
-                    form1 += "  <div class=\" col-sm-12 card my-1\">\n" +
-                        "                                <div class=\"card-body\">\n" +
-                        "                                    <video controls  controlsList=\"nodownload\">\n" +
-                        "                                        <source src=\"/" + video + "\">\n" +
-                        "                                        Your browser does not support the video tag.\n" +
-                        "                                    </video>\n" +
-                        "                                </div>\n" +
-                        "                            </div>\n";
+                form1 += "  <div class=\" col-sm-12 card my-1\">\n" +
+                    "                                <div class=\"card-body\">\n" +
+                    "                                    <video controls  controlsList=\"nodownload\">\n" +
+                    "                                        <source src=\"/" + video + "\">\n" +
+                    "                                        Your browser does not support the video tag.\n" +
+                    "                                    </video>\n" +
+                    "                                </div>\n" +
+                    "                            </div>\n";
 
-                }
-                if(information!=null){
-                    form1 +=
-                        "<div class='col-sm-12' style='overflow-y:auto'><p class='text-center m-2'>Информация:`" + information+"`</p></div>" ;
-                }
+                form1 +=
+                    "<div class='col-sm-12' style='max-height:300px; overflow-y:auto'><p class='text-center m-2'>Информация:`" + information+"`</p></div>" ;
 
                 form1 += "</div></div>";
 
