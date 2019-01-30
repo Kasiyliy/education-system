@@ -151,7 +151,7 @@
                 var form1 ="";
                 form1 += "<div class='row' id='lessonPart"+id+"'>";
 
-                form1 += "<div class='col-sm-7 row'>";
+                form1 += "<div class='col-sm-8 row'>";
 
                 form1 +=   " <div class='col-sm-12'><div class=\"embed-responsive embed-responsive-16by9\">\n" +
                     "                                <img class=\"embed-responsive-item\" id=\"viewer\"\n" +
@@ -187,7 +187,7 @@
                     "<div class='col-sm-12' style='min-width: 200px; height: 400px; overflow-y:auto'><p class='text-center m-2'>Информация:`" + information+"`</p></div>" ;
 
                 form1 += "</div>";
-                
+
                 form1 +="</div>";
                 if(checker){
                     var downloadTimer = setInterval(function(){
