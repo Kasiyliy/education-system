@@ -163,7 +163,7 @@
                     "                            </div>\n";
 
                 form1 +=
-                    "<div class='col-sm-12'><p style='min-width: 100px; overflow-y:auto' class='text-center m-2'>Информация:`" + information+"`</p></div>" ;
+                    "<div class='col-sm-12'><p style='min-width: 100px; height: 150px; overflow-y:auto' class='text-center m-2'>Информация:`" + information+"`</p></div>" ;
 
                 form1 += "</div>";
 
