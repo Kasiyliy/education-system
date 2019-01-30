@@ -184,7 +184,7 @@
                     "                            </div>\n";
 
                 form1 +=
-                    "<div class='col-sm-12' style='height: 400px; overflow-y:auto'><p class='text-center m-2'>Информация:`" + information+"`</p></div>" ;
+                    "<div class='col-sm-12' style='overflow-y:auto'><p class='text-center m-2'>Информация:`" + information+"`</p></div>" ;
 
                 form1 += "</div></div>";
 
