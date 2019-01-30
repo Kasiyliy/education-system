@@ -163,7 +163,7 @@
 
                 form1 += "                            <div class=\" col-sm-12 card my-1\">\n" +
                     "                                <div class=\"card-body\">\n" +
-                    "                                    <audio controls " + (currentLessonPartId==sliderLessonPartId? "autoplay='autoplay'" : "") +  " controlsList=\"nodownload\">\n" +
+                    "                                    <audio controls autoplay='autoplay' controlsList=\"nodownload\">\n" +
                     "                                        <source src=\"/" + audio + "\">\n" +
                     "                                        Your browser does not support the audio tag.\n" +
                     "                                    </audio>\n" +
@@ -174,14 +174,18 @@
 
                 form1 += "<div class='col-sm-4'><div class='row'>";
 
-                form1 += "  <div class=\" col-sm-12 card my-1\">\n" +
-                    "                                <div class=\"card-body\">\n" +
-                    "                                    <video controls  controlsList=\"nodownload\">\n" +
-                    "                                        <source src=\"/" + video + "\">\n" +
-                    "                                        Your browser does not support the video tag.\n" +
-                    "                                    </video>\n" +
-                    "                                </div>\n" +
-                    "                            </div>\n";
+                if(video!=null){
+                    if(video.length > 0){
+                        form1 += "  <div class=\" col-sm-12 card my-1\">\n" +
+                            "                                <div class=\"card-body\">\n" +
+                            "                                    <video controls  controlsList=\"nodownload\">\n" +
+                            "                                        <source src=\"/" + video + "\">\n" +
+                            "                                        Your browser does not support the video tag.\n" +
+                            "                                    </video>\n" +
+                            "                                </div>\n" +
+                            "                            </div>\n";
+                    }
+                }
 
                 form1 +=
                     "<div class='col-sm-12' style='max-height:300px; overflow-y:auto'><p class='text-center m-2'>Информация:`" + information+"`</p></div>" ;
