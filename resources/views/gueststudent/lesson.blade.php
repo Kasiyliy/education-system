@@ -73,22 +73,22 @@
         $(document).ready(function () {
             @foreach($otherLessonParts as $oLp)
                 constructFrame(
-                    "{{$oLp->id}}",
-                    "{{$oLp->information}}",
-                    "{{$oLp->presentation}}",
-                    "{{$oLp->video!= null ? $oLp->video : ""}}",
-                    "{{$oLp->audio!= null ? $oLp->audio : ""}}",
-                        {{$oLp->seconds}},
+                    `{{$oLp->id}}`,
+                    `{{$oLp->information}}`,
+                    `{{$oLp->presentation}}`,
+                    `{{$oLp->video!= null ? $oLp->video : ""}}`,
+                    `{{$oLp->audio!= null ? $oLp->audio : ""}}`,
+                    {{$oLp->seconds}},
                 false
                 );
             @endforeach
 
             constructFrame(
                 "{{$lessonPart->id}}",
-                "{{$lessonPart->information}}",
-                "{{$lessonPart->presentation}}",
-                "{{$lessonPart->video!= null ? $lessonPart->video : ""}}",
-                "{{$lessonPart->audio!= null ? $lessonPart->audio : ""}}",
+                `{{$lessonPart->information}}`,
+                `{{$lessonPart->presentation}}`,
+                `{{$lessonPart->video!= null ? $lessonPart->video : ""}}`,
+                `{{$lessonPart->audio!= null ? $lessonPart->audio : ""}}`,
                 {{$lessonPart->seconds}}
             );
             arrayIds.forEach(function(id){
@@ -107,7 +107,7 @@
                     var div = document.getElementById(lessonPartFrame + sliderLessonPartId);
                     div.style.display = 'none';
                     div = document.getElementById(lessonPartFrame + arrayIds[index-1]);
-                    div.style.display = 'block';
+                    div.removeAttribute('style');
                     sliderLessonPartId = arrayIds[index-1];
                 }
                 checkSliderSituation();
@@ -122,7 +122,7 @@
                     var div = document.getElementById(lessonPartFrame + sliderLessonPartId);
                     div.style.display = 'none';
                     div = document.getElementById(lessonPartFrame + arrayIds[index+1]);
-                    div.style.display = 'block';
+                    div.removeAttribute('style');
                     sliderLessonPartId = arrayIds[index+1];
                 }
                 checkSliderSituation();
@@ -149,23 +149,34 @@
                 currentLessonPartId = id;
                 sliderLessonPartId = id;
                 var form1 ="";
-                form1 += "<div id='lessonPart"+id+"'>";
+                form1 += "<div class='row' id='lessonPart"+id+"'>";
+
+                form1 += "<div class='col-sm-8'><div class='row'>";
+
+                form1 +=   " <div class='col-sm-12'><div class=\"embed-responsive embed-responsive-16by9\">\n" +
+                    "                                <img class=\"embed-responsive-item\" id=\"viewer\"\n" +
+                    "                                        src=\"/" + presentation + "\" allowfullscreen\n" +
+                    "                                        webkitallowfullscreen></img>\n" +
+                    "                            </div></div>\n" ;
 
 
-                form1 += "<div class='row'>" +
-                    "<div class='col-sm-12'><p class='text-center m-2'>Информация:" + information+"</p></div>" ;
 
-                if(presentation != null){
-                    form1 +=   " <div class='col-sm-12'><div class=\"embed-responsive embed-responsive-16by9\">\n" +
-                        "                                <img class=\"embed-responsive-item\" id=\"viewer\"\n" +
-                        "                                        src=\"/" + presentation + "\" allowfullscreen\n" +
-                        "                                        webkitallowfullscreen></img>\n" +
-                        "                            </div></div>\n" ;
-                }
+                form1 += "                            <div class=\" col-sm-12 card my-1\">\n" +
+                    "                                <div class=\"card-body\">\n" +
+                    "                                    <audio controls autoplay='autoplay' controlsList=\"nodownload\">\n" +
+                    "                                        <source src=\"/" + audio + "\">\n" +
+                    "                                        Your browser does not support the audio tag.\n" +
+                    "                                    </audio>\n" +
+                    "                                </div>\n" +
+                    "                            </div>";
 
-                if (video != null) {
-                    if (video.length > 0) {
-                        form1 += "                            <div class=\" col-sm-12 card my-1\">\n" +
+                form1 += "</div></div>";
+
+                form1 += "<div class='col-sm-4'><div class='row'>";
+
+                if(video!=null){
+                    if(video.length > 0){
+                        form1 += "  <div class=\" col-sm-12 card my-1\">\n" +
                             "                                <div class=\"card-body\">\n" +
                             "                                    <video controls  controlsList=\"nodownload\">\n" +
                             "                                        <source src=\"/" + video + "\">\n" +
@@ -175,20 +186,12 @@
                             "                            </div>\n";
                     }
                 }
-                form1 +="</div>";
 
-                if (audio != null) {
-                    if (audio.length > 0) {
-                        form1 += "                            <div class=\" col-sm-12 card my-1\">\n" +
-                            "                                <div class=\"card-body\">\n" +
-                            "                                    <audio controls autoplay='autoplay'  controlsList=\"nodownload\">\n" +
-                            "                                        <source src=\"/" + audio + "\">\n" +
-                            "                                        Your browser does not support the audio tag.\n" +
-                            "                                    </audio>\n" +
-                            "                                </div>\n" +
-                            "                            </div>";
-                    }
-                }
+                form1 +=
+                    "<div class='col-sm-12' style='max-height:300px; overflow-y:scroll'><p class='text-center m-2'>Информация:`" + information+"`</p></div>" ;
+
+                form1 += "</div></div>";
+
                 form1 +="</div>";
                 if(checker){
                     var downloadTimer = setInterval(function(){
