@@ -151,22 +151,6 @@
                 var form1 ="";
                 form1 += "<div class='row' id='lessonPart"+id+"'>";
 
-                form1 += "<div class='col-sm-4 row'>";
-
-                form1 += "  <div class=\" col-sm-12 card my-1\">\n" +
-                    "                                <div class=\"card-body\">\n" +
-                    "                                    <video controls  controlsList=\"nodownload\">\n" +
-                    "                                        <source src=\"/" + video + "\">\n" +
-                    "                                        Your browser does not support the video tag.\n" +
-                    "                                    </video>\n" +
-                    "                                </div>\n" +
-                    "                            </div>\n";
-
-                form1 +=
-                    "<div class='col-sm-12' style='min-width: 200px; height: 400px; overflow-y:auto'><p class='text-center m-2'>Информация:`" + information+"`</p></div>" ;
-
-                form1 += "</div>";
-
                 form1 += "<div class='col-sm-7 row'>";
 
                 form1 +=   " <div class='col-sm-12'><div class=\"embed-responsive embed-responsive-16by9\">\n" +
@@ -187,6 +171,23 @@
                     "                            </div>";
 
                 form1 += "</div>";
+
+                form1 += "<div class='col-sm-4 row'>";
+
+                form1 += "  <div class=\" col-sm-12 card my-1\">\n" +
+                    "                                <div class=\"card-body\">\n" +
+                    "                                    <video controls  controlsList=\"nodownload\">\n" +
+                    "                                        <source src=\"/" + video + "\">\n" +
+                    "                                        Your browser does not support the video tag.\n" +
+                    "                                    </video>\n" +
+                    "                                </div>\n" +
+                    "                            </div>\n";
+
+                form1 +=
+                    "<div class='col-sm-12' style='min-width: 200px; height: 400px; overflow-y:auto'><p class='text-center m-2'>Информация:`" + information+"`</p></div>" ;
+
+                form1 += "</div>";
+                
                 form1 +="</div>";
                 if(checker){
                     var downloadTimer = setInterval(function(){
