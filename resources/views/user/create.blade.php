@@ -36,7 +36,7 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-info green"></i></span>
                                                 <input id="name" type="text" class="form-control" name="firstname"
-                                                       value="" placeholder="First Name" required="required"
+                                                       value="{{old('firstname')}}" placeholder="First Name" required="required"
                                                        type="text">
                                             </div>
                                             <span class="text-danger">{{ $errors->first('firstname') }}</span>
@@ -52,7 +52,7 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-info green"></i></span>
                                                 <input id="name" type="text" class="form-control" name="lastname"
-                                                       value="" placeholder="Last Name" required="required" type="text">
+                                                       value="{{old('lastname')}}" placeholder="Last Name" required="required" type="text">
                                             </div>
                                             <span class="text-danger">{{ $errors->first('lastname') }}</span>
 
@@ -67,7 +67,7 @@
                                             </label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-info green"></i></span>
-                                                <input type="text" class="form-control" name="login" value=""
+                                                <input type="text" class="form-control" name="login" value="{{old('login')}}"
                                                        placeholder="admin33" required="required">
                                             </div>
                                             <span class="text-danger">{{ $errors->first('login') }}</span>
@@ -102,7 +102,7 @@
                                                 <span class="input-group-addon"><i
                                                             class="fa fa-envelope green"></i></span>
                                                 <input type="text" id="email" name="email" placeholder="xxx@domain.com"
-                                                       value="" class="form-control">
+                                                       value="{{old('email')}}" class="form-control">
                                             </div>
                                             <span class="text-danger">{{ $errors->first('email') }}</span>
 
@@ -115,7 +115,7 @@
                                             </label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-info green"></i></span>
-                                                <textarea id="description" name="description"
+                                                <textarea id="description" name="description" value="{{old('description')}}"
                                                           class="form-control col-md-7 col-xs-12"></textarea>
                                             </div>
                                             <span class="text-danger">{{ $errors->first('description') }}</span>

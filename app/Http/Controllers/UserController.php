@@ -164,7 +164,7 @@ class UserController extends Controller
         ];
         $validator = Validator::make($data, $rules);
         if ($validator->fails()) {
-            return Redirect::route('user.addstudent')->withErrors($validator);
+            return Redirect::route('user.addstudent')->withInput()->withErrors($validator);
         } else {
             $student = Student::findOrFail($request->student_id);
             $student->user_id = $request->user_id;
@@ -196,7 +196,7 @@ class UserController extends Controller
         ];
         $validator = Validator::make($data, $rules, $message);
         if ($validator->fails()) {
-            return Redirect::route('user.create')->withErrors($validator);
+            return Redirect::route('user.create')->withInput()->withErrors($validator);
         } else {
             $user = new User;
             $user->create($data);

@@ -3,7 +3,7 @@ return [
     'welcome_word1' => 'Greetings to You dear Friend!',
     'welcome_word2' => 'We are happy to welcome ayou today,',
     'welcome_word3' => 'Please allow us to guide You through this jorney to get the treasured expertice, as today it is valued and indespensible factor of development.',
-    'welcome_word4' => 'Our finest course is designed and tailored especially for You. We do believe that it will give You yhe path for soaring new hights.',
+    'welcome_word4' => 'Our finest course is designed and tailored especially for You. We do believe that it will give You the path for soaring new hights.',
     'welcome_word5' => 'We look forward with our hearts and minds for Your prosperous future.',
     'welcome_word6' => 'Sincerely yours,',
 
@@ -20,8 +20,8 @@ return [
     'signin' => 'Log in',
     'signout' => 'Log out',
 
-    'teachercontrol' => 'Instructor control',
-    'teachercontrolteacher' => 'Instructor',
+    'teachercontrol' => 'Instructor',
+    'teachercontrolteacher' => 'Instructor control',
 
     'adminpanel' => 'Admin panel',
     'teacherpanel' => 'Teacher panel',
@@ -317,6 +317,16 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
     'user_text25' => 'Log in',
 
 
+
+    'instruction_text1' => 'Admin guidence',
+    'instruction_text2' => 'Instructor guidence',
+    'instruction_text3' => 'Инструкция для админа',
+    'instruction_text4' => 'Инструкция для админа',
+    'instruction_text5' => 'Инструкция для админа',
+    'instruction_text6' => 'Инструкция для админа',
+    'instruction_text7' => 'Инструкция для админа',
+    'instruction_text8' => 'Инструкция для админа',
+    'instruction_text9' => 'Инструкция для админа',
 
 
     'button_delete' => 'Delete',

@@ -103,4 +103,9 @@ class HomeController extends Controller
         return view('certificate.show', compact('subjects'));
     }
 
+    public function instruction()
+    {
+        return view('instruction.index');
+    }
+
 }

@@ -20,10 +20,10 @@
                 <div class="col-lg-10" id="iskrenne" style="margin-left:100px;">
                     <p class="text-white text-right">
                         {{trans('messages.welcome_word6')}}<br>
-                        @if(session('language') == 'ru')
-                            Команда ASTC Global<br>
-                        @else
+                        @if(session('language') == 'en')
                             ASTC Global team<br>
+                        @else
+                            команда ASTC Global<br>
                         @endif
 
                     </p>

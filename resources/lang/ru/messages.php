@@ -17,7 +17,7 @@ return [
     'signout' => 'Выход',
 
 
-    'teachercontrol' => 'Инструктора',
+    'teachercontrol' => 'Инструкторы',
     'teachercontrolteacher' => 'Контроль инструкторов',
 
     'adminpanel' => 'Панель администратора',
@@ -53,7 +53,7 @@ return [
     'result' => 'Результаты',
     'test_result' => 'Результаты тестов',
 
-    'presentation' => 'Презентация',
+    'presentation' => 'Презентаций',
     'add_presentation' => 'Добавление презентации',
     'list_presentation' => 'Список презентаций',
 
@@ -309,6 +309,17 @@ return [
     'user_text23' => 'Привязать',
     'user_text24' => 'Имя пользователя',
     'user_text25' => 'Логин',
+
+
+    'instruction_text1' => 'Инструкция для админа',
+    'instruction_text2' => 'Инструкция для инструктора',
+    'instruction_text3' => 'Инструкция для админа',
+    'instruction_text4' => 'Инструкция для админа',
+    'instruction_text5' => 'Инструкция для админа',
+    'instruction_text6' => 'Инструкция для админа',
+    'instruction_text7' => 'Инструкция для админа',
+    'instruction_text8' => 'Инструкция для админа',
+    'instruction_text9' => 'Инструкция для админа',
 
 
 
