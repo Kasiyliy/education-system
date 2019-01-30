@@ -149,19 +149,11 @@
                 currentLessonPartId = id;
                 sliderLessonPartId = id;
                 var form1 ="";
-                form1 += "<div id='lessonPart"+id+"'>";
+                form1 += "<div class='row' id='lessonPart"+id+"'>";
 
+                form1 += "<div class='col-sm-4 row'>";
 
-                form1 += "<div class='row'>" +
-                    "<div class='col-sm-12'><p class='text-center m-2'>Информация:`" + information+"`</p></div>" ;
-
-                form1 +=   " <div class='col-sm-12'><div class=\"embed-responsive embed-responsive-16by9\">\n" +
-                    "                                <img class=\"embed-responsive-item\" id=\"viewer\"\n" +
-                    "                                        src=\"/" + presentation + "\" allowfullscreen\n" +
-                    "                                        webkitallowfullscreen></img>\n" +
-                    "                            </div></div>\n" ;
-
-                form1 += "                            <div class=\" col-sm-12 card my-1\">\n" +
+                form1 += "  <div class=\" col-sm-12 card my-1\">\n" +
                     "                                <div class=\"card-body\">\n" +
                     "                                    <video controls  controlsList=\"nodownload\">\n" +
                     "                                        <source src=\"/" + video + "\">\n" +
@@ -170,7 +162,20 @@
                     "                                </div>\n" +
                     "                            </div>\n";
 
-                form1 +="</div>";
+                form1 +=
+                    "<div class='col-sm-12'><p class='text-center m-2'>Информация:`" + information+"`</p></div>" ;
+
+                form1 += "</div>";
+
+                form1 += "<div class='col-sm-8 row'>";
+
+                form1 +=   " <div class='col-sm-12'><div class=\"embed-responsive embed-responsive-16by9\">\n" +
+                    "                                <img class=\"embed-responsive-item\" id=\"viewer\"\n" +
+                    "                                        src=\"/" + presentation + "\" allowfullscreen\n" +
+                    "                                        webkitallowfullscreen></img>\n" +
+                    "                            </div></div>\n" ;
+
+
 
                 form1 += "                            <div class=\" col-sm-12 card my-1\">\n" +
                     "                                <div class=\"card-body\">\n" +
@@ -181,6 +186,7 @@
                     "                                </div>\n" +
                     "                            </div>";
 
+                form1 += "</div>";
                 form1 +="</div>";
                 if(checker){
                     var downloadTimer = setInterval(function(){
