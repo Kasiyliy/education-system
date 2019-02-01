@@ -98,6 +98,8 @@ class GiveCertificateController extends Controller
 
         $msg = "Congrtulations!";
         mail(Auth::user()->email,"ASTC Global certificate!",$msg);
+
+        dd(Auth::user()->email);
         Session::flash('warning', 'Сертификат отправлен на почту!');
         return redirect()->back();
     }
