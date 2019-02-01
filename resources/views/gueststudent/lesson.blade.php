@@ -163,7 +163,7 @@
 
                 form1 += "                            <div class=\" col-sm-12 card my-1\">\n" +
                     "                                <div class=\"card-body\">\n" +
-                    "                                    <audio controls autoplay='autoplay' controlsList=\"nodownload\">\n" +
+                    "                                    <audio controls " + checker ? "" :"autoplay='autoplay'" + " controlsList=\"nodownload\">\n" +
                     "                                        <source src=\"/" + audio + "\">\n" +
                     "                                        Your browser does not support the audio tag.\n" +
                     "                                    </audio>\n" +
