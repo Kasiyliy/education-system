@@ -211,12 +211,7 @@
                         if(timeleft <= 0)
                         {
 
-                            var sounds = document.getElementsByTagName('audio');
-                            for(i=0; i<sounds.length; i++) {
-                                if(!sounds[i].paused){
-                                    sounds[i].pause();
-                                }
-                            }
+                            pauseAll();
 
                             clearInterval(downloadTimer);
                             $.ajax({
@@ -245,7 +240,28 @@
                 checkSliderSituation();
             }
 
+            function pauseAudio(){
+                var sounds = document.getElementsByTagName('audio');
+                for(i=0; i<sounds.length; i++) {
+                    if(!sounds[i].paused){
+                        sounds[i].pause();
+                    }
+                }
+            }
 
+            function pauseVideo(){
+                var videos = document.getElementsByTagName('video');
+                for(i=0; i<videos.length; i++) {
+                    if(!videos[i].paused){
+                        videos[i].pause();
+                    }
+                }
+            }
+
+            function pauseAll(){
+                pauseAudio();
+                pauseVideo();
+            }
 
             function constructEnd(){
                 var lastFrame  = "<div class='jumbotron' id='lastFrame'> " +
