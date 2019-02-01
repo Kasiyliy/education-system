@@ -213,7 +213,7 @@
 
                             var sounds = document.getElementsByTagName('audio');
                             for(i=0; i<sounds.length; i++) {
-                                if(!audelem.paused){
+                                if(!sounds[i].paused){
                                     sounds[i].pause();
                                 }
                             }
