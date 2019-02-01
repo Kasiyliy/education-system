@@ -210,6 +210,14 @@
                         }
                         if(timeleft <= 0)
                         {
+
+                            var sounds = document.getElementsByTagName('audio');
+                            for(i=0; i<sounds.length; i++) {
+                                if(!audelem.paused){
+                                    sounds[i].pause();
+                                }
+                            }
+
                             clearInterval(downloadTimer);
                             $.ajax({
                                 method: "GET",
