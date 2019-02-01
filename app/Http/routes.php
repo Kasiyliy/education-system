@@ -47,6 +47,7 @@ Route::group(['middleware' => ['language',]], function () {
         Route::post('/quizresult', ['as' => 'quizresult.store', 'uses' => 'QuizResultController@store']);
         Route::get('/certificate/{id}', array('as' => 'certificate', 'uses' => 'CertificateController@give'));
         Route::post('/certificate/{student_id}/{course_id}', ['as' => 'certificate.put_info', 'uses' => 'GiveCertificateController@put_info']);
+        Route::post('/send/certificate/{student_id}/{course_id}', ['as' => 'certificate.send_email', 'uses' => 'GiveCertificateController@send_email']);
     });
 
     Route::group(['middleware' => ['auth']], function () {

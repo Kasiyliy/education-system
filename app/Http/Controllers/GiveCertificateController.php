@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Certificate;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Subject;
 use App\StudentCertificate;
+use Mail;
+use Session;
 
 class GiveCertificateController extends Controller
 {
@@ -88,6 +91,18 @@ class GiveCertificateController extends Controller
                 return Redirect::route('certificate.show')->with("success", $notification);
             }
         }
+    }
+
+    public function send_email($student_id, $course_id)
+    {
+        $data = array('name'=>"ASTC Global");
+        Mail::send(['text'=>'mail'], $data, function($message) {
+            $message->to(Auth::user()->email, 'Tutorials Point')->subject
+            ('Laravel Basic Testing Mail');
+            $message->from('certificate@astcglobal.org','ASTC Global');
+        });
+        Session::flash('warning', 'Сертификат отправлен на почту!');
+        return redirect()->back();
     }
 
     public function put_info($student_id, $course_id)
