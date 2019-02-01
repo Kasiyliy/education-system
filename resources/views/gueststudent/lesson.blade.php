@@ -210,10 +210,6 @@
                         }
                         if(timeleft <= 0)
                         {
-                            $.each($('audio'), function () {
-                                $(this).pause();
-                            });
-
                             clearInterval(downloadTimer);
                             $.ajax({
                                 method: "GET",
