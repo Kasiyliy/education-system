@@ -95,12 +95,9 @@ class GiveCertificateController extends Controller
 
     public function send_email($student_id, $course_id)
     {
-        $data = array('name'=>"ASTC Global");
-        Mail::send(['text'=>'mail'], $data, function($message) {
-            $message->to(Auth::user()->email, 'Tutorials Point')->subject
-            ('Laravel Basic Testing Mail');
-            $message->from('certificate@astcglobal.org','ASTC Global');
-        });
+
+        $msg = "Congrtulations!";
+        mail(Auth::user()->email,"ASTC Global certificate!",$msg);
         Session::flash('warning', 'Сертификат отправлен на почту!');
         return redirect()->back();
     }
