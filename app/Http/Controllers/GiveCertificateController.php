@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Certificate;
+use App\Institute;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -96,13 +97,18 @@ class GiveCertificateController extends Controller
     public function send_email($student_id, $course_id)
     {
 
-        $from =  "support@astcglobal.org";
-        $to = "asilkhan234@gmail.com";
-        $subject = "ASTC Global certificate";
-        $body = "Congratulations!";
+        $institute = Institute::first();
+        if($institute){
+            $from =  $institute->email;
+            $to = Auth::user()->email;
+            $subject = "ASTC Global certificate";
+            $body = "Congratulations!";
+            $this::sendMail($from , $to ,$subject , $body);
+            Session::flash('success', 'Сертификат отправлен на почту!');
+        }else{
+            Session::flash('error', 'Ошибка отправки сообщения, свяжитесь с администратором сайта!');
+        }
 
-        $this::sendMail($from , $to ,$subject , $body);
-        Session::flash('warning', 'Сертификат отправлен на почту!');
         return redirect()->back();
     }
 
