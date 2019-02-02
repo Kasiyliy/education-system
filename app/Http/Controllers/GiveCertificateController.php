@@ -96,12 +96,26 @@ class GiveCertificateController extends Controller
     public function send_email($student_id, $course_id)
     {
 
-        $msg = "Congrtulations!";
-        mail(Auth::user()->email,"ASTC Global certificate!",$msg);
+        $from =  "support@astcglobal.org";
+        $to = Auth::user()->email;
+        $subject = "ASTC Global certificate";
+        $body = "Congratulations!";
 
-        dd(Auth::user()->email);
+        $this::sendMail($from , $to ,$subject , $body);
         Session::flash('warning', 'Сертификат отправлен на почту!');
         return redirect()->back();
+    }
+
+    public static function sendMail($from,$to,$subject,$body)
+    {
+        $charset = 'utf-8';
+        mb_language("ru");
+        $headers  = "MIME-Version: 1.0 \n" ;
+        $headers .= "From: <".$from."> \n";
+        $headers .= "Reply-To: <".$from."> \n";
+        $headers .= "Content-Type: text/html; charset=$charset \n";
+        $subject = '=?'.$charset.'?B?'.base64_encode($subject).'?=';
+        mail($to,$subject,$body,$headers);
     }
 
     public function put_info($student_id, $course_id)
