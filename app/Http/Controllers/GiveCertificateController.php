@@ -97,7 +97,7 @@ class GiveCertificateController extends Controller
     {
 
         $from =  "support@astcglobal.org";
-        $to = Auth::user()->email;
+        $to = "asilkhan234@gmail.com";
         $subject = "ASTC Global certificate";
         $body = "Congratulations!";
 
