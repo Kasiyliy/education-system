@@ -102,7 +102,7 @@ class GiveCertificateController extends Controller
             $from =  $institute->email;
             $to = Auth::user()->email;
             $subject = "ASTC Global certificate";
-            $body = "Congratulations!";
+            $body = "Congratulations! Your certificate is ready! Download it from here: ". $this->get_info($student_id, $course_id);
             $this::sendMail($from , $to ,$subject , $body);
             Session::flash('success', 'Сертификат отправлен на почту!');
         }else{
@@ -163,6 +163,50 @@ class GiveCertificateController extends Controller
         } else {
             $certificate_id = $certificate->IdNo;
             return redirect()->route('certificate',compact('certificate_id'));
+        }
+
+    }
+
+
+    public function get_info($student_id, $course_id)
+    {
+        $subject_id = $course_id;
+        $user_id = $student_id;
+
+        $teacher_id1 = Subject::select('user_id')
+            ->where('id', '=', $subject_id)
+            ->first();
+        $teacher_id = $teacher_id1->user_id;
+
+        $goden1 = Certificate::select('goden_do')
+            ->where('subject_id', '=', $course_id)
+            ->first();
+        $goden2 = $goden1->goden_do;
+
+        $goden_do = Carbon::now()->addYear('' . $goden2);
+        $converteddate = date("Y-m-d",strtotime($goden_do));
+
+        $certificate = StudentCertificate::select('*')
+            ->where('user_id', '=', $user_id)
+            ->where('subject_id', '=', $subject_id)
+            ->first();
+
+
+        if (!$certificate) {
+            $IdNo = abs(crc32(uniqid()));
+
+            $certificate = new StudentCertificate();
+            $certificate->IdNo = $IdNo;
+            $certificate->subject_id = $subject_id;
+            $certificate->user_id = $user_id;
+            $certificate->teacher_id = $teacher_id;
+            $certificate->goden_do = $converteddate;
+            $certificate->save();
+            return route('certificate' ,compact('IdNo'));
+
+        } else {
+            $certificate_id = $certificate->IdNo;
+            return route('certificate',compact('certificate_id'));
         }
 
     }
