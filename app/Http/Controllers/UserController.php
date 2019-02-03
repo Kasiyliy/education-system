@@ -150,7 +150,7 @@ class UserController extends Controller
     {
         $user = Student::where('students.user_id', '=', $id)
             ->update(['students.user_id' => null]);
-        $notification = array('title' => 'Удаление', 'body' => 'Пользователь успешно удален.');
+        $notification = array('title' => trans('messages.delete'), 'body' => trans('messages.delete_success'));
         return Redirect::route('user.addstudent')->with("success", $notification);
 
     }
@@ -169,7 +169,7 @@ class UserController extends Controller
             $student = Student::findOrFail($request->student_id);
             $student->user_id = $request->user_id;
             $student->save();
-            $notification = array('title' => 'Информация сохранена', 'body' => 'Аккаунт успешно привязан к слушателю.');
+            $notification = array('title' => trans('messages.save'), 'body' => trans('messages.account_add'));
             return Redirect::route('user.addstudent')->with("success", $notification);
         }
     }
@@ -201,7 +201,7 @@ class UserController extends Controller
             $user = new User;
             $user->create($data);
 
-            $notification = array('title' => 'Информация сохранена', 'body' => 'Пользователь успешно добавлен.');
+            $notification = array('title' => trans('messages.insert'), 'body' => trans('messages.insert_success'));
 
             return Redirect::route('user.create')->with("success", $notification);
         }
@@ -217,12 +217,12 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         if($user->group == User::ADMIN){
-            $notification = array('title' => 'Удаление', 'body' => 'Невозможно удалить Админа.');
+            $notification = array('title' => trans('messages.delete'), 'body' =>trans('messages.delete_error'));
             return Redirect::route('user.index')->with("warning", $notification);
         }
         $user->delete();
 
-        $notification = array('title' => 'Удаление', 'body' => 'Пользователь успешно удален.');
+        $notification = array('title' => trans('messages.delete'), 'body' => trans('messages.delete_success'));
         return Redirect::route('user.index')->with("success", $notification);
     }
 
@@ -274,7 +274,7 @@ class UserController extends Controller
             $name = $user->firstname . ' ' . $user->lastname;
             Session::put('name', $name);
 
-            $notification = array('title' => 'Изменение', 'body' => 'Информация успешно изменена');
+            $notification = array('title' => trans('messages.update'), 'body' => trans('messages.update_success'));
             return Redirect::back()->with('success', $notification);
         }
         return Redirect::back()->with('error', 'Invalid request!!!');

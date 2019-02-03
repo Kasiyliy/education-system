@@ -123,7 +123,7 @@ class StudentController extends Controller
         ];
 
         $message = [
-            'unique' => 'Такой логин уже существует!'
+            'unique' => trans('messages.login_exist')
         ];
         $validator = Validator::make($data, $rules, $message);
         if ($validator->fails()) {
@@ -131,7 +131,7 @@ class StudentController extends Controller
         }
         $student = new Student;
         $student->create($data);
-        $notification = array('title' => 'Добавление', 'body' => 'Студент успешно добавлен.');
+        $notification = array('title' => trans('messages.insert'), 'body' => trans('messages.insert_success'));
         return Redirect::route('student.create')->with("success", $notification);
 
     }
@@ -151,7 +151,7 @@ class StudentController extends Controller
             return view('student.show', compact('student'));
         } catch (Exception $e) {
 
-            $notification = array('title' => 'Изменение', 'body' => "Никаких записей нет.");
+            $notification = array('title' => trans('messages.error'), 'body' => trans('messages.info_error'));
             return Redirect::route('student.index')->with("error", $notification);
         }
     }
@@ -171,7 +171,7 @@ class StudentController extends Controller
             return view('student.edit', compact('departments', 'student'));
         } catch (Exception $e) {
 
-            $notification = array('title' => 'Изменение', 'body' => "Нет записей.");
+            $notification = array('title' => trans('messages.error'), 'body' => trans('messages.info_error'));
             return Redirect::route('student.index')->with("error", $notification);
         }
     }
@@ -209,10 +209,10 @@ class StudentController extends Controller
                 // 	'success' => true,
                 // 	'message' => "Student Information Updated Succesfully."
                 // ], 200);
-                $notification = array('title' => 'Изменение', 'body' => "Информация успешно изменена");
+                $notification = array('title' => trans('messages.update'), 'body' => trans('messages.update_success'));
                 return Redirect::route('student.index')->with("success", $notification);
             } catch (Exception $e) {
-                $notification = array('title' => 'Изменение', 'body' => "Нету никаких записей");
+                $notification = array('title' => trans('messages.error'), 'body' => trans('messages.info_error'));
                 return Redirect::route('student.index')->with("error", $notification);
             }
         }
@@ -229,7 +229,7 @@ class StudentController extends Controller
     {
         $student = Student::findOrFail($id);
         $student->delete();
-        $notification = array('title' => 'Удаление', 'body' => 'Студент успешно удален.');
+        $notification = array('title' => trans('messages.delete'), 'body' => trans('messages.delete_success'));
         return Redirect::route('student.index')->with("success", $notification);
     }
 
@@ -297,7 +297,7 @@ class StudentController extends Controller
             }
         }
         Registration::insert($toBeRegisterStudents);
-        $notification = array('title' => ' Добавление ', 'body' => $newRegistration . ' Студент успешно зарегестрирован на курс.');
+        $notification = array('title' => trans('messages.insert'), 'body' => $newRegistration . trans('messages.insert_success'));
 
 
         if ($alreadyRegistered) {
@@ -344,7 +344,7 @@ class StudentController extends Controller
     {
         $student = Registration::findOrFail($id);
         $student->delete();
-        $notification = array('title' => 'Удаление', 'body' => 'Отмена добавления на курс.');
+        $notification = array('title' => trans('messages.delete'), 'body' => trans('messages.delete_success'));
         return Response()->json([
             'success' => true,
             'message' => $notification

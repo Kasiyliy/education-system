@@ -33,27 +33,28 @@
                             'enctype' => 'multipart/form-data', 'class' => 'form-horizontal']) !!}
                             {{csrf_field()}}
                             <div class="form-group">
-                                <label for="presentation">{{trans('messages.presentation_text7')}}</label>
+                                <label for="presentation">{{trans('messages.presentation_text7')}}(jpg, jpeg, png,
+                                    mp4(video))</label>
                                 <input type="file" class="form-control" id="presentation" name="presentation" required>
                             </div>
                             <div class="form-group">
-                                <label for="audio">{{trans('messages.presentation_text8')}}</label>
+                                <label for="audio">{{trans('messages.presentation_text8')}}(mpga, wav, mp3)</label>
                                 <input type="file" class="form-control" id="audio" name="audio">
                             </div>
                             <div class="form-group">
-                                <label for="video">{{trans('messages.presentation_text9')}}</label>
+                                <label for="video">{{trans('messages.presentation_text9')}}(mp4, mov, avi, wmv)</label>
                                 <input type="file" class="form-control" id="video" name="video">
                             </div>
-                                <input type="hidden" name="lesson_id" value="{{$lesson->id}}">
+                            <input type="hidden" name="lesson_id" value="{{$lesson->id}}">
                             <div class="form-group">
                                 <label for="seconds">{{trans('messages.presentation_text10')}}</label>
                                 <input type="number" min="0" name="seconds" id="seconds" required>
                             </div>
                             <div class="form-group">
                                 <label for="information">{{trans('messages.presentation_text11')}}</label>
-                                <textarea  class="form-control" name="information" id="information" required></textarea>
+                                <textarea class="form-control" name="information" id="information" required></textarea>
                             </div>
-                                <button type="submit" class = "btn btn-success">{{trans('messages.button_create')}}</button>
+                            <button type="submit" class="btn btn-success">{{trans('messages.button_create')}}</button>
 
                         </div>
                     </div>

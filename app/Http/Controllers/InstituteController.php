@@ -74,7 +74,7 @@ class instituteController extends Controller
             $institue->phoneNo = $data['phoneNo'];
             $institue->address = $data['address'];
             $institue->save();
-            $notification = array('title' => 'Изменения', 'body' => 'Информация успешно изменена.');
+            $notification = array('title' => trans('messages.update') , 'body' =>trans('messages.update_success'));
 
             Session::put('inName', $institue->name);
             Session::put('inNameShort', AppHelper::getShortName($institue->name));

@@ -104,7 +104,7 @@ class QuestionController extends Controller
                 $answer->question_id = $question->id;
                 $answer->save();
             }
-            Session::flash('success', ['title' => 'Успешно!', 'body' => 'Тест сохранен!']);
+            Session::flash('success', ['title' => trans('messages.insert'), 'body' => trans('messages.insert_success')]);
             return redirect()->back();
 
         }
@@ -153,7 +153,7 @@ class QuestionController extends Controller
                 $answer->question_id = $question->id;
                 $answer->save();
             }
-            Session::flash('success', ['title' => 'Успешно!', 'body' => 'Тест сохранен!']);
+            Session::flash('success', ['title' => trans('messages.insert'), 'body' => trans('messages.insert_success')]);
             return redirect()->back();
 
         }

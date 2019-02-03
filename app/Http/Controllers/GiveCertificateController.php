@@ -72,7 +72,7 @@ class GiveCertificateController extends Controller
                 $certificate->text7 = $request->text7;
                 $certificate->subject_id = $subject_id;
                 $certificate->save();
-                $notification = array('title' => 'Изменение', 'body' => 'Сертификат успешно изменен');
+                $notification = array('title' => trans('messages.update') , 'body' =>trans('messages.update_success'));
                 return Redirect::route('certificate.show')->with("success", $notification);
             } else {
                 $certificate = Certificate::findOrFail($certificate_id);
@@ -88,7 +88,7 @@ class GiveCertificateController extends Controller
                 $certificate->text7 = $request->text7;
                 $certificate->subject_id = $subject_id;
                 $certificate->save();
-                $notification = array('title' => 'Изменение', 'body' => 'Сертификат успешно изменен');
+                $notification = array('title' => trans('messages.update') , 'body' =>trans('messages.update_success'));
                 return Redirect::route('certificate.show')->with("success", $notification);
             }
         }

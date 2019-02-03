@@ -23,11 +23,16 @@ class QuizResultController extends Controller
         $currentUser = Auth::user();
         $quizResults = [];
         if($currentUser->group == User::ADMIN){
-            $quizResults = QuizResult::all();
+            $quizResults = QuizResult::with('student')
+                ->with('quiz')
+                ->get();
         }else if($currentUser->group == User::TEACHER){
             $quizResults = QuizResult::select('quiz_results.*')
                 ->join('quizes' , 'quizes.id', '=','quiz_results.quiz_id')
-                ->where('quizes.user_id' ,$currentUser->id )->get();
+                ->where('quizes.user_id' ,$currentUser->id )
+                ->whereNotNull('quiz_results.student_id')
+                ->whereNotNull('quiz_results.quiz_id')
+                ->get();
         }
 
         return view("results.index", compact('quizResults'));
@@ -155,7 +160,7 @@ class QuizResultController extends Controller
     public function destroy($id)
     {
         QuizResult::destroy($id);
-        Session::flash("success" , ['title' =>'Удалено!', 'body' =>'Успешно!']);
+        Session::flash("success" , ['title' =>trans('messages.delete'), 'body' =>trans('messages.delete_success')]);
         return redirect()->back();
     }
 }

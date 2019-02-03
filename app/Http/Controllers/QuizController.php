@@ -58,10 +58,10 @@ class QuizController extends Controller
                 ->count();
             if ($checkForExist == null) {
                 $quiz->save();
-                $notification = array('title' => 'Добавление!', 'body' => 'Тест добавлен!');
+                $notification = array('title' => trans('messages.insert'), 'body' => trans('messages.insert_success'));
                 return redirect()->back()->with("success", $notification);
             } else {
-                $notification = array('title' => 'Добавление!', 'body' => 'У курса уже есть урок!');
+                $notification = array('title' => trans('messages.error'), 'body' => trans('messages.error_lesson'));
                 return redirect()->back()->with("error", $notification);
             }
         }
@@ -184,7 +184,7 @@ class QuizController extends Controller
 
         $quiz = Quiz::where('id', $id)->first();
         $quiz->delete();
-        $notification = array('title' => 'Удаление', 'body' => 'Тест удален.');
+        $notification = array('title' => trans('messages.delete'), 'body' => trans('messages.delete_success'));
         return Response()->json([
             'success' => true,
             'message' => $notification

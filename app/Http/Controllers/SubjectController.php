@@ -79,7 +79,7 @@ class SubjectController extends Controller
         } else {
 
             $this->subject->create($data);
-            $notification = array('title' => 'Информация сохранена', 'body' => 'Курс успешно добавлен.');
+            $notification = array('title' => trans('messages.insert'), 'body' => trans('messages.insert_success'));
             return Redirect::route('subject.create')->with("success", $notification);
         }
     }
@@ -110,7 +110,7 @@ class SubjectController extends Controller
             $subject = Subject::findOrFail($id);
             return view('subject.edit', compact('departments', 'subject'));
         } catch (Exception $e) {
-            $notification = array('title' => 'Изменение', 'body' => "Никаих записей нету");
+            $notification = array('title' => trans('messages.error'), 'body' => trans('messages.info_error'));
             return Redirect::route('subject.index')->with("error", $notification);
         }
 
@@ -140,10 +140,10 @@ class SubjectController extends Controller
             try {
                 $subject = Subject::findOrFail($id);
                 $subject->fill($data)->save();
-                $notification = array('title' => 'Изменение', 'body' => 'Курс успешно изменен.');
+                $notification = array('title' => trans('messages.update'), 'body' => trans('messages.update_success'));
                 return Redirect::route('subject.index')->with("success", $notification);
             } catch (Exception $e) {
-                $notification = array('title' => 'Изменение', 'body' => "никаких записей нету.");
+                $notification = array('title' => trans('messages.error'), 'body' => trans('messages.info_error'));
                 return Redirect::route('subject.index')->with("error", $notification);
             }
         }
@@ -160,7 +160,7 @@ class SubjectController extends Controller
     {
         $subject = Subject::findOrFail($id);
         $subject->delete();
-        $notification = array('title' => 'Удаление', 'body' => 'Курс успешно удален.');
+        $notification = array('title' => trans('messages.delete'), 'body' => trans('messages.delete_success'));
         return Redirect::route('subject.index')->with("success", $notification);
 
     }

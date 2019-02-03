@@ -49,7 +49,7 @@ class LessonPartController extends Controller
             $lessonPart->seconds = $request->seconds;
             $lessonPart->information = $request->information;
             $lessonPart->save();
-            Session::flash('success', ['title' => 'Успешно!' , 'body' =>'Часть урока сохранена!']);
+            Session::flash('success', ['title' => trans('messages.insert') , 'body' =>trans('messages.insert_success')]);
             return redirect()->back();
         }
 
@@ -63,7 +63,7 @@ class LessonPartController extends Controller
     public function destroy($id){
         $lessonPart = LessonPart::findOrFail($id);
         $lessonPart->delete();
-        Session::flash('success', ['title' => 'Успешно!' , 'body' =>'Часть урока удалена!']);
+        Session::flash('success', ['title' => trans('messages.delete') , 'body' =>trans('messages.delete_success')]);
         return redirect()->back();
     }
 
@@ -124,7 +124,7 @@ class LessonPartController extends Controller
             $lessonPart->seconds = $request->seconds;
             $lessonPart->information = $request->information;
             $lessonPart->save();
-            Session::flash('success', ['title' => 'Успешно!' , 'body' =>'Часть урока обновлена!']);
+            Session::flash('success', ['title' => trans('messages.update') , 'body' =>trans('messages.update_success')]);
             return redirect()->route('lesson.show', ['id' => $lessonPart->lesson_id]);
         }
     }

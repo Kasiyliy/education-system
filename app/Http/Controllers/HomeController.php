@@ -38,7 +38,7 @@ class HomeController extends Controller
     {
         $user = auth()->user();
         if (!$user)
-            return redirect()->to('/')->with('warning', 'Сессия завершена, пожалуйста войдите в система снова.');
+            return redirect()->to('/')->with('warning', trans('messages.session'));
         auth()->logout();
 
         return view('lock', compact('user'));

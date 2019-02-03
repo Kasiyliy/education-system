@@ -47,7 +47,7 @@ class LessonController extends Controller
             $subjects = Subject::where('user_id', Auth::id())->get();
         }
         if (count($subjects) == 0) {
-            Session::flash('warning', ['title' => 'Ошибка!', 'body' => 'Не добавлены курсы!']);
+            Session::flash('warning', ['title' => trans('messages.error'), 'body' => trans('messages.info_error')]);
             return redirect()->back();
         }
         return view('lesson.create', compact('subjects'));
@@ -81,10 +81,10 @@ class LessonController extends Controller
                 ->count();
             if ($checkForExist == null) {
                 $lesson->save();
-                Session::flash('success', ['title' => 'Добавление!', 'body' => 'Сохранено!']);
+                Session::flash('success', ['title' => trans('messages.insert'), 'body' => trans('messages.insert_success')]);
                 return redirect()->route('lesson-part.index', ['id' => $lesson->id]);
             } else {
-                $notification = array('title' => 'Добавление!', 'body' => 'У курса уже есть урок!');
+                $notification = array('title' => trans('messages.error'), 'body' => trans('messages.error_lesson'));
                 return redirect()->back()->with('error' , $notification);
             }
         }
@@ -139,7 +139,7 @@ class LessonController extends Controller
             $lesson->name = $request->name;
             $lesson->description = $request->description;
             $lesson->save();
-            $notification = array('title' => 'Изменение!', 'body' => 'Изменения внесены!');
+            $notification = array('title' => trans('messages.update'), 'body' => trans('messages.update_success'));
             return redirect()->back()->with('success', $notification);
         }
     }

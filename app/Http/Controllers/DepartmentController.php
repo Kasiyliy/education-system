@@ -59,7 +59,7 @@ class DepartmentController extends Controller
         } else {
             $department = new Department;
             $department->create($data);
-            $notification = array('title' => 'Изменение', 'body' => 'Дисциплина успешно добавлена');
+            $notification = array('title' => trans('messages.update') , 'body' =>trans('messages.update_success'));
             return Redirect::route('department.create')->with("success", $notification);
         }
 
@@ -120,10 +120,10 @@ class DepartmentController extends Controller
             try {
                 $department = Department::findOrFail($id);
                 $department->fill($data)->save();
-                $notification = array('title' => 'Изменение', 'body' => 'Дисциплина успешно изменена');
+                $notification = array('title' => trans('messages.update') , 'body' =>trans('messages.update_success'));
                 return Redirect::route('department.index')->with("success", $notification);
             } catch (Exception $e) {
-                $notification = array('title' => 'Изменение', 'body' => "Никаких записей нету");
+                $notification = array('title' => trans('messages.update') , 'body' =>trans('messages.info_error'));
                 return Redirect::route('department.index')->with("error", $notification);
             }
         }
@@ -141,7 +141,7 @@ class DepartmentController extends Controller
     {
         $department = Department::findOrFail($id);
         $department->delete();
-        $notification = array('title' => 'Удаление', 'body' => 'Дисциплина успешно удалена');
+        $notification = array('title' => trans('messages.delete') , 'body' =>trans('messages.delete_success'));
         return Redirect::route('department.index')->with("success", $notification);
 
     }

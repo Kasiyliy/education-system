@@ -44,7 +44,7 @@ class HelpFeedbackController extends Controller
 
 
 
-        $notification = array('title' => 'Сообщение', 'body' => "Сообщение отпрвлено.");
+        $notification = array('title' => trans('messages.messages') , 'body' =>trans('messages.messages_send'));
         return redirect()->back()->with("success" , $notification);
     }
 
@@ -52,7 +52,7 @@ class HelpFeedbackController extends Controller
     {
         $feedback = HelpFeedback::findOrFail($id);
         $feedback->delete();
-        $notification = array('title' => 'Удаление', 'body' => 'Сообщение успешно удалено');
+        $notification = array('title' => trans('messages.delete') , 'body' =>trans('messages.delete_success'));
         return Redirect::route('feedback.admin')->with("success", $notification);
     }
 
@@ -79,7 +79,7 @@ class HelpFeedbackController extends Controller
         $helpfeedback->feedback = true;
         $helpfeedback->save();
 
-        Session::flash('success', 'Сообщение отправлено!');
+        Session::flash('success', trans('messages.messages_send'));
         return redirect()->back();
     }
 
@@ -107,7 +107,7 @@ class HelpFeedbackController extends Controller
         $helpfeedback->feedback = false;
         $helpfeedback->save();
 
-        Session::flash('success', 'Сообщение отправлено!');
+        Session::flash('success', trans('messages.messages_send'));
         return redirect()->back();
     }
 }

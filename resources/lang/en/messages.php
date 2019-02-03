@@ -342,9 +342,33 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
     'yes' => 'Yes',
     'no' => 'No',
     'cancel' => 'Cancel',
-    'cancel_text1' => 'Are you sure you want to delete student?'
+    'cancel_text1' => 'Are you sure you want to delete student?',
 
+    'update' => 'Update',
+    'update_success' => 'Successfully updated',
+    'update_error' => 'Can not update',
 
+    'delete' => 'Delete',
+    'delete_success' => 'Successfully delete',
+    'delete_error' => 'Can not deleted',
+
+    'insert' => 'Insert',
+    'insert_error' => 'Can not insert',
+    'insert_success' => 'Successfully inserted',
+
+    'info_error' => 'Out of information',
+
+    'messages_send' => 'Message send',
+    'messages_error' => 'Message not send',
+
+    'session' => 'Session finished, please enter again.',
+
+    'error' => 'Error',
+    'save' => 'Information successfully saved',
+    'error_lesson' => 'Course already has lesson',
+    'error_student_account' => 'Student still does not have account',
+    'login_exist' => 'Login already exists!',
+    'account_add' => 'Account successfully binded to participant',
 ]
 ?>
 
