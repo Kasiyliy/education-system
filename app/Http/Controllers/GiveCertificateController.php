@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Certificate;
+use App\Institute;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Subject;
 use App\StudentCertificate;
+use Mail;
+use Session;
 
 class GiveCertificateController extends Controller
 {
@@ -90,6 +94,36 @@ class GiveCertificateController extends Controller
         }
     }
 
+    public function send_email($student_id, $course_id)
+    {
+
+        $institute = Institute::first();
+        if($institute){
+            $from =  $institute->email;
+            $to = Auth::user()->email;
+            $subject = "ASTC Global certificate";
+            $body = "Congratulations! Your certificate is ready! Download it from here: ". $this->get_info($student_id, $course_id);
+            $this::sendMail($from , $to ,$subject , $body);
+            Session::flash('success', 'Сертификат отправлен на почту!');
+        }else{
+            Session::flash('error', 'Ошибка отправки сообщения, свяжитесь с администратором сайта!');
+        }
+
+        return redirect()->back();
+    }
+
+    public static function sendMail($from,$to,$subject,$body)
+    {
+        $charset = 'utf-8';
+        mb_language("ru");
+        $headers  = "MIME-Version: 1.0 \n" ;
+        $headers .= "From: <".$from."> \n";
+        $headers .= "Reply-To: <".$from."> \n";
+        $headers .= "Content-Type: text/html; charset=$charset \n";
+        $subject = '=?'.$charset.'?B?'.base64_encode($subject).'?=';
+        mail($to,$subject,$body,$headers);
+    }
+
     public function put_info($student_id, $course_id)
     {
         $subject_id = $course_id;
@@ -129,6 +163,50 @@ class GiveCertificateController extends Controller
         } else {
             $certificate_id = $certificate->IdNo;
             return redirect()->route('certificate',compact('certificate_id'));
+        }
+
+    }
+
+
+    public function get_info($student_id, $course_id)
+    {
+        $subject_id = $course_id;
+        $user_id = $student_id;
+
+        $teacher_id1 = Subject::select('user_id')
+            ->where('id', '=', $subject_id)
+            ->first();
+        $teacher_id = $teacher_id1->user_id;
+
+        $goden1 = Certificate::select('goden_do')
+            ->where('subject_id', '=', $course_id)
+            ->first();
+        $goden2 = $goden1->goden_do;
+
+        $goden_do = Carbon::now()->addYear('' . $goden2);
+        $converteddate = date("Y-m-d",strtotime($goden_do));
+
+        $certificate = StudentCertificate::select('*')
+            ->where('user_id', '=', $user_id)
+            ->where('subject_id', '=', $subject_id)
+            ->first();
+
+
+        if (!$certificate) {
+            $IdNo = abs(crc32(uniqid()));
+
+            $certificate = new StudentCertificate();
+            $certificate->IdNo = $IdNo;
+            $certificate->subject_id = $subject_id;
+            $certificate->user_id = $user_id;
+            $certificate->teacher_id = $teacher_id;
+            $certificate->goden_do = $converteddate;
+            $certificate->save();
+            return route('certificate' ,compact('IdNo'));
+
+        } else {
+            $certificate_id = $certificate->IdNo;
+            return route('certificate',compact('certificate_id'));
         }
 
     }

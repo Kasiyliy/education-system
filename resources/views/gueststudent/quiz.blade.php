@@ -82,12 +82,12 @@
         @foreach($quiz->questions as  $question)
         {
             id : "{{$question->id}}",
-            question : "{{$question->value}}",
+            question : `{{$question->value}}`,
             answers : [
             @for($i = 0 ;  $i < $question->answers->count(); $i++ )
             {
                     id: {{$question->answers[$i]->id}} ,
-                    value : "{{$question->answers[$i]->value}}" ,
+                    value : `{{$question->answers[$i]->value}}` ,
             },
             @endfor
           ]

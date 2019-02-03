@@ -133,13 +133,29 @@
                                 <div class="card my-4">
                                     <div class="card-body">
                                         @if($quizResult->percentage > 75)
-                                            <form method="POST" action="{{URL::route('certificate.put_info',
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <form method="POST" action="{{URL::route('certificate.put_info',
                                             ['student_id' => Auth::user()->id , 'course_id' => $subject->id])}}">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <button class="text-white m-0 text-center btn btn-success w-100">
-                                                    Получить сертификат!
-                                                </button>
-                                            </form>
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                        <button class="text-white m-0 text-center btn btn-success w-100">
+                                                            Получить сертификат!
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <form method="POST" action="{{URL::route('certificate.send_email',
+                                            ['student_id' => Auth::user()->id , 'course_id' => $subject->id])}}">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                        <button class="text-white m-0 text-center btn btn-warning w-100">
+                                                            Отправить на почту
+                                                        </button>
+                                                    </form>
+                                                </div>
+
+
+
+                                            </div>
                                         @else
                                             <a href="{{URL::route('help')}}#help1"
                                                class="text-white m-0 text-center btn btn-danger w-100">Свяжитесь с

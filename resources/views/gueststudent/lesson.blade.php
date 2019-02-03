@@ -163,7 +163,7 @@
 
                 form1 += "                            <div class=\" col-sm-12 card my-1\">\n" +
                     "                                <div class=\"card-body\">\n" +
-                    "                                    <audio controls autoplay='autoplay' controlsList=\"nodownload\">\n" +
+                    "                                    <audio controls " + (!checker ? "" :"autoplay='autoplay'") + " controlsList=\"nodownload\">\n" +
                     "                                        <source src=\"/" + audio + "\">\n" +
                     "                                        Your browser does not support the audio tag.\n" +
                     "                                    </audio>\n" +
@@ -210,6 +210,9 @@
                         }
                         if(timeleft <= 0)
                         {
+
+                            pauseAll();
+
                             clearInterval(downloadTimer);
                             $.ajax({
                                 method: "GET",
@@ -237,7 +240,28 @@
                 checkSliderSituation();
             }
 
+            function pauseAudio(){
+                var sounds = document.getElementsByTagName('audio');
+                for(i=0; i<sounds.length; i++) {
+                    if(!sounds[i].paused){
+                        sounds[i].pause();
+                    }
+                }
+            }
 
+            function pauseVideo(){
+                var videos = document.getElementsByTagName('video');
+                for(i=0; i<videos.length; i++) {
+                    if(!videos[i].paused){
+                        videos[i].pause();
+                    }
+                }
+            }
+
+            function pauseAll(){
+                pauseAudio();
+                pauseVideo();
+            }
 
             function constructEnd(){
                 var lastFrame  = "<div class='jumbotron' id='lastFrame'> " +
