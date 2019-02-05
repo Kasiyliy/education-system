@@ -58,7 +58,7 @@
                                 <div class="form-group">
                                     <label for="information">{{trans('messages.presentation_text11')}}</label>
                                     <textarea class="form-control" name="information" id="information"
-                                              required>{{$lessonPart->information}}</textarea>
+                                              >{{$lessonPart->information}}</textarea>
                                 </div>
                                 <button type="submit"
                                         class="btn btn-success">{{trans('messages.button_change')}}</button>

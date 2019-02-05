@@ -27,20 +27,19 @@ class StudentSubjectsController extends Controller
     {
 
         $student = Student::where('user_id', Auth::id())->first();
-        if(!$student){
-            Session::flash('warning',  'У вас нету курсов!');
+        if (!$student) {
+            Session::flash('warning', 'У вас нету курсов!');
             return redirect()->back();
         }
-        $subjects = Subject::select('subject.id','subject.name','subject.description','subject.department_id',DB::raw('count(messages.id) as unread'))
-            ->join('registrations','registrations.subject_id' , '=' ,'subject.id')
-            ->leftJoin('messages',function($join)
-            {
+        $subjects = Subject::select('subject.id', 'subject.name', 'subject.description', 'subject.department_id', DB::raw('count(messages.id) as unread'))
+            ->join('registrations', 'registrations.subject_id', '=', 'subject.id')
+            ->leftJoin('messages', function ($join) {
                 $join->on('messages.acceptor_user_id', '=', DB::raw(Auth::id()));
                 $join->on('messages.read', '=', DB::raw('false'));
                 $join->on('subject.user_id', '=', 'messages.sender_user_id');
             })
-            ->where('registrations.students_id' , $student->id)
-            ->where('registrations.date_to_learn' , '>=', 'now()')
+            ->where('registrations.students_id', $student->id)
+            ->where('registrations.date_to_learn', '>=', 'now()')
             ->where('registrations.deleted_at', '=', null)
             ->groupBy('subject.id')
             ->groupBy('subject.name')
@@ -74,10 +73,16 @@ class StudentSubjectsController extends Controller
 
     public function showSubjects($id)
     {
+        $student_id = Student::where('user_id', Auth::id())->first();
         $subjects = Subject::select('*')
-        ->where('department_id' , '=' , $id)
-        ->get();
-        return view('gueststudent.department_subject')->with(compact('subjects'));
+            ->where('department_id', '=', $id)
+            ->get();
+        $student = $student_id->id;
+
+        $student_subjects = Registration::select('*')
+            ->where('students_id', '=', $student)
+            ->get();
+        return view('gueststudent.department_subject')->with(compact('subjects'))->with(compact('student_subjects'));
 
     }
 
@@ -160,22 +165,22 @@ class StudentSubjectsController extends Controller
             $currentLessonPart->user_id = Auth::id();
             $currentLessonPart->lesson_part_id = $firstLessonPart->id;
             $currentLessonPart->save();
-        }else if($currentLessonPart->completed){
-            Session::flash('success',  'Вы уже прошли урок!');
-            return redirect()->route('student.my.subjects.specific' ,['id' => $lesson->subject->id]);
+        } else if ($currentLessonPart->completed) {
+            Session::flash('success', 'Вы уже прошли урок!');
+            return redirect()->route('student.my.subjects.specific', ['id' => $lesson->subject->id]);
         }
 
         $lessonPart = $currentLessonPart->lessonPart;
         $otherLessonParts = [];
-        if($lesson->lessonParts){
-            foreach($lesson->lessonParts as $lp){
-                if($lessonPart->id <= $lp->id){
+        if ($lesson->lessonParts) {
+            foreach ($lesson->lessonParts as $lp) {
+                if ($lessonPart->id <= $lp->id) {
                     break;
                 }
                 $otherLessonParts[] = $lp;
             }
         }
-        return view('gueststudent.lesson')->with(compact('lesson','lessonPart','currentLessonPart','otherLessonParts'));
+        return view('gueststudent.lesson')->with(compact('lesson', 'lessonPart', 'currentLessonPart', 'otherLessonParts'));
     }
 
     public function nextLessonPart($currentLessonPartId)
@@ -293,12 +298,12 @@ class StudentSubjectsController extends Controller
             ->where('subject_id', $subject->id)
             ->orderBy('created_at', 'desc')->get();
 
-        $unReadMessages = Message::where('acceptor_user_id' ,$currentUser->id)
-            ->where('sender_user_id' ,$subject->user->id)
-            ->where('subject_id' ,$subject->id )
-            ->where('read' ,false)
-            ->orderBy('created_at' ,'desc')->get();
-        foreach ($unReadMessages as $unRead){
+        $unReadMessages = Message::where('acceptor_user_id', $currentUser->id)
+            ->where('sender_user_id', $subject->user->id)
+            ->where('subject_id', $subject->id)
+            ->where('read', false)
+            ->orderBy('created_at', 'desc')->get();
+        foreach ($unReadMessages as $unRead) {
             $unRead->read = true;
             $unRead->save();
         }

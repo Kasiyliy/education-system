@@ -188,7 +188,7 @@
                 }
 
                 form1 +=
-                    "<div class='col-sm-12' style='max-height:300px; overflow-y:scroll'><p class='text-center m-2'>Информация:`" + information+"`</p></div>" ;
+                    "<div class='col-sm-12' style='max-height:300px; overflow-y:scroll'><p class='text-center m-2'>`" + information+"`</p></div>" ;
 
                 form1 += "</div></div>";
 

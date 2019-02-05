@@ -43,7 +43,6 @@
                   <tr>
                     <th>{{trans('messages.student_text9')}}</th>
                     <th>ID</th>
-                    <th>{{trans('messages.button_action')}}</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -51,21 +50,6 @@
                     <tr>
                       <td>{{$student->firstName}} {{$student->middleName}} {{$student->lastName}}</td>
                       <td>{{$student->id}}</td>
-                      <td>
-                        <a title='Update' class='btn btn-info btn-xs btnUpdate'
-                           id='{{$student->id}}'
-                           href='{{URL::route('student.edit',$student->id)}}'> <i
-                                  class="glyphicon glyphicon-check icon-white"></i></a>
-                        <form class="deleteForm" method="POST"
-                              action="{{URL::route('student.destroy',$student->id)}}">
-                          <input name="_method" type="hidden" value="DELETE">
-                          <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                          <button type="submit" class='btn btn-danger btn-xs btnDelete'
-                                  href=''><i
-                                    class="glyphicon glyphicon-trash icon-white"></i>
-                          </button>
-                        </form>
-                      </td>
                     </tr>
                   @endforeach
                   </tbody>

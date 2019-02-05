@@ -34,10 +34,24 @@
                                 <p class="">{{$subject->description}}</p>
                             </div>
                             @if(Auth::check(\App\User::STUDENT))
-                                <button id="gocourse" type="submit"
-                                        href="{{URL::route('student.my.subjects.specific' , ['id'=>$subject->id])}}"
-                                        class='btn btn-success'>Go
-                                </button>
+                                @foreach($student_subjects as $student_subject)
+                                    <?php
+                                    $subject_id = $subject->id;
+                                    $student_subject_id = $student_subject->subject_id;
+                                    ?>
+                                    @if($subject_id == $student_subject_id)
+                                        <form action="{{URL::route('student.my.subjects')}}">
+                                            <button id="gocourse" type="submit"
+                                                    class='col-md-12 btn btn-success'>Go
+                                            </button>
+                                        </form>
+                                    @else
+                                        <button id="infoadmin" type="submit" onclick="openForm()"
+                                                class='btn btn-info open-button'>Go
+                                        </button>
+                                    @endif
+
+                                @endforeach
                             @else
                                 <button id="infoadmin" type="submit" onclick="openForm()"
                                         class='btn btn-info open-button'>Go
@@ -166,10 +180,5 @@
 
     span.onclick = function () {
         document.getElementById("myForm").style.display = "none";
-    }
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            document.getElementById("myForm").style.display = "none";
-        }
     }
 </script>

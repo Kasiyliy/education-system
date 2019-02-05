@@ -25,7 +25,7 @@
           <div class="card my-4">
             <div class="card-body">
               <p class="text-dark m-0 text-center">
-              Чат с учителем под курса "{{$subject->name}}" - {{$subject->user->firstname.' '.$subject->user->lastname.' '.$subject->user->middlename}}
+              {{trans('messages.chat_instructor')}} "{{$subject->name}}" - {{$subject->user->firstname.' '.$subject->user->lastname.' '.$subject->user->middlename}}
               </p>
             </div>
           </div>
