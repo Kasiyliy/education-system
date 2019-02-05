@@ -269,6 +269,7 @@ class UserController extends Controller
             }
 
 
+            dd($data->user_id);
             $user = User::findOrFail($data->user_id);
             $user->fill($data)->save();
 
