@@ -268,8 +268,7 @@ class UserController extends Controller
                 return Redirect::back()->withErrors($validator);
             }
 
-            dd($data->user_id);
-            $user = User::findOrFail($data->user_id);
+            $user = User::findOrFail($request->user_id);
             $user->fill($data)->save();
 
             $name = $user->firstname . ' ' . $user->lastname;
