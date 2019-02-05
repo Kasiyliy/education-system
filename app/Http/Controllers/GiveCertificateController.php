@@ -117,7 +117,8 @@ class GiveCertificateController extends Controller
         $charset = 'utf-8';
         mb_language("ru");
         $headers  = "MIME-Version: 1.0 \n" ;
-        $headers .= "From: <".$from."> \n";
+        $headers .= "From: ASTCGlobal <noreply@astcglobal.org> \n";
+        $headers .='X-Mailer: PHP/' . phpversion();
         $headers .= "Reply-To: <".$from."> \n";
         $headers .= "Content-Type: text/html; charset=$charset \n";
         $subject = '=?'.$charset.'?B?'.base64_encode($subject).'?=';
