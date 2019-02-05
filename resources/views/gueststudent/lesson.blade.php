@@ -99,11 +99,11 @@
                 }
             });
             $('#btnLeft').click(function () {
-                pauseAll();
+
                 var lessonPartFrame = 'lessonPart';
                 var index = arrayIds.indexOf(sliderLessonPartId);
                 if(index>0){
-
+                    pauseAll();
                     clear();
                     var div = document.getElementById(lessonPartFrame + sliderLessonPartId);
                     div.style.display = 'none';
@@ -115,11 +115,12 @@
             });
 
             $('#btnRight').click(function () {
-                pauseAll();
+
                 var lessonPartFrame = 'lessonPart';
                 var index = arrayIds.indexOf(sliderLessonPartId);
 
                 if(index<arrayIds.length-1){
+                    pauseAll();
                     clear();
                     var div = document.getElementById(lessonPartFrame + sliderLessonPartId);
                     div.style.display = 'none';
