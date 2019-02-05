@@ -249,7 +249,7 @@ class UserController extends Controller
                     'firstname' => 'required',
                     'lastname' => 'required',
                     'email' => 'email',
-                    'user_id' => 'number',
+                    'user_id' => 'numeric',
 
                 ];
             } else {
