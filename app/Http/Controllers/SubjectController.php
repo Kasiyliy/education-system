@@ -170,7 +170,7 @@ class SubjectController extends Controller
         $user = Auth::user();
         $subs = [];
         if($user){
-            if($user->admin){
+            if($user->group == User::ADMIN){
                 $subs   = Subject::where('department_id', $department)->get();
             }else{
                 $subs   = Subject::where('department_id', $department)->where('user_id' ,$user->id)->get();
