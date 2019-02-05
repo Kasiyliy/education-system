@@ -40,7 +40,7 @@
                     </div>
                     <div class="form-group">
                       <label for="description">{{trans('messages.presentation_text4')}}</label>
-                      <textarea rows="5" class="form-control"  name="description" id="description" required>{{$lesson->description}}</textarea>
+                      <textarea rows="5" class="form-control"  name="description" id="description" >{{$lesson->description}}</textarea>
                     </div>
                         <button type = "submit" class = "btn btn-success">{{trans('messages.button_change')}}</button>
                     </form>

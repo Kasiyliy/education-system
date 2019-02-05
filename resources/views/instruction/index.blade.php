@@ -780,7 +780,7 @@ Administrator guidance
 
     .shiny {
 
-        color: #F5C21B;
+        color: #111;
         position: relative;
         font-family: "Source Sans Pro", sans-serif;
         font-weight: 900;

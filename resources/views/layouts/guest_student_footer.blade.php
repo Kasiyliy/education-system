@@ -6,13 +6,22 @@
 
         <!-- Grid row -->
         <div class="row text-light">
+        <?php
 
+        use App\Institute;
+        $institute = Institute::select('*')->first();
+        if (!$institute) {
+            $institute = new Institute;
+            $institute->name = "Название учереждения";
+        }
+
+        ?>
             <!-- Grid column -->
             <div class="col-md-6 mt-md-0 mt-3">
-                <b class="font-weight-bold"><i calss="map-marker-alt"></i>Address: Manasdakjsndiausbd</b><br/><br/>
-                <b class="font-weight-bold"><i class="glyphicon glyphicon-earphone"></i>Phone number:
-                    +777777777</b><br/><br/>
-                <b class="font-weight-bold"><i class="glyphicon glyphicon-envelope"></i>E-mail: astcglobal@gmail.org</b><br/>
+                <b class="font-weight-bold"><i calss="map-marker-alt"></i>{{trans('messages.address')}} {{$institute->address}}</b><br/><br/>
+                <b class="font-weight-bold"><i class="glyphicon glyphicon-earphone"></i>{{trans('messages.telephone')}}:
+                    {{$institute->phoneNo}}</b><br/><br/>
+                <b class="font-weight-bold"><i class="glyphicon glyphicon-envelope"></i>E-mail: {{$institute->email}}</b><br/>
             </div>
             <!-- Grid column -->
 
@@ -21,11 +30,6 @@
             <!-- Grid column -->
             <div class="col-md-6 mb-md-0 mb-3">
 
-                <!-- Content -->
-                <h5 class="text-uppercase font-weight-bold">Footer text 2</h5>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio deserunt fuga perferendis modi earum
-                    commodi aperiam temporibus quod nulla nesciunt aliquid debitis ullam omnis quos ipsam, aspernatur id
-                    excepturi hic.</p>
 
             </div>
             <!-- Grid column -->

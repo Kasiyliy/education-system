@@ -113,7 +113,7 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
     'help_text5' => 'Test will be available after training completion followed by the certificate.',
 
     'help_text6' => 'If you have any further questions, please contact the administrator.',
-    'help_text7' => 'Information is confidence.',
+    'help_text7' => 'Information is confidential.',
 
 
     'name' => 'Name',
@@ -369,6 +369,9 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
     'error_student_account' => 'Student still does not have account',
     'login_exist' => 'Login already exists!',
     'account_add' => 'Account successfully binded to participant',
+
+
+    'chat_instructor' => 'Chat with Instructor of course',
 ]
 ?>
 
