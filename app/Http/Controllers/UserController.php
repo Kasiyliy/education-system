@@ -249,7 +249,7 @@ class UserController extends Controller
                     'firstname' => 'required',
                     'lastname' => 'required',
                     'email' => 'email',
-                    'user_id' => 'user_id',
+                    'user_id' => 'number',
 
                 ];
             } else {
@@ -268,8 +268,6 @@ class UserController extends Controller
                 return Redirect::back()->withErrors($validator);
             }
 
-
-            dd($data->user_id);
             $user = User::findOrFail($data->user_id);
             $user->fill($data)->save();
 
