@@ -99,6 +99,7 @@
                 }
             });
             $('#btnLeft').click(function () {
+                pauseAll();
                 var lessonPartFrame = 'lessonPart';
                 var index = arrayIds.indexOf(sliderLessonPartId);
                 if(index>0){
@@ -114,6 +115,7 @@
             });
 
             $('#btnRight').click(function () {
+                pauseAll();
                 var lessonPartFrame = 'lessonPart';
                 var index = arrayIds.indexOf(sliderLessonPartId);
 
