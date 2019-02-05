@@ -36,6 +36,7 @@ Route::group(['middleware' => ['language',]], function () {
     Route::get('/subjects', ['as' => 'homestudent.subjects', 'uses' => 'StudentSubjectsController@index']);
 
     Route::get('/subjects/{id}', ['as' => 'subjects.specific', 'uses' => 'StudentSubjectsController@showSubjects']);
+    Route::get('/certificate/{id}', array('as' => 'certificate', 'uses' => 'CertificateController@give'));
 
     Route::group(['prefix' => 'student', 'middleware' => ['for.student', 'auth']], function () {
         Route::get('/my/subjects', ['as' => 'student.my.subjects', 'uses' => 'StudentSubjectsController@mySubjects']);
@@ -45,7 +46,6 @@ Route::group(['middleware' => ['language',]], function () {
         Route::get('/my/subjects/quiz/{id}', ['as' => 'student.my.subjects.specific.quiz', 'uses' => 'StudentSubjectsController@showQuiz']);
         Route::get('/lesson_part/next_question/{id}', ['as' => 'lesson_part.next_question', 'uses' => 'StudentSubjectsController@nextLessonPart']);
         Route::post('/quizresult', ['as' => 'quizresult.store', 'uses' => 'QuizResultController@store']);
-        Route::get('/certificate/{id}', array('as' => 'certificate', 'uses' => 'CertificateController@give'));
         Route::post('/certificate/{student_id}/{course_id}', ['as' => 'certificate.put_info', 'uses' => 'GiveCertificateController@put_info']);
         Route::post('/send/certificate/{student_id}/{course_id}', ['as' => 'certificate.send_email', 'uses' => 'GiveCertificateController@send_email']);
     });
