@@ -15,7 +15,7 @@
         "picqer/php-barcode-generator": "^0.2.1",
         "setasign/fpdf": "1.8.1",
         "setasign/fpdi": "^2.0",
-        "phpmailer/phpmailer": "^5.4"
+        "phpmailer/phpmailer": "^6.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
