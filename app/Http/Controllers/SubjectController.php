@@ -167,7 +167,15 @@ class SubjectController extends Controller
 
     public function subjetsByDptSem($department, $semester)
     {
-        $subs = Subject::where('department_id', $department)->get();
+        $user = Auth::user();
+        $subs = [];
+        if($user){
+            if($user->admin){
+                $subs   = Subject::where('department_id', $department)->get();
+            }else{
+                $subs   = Subject::where('department_id', $department)->where('user_id' ,$user->id)->get();
+            }
+        }
         $subjects = Fractal()->collection($subs, new SubjectTransformer());
         return Response()->json(
             [
