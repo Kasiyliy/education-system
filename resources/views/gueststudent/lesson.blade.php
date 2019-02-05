@@ -178,7 +178,7 @@
                     if(video.length > 0){
                         form1 += "  <div class=\" col-sm-12 card my-1\">\n" +
                             "                                <div class=\"card-body\">\n" +
-                            "                                    <video controls  controlsList=\"nodownload\">\n" +
+                            "                                    <video  controls " + (!checker ? "" :"autoplay='autoplay'") + "   controlsList=\"nodownload\">\n" +
                             "                                        <source src=\"/" + video + "\">\n" +
                             "                                        Your browser does not support the video tag.\n" +
                             "                                    </video>\n" +
