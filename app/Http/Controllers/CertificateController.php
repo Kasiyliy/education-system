@@ -58,60 +58,62 @@ class CertificateController extends Controller
         $pdf->SetFont('Arial', 'I', '20');
         $pdf->SetTextColor(255, 255, 0);
 
-        $x = 120;
+        $x = 105;
         $y = 5;
+        $mid_x = 100;
+        $mid_y = 10;
         if($certificate_data->text1 != null) {
             $pdf->SetFont('Arial', 'B', '20');
             $pdf->SetTextColor(255, 255, 0);
             $pdf->SetXY($y, $x);
-            $pdf->Write(0, strtoupper($certificate_data->text1));
-            $pdf->SetXY($y, $x += 7.5);
+            $pdf->Cell($mid_x , $mid_y, strtoupper($certificate_data->text1) , 0 ,0 , 'C');
+            $pdf->SetXY($y, $x += 8.5);
         }
         if($certificate_data->text2 != null) {
             $pdf->SetFont('Arial', 'B', '20');
             $pdf->SetTextColor(255, 255, 0);
-            $pdf->Write(0, strtoupper($certificate_data->text2));
-            $pdf->SetXY($y, $x += 7.5);
+            $pdf->Cell($mid_x , $mid_y, strtoupper($certificate_data->text2) , 0 ,0 , 'C');
+            $pdf->SetXY($y, $x += 8.5);
         }
         if($certificate_data->text3 != null) {
             $pdf->SetFont('Arial', 'BI', '20');
             $pdf->SetTextColor(255, 255, 0);
-            $pdf->Write(0, strtoupper($certificate_data->text3));
-            $pdf->SetXY($y, $x += 7.5);
+            $pdf->Cell($mid_x , $mid_y, strtoupper($certificate_data->text3) , 0 ,0 , 'C');
+            $pdf->SetXY($y, $x += 8.5);
         }
         if($certificate_data->text4 != null) {
             $pdf->SetFont('Arial', 'BI', '20');
             $pdf->SetTextColor(255, 255, 0);
-            $pdf->Write(0, strtoupper($certificate_data->text4));
-            $pdf->SetXY($y, $x += 7.5);
+            $pdf->Cell($mid_x , $mid_y, strtoupper($certificate_data->text4) , 0 ,0 , 'C');
+            $pdf->SetXY($y, $x += 8.5);
         }
         if($certificate_data->text5 != null) {
             $pdf->SetFont('Arial', 'BI', '20');
             $pdf->SetTextColor(255, 255, 0);
             $pdf->SetXY($y, $x);
-            $pdf->Write(0, strtoupper($certificate_data->text5));
-            $pdf->SetXY($y, $x += 7.5);
+            $pdf->Cell($mid_x , $mid_y, strtoupper($certificate_data->text5) , 0 ,0 , 'C');
+            $pdf->SetXY($y, $x += 8.5);
         }
         if($certificate_data->text6 != null) {
             $pdf->SetFont('Arial', 'BI', '20');
             $pdf->SetTextColor(255, 255, 0);
-            $pdf->Write(0, strtoupper($certificate_data->text6));
-            $pdf->SetXY($y, $x += 7.5);
+            $pdf->Cell($mid_x , $mid_y, strtoupper($certificate_data->text6) , 0 ,0 , 'C');
+            $pdf->SetXY($y, $x += 8.5);
         }
         if($certificate_data->text7 != null) {
             $pdf->SetFont('Arial', 'B', '20');
             $pdf->SetTextColor(255, 255, 0);
-            $pdf->Write(0, strtoupper($certificate_data->text7));
-            $pdf->SetXY($y, $x += 7.5);
+            $pdf->Cell($mid_x , $mid_y, strtoupper($certificate_data->text7) , 0 ,0 , 'C');
+            $pdf->SetXY($y, $x += 8.5);
         }
 
         $pdf->SetFont('Arial', 'B', '22');
         $pdf->SetTextColor(255, 255, 255);
-        $pdf->Write(0, $NAME);
+        $pdf->Cell($mid_x , $mid_y, $NAME, 0 ,0 , 'C');
         $pdf->SetTextColor(255, 255, 0);
-        $pdf->SetXY($y, $x += 7.5);
+        $pdf->SetXY($y, $x += 8.5);
         $pdf->SetFont('Arial', 'B', '16');
-        $pdf->Write(0, '            ' .  date('d F Y',strtotime($certificate_data->created_at)));
+        $pdf->Cell($mid_x , $mid_y,  date('d F Y',strtotime($certificate_data->created_at)), 0 ,0 , 'C');
 
         $pdf->SetFont('Arial', 'B', '10');
         $x = 125;
