@@ -252,7 +252,7 @@ class UserController extends Controller
 
                 ];
             } else {
-                if (!Hash::check($request->input('oldpassword'), auth()->user()->password)) {
+                if (!Hash::check($request->input('oldpassword'), Auth()->user()->password)) {
 
                     $notification = array('title' => 'Ошибка валидации', 'body' => 'Старый пароль не соответсвует!!!');
                     return Redirect::back()->with('error', $notification);
@@ -268,7 +268,7 @@ class UserController extends Controller
             }
 
 
-            $user = User::findOrFail(auth()->user()->id);
+            $user = User::findOrFail(Auth()->user()->id);
             $user->fill($data)->save();
 
             $name = $user->firstname . ' ' . $user->lastname;
