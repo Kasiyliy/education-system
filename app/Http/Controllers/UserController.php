@@ -216,8 +216,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        if($user->group == User::ADMIN){
-            $notification = array('title' => trans('messages.delete'), 'body' =>trans('messages.delete_error'));
+        if ($user->group == User::ADMIN) {
+            $notification = array('title' => trans('messages.delete'), 'body' => trans('messages.delete_error'));
             return Redirect::route('user.index')->with("warning", $notification);
         }
         $user->delete();
@@ -234,7 +234,7 @@ class UserController extends Controller
     public function settings($id)
     {
         $user = User::select('*')
-            ->where('id' , '=' , $id)
+            ->where('id', '=', $id)
             ->first();
         return view('user.settings', compact('user'));
     }
@@ -249,6 +249,7 @@ class UserController extends Controller
                     'firstname' => 'required',
                     'lastname' => 'required',
                     'email' => 'email',
+                    'user_id' => 'user_id',
 
                 ];
             } else {
@@ -268,7 +269,7 @@ class UserController extends Controller
             }
 
 
-            $user = User::findOrFail(Auth()->user()->id);
+            $user = User::findOrFail($data->user_id);
             $user->fill($data)->save();
 
             $name = $user->firstname . ' ' . $user->lastname;
