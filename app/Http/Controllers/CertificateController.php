@@ -111,7 +111,7 @@ class CertificateController extends Controller
         $pdf->SetTextColor(255, 255, 0);
         $pdf->SetXY($y, $x += 7.5);
         $pdf->SetFont('Arial', 'B', '16');
-        $pdf->Write(0, '            ' .  date('F Y',strtotime($certificate_data->created_at)));
+        $pdf->Write(0, '            ' .  date('d F Y',strtotime($certificate_data->created_at)));
 
         $pdf->SetFont('Arial', 'B', '10');
         $x = 125;
