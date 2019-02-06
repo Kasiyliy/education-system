@@ -32,7 +32,7 @@
                 <div class="container-fluid">
                     <div class="card my-4">
                         <div class="card-body">
-                            <p class="text-dark m-0 text-center">Уроки</p>
+                            <p class="text-dark m-0 text-center">{{trans('messages.courses')}}</p>
                         </div>
                     </div>
                 </div>

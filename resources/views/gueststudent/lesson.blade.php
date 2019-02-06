@@ -17,7 +17,6 @@
                 <div class="container-fluid">
                     <div class="card my-4">
                         <div class="card-header">
-                            <span class="text-muted small">урок</span>
                             <p class="text-dark m-0 text-center">{{$lesson->name}}</p>
                             <a class='btn btn-success' href='{{URL::route('student.my.subjects.specific', ['id' =>$lesson->subject->id])}}' >к курсу</a>
                         </div>

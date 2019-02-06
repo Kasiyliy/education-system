@@ -45,10 +45,12 @@
                                                     class='col-md-12 btn btn-success'>Go
                                             </button>
                                         </form>
-                                    @else
+                                    @elseif($subject_id != $student_subject_id)
                                         <button id="infoadmin" type="submit" onclick="openForm()"
                                                 class='btn btn-info open-button'>Go
                                         </button>
+                                    @else
+
                                     @endif
 
                                 @endforeach

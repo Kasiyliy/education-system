@@ -152,8 +152,8 @@ $(document).ready(function() {
     TableManageButtons.init();
     @if($selectSub!="" && count($students)==0)
     new PNotify({
-        title: "",
-        text: '',
+        title: `{{trans('messages.error')}}`,
+        text: `{{trans('messages.info_error')}}`,
         styling: 'bootstrap3'
     });
     @endif
