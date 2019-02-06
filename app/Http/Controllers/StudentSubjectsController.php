@@ -73,15 +73,22 @@ class StudentSubjectsController extends Controller
 
     public function showSubjects($id)
     {
-        $student_id = Student::where('user_id', Auth::id())->first();
+
         $subjects = Subject::select('*')
             ->where('department_id', '=', $id)
             ->get();
-        $student = $student_id->id;
 
-        $student_subjects = Registration::select('*')
-            ->where('students_id', '=', $student)
-            ->get();
+        if (Auth::check()) {
+            $student_id = Student::where('user_id', Auth::id())->first();
+            $student = $student_id->id;
+            if ($student_id) {
+                $student_subjects = Registration::select('*')
+                    ->where('students_id', '=', $student)
+                    ->get();
+            }
+        }else {
+            $student_subjects = [];
+        }
         return view('gueststudent.department_subject')->with(compact('subjects'))->with(compact('student_subjects'));
 
     }

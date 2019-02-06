@@ -36,7 +36,7 @@ Route::group(['middleware' => ['language',]], function () {
     Route::get('/subjects', ['as' => 'homestudent.subjects', 'uses' => 'StudentSubjectsController@index']);
 
     Route::get('/subjects/{id}', ['as' => 'subjects.specific', 'uses' => 'StudentSubjectsController@showSubjects']);
-    Route::get('/certificate/{id}', array('as' => 'certificate', 'uses' => 'CertificateController@give'));
+    Route::get('/certificate/{id}', ['as' => 'certificate', 'uses' => 'CertificateController@give']);
 
     Route::group(['prefix' => 'student', 'middleware' => ['for.student', 'auth']], function () {
         Route::get('/my/subjects', ['as' => 'student.my.subjects', 'uses' => 'StudentSubjectsController@mySubjects']);
