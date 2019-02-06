@@ -34,6 +34,11 @@ class HomeController extends Controller
         return view('home', compact('error', 'institute'));
     }
 
+    public function mail()
+    {
+        return view('mail');
+    }
+
     public function lock()
     {
         $user = auth()->user();
