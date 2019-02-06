@@ -103,7 +103,8 @@ class GiveCertificateController extends Controller
             $to = Auth::user()->email;
             $subject = "ASTC Global certificate";
             $body = "Congratulations! Your certificate is ready! Download it from here: " . $this->get_info($student_id, $course_id);
-            $this::sendMail($from, $to, $subject, $body);
+            //$this::sendMail($from, $to, $subject, $body);
+            $this::sendMail();
             Session::flash('success', 'Сертификат отправлен на почту!');
         } else {
             Session::flash('error', 'Ошибка отправки сообщения, свяжитесь с администратором сайта!');
@@ -112,7 +113,19 @@ class GiveCertificateController extends Controller
         return redirect()->back();
     }
 
-    public static function sendMail($from,$to,$subject,$body)
+    public static function sendMail(){
+        $to_name = 'Kasya';
+        $to_email = 'asilkhan-al@mail.ru';
+        $data = array('name'=>"Sam Jose", "body" => "Test mail");
+
+        Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)
+                ->subject('Artisans Web Testing Mail');
+            $message->from('FROM_EMAIL_ADDRESS','Artisans Web');
+        });
+    }
+
+    public static function sendMail2($from,$to,$subject,$body)
     {
         $charset = 'utf-8';
         mb_language("ru");
