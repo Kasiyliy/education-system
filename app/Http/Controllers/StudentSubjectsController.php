@@ -86,6 +86,7 @@ class StudentSubjectsController extends Controller
                     ->where('students_id', '=', $student)
                     ->whereNull('deleted_at')
                     ->get();
+                dd($student_subjects);
             }
         }else {
             $student_subjects = [];
