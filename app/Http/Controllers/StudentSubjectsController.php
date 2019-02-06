@@ -84,6 +84,7 @@ class StudentSubjectsController extends Controller
             if ($student_id) {
                 $student_subjects = Registration::select('*')
                     ->where('students_id', '=', $student)
+                    ->whereNull('deleted_at')
                     ->get();
             }
         }else {
