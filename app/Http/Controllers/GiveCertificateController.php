@@ -203,11 +203,11 @@ class GiveCertificateController extends Controller
             $certificate->teacher_id = $teacher_id;
             $certificate->goden_do = $converteddate;
             $certificate->save();
-            return route('certificate' ,compact('IdNo'));
+            return route('pustota' ,compact('IdNo'));
 
         } else {
             $certificate_id = $certificate->IdNo;
-            return route('certificate',compact('certificate_id'));
+            return route('pustota',compact('certificate_id'));
         }
 
     }

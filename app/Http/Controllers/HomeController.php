@@ -100,8 +100,7 @@ class HomeController extends Controller
         $subjects = App\Subject::select('*')
             ->where('user_id', '=', Auth::user()->id)
             ->get();
-        dd($subjects);
-
+        return view('certificate.show', compact('subjects'));
     }
 
     public function instruction()
