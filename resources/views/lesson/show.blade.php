@@ -60,15 +60,19 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="information">{{trans('messages.presentation_text11')}}</label>
-                                        <textarea class="form-control" name="information" id="information"
-                                                  ></textarea>
+                                        <textarea class="form-control" name="information" id="information"></textarea>
                                     </div>
                                     <button type="submit"
                                             class="btn btn-success">{{trans('messages.button_create')}}</button>
+
+                                    {{ Form::close() }}
                                 </div>
                             </div>
 
                             <div class="panel-group" id="accordion">
+                                <?php
+                                $i = 0;
+                                ?>
                                 @foreach($lesson->lessonParts as $lessonPart)
                                     <div class="panel panel-default">
 
@@ -77,7 +81,7 @@
                                             <div class="panel-heading">
 
                                                 <h4 class="panel-title">
-                                                    ID:{{$lessonPart->id}}
+                                                    ID:{{++$i}}
                                                 </h4>
                                             </div>
                                         </a>
