@@ -44,13 +44,13 @@ class GiveCertificateController extends Controller
             'inspired_by' => 'required|max:20',
             'on_behalf_and_for' => 'required|max:20',
 
-            'text1' => 'string|max:21',
-            'text2' => 'string|max:21',
-            'text3' => 'string|max:21',
-            'text4' => 'string|max:21',
-            'text5' => 'string|max:21',
-            'text6' => 'string|max:21',
-            'text7' => 'string|max:21',
+            'text1' => 'string|max:26',
+            'text2' => 'string|max:26',
+            'text3' => 'string|max:26',
+            'text4' => 'string|max:26',
+            'text5' => 'string|max:26',
+            'text6' => 'string|max:26',
+            'text7' => 'string|max:26',
 
         ];
         $validator = Validator::make($data, $rules);
