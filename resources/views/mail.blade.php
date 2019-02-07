@@ -1,1 +1,1 @@
-<h1>GLOBAL ASTC! Hello WORLD!</h1>
+<h1>{{$body}}</h1>

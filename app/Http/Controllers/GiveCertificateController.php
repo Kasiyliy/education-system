@@ -113,15 +113,15 @@ class GiveCertificateController extends Controller
         return redirect()->back();
     }
 
-    public static function sendMail(){
+    public static function sendMail($to, $body){
         $to_name = 'Kasya';
-        $to_email = 'asilkhan-al@mail.ru';
-        $data = array('name'=>"Sam Jose", "body" => "Test mail");
+        $to_email = $to;
+        $data = array('name'=>"Sam Jose", "body" => $body);
 
         Mail::send('mail', $data, function($message) use ($to_name, $to_email) {
             $message->to($to_email, $to_name)
-                ->subject('Artisans Web Testing Mail');
-            $message->from('mail.globalastc@gmail.com','Artisans Web');
+                ->subject('Congratulations! Your certificate is ready!');
+            $message->from('mail.globalastc@gmail.com','GlobalASTC');
         });
     }
 
