@@ -29,9 +29,16 @@ class QuizResultController extends Controller
         }else if($currentUser->group == User::TEACHER){
             $quizResults = QuizResult::select('quiz_results.*')
                 ->join('quizes' , 'quizes.id', '=','quiz_results.quiz_id')
+                ->join('subject' , 'subject.id', '=','quizes.subject_id')
+                ->join('students' , 'students.id', '=','quiz_results.student_id')
+                ->join('students' , 'students.id', '=','quiz_results.student_id')
+                ->join('users' , 'users.id', '=','students.user_id')
                 ->where('quizes.user_id' ,$currentUser->id )
-                ->whereNotNull('quiz_results.student_id')
-                ->whereNotNull('quiz_results.quiz_id')
+                ->whereNull('quizes.deleted_at')
+                ->whereNull('students.deleted_at')
+                ->whereNull('subject.deleted_at')
+                ->whereNull('department.deleted_at')
+                ->whereNull('users.deleted_at')
                 ->get();
         }
 
