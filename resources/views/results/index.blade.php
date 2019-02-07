@@ -31,9 +31,9 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>{{trans('messages.result_text1')}}
-                                <small>{{trans('messages.result_text2')}}</small>
-                            </h2>
+                            {{--<h2>{{trans('messages.result_text1')}}--}}
+                                {{--<small>{{trans('messages.result_text2')}}</small>--}}
+                            {{--</h2>--}}
 
                             <div class="clearfix"></div>
                         </div>
@@ -41,13 +41,13 @@
                             <div class="col-md-12">
                                 <table id="datatable-buttons" class="table table-striped table-bordered">
                                     <thead>
-                                    <tr>
-                                        <th>{{trans('messages.result_text3')}}</th>
-                                        <th>{{trans('messages.result_text4')}}</th>
-                                        <th>{{trans('messages.result_text5')}}</th>
-                                        <th>{{trans('messages.result_text6')}}</th>
-                                        <th>{{trans('messages.button_action')}}</th>
-                                    </tr>
+                                    {{--<tr>--}}
+                                        {{--<th>{{trans('messages.result_text3')}}</th>--}}
+                                        {{--<th>{{trans('messages.result_text4')}}</th>--}}
+                                        {{--<th>{{trans('messages.result_text5')}}</th>--}}
+                                        {{--<th>{{trans('messages.result_text6')}}</th>--}}
+                                        {{--<th>{{trans('messages.button_action')}}</th>--}}
+                                    {{--</tr>--}}
                                     </thead>
                                     <tbody>
                                     @foreach($quizResults as $quizResult)
@@ -58,11 +58,11 @@
                                                 <td>{{$quizResult->quiz->subject->department->name.' - '.$quizResult->quiz->subject->name}}</td>
                                                 <td>{{$quizResult->created_at}}</td>
                                                 <td>
-                                                    <form action="{{URL::route("result.quiz.delete", ['id' => $quizResult->id])}}"
-                                                          method="post">
+                                                    <form action="{{URL::route("result.quiz.delete", ['id' => $quizResult->id])}}" method="post">
                                                         {{csrf_field()}}
-                                                        <button type="submit" class="btn btn-danger"><span
-                                                                    class="fa fa-trash"></span></button>
+                                                        <button type="submit" class="btn btn-danger">
+                                                            <span class="fa fa-trash"></span>
+                                                        </button>
                                                     </form>
 
                                                 </td>
