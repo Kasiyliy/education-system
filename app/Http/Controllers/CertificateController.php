@@ -125,7 +125,7 @@ class CertificateController extends Controller
         $pdf->Write(0, "POWERED BY: " . $PB);///print this output
         $pdf->SetXY($x, $y + 13);
         $pdf->Write(0, "ON BEHALF AND FOR: " . $CN);///print this output
-        $pdf->Output('gift_coupon_generated.pdf', 'I', true);
+        $pdf->Output('astcglobal_certificate.pdf', 'I', true);
     }
 
 
