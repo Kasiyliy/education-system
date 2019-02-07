@@ -12,6 +12,7 @@
 */
 Route::group(['middleware' => ['language',]], function () {
     Route::get('/', ['as' => 'homestudent.guest', 'uses' => 'HomeStudentController@guest']);
+    Route::get('/mail', array('as' => 'mail', 'uses' => 'HomeController@mail'));
     Route::get('/login', array('as' => 'home', 'uses' => 'HomeController@index'));
     Route::get('/setlangrus', array('as' => 'setlangrus', 'uses' => 'HomeController@setLangRus'));
     Route::get('/setlangeng', array('as' => 'setlangeng', 'uses' => 'HomeController@setLangEng'));
