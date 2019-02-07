@@ -5,7 +5,8 @@
     <link href="{{ URL::asset('assets/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{ URL::asset('assets/css/responsive.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{ URL::asset('assets/css/buttons.bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{ URL::asset('assets/css/buttons.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/css/select2.min.css')}}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/css/sweetalert.css')}}" rel="stylesheet">
 @endsection
 @section('content')
 
@@ -82,7 +83,8 @@
     <script src="{{ URL::asset('assets/js/jszip.min.js')}}"></script>
     <script src="{{ URL::asset('assets/js/pdfmake.min.js')}}"></script>
     <script src="{{ URL::asset('assets/js/vfs_fonts.js')}}"></script>
-
+    <script src="{{ URL::asset('assets/js/select2.full.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/validator.min.js')}}"></script>
     <script>
 
         $(document).ready(function () {
