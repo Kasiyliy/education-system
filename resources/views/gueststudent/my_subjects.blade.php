@@ -9,7 +9,7 @@
             <div class="col-sm-3">
                 <div class="card m-2 my-4">
                     <div class="card-header text-center">
-                        Профиль
+                        {{trans('messages.profile')}}
                     </div>
                     <ul class="list-group">
                         <li class="list-group-item text-muted"><span class="fa fa-user"></span> {{Auth::user()->login}} <i class="fa fa-dashboard fa-1x"></i></li>
@@ -23,7 +23,7 @@
                 <div class="container-fluid">
                     <div class="card my-4">
                         <div class="card-body">
-                            <p class="text-dark m-0 text-center">Мои курсы</p>
+                            <p class="text-dark m-0 text-center">{{trans('messages.mycourses')}}</p>
                         </div>
                     </div>
 
@@ -33,7 +33,7 @@
                                 <p class="text-center">{{$sortedSubjects[0]->department->name}}</p>
                             </div>
                             <div class="card-body">
-                                <span class="text-muted small">Описание:</span>
+                                <span class="text-muted small">{{trans('messages.description')}}:</span>
                                 <p class="text-center">{{$sortedSubjects[0]->department->description}} </p>
                             </div>
                         </div>
@@ -46,15 +46,15 @@
                                         <p> <span class="text-muted small"></span>:  {{$sortedSubject->name}}</p>
                                     </div>
                                     <div class="card-body">
-                                        <span class="text-muted small">Описание:</span>
+                                        <span class="text-muted small">{{trans('messages.description')}}:</span>
                                         <p class="text-center">{{$sortedSubject->description}}</p>
 
                                         @if($sortedSubject->unread)
-                                        <p class="text-danger">{{$sortedSubject->unread}} сообщений от учителя</p>
+                                        <p class="text-danger">{{$sortedSubject->unread}} {{trans('messages.instructor_message')}}</p>
                                         @endif
                                     </div>
                                     <div class="card-footer">
-                                        <a class="float-right btn btn-info text-white btn-xs" href="{{URL::route('student.my.subjects.specific' , ['id'=>$sortedSubject->id])}}">Начать</a>
+                                        <a class="float-right btn btn-info text-white btn-xs" href="{{URL::route('student.my.subjects.specific' , ['id'=>$sortedSubject->id])}}">{{trans('messages.start')}}</a>
                                     </div>
                                 </div>
                             </div>

@@ -18,14 +18,14 @@
                     <div class="card my-4">
                         <div class="card-header">
                             <p class="text-dark m-0 text-center">{{$lesson->name}}</p>
-                            <a class='btn btn-success' href='{{URL::route('student.my.subjects.specific', ['id' =>$lesson->subject->id])}}' >к курсу</a>
+                            <a class='btn btn-success' href='{{URL::route('student.my.subjects.specific', ['id' =>$lesson->subject->id])}}' >{{trans('messages.go_course')}}</a>
                         </div>
                         <div class="container-fluid">
                             <div class="text-center my-2">
                                 <p class="text-muted text-center" id="slideOutOf"></p>
-                                <a class="btn btn-success btn-sm my-2 float-left" id="btnLeft"><span class="fa fa-arrow-left text-white">Previous</span></a>
+                                <a class="btn btn-success btn-sm my-2 float-left" id="btnLeft"><span class="fa fa-arrow-left text-white">{{trans('messages.previous')}}</span></a>
                                 <span id='countdowntimer' class='text-muted text-center'></span>
-                                <a class="btn btn-success btn-sm my-2 float-right" id="btnRight"><span class = "text-white">Next</span><span class="fa fa-arrow-right text-white"></span></a>
+                                <a class="btn btn-success btn-sm my-2 float-right" id="btnRight"><span class = "text-white">{{trans('messages.next')}}</span><span class="fa fa-arrow-right text-white"></span></a>
                             </div>
                             <div class="col-sm-12">
                                 <div class="card-body" id="lessonPart">
@@ -35,7 +35,7 @@
 
                         </div>
                         <div class="card-footer">
-                            <span class="text-muted small">описание</span>
+                            <span class="text-muted small">{{trans('messages.description')}}</span>
                             <p class="text-dark m-0 text-center">{{$lesson->description}}</p>
                         </div>
                     </div>

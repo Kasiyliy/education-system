@@ -9,7 +9,7 @@
       <div class="col-sm-3">
         <div class="card m-2 my-4">
           <div class="card-header text-center">
-            Профиль
+            {{trans('messages.profile')}}
           </div>
           <ul class="list-group">
             <li class="list-group-item text-muted"><span class="fa fa-user"></span> {{Auth::user()->login}} <i class="fa fa-dashboard fa-1x"></i></li>
@@ -23,43 +23,43 @@
         <div class="container-fluid">
           <div class="card my-4">
             <div class="card-header">
-              <span class="text-muted small">Наименование:</span>
+              <span class="text-muted small">{{trans('messages.names')}}:</span>
               <p class="text-dark m-0 text-center">{{$quiz->name}}</p>
             </div>
             <div class="card-body text-center">
 
               <div id="quizContent" class="center-margin">
                 <ul class="list-group my-5">
-                  <li class="list-group-item">Курс: {{$quiz->subject->department->name}}</li>
-                  <li class="list-group-item">Под курс: {{$quiz->subject->name}}</li>
-                  <li class="list-group-item">Вопросов: {{$quiz->questions->count()}}</li>
-                  <li class="list-group-item">Дата начала: {{date('Y-m-d')}}</li>
+                  <li class="list-group-item">{{trans('messages.disciplina')}}: {{$quiz->subject->department->name}}</li>
+                  <li class="list-group-item">{{trans('messages.cours')}}: {{$quiz->subject->name}}</li>
+                  <li class="list-group-item">{{trans('messages.question')}}: {{$quiz->questions->count()}}</li>
+                  <li class="list-group-item">{{trans('messages.start_date')}}: {{date('Y-m-d')}}</li>
                 </ul>
               </div>
               <div id="buttons" class="center-margin">
                 @if(!isset($quizResult))
-                      <a id="startButton" class="btn btn-primary text-white ">Начать</a>
+                      <a id="startButton" class="btn btn-primary text-white ">{{trans('messages.start')}}</a>
                 @else
-                    <p class="text-danger">Тест уже пройден!</p>
+                    <p class="text-danger">{{trans('messages.test_is_finished')}}!</p>
                     <p class="
-                            @if($quizResult->percentage>=50)
+                            @if($quizResult->percentage>=75)
                             text-success
                             @else
                             text-danger
                             @endif
                             "
-                    >Ваш оценка - {{$quizResult->percentage}}</p>
+                    >{{trans('messages.mark')}} - {{$quizResult->percentage}}</p>
                 @endif
-                <a id="finishButton" class="btn btn-success text-white d-none">Закончить</a>
+                <a id="finishButton" class="btn btn-success text-white d-none">{{trans('messages.finish')}}</a>
               </div>
               <div>
                 <a id="nextButton" class="btn btn-success d-none text-white">
-                  Следующее
+                    {{trans('messages.next')}}
                 </a>
               </div>
             </div>
             <div class="card-footer">
-              <span class="text-muted small">Описание:</span>
+              <span class="text-muted small">{{trans('messages.description')}}:</span>
               <p class="text-dark m-0 text-center">{{$quiz->description}}</p>
             </div>
           </div>

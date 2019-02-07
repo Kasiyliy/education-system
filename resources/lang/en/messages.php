@@ -372,6 +372,30 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
 
 
     'chat_instructor' => 'Chat with Instructor of course',
+
+    'names' => 'Name',
+    'cours' => 'Course',
+    'question' => 'Of questions',
+    'start_date' => 'Start date',
+    'finish' => 'Finish',
+    'start' => 'Start',
+    'description' => 'Description',
+    'test_is_finished' => 'Test already passed',
+    'mark' => 'Your mark',
+    'next' => 'Next',
+    'previous' => 'Previous',
+    'go_course' => 'to the course',
+    'instructor_message' => 'Messages from the instructor',
+
+    'profile' => 'Profile',
+    'open' => 'Open',
+    'lesson_finished' => 'Lesson finished',
+    'test_finished' => 'Test finished',
+    'lesson_not_finished' => 'Lesson not finished',
+    'get_certificate' => 'Get certificate',
+    'send_certificate' => 'Send to E-mail',
+    'error_certificate' => 'Contact with administrator! You do not have enough point to get certificate...',
+
 ]
 ?>
 
