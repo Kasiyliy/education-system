@@ -99,12 +99,9 @@ class GiveCertificateController extends Controller
 
         $institute = Institute::first();
         if ($institute) {
-            $from = $institute->email;
             $to = Auth::user()->email;
-            $subject = "ASTC Global certificate";
             $body = "Congratulations! Your certificate is ready! Download it from here: " . $this->get_info($student_id, $course_id);
-            //$this::sendMail($from, $to, $subject, $body);
-            $this::sendMail();
+            $this::sendMail($to , $body);
             Session::flash('success', 'Сертификат отправлен на почту!');
         } else {
             Session::flash('error', 'Ошибка отправки сообщения, свяжитесь с администратором сайта!');
@@ -114,9 +111,9 @@ class GiveCertificateController extends Controller
     }
 
     public static function sendMail($to, $body){
-        $to_name = 'Kasya';
+        $to_name = Auth::user()->firstname.' '.Auth::user()->lastname;
         $to_email = $to;
-        $data = array('name'=>"Sam Jose", "body" => $body);
+        $data = array('name'=>$to_name, "body" => $body);
 
         Mail::send('mail', $data, function($message) use ($to_name, $to_email) {
             $message->to($to_email, $to_name)
