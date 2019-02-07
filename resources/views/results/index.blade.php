@@ -1,12 +1,23 @@
 @extends('layouts.master')
 
-@section('title', 'Глобальный курс')
+@section("title", "Quiz")
 @section('extrastyle')
     <link href="{{ URL::asset('assets/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{ URL::asset('assets/css/responsive.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{ URL::asset('assets/css/buttons.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{ URL::asset('assets/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{ URL::asset('assets/css/sweetalert.css')}}" rel="stylesheet">
+    <style>
+        @media print {
+            table td:last-child {
+                display: none
+            }
+
+            table th:last-child {
+                display: none
+            }
+        }
+    </style>
 @endsection
 @section('content')
 
@@ -69,6 +80,8 @@
         </div>
     </div>
     <!-- /page content -->
+
+    <!-- Modal For Attendance Update -->
 @endsection
 @section('extrascript')
     <!-- dataTables -->
@@ -85,12 +98,43 @@
     <script src="{{ URL::asset('assets/js/vfs_fonts.js')}}"></script>
     <script src="{{ URL::asset('assets/js/select2.full.min.js')}}"></script>
     <script src="{{ URL::asset('assets/js/validator.min.js')}}"></script>
-    <script>
 
+    <script>
         $(document).ready(function () {
+
+            $(".department").select2({
+                placeholder: "",
+                allowClear: true
+            });
+            $(".subject").select2({
+                placeholder: "",
+                allowClear: true
+            });
+            // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
+            $('form')
+                .on('blur', 'input[required], input.optional, select.required', validator.checkField)
+                .on('change', 'select.required', validator.checkField)
+                .on('keypress', 'input[required][pattern]', validator.keypress);
+
+            $('form').submit(function (e) {
+                e.preventDefault();
+                var submit = true;
+
+                // evaluate the form using generic validaing
+                if (!validator.checkAll($(this))) {
+                    submit = false;
+                }
+
+                if (submit)
+                    this.submit();
+
+
+                return false;
+            });
 
             //datatables code
             var handleDataTableButtons = function () {
+
                 if ($("#datatable-buttons").length) {
                     $("#datatable-buttons").DataTable({
                         responsive: true,
@@ -126,6 +170,7 @@
                 "use strict";
                 return {
                     init: function () {
+
                         handleDataTableButtons();
                     }
                 };
@@ -133,7 +178,9 @@
 
             TableManageButtons.init();
 
+
         });
+
     </script>
-    <!-- /validator -->
+
 @endsection
