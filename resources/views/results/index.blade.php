@@ -49,27 +49,26 @@
                                         <th>{{trans('messages.button_action')}}</th>
                                     </tr>
                                     </thead>
-                                    {{--<tbody>--}}
-                                    {{--@foreach($quizResults as $quizResult)--}}
-                                        {{--<tr>--}}
-                                            {{--@if($quizResult->quiz && $quizResult->student && $quizResult->student->user && $quizResult->quiz->subject)--}}
-                                                {{--<td>{{$quizResult->student->user->firstname.' '.$quizResult->student->user->lastname}}</td>--}}
-                                                {{--<td>{{$quizResult->percentage}}</td>--}}
-                                                {{--<td>{{$quizResult->quiz->subject->department->name.' - '.$quizResult->quiz->subject->name}}</td>--}}
-                                                {{--<td>{{$quizResult->created_at}}</td>--}}
-                                                {{--<td>--}}
-                                                    {{--<form action="{{URL::route("result.quiz.delete", ['id' => $quizResult->id])}}" method="post">--}}
-                                                        {{--{{csrf_field()}}--}}
-                                                        {{--<button type="submit" class="btn btn-danger">--}}
-                                                            {{--<span class="fa fa-trash"></span>--}}
-                                                        {{--</button>--}}
-                                                    {{--</form>--}}
-
-                                                {{--</td>--}}
-                                            {{--@endif--}}
-                                        {{--</tr>--}}
-                                    {{--@endforeach--}}
-                                    {{--</tbody>--}}
+                                    <tbody>
+                                    @foreach($quizResults as $quizResult)
+                                        @if($quizResult->quiz && $quizResult->student && $quizResult->student->user && $quizResult->quiz->subject)
+                                            <tr>
+                                                <td>{{$quizResult->student->user->firstname.' '.$quizResult->student->user->lastname}}</td>
+                                                <td>{{$quizResult->percentage}}</td>
+                                                <td>{{$quizResult->quiz->subject->department->name.' - '.$quizResult->quiz->subject->name}}</td>
+                                                <td>{{$quizResult->created_at}}</td>
+                                                <td>
+                                                    <form action="{{URL::route("result.quiz.delete", ['id' => $quizResult->id])}}" method="post">
+                                                        {{csrf_field()}}
+                                                        <button type="submit" class="btn btn-danger">
+                                                            <span class="fa fa-trash"></span>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
