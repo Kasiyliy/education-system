@@ -396,6 +396,19 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
     'send_certificate' => 'Send to E-mail',
     'error_certificate' => 'Contact with administrator! You do not have enough point to get certificate...',
 
+    'finish_test' => 'Complete the test!',
+    'test_passed' => 'You passed the test!',
+    'your_result' => 'Your result - ',
+    'to_my_course' => 'Go to my courses',
+    'have_error' => 'An error has occurred!',
+    'choose_one_variant' => 'Choose one variant!',
+    'date_start' => 'Start date',
+    'date_finish' => 'Expiration date',
+    'total_question' => 'Total number of questions',
+    '30_second' => 'Less than 30 seconds left',
+    '15_second' => 'Less than 15 seconds left',
+    'your_lesson_finish' => 'Your lesson is over! Please follow the link',
+
 ]
 ?>
 

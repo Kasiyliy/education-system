@@ -86,7 +86,7 @@
             answers : [
             @for($i = 0 ;  $i < $question->answers->count(); $i++ )
             {
-                    id: {{$question->answers[$i]->id}} ,
+                    id: `{{$question->answers[$i]->id}}` ,
                     value : `{{$question->answers[$i]->value}}` ,
             },
             @endfor
@@ -110,7 +110,7 @@
 
         $('#finishButton').on('click', function(){
             if(results.length != quiz.length){
-                toastr.error("Закончите тест!");
+                toastr.error({{trans('messages.finish_test')}});
                 return;
             }
 
@@ -120,24 +120,24 @@
                 dataType: "json",
                 data : {
                     'values' : JSON.stringify(results),
-                    'quiz_id' : {{$quiz->id}},
+                    'quiz_id' : `{{$quiz->id}}`,
                     "_token": "{{ csrf_token() }}",
                 }
             }).done(function( msg ) {
                 if(msg.error == 0){
-                    toastr.success("Вы сдали тест!");
+                    toastr.success({{trans('messages.test_passed')}});
                     $('#quizContent').html('');
                     var result = document.createElement('h3');
-                    result.innerText = 'Ваш результат - ' + JSON.parse(msg.message).percentage + "%";
+                    result.innerText = {{trans('messages.your_result')}} + JSON.parse(msg.message).percentage + "%";
                     $('#quizContent').append(result);
                     $('#finishButton').hide();
                     var toMySubjectSpecific = document.createElement('a');
                     toMySubjectSpecific.className = 'btn btn-success text-white';
-                    toMySubjectSpecific.innerText = 'Перейти к моим курсам';
+                    toMySubjectSpecific.innerText = `{{trans('messages.to_my_course')}}`;
                     toMySubjectSpecific.href = "{{URL::route("student.my.subjects.specific" , ['id' => $quiz->subject->id])}}";
                     $('#quizContent').append(toMySubjectSpecific);
                 }else{
-                    toastr.error("Возникла ошибка!");
+                    toastr.error({{trans('messages.have_error')}});
                 }
             });
         });
@@ -149,7 +149,7 @@
                 });
 
                 if(selected.length ==0){
-                    toastr.error("Выберите один вариант!");
+                    toastr.error({{trans('messages.choose_one_variant')}});
                     error = true;
                 }
 
@@ -194,9 +194,9 @@
                     var endDate = new Date();
                     var seconds = (endDate.getTime() - startDate.getTime()) / 1000;
                     var features = document.createElement('p');
-                    var res = 'Дата начала: ' + startDate.toLocaleString() + "<br>";
-                    res += 'Дата окончания: ' + endDate.toLocaleString() + "<br>";
-                    res += 'Общее количество вопросов: ' + quiz.length + "<br>";
+                    var res = '{{trans('messages.date_start')}}: ' + startDate.toLocaleString() + "<br>";
+                    res += '{{trans('messages.date_finish')}}: ' + endDate.toLocaleString() + "<br>";
+                    res += '{{trans('messages.total_question')}}: ' + quiz.length + "<br>";
 
                     features.innerHTML = res;
                     $('#quizContent').html(features);
