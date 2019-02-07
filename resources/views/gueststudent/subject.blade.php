@@ -9,7 +9,7 @@
             <div class="col-sm-3">
                 <div class="card m-2 my-4">
                     <div class="card-header text-center">
-                        Профиль
+                        {{trans('messages.profile')}}
                     </div>
                     <ul class="list-group">
                         <li class="list-group-item text-muted"><span class="fa fa-user"></span> {{Auth::user()->login}}
@@ -23,7 +23,7 @@
                         <li class="list-group-item"><span class="fa fa-envelope"></span>
                             <a class="btn-link"
                                href="{{URL::route('student.my.subjects.chat', ['id' => $subject->id])}}">
-                                Перейти в чат с учителем</a></li>
+                                {{trans('messages.chat_instructor')}}</a></li>
                     </ul>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                                                 aria-controls="collapse{{$lesson->id}}">
                                             {{$lesson->name}} <span class="fa fa-arrow-circle-down text-danger"></span>
                                             @if($show)
-                                                <span class="text-muted">урок пройден</span>
+                                                <span class="text-muted">{{trans('messages.lesson_finished')}}</span>
                                             @endif
                                         </button>
                                     </h5>
@@ -62,7 +62,7 @@
                                     </div>
                                     <a class="btn btn-success btn-xs m-2 float-right text-white"
                                        href="{{URL::route('student.my.subjects.specific.lesson', ['id' => $lesson->id])}}">
-                                        Открыть
+                                        {{trans('messages.open')}}
                                     </a>
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                 <div class="container-fluid">
                     <div class="card my-4">
                         <div class="card-body">
-                            <p class="text-dark m-0 text-center">Тесты</p>
+                            <p class="text-dark m-0 text-center">{{trans('messages.test')}}</p>
                         </div>
                     </div>
                 </div>
@@ -92,12 +92,12 @@
                                                 aria-controls="collapsequiz{{$quiz->id}}">
                                             {{$quiz->name}} <span class="fa fa-arrow-circle-down text-danger"></span>
                                             @if($quiz->quizResults()->where('student_id' , Auth::user()->student->id)->first())
-                                                <span class="text-muted">тест пройден!</span>
+                                                <span class="text-muted">{{trans('messages.test_finished')}}!</span>
                                             @endif
                                         </button>
                                     </h5>
                                     @if(!$show)
-                                        <span class="text-muted">урок еще не пройден</span>
+                                        <span class="text-muted">{{trans('messages.lesson_not_finished')}}</span>
                                     @endif
 
                                 </div>
@@ -116,7 +116,7 @@
                                             class="btn btn-danger btn-xs m-2 float-right text-white"
                                             @endif
                                     >
-                                        Открыть
+                                        {{trans('messages.open')}}
                                     </a>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@
                                             ['student_id' => Auth::user()->id , 'course_id' => $subject->id])}}">
                                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                         <button class="text-white m-0 text-center btn btn-success w-100">
-                                                            Получить сертификат!
+                                                            {{trans('messages.get_certificate')}}
                                                         </button>
                                                     </form>
                                                 </div>
@@ -148,7 +148,7 @@
                                             ['student_id' => Auth::user()->id , 'course_id' => $subject->id])}}">
                                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                         <button class="text-white m-0 text-center btn btn-warning w-100">
-                                                            Отправить на почту
+                                                            {{trans('messages.send_certificate')}}
                                                         </button>
                                                     </form>
                                                 </div>
@@ -158,9 +158,7 @@
                                             </div>
                                         @else
                                             <a href="{{URL::route('help')}}#help1"
-                                               class="text-white m-0 text-center btn btn-danger w-100">Свяжитесь с
-                                                администратором! У вас недостаточный результат для получения
-                                                сертификата...
+                                               class="text-white m-0 text-center btn btn-danger w-100">{{trans('messages.error_certificate')}}
                                             </a>
                                         @endif
                                     </div>

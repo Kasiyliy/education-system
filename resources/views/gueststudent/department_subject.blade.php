@@ -38,21 +38,27 @@
                                     <?php
                                     $subject_id = $subject->id;
                                     $student_subject_id = $student_subject->subject_id;
+                                    $registered_subject = \App\Registration::select('*')
+                                        ->where('subject_id', '=', $subject_id)
+                                        ->where('students_id' , '=' , $student_subject->students_id)
+                                        ->count();
                                     ?>
-                                    @if($subject_id == $student_subject_id)
+                                    @if($registered_subject >= 1)
+
                                         <form action="{{URL::route('student.my.subjects')}}">
                                             <button id="gocourse" type="submit"
                                                     class='col-md-12 btn btn-success'>Go
                                             </button>
                                         </form>
-                                    @elseif($subject_id != $student_subject_id)
+                                        @break
+                                    @elseif(!$registered_subject)
                                         <button id="infoadmin" type="submit" onclick="openForm()"
                                                 class='btn btn-info open-button'>Go
                                         </button>
+                                        @break
                                     @else
 
                                     @endif
-
                                 @endforeach
                             @else
                                 <button id="infoadmin" type="submit" onclick="openForm()"
