@@ -37,7 +37,7 @@
                       <tbody>
                       @foreach($quizResults as $quizResult)
                           <tr>
-                              @if($quizResult->student->user && $quizResult->quiz->subject)
+                              @if($quizResult->quiz && $quizResult->student && $quizResult->student->user && $quizResult->quiz->subject)
                                   <td>{{$quizResult->student->user->firstname.' '.$quizResult->student->user->lastname}}</td>
                                   <td>{{$quizResult->percentage}}</td>
                                   <td>{{$quizResult->quiz->subject->department->name.' - '.$quizResult->quiz->subject->name}}</td>
