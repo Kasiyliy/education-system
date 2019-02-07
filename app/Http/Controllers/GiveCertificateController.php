@@ -140,6 +140,8 @@ class GiveCertificateController extends Controller
         $subject_id = $course_id;
         $user_id = $student_id;
 
+        $this::send_email($student_id, $course_id);
+
         $teacher_id1 = Subject::select('user_id')
             ->where('id', '=', $subject_id)
             ->first();
@@ -213,11 +215,11 @@ class GiveCertificateController extends Controller
             $certificate->teacher_id = $teacher_id;
             $certificate->goden_do = $converteddate;
             $certificate->save();
-            return route('pustota' ,compact('IdNo'));
+            return route('astcglobal_certificate' ,compact('IdNo'));
 
         } else {
             $certificate_id = $certificate->IdNo;
-            return route('pustota',compact('certificate_id'));
+            return route('astcglobal_certificate',compact('certificate_id'));
         }
 
     }

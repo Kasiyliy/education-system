@@ -16,22 +16,20 @@
         }
 
         ?>
-            <!-- Grid column -->
-            <div class="col-md-6 mt-md-0 mt-3">
-                <b class="font-weight-bold"><i calss="map-marker-alt"></i>{{trans('messages.address')}} {{$institute->address}}</b><br/><br/>
-                <b class="font-weight-bold"><i class="glyphicon glyphicon-earphone"></i>{{trans('messages.telephone')}}:
+        <!-- Grid column -->
+            <div class = "col-md-4"></div>
+            <div class="col-md-4 col-centered mt-md-0 mt-3">
+                <center>
+                <b class="font-weight-bold"><i
+                            class="fas fa-map-marker-alt"></i> {{trans('messages.address')}} {{$institute->address}}</b><br/><br/>
+                <b class="font-weight-bold"><i class="fa fa-phone"></i> {{trans('messages.telephone')}}:
                     {{$institute->phoneNo}}</b><br/><br/>
-                <b class="font-weight-bold"><i class="glyphicon glyphicon-envelope"></i>E-mail: {{$institute->email}}</b><br/>
+                <b class="font-weight-bold"><i class="fa fa-envelope"></i> E-mail: {{$institute->email}}</b><br/>
+                </center>
             </div>
-            <!-- Grid column -->
 
-            <hr class="clearfix w-100 d-md-none pb-3">
+            <div class = "col-md-4"></div>
 
-            <!-- Grid column -->
-            <div class="col-md-6 mb-md-0 mb-3">
-
-
-            </div>
             <!-- Grid column -->
 
         </div>
@@ -41,7 +39,7 @@
     <!-- Footer Text -->
 
     <!-- Copyright --><br/><br/><br/><br/>
-    <div class="footer-copyright text-center py-3 text-light">© {{date('Y')}} Powered by: ZMA Incorp</a>
+    <div class="footer-copyright text-center py-3 text-light">© {{date('Y')}} Powered by: ZMA Incorporation</a>
     </div>
     <!-- Copyright -->
 
