@@ -17,18 +17,19 @@
 
         ?>
         <!-- Grid column -->
-            <div class = "col-md-4"></div>
+            <div class="col-md-4"></div>
             <div class="col-md-4 col-centered mt-md-0 mt-3">
                 <center>
-                <b class="font-weight-bold"><i
-                            class="fas fa-map-marker-alt"></i> {{trans('messages.address')}} {{$institute->address}}</b><br/><br/>
-                <b class="font-weight-bold"><i class="fa fa-phone"></i> {{trans('messages.telephone')}}:
-                    {{$institute->phoneNo}}</b><br/><br/>
-                <b class="font-weight-bold"><i class="fa fa-envelope"></i> E-mail: {{$institute->email}}</b><br/>
+                    <b class="font-weight-bold"><i
+                                class="fas fa-map-marker-alt"></i> {{trans('messages.address')}} {{$institute->address}}
+                    </b><br/><br/>
+                    <b class="font-weight-bold"><i class="fa fa-phone"></i> {{trans('messages.telephone')}}:
+                        {{$institute->phoneNo}}</b><br/><br/>
+                    <b class="font-weight-bold"><i class="fa fa-envelope"></i> E-mail: {{$institute->email}}</b><br/>
                 </center>
             </div>
 
-            <div class = "col-md-4"></div>
+            <div class="col-md-4"></div>
 
             <!-- Grid column -->
 

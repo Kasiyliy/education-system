@@ -30,13 +30,15 @@
                                            for="answer">E-mail<span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input readonly type = "email" id="email" value = "{{$feedbacks->email}}" required="required" name="email"
-                                                  class="form-control col-md-7 col-xs-12"/>
+                                        <input readonly type="email" id="email" value="{{$feedbacks->email}}"
+                                               required="required" name="email"
+                                               class="form-control col-md-7 col-xs-12"/>
                                     </div>
                                 </div>
                                 <div class="item form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                           for="answer">{{trans('messages.feedback_text7')}}<span class="required">*</span>
+                                           for="answer">{{trans('messages.feedback_text7')}}<span
+                                                class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <textarea readonly rows="5" id="message" required="required" name="message"
@@ -46,7 +48,8 @@
 
                                 <div class="item form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                           for="answer">{{trans('messages.feedback_text10')}}<span class="required">*</span>
+                                           for="answer">{{trans('messages.feedback_text10')}}<span
+                                                class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <textarea id="answer" required="required" name="answer"
@@ -74,36 +77,36 @@
             </div>
         </div>
     </div>
-            <!-- /page content -->
-            @endsection
-            @section('extrascript')
-                <script src="{{ URL::asset('assets/js/validator.min.js')}}"></script>
-                <!-- validator -->
-                <script>
-                    // initialize the validator function
-                    validator.message.date = 'not a real date';
+    <!-- /page content -->
+@endsection
+@section('extrascript')
+    <script src="{{ URL::asset('assets/js/validator.min.js')}}"></script>
+    <!-- validator -->
+    <script>
+        // initialize the validator function
+        validator.message.date = 'not a real date';
 
-                    // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
-                    $('form')
-                        .on('blur', 'input[required], input.optional, select.required', validator.checkField)
-                        .on('change', 'select.required', validator.checkField)
-                        .on('keypress', 'input[required][pattern]', validator.keypress);
+        // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
+        $('form')
+            .on('blur', 'input[required], input.optional, select.required', validator.checkField)
+            .on('change', 'select.required', validator.checkField)
+            .on('keypress', 'input[required][pattern]', validator.keypress);
 
 
-                    $('form').submit(function (e) {
-                        e.preventDefault();
-                        var submit = true;
+        $('form').submit(function (e) {
+            e.preventDefault();
+            var submit = true;
 
-                        // evaluate the form using generic validaing
-                        if (!validator.checkAll($(this))) {
-                            submit = false;
-                        }
+            // evaluate the form using generic validaing
+            if (!validator.checkAll($(this))) {
+                submit = false;
+            }
 
-                        if (submit)
-                            this.submit();
+            if (submit)
+                this.submit();
 
-                        return false;
-                    });
-                </script>
-                <!-- /validator -->
+            return false;
+        });
+    </script>
+    <!-- /validator -->
 @endsection

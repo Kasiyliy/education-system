@@ -52,7 +52,7 @@
                             </table>
                         </div>
                         <div class="container-fluid">
-                            <form id = "chat_form" method="post" action="{{URL::route('message.store')}}"
+                            <form id="chat_form" method="post" action="{{URL::route('message.store')}}"
                                   class="form form-horizontal my-2 m-3">
                                 {{csrf_field()}}
                                 <input type="hidden" name="acceptor_user_id" value="{{$student->user_id}}">
@@ -61,7 +61,8 @@
                                 <textarea required name="content" class="form-control my-2"
                                           placeholder="{{trans('messages.chat_text7')}}"></textarea>
                                 <br>
-                                <button class="form-control btn btn-success" type="submit">{{trans('messages.chat_text8')}}</button>
+                                <button class="form-control btn btn-success"
+                                        type="submit">{{trans('messages.chat_text8')}}</button>
                             </form>
                         </div>
                     </div>
@@ -70,43 +71,45 @@
 
                 </div>
             </div>
-            <!-- /page content -->
-        @endsection
-        @section('extrascript')
-            <!-- dataTables -->
-                <script src="{{ URL::asset('assets/js/jquery.dataTables.min.js')}}"></script>
-                <script src="{{ URL::asset('assets/js/dataTables.bootstrap.min.js')}}"></script>
-                <script src="{{ URL::asset('assets/js/dataTables.responsive.min.js')}}"></script>
-                <script src="{{ URL::asset('assets/js/dataTables.buttons.min.js')}}"></script>
-                <script src="{{ URL::asset('assets/js/buttons.bootstrap.min.js')}}"></script>
-                <script src="{{ URL::asset('assets/js/buttons.flash.min.js')}}"></script>
-                <script src="{{ URL::asset('assets/js/buttons.html5.min.js')}}"></script>
-                <script src="{{ URL::asset('assets/js/buttons.print.min.js')}}"></script>
-                <script src="{{ URL::asset('assets/js/jszip.min.js')}}"></script>
-                <script src="{{ URL::asset('assets/js/pdfmake.min.js')}}"></script>
-                <script src="{{ URL::asset('assets/js/vfs_fonts.js')}}"></script>
-                <script type="text/javascript">
+        </div>
+    </div>
+    <!-- /page content -->
+@endsection
+@section('extrascript')
+    <!-- dataTables -->
+    <script src="{{ URL::asset('assets/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/dataTables.bootstrap.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/buttons.bootstrap.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/buttons.flash.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/buttons.html5.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/buttons.print.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/jszip.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/pdfmake.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/vfs_fonts.js')}}"></script>
+    <script type="text/javascript">
 
-                    var shiftDown = false;
-                    var chatForm = $("#chat_form");
-                    var messageBox = chatForm.children("textarea");
+        var shiftDown = false;
+        var chatForm = $("#chat_form");
+        var messageBox = chatForm.children("textarea");
 
-                    $(document).keypress(function (e) {
-                        if(e.keyCode == 13) {
-                            if(messageBox.is(":focus") && !shiftDown) {
-                                e.preventDefault(); // prevent another \n from being entered
-                                chatForm.submit();
-                            }
-                        }
-                    });
+        $(document).keypress(function (e) {
+            if (e.keyCode == 13) {
+                if (messageBox.is(":focus") && !shiftDown) {
+                    e.preventDefault(); // prevent another \n from being entered
+                    chatForm.submit();
+                }
+            }
+        });
 
-                    $(document).keydown(function (e) {
-                        if(e.keyCode == 16) shiftDown = true;
-                    });
+        $(document).keydown(function (e) {
+            if (e.keyCode == 16) shiftDown = true;
+        });
 
-                    $(document).keyup(function (e) {
-                        if(e.keyCode == 16) shiftDown = false;
-                    });
-                </script>
+        $(document).keyup(function (e) {
+            if (e.keyCode == 16) shiftDown = false;
+        });
+    </script>
 
 @endsection
