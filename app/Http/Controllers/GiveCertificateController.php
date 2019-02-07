@@ -163,7 +163,12 @@ class GiveCertificateController extends Controller
 
         if (!$certificate) {
             $IdNo = abs(crc32(uniqid()));
-
+            if($IdNo > 2147483648){
+                $IdNo -= 2147483648;
+                if($IdNo <1000000000 ){
+                    $IdNo +=1000000000;
+                }
+            }
             $certificate = new StudentCertificate();
             $certificate->IdNo = $IdNo;
             $certificate->subject_id = $subject_id;
