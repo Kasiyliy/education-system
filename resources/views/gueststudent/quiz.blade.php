@@ -110,7 +110,7 @@
 
         $('#finishButton').on('click', function(){
             if(results.length != quiz.length){
-                toastr.error({{trans('messages.finish_test')}});
+                toastr.error(`{{trans('messages.finish_test')}}`);
                 return;
             }
 
