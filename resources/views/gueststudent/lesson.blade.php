@@ -205,10 +205,10 @@
                             document.getElementById("countdowntimer").className = 'text-danger text-center'
                         }
                         if(timeleft==30){
-                            toastr.warning({{trans('messages.30_second')}});
+                            toastr.warning(`{{trans('messages.30_second')}}`);
                         }
                         if(timeleft==15){
-                            toastr.warning({{trans('messages.15_second')}});
+                            toastr.warning(`{{trans('messages.15_second')}}`);
                         }
                         if(timeleft <= 0)
                         {
@@ -230,7 +230,7 @@
                                         constructEnd();
                                     }
                                 } else {
-                                    toastr.error({{trans('messages.have_error')}});
+                                    toastr.error(`{{trans('messages.have_error')}}`);
 
                                 }
                             });
@@ -267,7 +267,7 @@
 
             function constructEnd(){
                 var lastFrame  = "<div class='jumbotron' id='lastFrame'> " +
-                    "<p class='text-center'>'{{trans('messages.your_lesson_finish')}}' <a class='btn btn-success' href='{{URL::route('student.my.subjects.specific', ['id' =>$lesson->subject->id])}}' >'{{trans('messages.go_course')}}'</a></p>" +
+                    "<p class='text-center'>'`{{trans('messages.your_lesson_finish')}}`' <a class='btn btn-success' href='{{URL::route('student.my.subjects.specific', ['id' =>$lesson->subject->id])}}' >'`{{trans('messages.go_course')}}`'</a></p>" +
                     "</div>";
 
                 $('#lessonPart').html(lastFrame);
