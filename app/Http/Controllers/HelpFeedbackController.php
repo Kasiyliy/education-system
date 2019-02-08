@@ -38,14 +38,30 @@ class HelpFeedbackController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
+
+        $institute = Institute::first();
         $email = $request->email;
         $message = $request->message;
         $answer = $request->answer;
-
-
+        if ($institute) {
+            $this::sendMail($email , $answer);
+        } else {
+        }
 
         $notification = array('title' => trans('messages.messages') , 'body' =>trans('messages.messages_send'));
         return redirect()->back()->with("success" , $notification);
+    }
+
+    public static function sendMail($to, $body){
+        $to_name = Auth::user()->firstname.' '.Auth::user()->lastname;
+        $to_email = $to;
+        $data = array('name'=>$to_name, "body" => $body);
+
+        Mail::send('mail', $data, function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)
+                ->subject('');
+            $message->from('mail.globalastc@gmail.com','GlobalASTC');
+        });
     }
 
     public function destroy($id)

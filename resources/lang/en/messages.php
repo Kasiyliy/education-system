@@ -409,6 +409,10 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
     '15_second' => 'Less than 15 seconds left',
     'your_lesson_finish' => 'Your lesson is over! Please follow the link',
 
+    'login_success' => 'You are logged in.',
+    'login_error' => 'Your login / password has been entered incorrectly',
+    'logout' => 'You are logged out.',
+
 ]
 ?>
 
