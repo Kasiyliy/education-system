@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\HelpFeedback;
+use App\Institute;
 use Validator;
 use Session;
 use Illuminate\Support\Facades\Redirect;
