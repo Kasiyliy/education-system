@@ -125,10 +125,10 @@
                 }
             }).done(function( msg ) {
                 if(msg.error == 0){
-                    toastr.success({{trans('messages.test_passed')}});
+                    toastr.success(`{{trans('messages.test_passed')}}`);
                     $('#quizContent').html('');
                     var result = document.createElement('h3');
-                    result.innerText = {{trans('messages.your_result')}} + JSON.parse(msg.message).percentage + "%";
+                    result.innerText = `{{trans('messages.your_result')}}` + JSON.parse(msg.message).percentage + "%";
                     $('#quizContent').append(result);
                     $('#finishButton').hide();
                     var toMySubjectSpecific = document.createElement('a');
@@ -137,7 +137,7 @@
                     toMySubjectSpecific.href = "{{URL::route("student.my.subjects.specific" , ['id' => $quiz->subject->id])}}";
                     $('#quizContent').append(toMySubjectSpecific);
                 }else{
-                    toastr.error({{trans('messages.have_error')}});
+                    toastr.error(`{{trans('messages.have_error')}}`);
                 }
             });
         });
@@ -149,7 +149,7 @@
                 });
 
                 if(selected.length ==0){
-                    toastr.error({{trans('messages.choose_one_variant')}});
+                    toastr.error(`{{trans('messages.choose_one_variant')}}`);
                     error = true;
                 }
 
@@ -194,9 +194,9 @@
                     var endDate = new Date();
                     var seconds = (endDate.getTime() - startDate.getTime()) / 1000;
                     var features = document.createElement('p');
-                    var res = '{{trans('messages.date_start')}}: ' + startDate.toLocaleString() + "<br>";
-                    res += '{{trans('messages.date_finish')}}: ' + endDate.toLocaleString() + "<br>";
-                    res += '{{trans('messages.total_question')}}: ' + quiz.length + "<br>";
+                    var res = '`{{trans('messages.date_start')}}`: ' + startDate.toLocaleString() + "<br>";
+                    res += '`{{trans('messages.date_finish')}}`: ' + endDate.toLocaleString() + "<br>";
+                    res += '`{{trans('messages.total_question')}}`: ' + quiz.length + "<br>";
 
                     features.innerHTML = res;
                     $('#quizContent').html(features);
