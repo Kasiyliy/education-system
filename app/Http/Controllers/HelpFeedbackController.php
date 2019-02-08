@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\HelpFeedback;
 use App\Institute;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use Session;
 use Illuminate\Support\Facades\Redirect;
@@ -54,6 +55,7 @@ class HelpFeedbackController extends Controller
     }
 
     public static function sendMail($to, $body){
+        
         $to_name = Auth::user()->firstname.' '.Auth::user()->lastname;
         $to_email = $to;
         $data = array('name'=>$to_name, "body" => $body);
