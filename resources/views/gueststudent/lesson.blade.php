@@ -54,8 +54,8 @@
         var form = "";
         var arrayIds = [];
 
-        var currentLessonPartCheckerId = {{$currentLessonPart->id}};
-        var currentLessonPartId = {{$lessonPart->id}};
+        var currentLessonPartCheckerId = `{{$currentLessonPart->id}}`;
+        var currentLessonPartId = `{{$lessonPart->id}}`;
         var sliderLessonPartId = currentLessonPartId;
 
 
@@ -77,7 +77,7 @@
                     `{{$oLp->presentation}}`,
                     `{{$oLp->video!= null ? $oLp->video : ""}}`,
                     `{{$oLp->audio!= null ? $oLp->audio : ""}}`,
-                    {{$oLp->seconds}},
+                    `{{$oLp->seconds}}`,
                 false
                 );
             @endforeach
@@ -205,10 +205,10 @@
                             document.getElementById("countdowntimer").className = 'text-danger text-center'
                         }
                         if(timeleft==30){
-                            toastr.warning("Осталось меньше 30 секунд!");
+                            toastr.warning(`{{trans('messages.30_second')}}`);
                         }
                         if(timeleft==15){
-                            toastr.warning("Осталось меньше 15 секунд!");
+                            toastr.warning(`{{trans('messages.15_second')}}`);
                         }
                         if(timeleft <= 0)
                         {
@@ -230,7 +230,7 @@
                                         constructEnd();
                                     }
                                 } else {
-                                    toastr.error("Возникла ошибка!");
+                                    toastr.error(`{{trans('messages.have_error')}}`);
 
                                 }
                             });
@@ -267,7 +267,7 @@
 
             function constructEnd(){
                 var lastFrame  = "<div class='jumbotron' id='lastFrame'> " +
-                    "<p class='text-center'>Ваш урок окончен! Просим вас перейти по ссылке <a class='btn btn-success' href='{{URL::route('student.my.subjects.specific', ['id' =>$lesson->subject->id])}}' >к курсу</a></p>" +
+                    "<p class='text-center'>'`{{trans('messages.your_lesson_finish')}}`' <a class='btn btn-success' href='{{URL::route('student.my.subjects.specific', ['id' =>$lesson->subject->id])}}' >'`{{trans('messages.go_course')}}`'</a></p>" +
                     "</div>";
 
                 $('#lessonPart').html(lastFrame);

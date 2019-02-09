@@ -41,7 +41,7 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input id="text1" type="text" class="form-control col-md-7 col-xs-12"
                                                name="text1"
-                                               value="{{$certificate->text1}}" placeholder="text1">
+                                               value="{{$certificate->text1}}" maxlength="22" placeholder="text1">
                                         <span class="text-danger">{{ $errors->first('text1') }}</span>
                                     </div>
                                 </div>
@@ -53,7 +53,7 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input id="text2" type="text" class="form-control col-md-7 col-xs-12"
                                                name="text2"
-                                               value="{{$certificate->text2}}" placeholder="text2">
+                                               value="{{$certificate->text2}}" maxlength="22" placeholder="text2">
                                         <span class="text-danger">{{ $errors->first('text2') }}</span>
                                     </div>
                                 </div>
@@ -65,7 +65,7 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input id="text3" type="text" class="form-control col-md-7 col-xs-12"
                                                name="text3"
-                                               value="{{$certificate->text3}}" placeholder="text3">
+                                               value="{{$certificate->text3}}" maxlength="22" placeholder="text3">
                                         <span class="text-danger">{{ $errors->first('text3') }}</span>
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input id="text4" type="text" class="form-control col-md-7 col-xs-12"
                                                name="text4"
-                                               value="{{$certificate->text4}}" placeholder="text4">
+                                               value="{{$certificate->text4}}" maxlength="22" placeholder="text4">
                                         <span class="text-danger">{{ $errors->first('text4') }}</span>
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input id="text5" type="text" class="form-control col-md-7 col-xs-12"
                                                name="text5"
-                                               value="{{$certificate->text5}}" placeholder="text5">
+                                               value="{{$certificate->text5}}" maxlength="22" placeholder="text5">
                                         <span class="text-danger">{{ $errors->first('text5') }}</span>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input id="text6" type="text" class="form-control col-md-7 col-xs-12"
                                                name="text6"
-                                               value="{{$certificate->text6}}" placeholder="text6">
+                                               value="{{$certificate->text6}}" maxlength="22" placeholder="text6">
                                         <span class="text-danger">{{ $errors->first('text6') }}</span>
                                     </div>
                                 </div>
@@ -113,7 +113,7 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input id="text7" type="text" class="form-control col-md-7 col-xs-12"
                                                name="text7"
-                                               value="{{$certificate->text7}}" placeholder="text7">
+                                               value="{{$certificate->text7}}" maxlength="22" placeholder="text7">
                                         <span class="text-danger">{{ $errors->first('text7') }}</span>
                                     </div>
                                 </div>

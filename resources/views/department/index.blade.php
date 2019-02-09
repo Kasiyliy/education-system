@@ -65,71 +65,73 @@
 
                 </div>
             </div>
-            <!-- /page content -->
-        @endsection
-        @section('extrascript')
-            <!-- dataTables -->
-                <script src="{{ URL::asset('assets/js/jquery.dataTables.min.js')}}"></script>
-                <script src="{{ URL::asset('assets/js/dataTables.bootstrap.min.js')}}"></script>
-                <script src="{{ URL::asset('assets/js/dataTables.responsive.min.js')}}"></script>
-                <script src="{{ URL::asset('assets/js/dataTables.buttons.min.js')}}"></script>
-                <script src="{{ URL::asset('assets/js/buttons.bootstrap.min.js')}}"></script>
-                <script src="{{ URL::asset('assets/js/buttons.flash.min.js')}}"></script>
-                <script src="{{ URL::asset('assets/js/buttons.html5.min.js')}}"></script>
-                <script src="{{ URL::asset('assets/js/buttons.print.min.js')}}"></script>
-                <script src="{{ URL::asset('assets/js/jszip.min.js')}}"></script>
-                <script src="{{ URL::asset('assets/js/pdfmake.min.js')}}"></script>
-                <script src="{{ URL::asset('assets/js/vfs_fonts.js')}}"></script>
+        </div>
+    </div>
+    <!-- /page content -->
+@endsection
+@section('extrascript')
+    <!-- dataTables -->
+    <script src="{{ URL::asset('assets/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/dataTables.bootstrap.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/buttons.bootstrap.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/buttons.flash.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/buttons.html5.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/buttons.print.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/jszip.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/pdfmake.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/vfs_fonts.js')}}"></script>
 
-                <script>
+    <script>
 
-                    $(document).ready(function () {
+        $(document).ready(function () {
 
-                        //datatables code
-                        var handleDataTableButtons = function () {
-                            if ($("#datatable-buttons").length) {
-                                $("#datatable-buttons").DataTable({
-                                    responsive: true,
-                                    dom: "Bfrtip",
-                                    buttons: [
-                                        {
-                                            extend: "copy",
-                                            className: "btn-sm"
-                                        },
-                                        {
-                                            extend: "csv",
-                                            className: "btn-sm"
-                                        },
-                                        {
-                                            extend: "excel",
-                                            className: "btn-sm"
-                                        },
-                                        {
-                                            extend: "pdfHtml5",
-                                            className: "btn-sm"
-                                        },
-                                        {
-                                            extend: "print",
-                                            className: "btn-sm"
-                                        },
-                                    ],
-                                    responsive: true
-                                });
-                            }
-                        };
-
-                        TableManageButtons = function () {
-                            "use strict";
-                            return {
-                                init: function () {
-                                    handleDataTableButtons();
-                                }
-                            };
-                        }();
-
-                        TableManageButtons.init();
-
+            //datatables code
+            var handleDataTableButtons = function () {
+                if ($("#datatable-buttons").length) {
+                    $("#datatable-buttons").DataTable({
+                        responsive: true,
+                        dom: "Bfrtip",
+                        buttons: [
+                            {
+                                extend: "copy",
+                                className: "btn-sm"
+                            },
+                            {
+                                extend: "csv",
+                                className: "btn-sm"
+                            },
+                            {
+                                extend: "excel",
+                                className: "btn-sm"
+                            },
+                            {
+                                extend: "pdfHtml5",
+                                className: "btn-sm"
+                            },
+                            {
+                                extend: "print",
+                                className: "btn-sm"
+                            },
+                        ],
+                        responsive: true
                     });
-                </script>
-                <!-- /validator -->
+                }
+            };
+
+            TableManageButtons = function () {
+                "use strict";
+                return {
+                    init: function () {
+                        handleDataTableButtons();
+                    }
+                };
+            }();
+
+            TableManageButtons.init();
+
+        });
+    </script>
+    <!-- /validator -->
 @endsection

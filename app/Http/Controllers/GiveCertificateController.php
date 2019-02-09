@@ -44,13 +44,13 @@ class GiveCertificateController extends Controller
             'inspired_by' => 'required|max:20',
             'on_behalf_and_for' => 'required|max:20',
 
-            'text1' => 'string|max:21',
-            'text2' => 'string|max:21',
-            'text3' => 'string|max:21',
-            'text4' => 'string|max:21',
-            'text5' => 'string|max:21',
-            'text6' => 'string|max:21',
-            'text7' => 'string|max:21',
+            'text1' => 'string|max:26',
+            'text2' => 'string|max:26',
+            'text3' => 'string|max:26',
+            'text4' => 'string|max:26',
+            'text5' => 'string|max:26',
+            'text6' => 'string|max:26',
+            'text7' => 'string|max:26',
 
         ];
         $validator = Validator::make($data, $rules);
@@ -140,6 +140,8 @@ class GiveCertificateController extends Controller
         $subject_id = $course_id;
         $user_id = $student_id;
 
+        $this::send_email($student_id, $course_id);
+
         $teacher_id1 = Subject::select('user_id')
             ->where('id', '=', $subject_id)
             ->first();
@@ -161,7 +163,12 @@ class GiveCertificateController extends Controller
 
         if (!$certificate) {
             $IdNo = abs(crc32(uniqid()));
-
+            if($IdNo > 2147483648){
+                $IdNo -= 2147483648;
+                if($IdNo <1000000000 ){
+                    $IdNo +=1000000000;
+                }
+            }
             $certificate = new StudentCertificate();
             $certificate->IdNo = $IdNo;
             $certificate->subject_id = $subject_id;
@@ -213,11 +220,11 @@ class GiveCertificateController extends Controller
             $certificate->teacher_id = $teacher_id;
             $certificate->goden_do = $converteddate;
             $certificate->save();
-            return route('pustota' ,compact('IdNo'));
+            return route('astcglobal_certificate' ,compact('IdNo'));
 
         } else {
             $certificate_id = $certificate->IdNo;
-            return route('pustota',compact('certificate_id'));
+            return route('astcglobal_certificate',compact('certificate_id'));
         }
 
     }

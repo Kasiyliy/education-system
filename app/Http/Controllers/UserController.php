@@ -67,15 +67,15 @@ class UserController extends Controller
                 Session::put('inNameShort', AppHelper::getShortName($institute->name));
 
                 if (Auth::user()->group == User::STUDENT and Auth::user()->student()->get()) {
-                    return Redirect::to('/guest')->with('success', "Вы вошли в систему.");
+                    return Redirect::to('/guest')->with('success', trans('messages.login_success') );
                 }
-                $notification = array('title' => 'Логин', 'body' => 'Вы вошли в систему.');
+                $notification = array('title' => trans('messages.login'), 'body' => trans('messages.login_success'));
                 return Redirect::to('/dashboard')->with('success', $notification);
             }
 
         } else {
 
-            return Redirect::to('/login')->with('error', 'Ваш логин/пароль были введены не верно');
+            return Redirect::to('/login')->with('error', trans('messages.login_error'));
 
         }
 
@@ -96,7 +96,7 @@ class UserController extends Controller
         Auth::logout();
 
         session()->forget('name');
-        return Redirect::to('/')->with('success', 'Вы вышли из системы!');
+        return Redirect::to('/')->with('success', trans('messages.logout'));
     }
 
     /**

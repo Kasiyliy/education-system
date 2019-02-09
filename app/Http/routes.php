@@ -38,7 +38,7 @@ Route::group(['middleware' => ['language',]], function () {
 
     Route::get('/subjects/{id}', ['as' => 'subjects.specific', 'uses' => 'StudentSubjectsController@showSubjects']);
 
-    Route::get('/pustota/{id}', ['as' => 'pustota', 'uses' => 'CertificateController@give']);
+    Route::get('/astcglobal_certificate/{id}', ['as' => 'astcglobal_certificate', 'uses' => 'CertificateController@give']);
 
     Route::group(['prefix' => 'student', 'middleware' => ['for.student', 'auth']], function () {
         Route::get('/my/subjects', ['as' => 'student.my.subjects', 'uses' => 'StudentSubjectsController@mySubjects']);
