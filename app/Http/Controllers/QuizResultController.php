@@ -32,6 +32,7 @@ class QuizResultController extends Controller
                 ->join('subject' , 'subject.id', '=','quizes.subject_id')
                 ->join('students' , 'students.id', '=','quiz_results.student_id')
                 ->join('users' , 'users.id', '=','students.user_id')
+                ->join('department' , 'department.id', '=','subject.department_id')
                 ->where('quizes.user_id' ,$currentUser->id )
                 ->whereNull('quizes.deleted_at')
                 ->whereNull('students.deleted_at')
