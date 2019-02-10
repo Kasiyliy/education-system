@@ -12,7 +12,7 @@ class LessonPart extends Model
 
     protected $fillable = [
         'presentation',
-        'inforamtion',
+        'information',
         'lesson_id',
         'audio',
         'video',

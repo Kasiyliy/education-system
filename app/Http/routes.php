@@ -121,7 +121,10 @@ Route::group(['middleware' => ['language',]], function () {
         Route::get('lesson-part/{id}', ['as' => 'lesson-part.index', 'uses'=>'LessonPartController@index']);
         Route::post('lesson-part/{id}', ['as' => 'lesson-part.destroy', 'uses'=>'LessonPartController@destroy']);
         Route::get('lesson-part/edit/{id}', ['as' => 'lesson-part.edit', 'uses'=>'LessonPartController@edit']);
-        Route::post('lesson-part/update/{id}', ['as' => 'lesson-part.update', 'uses'=>'LessonPartController@update']);
+        Route::post('lesson-part/updatePresentation/{id}', ['as' => 'lesson-part.updatePresentation', 'uses'=>'LessonPartController@updatePresentation']);
+        Route::post('lesson-part/updateAudio/{id}', ['as' => 'lesson-part.updateAudio', 'uses'=>'LessonPartController@updateAudio']);
+        Route::post('lesson-part/updateVideo/{id}', ['as' => 'lesson-part.updateVideo', 'uses'=>'LessonPartController@updateVideo']);
+        Route::post('lesson-part/updateInfoAndSec/{id}', ['as' => 'lesson-part.updateInfoAndSec', 'uses'=>'LessonPartController@updateInfoAndSec']);
         Route::post('lesson-part', ['as' => 'lesson-part.store', 'uses'=>'LessonPartController@store']);
 
         Route::get('message/{studentId}/{subjectId}', ['as' => 'message.show2', 'uses' => 'MessageController@show2']);

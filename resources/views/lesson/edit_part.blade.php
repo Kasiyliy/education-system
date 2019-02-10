@@ -31,25 +31,81 @@
                                     </ul>
                                 </div>
                             @endif
-                            <form action="{{URL::route('lesson-part.update',['id' => $lessonPart->id])}}" method="POST"
+
+                            <form action="{{URL::route('lesson-part.updatePresentation',['id' => $lessonPart->id])}}" method="POST"
                                   class="form-horizontal" enctype="multipart/form-data">
                                 {{csrf_field()}}
-                                <div class="form-group">
-                                    <label for="presentation">{{trans('messages.presentation_text7')}}(jpg, jpeg, png,
-                                        mp4(video))</label>
-                                    <input type="file" class="form-control" id="presentation" name="presentation"
-                                           required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="audio">{{trans('messages.presentation_text8')}}(mpga, wav, mp3)</label>
-                                    <input type="file" class="form-control" id="audio" name="audio">
-                                </div>
-                                <div class="form-group">
-                                    <label for="video">{{trans('messages.presentation_text9')}}(mp4, mov, avi,
-                                        wmv)</label>
-                                    <input type="file" class="form-control" id="video" name="video">
+
+                                <div class="row">
+                                    <div class="col-sm-6 m-1">
+                                        <div class="form-group">
+                                            <label for="presentation">{{trans('messages.presentation_text7')}}(jpg, jpeg, png,
+                                                mp4(video))</label>
+                                            <input type="file" class="form-control" id="presentation" name="presentation"
+                                                   required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 m-1">
+                                        <div>
+                                            <embed style="width: 100%" src="/{{$lessonPart->presentation}}"
+                                                   class="embed-responsive-item"/>
+                                        </div>
+                                    </div>
                                 </div>
 
+                                <button type="submit"
+                                        class="btn btn-success">{{trans('messages.button_change')}}</button>
+                            </form>
+
+                            <form action="{{URL::route('lesson-part.updateAudio',['id' => $lessonPart->id])}}" method="POST"
+                                  class="form-horizontal" enctype="multipart/form-data">
+                                {{csrf_field()}}
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="audio">{{trans('messages.presentation_text8')}}(mpga, wav, mp3)</label>
+                                            <input type="file" class="form-control" id="audio" name="audio">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <audio controls>
+                                            <source src="/{{$lessonPart->audio}}">
+                                            Your browser does not support the audio tag.
+                                        </audio>
+                                    </div>
+                                </div>
+
+                                <button type="submit"
+                                        class="btn btn-success">{{trans('messages.button_change')}}</button>
+                            </form>
+
+                            <form action="{{URL::route('lesson-part.updateVideo',['id' => $lessonPart->id])}}" method="POST"
+                                  class="form-horizontal" enctype="multipart/form-data">
+                                {{csrf_field()}}
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="video">{{trans('messages.presentation_text9')}}(mp4, mov, avi,
+                                                wmv)</label>
+                                            <input type="file" class="form-control" id="video" name="video">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <video controls style="width: 100%;">
+                                            <source src="/{{$lessonPart->video}}">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                </div>
+
+                                <button type="submit"
+                                        class="btn btn-success">{{trans('messages.button_change')}}</button>
+                            </form>
+
+                            <form action="{{URL::route('lesson-part.updateInfoAndSec',['id' => $lessonPart->id])}}" method="POST"
+                                  class="form-horizontal">
+                                {{csrf_field()}}
                                 <div class="form-group">
                                     <label for="seconds">{{trans('messages.presentation_text10')}}</label>
                                     <input type="number" min="0" name="seconds" value="{{$lessonPart->seconds}}"
