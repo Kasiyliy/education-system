@@ -46,10 +46,13 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php
+                                        $i = 0;
+                                ?>
                                 @if($quiz->questions->count() > 0)
                                     @foreach($quiz->questions as $question)
                                         <tr>
-                                            <td>{{$question->id}}</td>
+                                            <td>{{ ++$i }}</td>
                                             <td>{{$question->value}}</td>
                                             <td>
                                                 <a href="{{URL::route('question.edit',['id' =>$question->id])}}" class="btn btn-success btn-xs">{{trans('messages.button_change')}}</a>
