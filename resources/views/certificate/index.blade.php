@@ -1,7 +1,8 @@
 @extends('layouts.master')
 
-@section('title', 'Под курсы')
+@section('title', '')
 @section('extrastyle')
+
     <link href="{{ URL::asset('assets/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{ URL::asset('assets/css/responsive.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{ URL::asset('assets/css/buttons.bootstrap.min.css')}}" rel="stylesheet">
@@ -37,19 +38,18 @@
                                     <th>{{trans('messages.sertificate_text17')}}</th>
                                 </tr>
                                 </thead>
-
+                                <tbody>
                                 @foreach($certificates as $certificate)
-                                    <tbody>
-
-                                    <td>{{$certificate->IdNo}}</td>
-                                    <td>{{$certificate->studentfirstname}} {{$certificate->studentlastname}}</td>
-                                    <td>{{$certificate->teacherfirstname}} {{$certificate->teacherlastname}}</td>
-                                    <td>{{$certificate->subjectname}}</td>
-                                    <td>{{$certificate->created_at->format('F j, Y h:m A')}}</td>
-                                    <td>{{$certificate->goden_do}}</td>
-
-                                    </tbody>
+                                    <tr>
+                                        <td>{{$certificate->IdNo}}</td>
+                                        <td>{{$certificate->studentfirstname}} {{$certificate->studentlastname}}</td>
+                                        <td>{{$certificate->teacherfirstname}} {{$certificate->teacherlastname}}</td>
+                                        <td>{{$certificate->subjectname}}</td>
+                                        <td>{{$certificate->created_at->format('F j, Y h:m A')}}</td>
+                                        <td>{{$certificate->goden_do}}</td>
+                                    </tr>
                                 @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>

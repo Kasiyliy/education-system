@@ -5,8 +5,7 @@
     <link href="{{ URL::asset('assets/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{ URL::asset('assets/css/responsive.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{ URL::asset('assets/css/buttons.bootstrap.min.css')}}" rel="stylesheet">
-
-    <link href="{{ URL::asset('assets/css/select2.min.css')}}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/css/buttons.bootstrap.min.css')}}" rel="stylesheet">
     <style>
         @media print {
             table td:last-child {
@@ -37,41 +36,38 @@
 
                             <div class="clearfix"></div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <table id="datatable-buttons" class="table table-striped table-bordered">
-                                    <thead>
+                        <table id="datatable-buttons" class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>{{trans('messages.result_text3')}}</th>
+                                <th>{{trans('messages.result_text4')}}</th>
+                                <th>{{trans('messages.result_text5')}}</th>
+                                <th>{{trans('messages.result_text6')}}</th>
+                                <th>{{trans('messages.button_action')}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($quizResults as $quizResult)
+                                @if($quizResult->quiz && $quizResult->student && $quizResult->student->user && $quizResult->quiz->subject)
                                     <tr>
-                                        <th>{{trans('messages.result_text3')}}</th>
-                                        <th>{{trans('messages.result_text4')}}</th>
-                                        <th>{{trans('messages.result_text5')}}</th>
-                                        <th>{{trans('messages.result_text6')}}</th>
-                                        <th>{{trans('messages.button_action')}}</th>
+                                        <td>{{$quizResult->student->user->firstname.' '.$quizResult->student->user->lastname}}</td>
+                                        <td>{{$quizResult->percentage}}</td>
+                                        <td>{{$quizResult->quiz->subject->department->name.' - '.$quizResult->quiz->subject->name}}</td>
+                                        <td>{{$quizResult->created_at}}</td>
+                                        <td>
+                                            <form action="{{URL::route("result.quiz.delete", ['id' => $quizResult->id])}}"
+                                                  method="post">
+                                                {{csrf_field()}}
+                                                <button type="submit" class="btn btn-danger">
+                                                    <span class="fa fa-trash"></span>
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($quizResults as $quizResult)
-                                        @if($quizResult->quiz && $quizResult->student && $quizResult->student->user && $quizResult->quiz->subject)
-                                            <tr>
-                                                <td>{{$quizResult->student->user->firstname.' '.$quizResult->student->user->lastname}}</td>
-                                                <td>{{$quizResult->percentage}}</td>
-                                                <td>{{$quizResult->quiz->subject->department->name.' - '.$quizResult->quiz->subject->name}}</td>
-                                                <td>{{$quizResult->created_at}}</td>
-                                                <td>
-                                                    <form action="{{URL::route("result.quiz.delete", ['id' => $quizResult->id])}}" method="post">
-                                                        {{csrf_field()}}
-                                                        <button type="submit" class="btn btn-danger">
-                                                            <span class="fa fa-trash"></span>
-                                                        </button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        @endif
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                                @endif
+                            @endforeach
+                            </tbody>
+                        </table>
                         <!-- row end -->
                         <div class="clearfix"></div>
 
@@ -85,7 +81,6 @@
     <!-- Modal For Attendance Update -->
 @endsection
 @section('extrascript')
-    <!-- dataTables -->
     <script src="{{ URL::asset('assets/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{ URL::asset('assets/js/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{ URL::asset('assets/js/dataTables.responsive.min.js')}}"></script>
@@ -97,15 +92,11 @@
     <script src="{{ URL::asset('assets/js/jszip.min.js')}}"></script>
     <script src="{{ URL::asset('assets/js/pdfmake.min.js')}}"></script>
     <script src="{{ URL::asset('assets/js/vfs_fonts.js')}}"></script>
-    <script src="{{ URL::asset('assets/js/select2.full.min.js')}}"></script>
 
     <script>
 
         $(document).ready(function () {
-            $(".select2_single").select2({
-                placeholder: "Select Department",
-                allowClear: true
-            });
+
             //datatables code
             var handleDataTableButtons = function () {
                 if ($("#datatable-buttons").length) {
