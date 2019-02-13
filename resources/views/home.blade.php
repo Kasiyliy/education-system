@@ -38,38 +38,41 @@
                         <input type="password" class="form-control" name="password" placeholder="Password" required=""/>
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-success btn-lg">{{trans('messages.signin')}}   <i class="fa fa-2x fa-sign-in"></i>
+                        <button type="submit" class="btn btn-success btn-lg">{{trans('messages.signin')}} <i
+                                    class="fa fa-2x fa-sign-in"></i>
                         </button>
                     </div>
 
                     <div class="clearfix"></div>
 
-                    <div class="separator">
-                        @if (Session::has('success'))
-                            <div class="alert alert-success">
-                                {{ Session::get('success') }}
-                            </div>
-                        @endif
-                        @if (Session::has('error'))
-                            <div class="alert alert-danger">
-                                {{ Session::get('error') }}
-                            </div>
-                        @endif
-                        @if (Session::has('warning'))
-                            <div class="alert alert-warning">
-                                {{ Session::get('warning') }}
-                            </div>
-                        @endif
-
-                        <div class="clearfix"></div>
-                        <br/>
-
-                        <div>
-                            <h2 style="font-size:16px;"><i class="fa fa-bank"></i> {{$institute->name}}</h2>
-                            <p>©{{date('Y')}} All Rights Reserved.</p>
-                        </div>
-                    </div>
                 </form>
+                <a href = "/" style = "color:white;">{{trans('messages.return')}}</a>
+                <div class="separator">
+                    @if (Session::has('success'))
+                        <div class="alert alert-success">
+                            {{ Session::get('success') }}
+                        </div>
+                    @endif
+                    @if (Session::has('error'))
+                        <div class="alert alert-danger">
+                            {{ Session::get('error') }}
+                        </div>
+                    @endif
+                    @if (Session::has('warning'))
+                        <div class="alert alert-warning">
+                            {{ Session::get('warning') }}
+                        </div>
+                    @endif
+
+                    <div class="clearfix"></div>
+                    <br/>
+
+                    <div>
+                        <h2 style="font-size:16px;"><i class="fa fa-bank"></i> {{$institute->name}}</h2>
+                        <p>©{{date('Y')}} All Rights Reserved.</p>
+                    </div>
+                </div>
+
             </section>
         </div>
 
@@ -100,6 +103,7 @@
             padding-bottom: 0;
         }
     }
+
     @media (min-width: 10px) {
         body.masthead6 {
             height: 1000px;

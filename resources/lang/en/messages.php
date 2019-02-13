@@ -1,10 +1,12 @@
 <?php
 return [
-    'welcome_word1' => 'Greetings to You dear Friend!',
-    'welcome_word2' => 'We are happy to welcome ayou today,',
-    'welcome_word3' => 'Please allow us to guide You through this jorney to get the treasured expertice, as today it is valued and indespensible factor of development.',
-    'welcome_word4' => 'Our finest course is designed and tailored especially for You. We do believe that it will give You the path for soaring new hights.',
-    'welcome_word5' => 'We look forward with our hearts and minds for Your prosperous future.',
+    'welcome_word1' => 'Dear friend,',
+    'welcome_word2' => 'We are happy to welcome you on our platform!',
+    'welcome_word3' => 'Please allow us to guide you through this journey to get the treasured expertise, as it is highly
+valued and indispensable factor in knowledge development.',
+    'welcome_word4' => 'Our best training courses are designed and custom-made specifically for Your requirements.
+We do believe that it will create a new chance to soar to new heights.',
+    'welcome_word5' => 'We look forward working with you, putting our heart and mind for Your prosperous future,',
     'welcome_word6' => 'Sincerely yours,',
 
 
@@ -67,7 +69,7 @@ return [
 
     'about_us' => 'About us',
 
-    'all_subjects_text1' => 'We are happy to offer you our finest selection of the following courses:',
+    'all_subjects_text1' => 'We are happy to offer you our finest selection of these following courses:',
 
     'start_department' => 'More',
     'opisanie' => 'Course description',
@@ -90,7 +92,7 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
      cooperation with our clients and partners.
 ',
 
-    'feedback_text1' => 'Please, contact us!',
+    'feedback_text1' => 'Please, contact us for any concern!',
     'feedback_text2' => 'Your feedback is important!',
     'feedback_text3' => 'Your feedback!',
 
@@ -109,8 +111,9 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
     'help_text1' => 'Welcome!',
     'help_text2' => 'Register with us.',
     'help_text3' => 'Start training.',
-    'help_text4' => 'In case of access problems, please kindly address the administrator.',
-    'help_text5' => 'Test will be available after training completion followed by the certificate.',
+    'help_text4' => 'In case of an access problems, please kindly address the administrator.',
+    'help_text5' => 'Test will be available right after training completion, later followed by a certificate upon a
+successful result.',
 
     'help_text6' => 'If you have any further questions, please contact the administrator.',
     'help_text7' => 'Information is confidential.',
@@ -413,6 +416,7 @@ Time is the most valuable resource, so we suggest it’s effective practice!',
     'login_error' => 'Your login / password has been entered incorrectly',
     'logout' => 'You are logged out.',
 
+    'return' => 'Go back to main',
 ]
 ?>
 
