@@ -86,7 +86,7 @@
             @for($i = 0 ;  $i < $question->answers->count(); $i++ )
             {
                     id: `{{$question->answers[$i]->id}}` ,
-                    value : `{{htmlspecialchars_decode($question->answers[$i]->value)}}` ,
+                    value : `{{htmlspecialchars($question->answers[$i]->value)}}` ,
             },
             @endfor
           ]
