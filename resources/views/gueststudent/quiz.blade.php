@@ -70,9 +70,6 @@
   </div>
 
 @endsection
-<?php
-dd($question->answers);
-?>
 @section('scripts')
   <script src="{{ URL::asset('assets/js/validator.min.js')}}" ></script>
 
@@ -89,7 +86,7 @@ dd($question->answers);
             @for($i = 0 ;  $i < $question->answers->count(); $i++ )
             {
                     id: `{{$question->answers[$i]->id}}` ,
-                    value : `{{htmlspecialchars_decode($question->answers[$i]->value,ENT_QUOTES)}}` ,
+                    value : `{{htmlspecialchars_decode($question->answers[$i]->value)}}` ,
             },
             @endfor
           ]
