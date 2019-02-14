@@ -6,7 +6,7 @@ return [
 valued and indispensable factor in knowledge development.',
     'welcome_word4' => 'Our best training courses are designed and custom-made specifically for Your requirements.
 We do believe that it will create a new chance to soar to new heights.',
-    'welcome_word5' => 'We look forward working with you, putting our heart and mind for Your prosperous future,',
+    'welcome_word5' => 'We look forward working with you, putting our heart and mind for Your prosperous future!',
     'welcome_word6' => 'Sincerely yours,',
 
 
