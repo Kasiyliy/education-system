@@ -134,21 +134,12 @@
                                     <div class="card-body">
                                         @if($quizResult->percentage > 75)
                                             <div class="row">
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-12">
                                                     <form method="POST" action="{{URL::route('certificate.put_info',
                                             ['student_id' => Auth::user()->id , 'course_id' => $subject->id])}}">
                                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                         <button class="text-white m-0 text-center btn btn-success w-100">
                                                             {{trans('messages.get_certificate')}}
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <form method="POST" action="{{URL::route('certificate.send_email',
-                                            ['student_id' => Auth::user()->id , 'course_id' => $subject->id])}}">
-                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                        <button class="text-white m-0 text-center btn btn-warning w-100">
-                                                            {{trans('messages.send_certificate')}}
                                                         </button>
                                                     </form>
                                                 </div>
