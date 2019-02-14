@@ -70,7 +70,9 @@
   </div>
 
 @endsection
-
+<?php
+dd($question->answers);
+?>
 @section('scripts')
   <script src="{{ URL::asset('assets/js/validator.min.js')}}" ></script>
 
