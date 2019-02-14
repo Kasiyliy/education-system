@@ -142,15 +142,16 @@
             });
         });
         function constructResult(){
+            var err = false;
             if(currentQuestionId!=0){
                 var selected = [];
                 $('#quizContent input:checked').each(function(){
                     selected.push(parseInt($(this).attr('value')));
                 });
 
-                if(selected.length ==0){
+                if(selected.length == 0){
                     toastr.error(`{{trans('messages.choose_one_variant')}}`);
-                    error = true;
+                    err = true;
                 }
 
                 results.push({
@@ -158,13 +159,14 @@
                     selected : selected,
                 });
             }
+            return err;
         }
 
         function nextQuestion(){
             var found = false;
             if(quiz[quiz.length-1].id != currentQuestionId){
                 var error = false;
-                constructResult();
+                error = constructResult();
                 if(error){
                     return;
                 }
