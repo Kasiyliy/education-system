@@ -72,9 +72,9 @@
 @endsection
 
 @section('scripts')
-  <script src="{{ URL::asset('assets/js/validator.min.js')}}"></script>
+  <script src="{{ URL::asset('assets/js/validator.min.js')}}" ></script>
 
-  <script>
+  <script  charset="UTF-8" >
     var currentQuestionId = 0;
     var results = [];
     var questionIndex = 0;
