@@ -190,7 +190,7 @@ class GiveCertificateController extends Controller
             }
 
         } else {
-            Session::flash('success', trans('messages.certificate_error') . ' ' . trans('messages.certificate_error_admin'));
+            Session::flash('error', trans('messages.certificate_error') . ' ' . trans('messages.certificate_error_admin'));
             return redirect()->back();
         }
     }
@@ -247,7 +247,7 @@ class GiveCertificateController extends Controller
                 return route('astcglobal_certificate', compact('certificate_id'));
             }
         } else {
-            Session::flash('success', trans('messages.certificate_error') . ' ' . trans('messages.certificate_error_admin'));
+            Session::flash('error', trans('messages.certificate_error') . ' ' . trans('messages.certificate_error_admin'));
             return redirect()->back();
         }
     }
