@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Registration;
 use App\TeacherControl;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -35,6 +37,11 @@ class UserController extends Controller
 
     public function login()
     {
+        $date_now = Carbon::now();
+        $date_now_right = date('Y-m-d' , strtotime($date_now));
+        $date_learn = Registration::select('*')
+            ->where('date_to_learn', '<', $date_now_right);
+        $date_learn->delete();
 
         if (Auth::attempt(array('login' => Input::get('login'), 'password' => Input::get('password')))) {
             $name = Auth::user()->firstname . ' ' . Auth::user()->lastname;
@@ -67,7 +74,7 @@ class UserController extends Controller
                 Session::put('inNameShort', AppHelper::getShortName($institute->name));
 
                 if (Auth::user()->group == User::STUDENT and Auth::user()->student()->get()) {
-                    return Redirect::to('/guest')->with('success', trans('messages.login_success') );
+                    return Redirect::to('/guest')->with('success', trans('messages.login_success'));
                 }
                 $notification = array('title' => trans('messages.login'), 'body' => trans('messages.login_success'));
                 return Redirect::to('/dashboard')->with('success', $notification);
