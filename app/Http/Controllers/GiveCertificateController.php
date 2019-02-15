@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Certificate;
 use App\Institute;
+use App\Student;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -142,7 +143,7 @@ class GiveCertificateController extends Controller
         $subject_id = $course_id;
         $user_id = $student_id;
 
-        $student_id1 = User::select('*')
+        $student_id1 = Student::select('*')
             ->where('user_id' , '=' , $user_id)
             ->first();
         $student_id = $student_id1->id;
@@ -200,8 +201,8 @@ class GiveCertificateController extends Controller
     {
         $subject_id = $course_id;
         $user_id = $student_id;
-        
-        $student_id1 = User::select('*')
+
+        $student_id1 = Student::select('*')
             ->where('user_id' , '=' , $user_id)
             ->first();
         $student_id = $student_id1->id;
