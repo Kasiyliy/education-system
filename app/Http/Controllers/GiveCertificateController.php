@@ -148,8 +148,6 @@ class GiveCertificateController extends Controller
             ->first();
         $student_id = $student_id1->id;
 
-        $this::send_email($user_id, $course_id);
-
         $teacher_id1 = Subject::select('user_id')
             ->where('id', '=', $subject_id)
             ->first();
@@ -172,6 +170,7 @@ class GiveCertificateController extends Controller
                 ->where('subject_id', '=', $subject_id)
                 ->first();
 
+            $this::send_email($user_id, $course_id);
 
             if (!$certificate) {
                 $IdNo = $student_id.$course_id.$teacher_id;
