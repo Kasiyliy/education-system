@@ -158,59 +158,6 @@ $(document).ready(function() {
     });
     @endif
 
-    $('.deleteForm').submit(function(e) {
-        e.preventDefault();
-        var that=$(this);
-        swal({
-            title: "{{trans('messages.cancel')}}!",
-            text: '{{trans('messages.cancel_text1')}}?',
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#cc3f44",
-            confirmButtonText: "{{trans('messages.yes')}}",
-            closeOnConfirm: true,
-            html: false
-        }, function( isConfirm ) {
-            if(isConfirm)
-            {
-                var data= $('.deleteForm').serialize();
-                //console.log(data);
-                var postURL = $('.deleteForm').attr('action');
-                //console.log();
-                $.ajax({
-                    url: postURL,
-                    type: 'get',
-                    dataType: 'json',
-                    data: data,
-                    success: function(data) {
-                        that.parent().parent().remove();
-                        new PNotify({
-                            title: data.message.title,
-                            text: data.message.body,
-                            type: 'success',
-                            styling: 'bootstrap3'
-                        });
-
-
-                    },
-                    error: function(data){
-                        var respone = JSON.parse(data.responseText);
-                        $.each(respone.message, function( key, value ) {
-                            new PNotify({
-                                title: 'Error!',
-                                text: value,
-                                type: 'error',
-                                styling: 'bootstrap3'
-                            });
-                        });
-
-                    }
-                });
-            }
-
-        });
-    });
-
 });
 
 </script>
