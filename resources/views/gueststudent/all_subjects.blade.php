@@ -18,7 +18,6 @@
         <div class="row mx-1">
 
             @foreach($departments as $department)
-
                 <div class="col-md-3" style="margin-top: 100px">
                     <div class="thumbnail">
                         <a class="text-decoration-none"

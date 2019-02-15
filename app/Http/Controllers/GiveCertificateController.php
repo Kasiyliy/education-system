@@ -174,7 +174,7 @@ class GiveCertificateController extends Controller
 
 
             if (!$certificate) {
-                $IdNo = $student_id . $course_id . $teacher_id;
+                $IdNo = $student_id.$course_id.$teacher_id;
 
                 $certificate = new StudentCertificate();
                 $certificate->IdNo = $IdNo;
@@ -231,7 +231,7 @@ class GiveCertificateController extends Controller
 
 
             if (!$certificate) {
-                $IdNo = $student_id . $course_id . $teacher_id;
+                $IdNo = $student_id.$course_id.$teacher_id;
 
                 $certificate = new StudentCertificate();
                 $certificate->IdNo = $IdNo;
