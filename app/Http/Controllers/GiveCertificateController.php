@@ -192,7 +192,7 @@ class GiveCertificateController extends Controller
 
         } else {
             $notification = array('title' => trans('messages.certificate_error'), 'body' => trans('messages.certificate_error_admin'));
-            return Redirect::back()->with("error", $notification);
+            return redirect()->back()->with("error", $notification);
         }
     }
 
@@ -240,6 +240,7 @@ class GiveCertificateController extends Controller
                 $certificate->teacher_id = $teacher_id;
                 $certificate->goden_do = $converteddate;
                 $certificate->save();
+
                 return route('astcglobal_certificate', compact('IdNo'));
 
             } else {
@@ -248,7 +249,7 @@ class GiveCertificateController extends Controller
             }
         } else {
             $notification = array('title' => trans('messages.certificate_error'), 'body' => trans('messages.certificate_error_admin'));
-            return Redirect::back()->with("error", $notification);
+            return redirect()->back()->with("error", $notification);
         }
     }
 
