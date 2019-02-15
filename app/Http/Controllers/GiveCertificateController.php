@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Certificate;
 use App\Institute;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -72,7 +73,7 @@ class GiveCertificateController extends Controller
                 $certificate->text7 = $request->text7;
                 $certificate->subject_id = $subject_id;
                 $certificate->save();
-                $notification = array('title' => trans('messages.update') , 'body' =>trans('messages.update_success'));
+                $notification = array('title' => trans('messages.update'), 'body' => trans('messages.update_success'));
                 return Redirect::route('certificate.show')->with("success", $notification);
             } else {
                 $certificate = Certificate::findOrFail($certificate_id);
@@ -88,7 +89,7 @@ class GiveCertificateController extends Controller
                 $certificate->text7 = $request->text7;
                 $certificate->subject_id = $subject_id;
                 $certificate->save();
-                $notification = array('title' => trans('messages.update') , 'body' =>trans('messages.update_success'));
+                $notification = array('title' => trans('messages.update'), 'body' => trans('messages.update_success'));
                 return Redirect::route('certificate.show')->with("success", $notification);
             }
         }
@@ -101,7 +102,7 @@ class GiveCertificateController extends Controller
         if ($institute) {
             $to = Auth::user()->email;
             $body = "Congratulations! Your certificate is ready! Download it from here: " . $this->get_info($student_id, $course_id);
-            $this::sendMail($to , $body);
+            $this::sendMail($to, $body);
             Session::flash('success', 'Сертификат отправлен на почту!');
         } else {
             Session::flash('error', 'Ошибка отправки сообщения, свяжитесь с администратором сайта!');
@@ -110,35 +111,41 @@ class GiveCertificateController extends Controller
         return redirect()->back();
     }
 
-    public static function sendMail($to, $body){
-        $to_name = Auth::user()->firstname.' '.Auth::user()->lastname;
+    public static function sendMail($to, $body)
+    {
+        $to_name = Auth::user()->firstname . ' ' . Auth::user()->lastname;
         $to_email = $to;
-        $data = array('name'=>$to_name, "body" => $body);
+        $data = array('name' => $to_name, "body" => $body);
 
-        Mail::send('mail', $data, function($message) use ($to_name, $to_email) {
+        Mail::send('mail', $data, function ($message) use ($to_name, $to_email) {
             $message->to($to_email, $to_name)
                 ->subject('Congratulations! Your certificate is ready!');
-            $message->from('mail.globalastc@gmail.com','GlobalASTC');
+            $message->from('mail.globalastc@gmail.com', 'GlobalASTC');
         });
     }
 
-    public static function sendMail2($from,$to,$subject,$body)
+    public static function sendMail2($from, $to, $subject, $body)
     {
         $charset = 'utf-8';
         mb_language("ru");
-        $headers  = "MIME-Version: 1.0 \n" ;
+        $headers = "MIME-Version: 1.0 \n";
         $headers .= "From: ASTCGlobal <no-reply@mail.astcglobal.org> \n";
-        $headers .='X-Mailer: PHP/' . phpversion();
-        $headers .= "Reply-To: <".$from."> \n";
+        $headers .= 'X-Mailer: PHP/' . phpversion();
+        $headers .= "Reply-To: <" . $from . "> \n";
         $headers .= "Content-Type: text/html; charset=$charset \n";
-        $subject = '=?'.$charset.'?B?'.base64_encode($subject).'?=';
-        mail($to,$subject,$body,$headers);
+        $subject = '=?' . $charset . '?B?' . base64_encode($subject) . '?=';
+        mail($to, $subject, $body, $headers);
     }
 
     public function put_info($student_id, $course_id)
     {
         $subject_id = $course_id;
         $user_id = $student_id;
+
+        $student_id1 = User::select('*')
+            ->where('user_id' , '=' , $user_id)
+            ->first();
+        $student_id = $student_id1->id;
 
         $this::send_email($student_id, $course_id);
 
@@ -147,42 +154,45 @@ class GiveCertificateController extends Controller
             ->first();
         $teacher_id = $teacher_id1->user_id;
 
-        $goden1 = Certificate::select('goden_do')
+        $has_certifiacte = Certificate::select('*')
             ->where('subject_id', '=', $course_id)
             ->first();
-        $goden2 = $goden1->goden_do;
+        if ($has_certifiacte) {
+            $goden1 = Certificate::select('goden_do')
+                ->where('subject_id', '=', $course_id)
+                ->first();
+            $goden2 = $goden1->goden_do;
 
-        $goden_do = Carbon::now()->addYear('' . $goden2);
-        $converteddate = date("Y-m-d",strtotime($goden_do));
+            $goden_do = Carbon::now()->addYear('' . $goden2);
+            $converteddate = date("Y-m-d", strtotime($goden_do));
 
-        $certificate = StudentCertificate::select('*')
-            ->where('user_id', '=', $user_id)
-            ->where('subject_id', '=', $subject_id)
-            ->first();
+            $certificate = StudentCertificate::select('*')
+                ->where('user_id', '=', $user_id)
+                ->where('subject_id', '=', $subject_id)
+                ->first();
 
 
-        if (!$certificate) {
-            $IdNo = abs(crc32(uniqid()));
-            if($IdNo > 2147483648){
-                $IdNo -= 2147483648;
-                if($IdNo <1000000000 ){
-                    $IdNo +=1000000000;
-                }
+            if (!$certificate) {
+                $IdNo = $student_id.$course_id.$teacher_id;
+
+                $certificate = new StudentCertificate();
+                $certificate->IdNo = $IdNo;
+                $certificate->subject_id = $subject_id;
+                $certificate->user_id = $user_id;
+                $certificate->teacher_id = $teacher_id;
+                $certificate->goden_do = $converteddate;
+                $certificate->save();
+                return redirect()->route('certificate', compact('IdNo'));
+
+            } else {
+                $certificate_id = $certificate->IdNo;
+                return redirect()->route('certificate', compact('certificate_id'));
             }
-            $certificate = new StudentCertificate();
-            $certificate->IdNo = $IdNo;
-            $certificate->subject_id = $subject_id;
-            $certificate->user_id = $user_id;
-            $certificate->teacher_id = $teacher_id;
-            $certificate->goden_do = $converteddate;
-            $certificate->save();
-            return redirect()->route('certificate' ,compact('IdNo'));
 
         } else {
-            $certificate_id = $certificate->IdNo;
-            return redirect()->route('certificate',compact('certificate_id'));
+            $notification = array('title' => trans('messages.certificate_error'), 'body' => trans('messages.certificate_error_admin'));
+            return Redirect::back()->with("error", $notification);
         }
-
     }
 
 
@@ -190,48 +200,55 @@ class GiveCertificateController extends Controller
     {
         $subject_id = $course_id;
         $user_id = $student_id;
+        
+        $student_id1 = User::select('*')
+            ->where('user_id' , '=' , $user_id)
+            ->first();
+        $student_id = $student_id1->id;
 
         $teacher_id1 = Subject::select('user_id')
             ->where('id', '=', $subject_id)
             ->first();
         $teacher_id = $teacher_id1->user_id;
 
-        $goden1 = Certificate::select('goden_do')
+        $has_certifiacte = Certificate::select('*')
             ->where('subject_id', '=', $course_id)
             ->first();
-        $goden2 = $goden1->goden_do;
+        if ($has_certifiacte) {
+            $goden1 = Certificate::select('goden_do')
+                ->where('subject_id', '=', $course_id)
+                ->first();
+            $goden2 = $goden1->goden_do;
 
-        $goden_do = Carbon::now()->addYear('' . $goden2);
-        $converteddate = date("Y-m-d",strtotime($goden_do));
+            $goden_do = Carbon::now()->addYear('' . $goden2);
+            $converteddate = date("Y-m-d", strtotime($goden_do));
 
-        $certificate = StudentCertificate::select('*')
-            ->where('user_id', '=', $user_id)
-            ->where('subject_id', '=', $subject_id)
-            ->first();
+            $certificate = StudentCertificate::select('*')
+                ->where('user_id', '=', $user_id)
+                ->where('subject_id', '=', $subject_id)
+                ->first();
 
 
-        if (!$certificate) {
-            $IdNo = abs(crc32(uniqid()));
-            if($IdNo > 2147483648){
-                $IdNo -= 2147483648;
-                if($IdNo <1000000000 ){
-                    $IdNo +=1000000000;
-                }
+            if (!$certificate) {
+                $IdNo = $student_id.$course_id.$teacher_id;
+
+                $certificate = new StudentCertificate();
+                $certificate->IdNo = $IdNo;
+                $certificate->subject_id = $subject_id;
+                $certificate->user_id = $user_id;
+                $certificate->teacher_id = $teacher_id;
+                $certificate->goden_do = $converteddate;
+                $certificate->save();
+                return route('astcglobal_certificate', compact('IdNo'));
+
+            } else {
+                $certificate_id = $certificate->IdNo;
+                return route('astcglobal_certificate', compact('certificate_id'));
             }
-            $certificate = new StudentCertificate();
-            $certificate->IdNo = $IdNo;
-            $certificate->subject_id = $subject_id;
-            $certificate->user_id = $user_id;
-            $certificate->teacher_id = $teacher_id;
-            $certificate->goden_do = $converteddate;
-            $certificate->save();
-            return route('astcglobal_certificate' ,compact('IdNo'));
-
         } else {
-            $certificate_id = $certificate->IdNo;
-            return route('astcglobal_certificate',compact('certificate_id'));
+            $notification = array('title' => trans('messages.certificate_error'), 'body' => trans('messages.certificate_error_admin'));
+            return Redirect::back()->with("error", $notification);
         }
-
     }
 
     public function create_certificate($course_id)

@@ -418,6 +418,9 @@ successful result.',
 
     'return' => 'Go back to main',
     'admin' => 'Admin',
+
+    'certificate_error' => 'Certificate not added',
+    'certificate_error_admin' => 'Please contact the site administrator',
 ]
 ?>
 
