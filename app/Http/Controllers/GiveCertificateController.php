@@ -148,6 +148,8 @@ class GiveCertificateController extends Controller
             ->first();
         $student_id = $student_id1->id;
 
+dd($student_id);
+
         $this::send_email($student_id, $course_id);
 
         $teacher_id1 = Subject::select('user_id')
