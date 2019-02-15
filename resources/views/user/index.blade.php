@@ -62,7 +62,15 @@
                                     <tr>
                                         <td>{{$user->firstname}} {{$user->lastName}}</td>
                                         <td>{{$user->login}}</td>
-                                        <td>{{$user->group}}</td>
+                                        <td>
+                                            @if($user->group == 'Teacher')
+                                                {{trans('messages.user_text10')}}
+                                            @elseif($user->group == 'Student')
+                                                {{trans('messages.user_text11')}}
+                                            @elseif($user->group == 'Admin')
+                                                {{trans('messages.admin')}}
+                                            @endif
+                                        </td>
                                         <td>{{$user->email}}</td>
                                         <td>{{$user->description}}</td>
                                         <td>{{$user->created_at->format('F j, Y h:m A')}}</td>

@@ -80,9 +80,28 @@
                                             </label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-info blue"></i></span>
-                                                <input type="text" disabled="disabled" class="form-control" name="group"
-                                                       value="{{$user->group}}" placeholder="admin33"
-                                                       required="required">
+                                                @if($user->group == 'Teacher')
+                                                    <input type="text" disabled="disabled" class="form-control"
+                                                           name="group"
+                                                           value="{{trans('messages.user_text10')}}"
+                                                           placeholder="admin33"
+                                                           required="required">
+
+                                                @elseif($user->group == 'Student')
+                                                    <input type="text" disabled="disabled" class="form-control"
+                                                           name="group"
+                                                           value="{{trans('messages.user_text11')}}"
+                                                           placeholder="admin33"
+                                                           required="required">
+
+                                                @elseif($user->group == 'Admin')
+                                                    <input type="text" disabled="disabled" class="form-control"
+                                                           name="group"
+                                                           value="{{trans('messages.admin')}}"
+                                                           placeholder="admin33"
+                                                           required="required">
+
+                                                @endif
                                             </div>
                                             <span class="text-danger">{{ $errors->first('group') }}</span>
 

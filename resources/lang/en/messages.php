@@ -417,6 +417,7 @@ successful result.',
     'logout' => 'You are logged out.',
 
     'return' => 'Go back to main',
+    'admin' => 'Admin',
 ]
 ?>
 
