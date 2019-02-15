@@ -191,7 +191,7 @@ class GiveCertificateController extends Controller
 
         } else{
             $notification = array('title' => trans('messages.certificate_error'), 'body' => trans('messages.certificate_error_admin'));
-            return redirect()->back();
+            return redirect()->back()->with("error", $notification);
         }
     }
 

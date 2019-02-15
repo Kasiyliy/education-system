@@ -165,3 +165,15 @@
     </div>
 
 @endsection
+
+@section('scripts')
+    <script src="{{ URL::asset('assets/js/validator.min.js')}}"></script>
+
+    <script>
+        $('#iframe').ready(function () {
+            setTimeout(function () {
+                $('#iframe').contents().find('#download').remove();
+            }, 100);
+        });
+    </script>
+@endsection
