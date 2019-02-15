@@ -80,11 +80,14 @@ class StudentSubjectsController extends Controller
 
         if (Auth::check()) {
             $student_id = Student::where('user_id', Auth::id())->first();
-            $student = $student_id->id;
             if ($student_id) {
+                $student = $student_id->id;
                 $student_subjects = Registration::select('*')
                     ->where('students_id', '=', $student)
                     ->get();
+            }
+            else{
+                $student_subjects = [];
             }
         }else {
             $student_subjects = [];

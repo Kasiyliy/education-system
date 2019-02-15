@@ -33,7 +33,7 @@
                                 <span class="text-muted small">{{trans('messages.opisanie')}}:</span>
                                 <p class="">{{$subject->description}}</p>
                             </div>
-                            @if(Auth::check(\App\User::STUDENT))
+                            @if(Auth::check(\App\User::STUDENT) and $student_subjects != null)
                                 @foreach($student_subjects as $student_subject)
                                     <?php
                                     $subject_id = $subject->id;
