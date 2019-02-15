@@ -156,6 +156,7 @@ class GiveCertificateController extends Controller
         $has_certifiacte = Certificate::select('*')
             ->where('subject_id', '=', $course_id)
             ->first();
+        dd($has_certifiacte);
         if ($has_certifiacte) {
             $goden1 = Certificate::select('goden_do')
                 ->where('subject_id', '=', $course_id)
