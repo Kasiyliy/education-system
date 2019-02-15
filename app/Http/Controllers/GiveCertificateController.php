@@ -173,7 +173,7 @@ class GiveCertificateController extends Controller
             $this::send_email($user_id, $course_id);
 
             if (!$certificate) {
-                $IdNo = $student_id.$course_id.$teacher_id;
+                $IdNo = $student_id . $course_id . $teacher_id;
 
                 $certificate = new StudentCertificate();
                 $certificate->IdNo = $IdNo;
@@ -189,9 +189,9 @@ class GiveCertificateController extends Controller
                 return redirect()->route('certificate', compact('certificate_id'));
             }
 
-        } else{
-            $notification = array('title' => trans('messages.certificate_error'), 'body' => trans('messages.certificate_error_admin'));
-            return redirect()->back()->with("error", $notification);
+        } else {
+            Session::flash('success', trans('messages.certificate_error') . ' ' . trans('messages.certificate_error_admin'));
+            return redirect()->back();
         }
     }
 
@@ -230,7 +230,7 @@ class GiveCertificateController extends Controller
 
 
             if (!$certificate) {
-                $IdNo = $student_id.$course_id.$teacher_id;
+                $IdNo = $student_id . $course_id . $teacher_id;
 
                 $certificate = new StudentCertificate();
                 $certificate->IdNo = $IdNo;
@@ -247,8 +247,8 @@ class GiveCertificateController extends Controller
                 return route('astcglobal_certificate', compact('certificate_id'));
             }
         } else {
-            $notification = array('title' => trans('messages.certificate_error'), 'body' => trans('messages.certificate_error_admin'));
-            return redirect()->back()->with("error", $notification);
+            Session::flash('success', trans('messages.certificate_error') . ' ' . trans('messages.certificate_error_admin'));
+            return redirect()->back();
         }
     }
 
