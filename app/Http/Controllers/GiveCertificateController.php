@@ -156,7 +156,6 @@ class GiveCertificateController extends Controller
         $has_certifiacte = Certificate::select('*')
             ->where('subject_id', '=', $course_id)
             ->first();
-        dd($has_certifiacte);
         if ($has_certifiacte) {
             $goden1 = Certificate::select('goden_do')
                 ->where('subject_id', '=', $course_id)
@@ -190,8 +189,10 @@ class GiveCertificateController extends Controller
                 return redirect()->route('certificate', compact('certificate_id'));
             }
 
-        } else {
+        } else{
+
             $notification = array('title' => trans('messages.certificate_error'), 'body' => trans('messages.certificate_error_admin'));
+            dd($notification);
             return redirect()->back()->with("error", $notification);
         }
     }
