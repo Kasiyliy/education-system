@@ -144,13 +144,11 @@ class GiveCertificateController extends Controller
         $user_id = $student_id;
 
         $student_id1 = Student::select('*')
-            ->where('user_id' , '=' , $user_id)
+            ->where('user_id', '=', $user_id)
             ->first();
         $student_id = $student_id1->id;
 
-dd($student_id);
-
-        $this::send_email($student_id, $course_id);
+        $this::send_email($user_id, $course_id);
 
         $teacher_id1 = Subject::select('user_id')
             ->where('id', '=', $subject_id)
@@ -176,7 +174,7 @@ dd($student_id);
 
 
             if (!$certificate) {
-                $IdNo = $student_id.$course_id.$teacher_id;
+                $IdNo = $student_id . $course_id . $teacher_id;
 
                 $certificate = new StudentCertificate();
                 $certificate->IdNo = $IdNo;
@@ -205,7 +203,7 @@ dd($student_id);
         $user_id = $student_id;
 
         $student_id1 = Student::select('*')
-            ->where('user_id' , '=' , $user_id)
+            ->where('user_id', '=', $user_id)
             ->first();
         $student_id = $student_id1->id;
 
@@ -233,7 +231,7 @@ dd($student_id);
 
 
             if (!$certificate) {
-                $IdNo = $student_id.$course_id.$teacher_id;
+                $IdNo = $student_id . $course_id . $teacher_id;
 
                 $certificate = new StudentCertificate();
                 $certificate->IdNo = $IdNo;
