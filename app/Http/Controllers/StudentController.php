@@ -345,11 +345,7 @@ class StudentController extends Controller
         $student = Registration::findOrFail($id);
         $student->delete();
         $notification = array('title' => trans('messages.delete'), 'body' => trans('messages.delete_success'));
-        return Response()->json([
-            'success' => true,
-            'message' => $notification
-        ], 200);
-
+        return redirect()->back()->with($notification);
     }
 
 }
