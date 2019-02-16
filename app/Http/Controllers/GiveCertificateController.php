@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Certificate;
 use App\Institute;
+use App\Quiz;
+use App\QuizResult;
 use App\Student;
 use App\User;
 use Carbon\Carbon;
@@ -170,10 +172,18 @@ class GiveCertificateController extends Controller
                 ->where('subject_id', '=', $subject_id)
                 ->first();
 
+            $quiz_id1 = QuizResult::select('quiz_results.*')
+                ->leftJoin('quizes', 'quiz_results.quiz_id', '=', 'quizes.id')
+                ->where('quiz_results.student_id', '=', $student_id)
+                ->where('quizes.subject_id', '=', $course_id)
+                ->first();
+            $quiz_id = $quiz_id1->id;
+
+
             $this::send_email($user_id, $course_id);
 
             if (!$certificate) {
-                $IdNo = $student_id . $course_id . $teacher_id;
+                $IdNo = $student_id . $course_id . $teacher_id . $quiz_id;
 
                 $certificate = new StudentCertificate();
                 $certificate->IdNo = $IdNo;
@@ -228,9 +238,15 @@ class GiveCertificateController extends Controller
                 ->where('subject_id', '=', $subject_id)
                 ->first();
 
+            $quiz_id1 = QuizResult::select('quiz_results.*')
+                ->leftJoin('quizes', 'quiz_results.quiz_id', '=', 'quizes.id')
+                ->where('quiz_results.student_id', '=', $student_id)
+                ->where('quizes.subject_id', '=', $course_id)
+                ->first();
+            $quiz_id = $quiz_id1->id;
 
             if (!$certificate) {
-                $IdNo = $student_id . $course_id . $teacher_id;
+                $IdNo = $student_id . $course_id . $teacher_id . $quiz_id;
 
                 $certificate = new StudentCertificate();
                 $certificate->IdNo = $IdNo;
