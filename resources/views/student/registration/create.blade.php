@@ -5,6 +5,9 @@
 @section('extrastyle')
     <link href="{{ URL::asset('assets/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{ URL::asset('assets/css/switchery.min.css')}}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/css/responsive.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/css/fixedHeader.bootstrap.min.css')}}" rel="stylesheet">
 
 @endsection
 
@@ -19,13 +22,13 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
-                        <div class="">
+                        <div class="x_content">
                             <h2>{{trans('messages.registration_text1')}}
                                 <small>{{trans('messages.registration_text2')}}</small>
                             </h2>
 
                         </div>
-                        <div class="">
+                        <div class="x_content">
                             @if (count($errors) > 0)
                                 <div class="alert alert-danger">
                                     <strong>{{trans('messages.registration_text21')}}
@@ -39,9 +42,9 @@
                             @endif
                             <form class="form-horizontal form-label-left" novalidate method="post"
                                   action="{{URL::route('student.registration.store')}}">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-12">
                                         <div class="item form-group">
                                             <label for="subject">{{trans('messages.registration_text3')}}<span
                                                         class="required">*</span>
@@ -53,30 +56,28 @@
                                         </div>
                                     </div>
                                 </div>
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="table-responsive">
-                                            <table id="studentList"
-                                                   class="table table-striped table-bordered table-hover">
-                                                <thead>
-                                                <tr>
+                                    <table id="studentList"
+                                           class="table table-striped table-bordered nowrap" style="width:100%">
+                                        <thead>
+                                        <tr>
 
-                                                    <th>Id No</th>
-                                                    <th>{{trans('messages.registration_text4')}}</th>
-                                                    <th>{{trans('messages.registration_text5')}}</th>
-                                                    <th>{{trans('messages.registration_text6')}}?</th>
+                                            <th>Id No</th>
+                                            <th>{{trans('messages.registration_text4')}}</th>
+                                            <th>{{trans('messages.registration_text5')}}</th>
+                                            <th>{{trans('messages.registration_text6')}}?</th>
 
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-
-                                                <tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                                        </tr>
+                                        </thead>
+                                        <tbody id='tbodyid'>
+                                        <tbody>
+                                    </table>
                                 </div>
 
                                 <div class="ln_solid"></div>
+
                                 <div class="row">
                                     <button id="btnsave" type="submit" class="btn btn-lg btn-success pull-right"><i
                                                 class="fa fa-check">{{trans('messages.button_subscribe')}}</i></button>
@@ -97,6 +98,11 @@
 @section('extrascript')
     <script src="{{ URL::asset('assets/js/select2.full.min.js')}}"></script>
     <script src="{{ URL::asset('assets/js/switchery.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/dataTables.bootstrap.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/dataTables.fixedHeader.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/responsive.bootstrap.min.js')}}"></script>
     <!-- validator -->
     <script>
         $(document).ready(function () {
@@ -124,13 +130,13 @@
                         dataType: 'json',
                         success: function (data) {
                             //console.log(data);
-                            $("#studentList").find("tr:gt(0)").remove();
                             if (data.students.length > 0) {
                                 $('#btnsave').show();
                             } else {
                                 $('#btnsave').hide();
                             }
                             var studentIds = [];
+                            $("#studentList").find("tr:gt(0)").remove();
                             $.each(data.registeredStudents, function (key, value) {
                                 studentIds.push(value.students_id);
                             });
@@ -163,7 +169,7 @@
 
         //add row to table
         function addRow(id, stdname, idNo, flag) {
-            var table = document.getElementById('studentList');
+            var table = document.getElementById('tbodyid');
             var rowCount = table.rows.length;
             var row = table.insertRow(rowCount);
 
@@ -194,7 +200,6 @@
             };
             cell6.appendChild(dateBox);
 
-
             var cell5 = row.insertCell(3);
             var chkbox = document.createElement("input");
             chkbox.type = "checkbox";
@@ -204,10 +209,22 @@
             chkbox.size = "3";
             cell5.appendChild(chkbox);
 
+            var inputs = $('input[type=date]');
+
+            inputs.onchange = function () {
+                inputs.value = inputs.value;
+                inputs.name = "dateToLearn";
+            }
+            var table = $('#studentList').DataTable({
+                responsive: true
+            });
+
         };
         //make all checkbox checked
         $('.allCheck').on('change', function () {
             $('.tb-switch').trigger('click');
         });
+
+
     </script>
 @endsection

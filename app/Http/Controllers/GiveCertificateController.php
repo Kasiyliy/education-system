@@ -148,7 +148,7 @@ class GiveCertificateController extends Controller
         $student_id1 = Student::select('*')
             ->where('user_id', '=', $user_id)
             ->first();
-        $student_id = $student_id1->id;
+        $for_test_student_id = $student_id1->id;
 
         $teacher_id1 = Subject::select('user_id')
             ->where('id', '=', $subject_id)
@@ -174,7 +174,7 @@ class GiveCertificateController extends Controller
 
             $quiz_id1 = QuizResult::select('quiz_results.*')
                 ->leftJoin('quizes', 'quiz_results.quiz_id', '=', 'quizes.id')
-                ->where('quiz_results.student_id', '=', $student_id)
+                ->where('quiz_results.student_id', '=', $for_test_student_id)
                 ->where('quizes.subject_id', '=', $course_id)
                 ->first();
             $quiz_id = $quiz_id1->id;
@@ -213,7 +213,7 @@ class GiveCertificateController extends Controller
         $student_id1 = Student::select('*')
             ->where('user_id', '=', $user_id)
             ->first();
-        $student_id = $student_id1->id;
+        $for_test_student_id = $student_id1->id;
 
         $teacher_id1 = Subject::select('user_id')
             ->where('id', '=', $subject_id)
@@ -239,7 +239,7 @@ class GiveCertificateController extends Controller
 
             $quiz_id1 = QuizResult::select('quiz_results.*')
                 ->leftJoin('quizes', 'quiz_results.quiz_id', '=', 'quizes.id')
-                ->where('quiz_results.student_id', '=', $student_id)
+                ->where('quiz_results.student_id', '=', $for_test_student_id)
                 ->where('quizes.subject_id', '=', $course_id)
                 ->first();
             $quiz_id = $quiz_id1->id;
