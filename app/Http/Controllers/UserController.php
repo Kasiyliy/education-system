@@ -38,7 +38,7 @@ class UserController extends Controller
     public function login()
     {
         $date_now = Carbon::now();
-        $date_now_right = date('Y-m-d' , strtotime($date_now));
+        $date_now_right = date('Y-m-d', strtotime($date_now));
         $date_learn = Registration::select('*')
             ->where('date_to_learn', '<', $date_now_right);
         $date_learn->delete();
@@ -279,8 +279,9 @@ class UserController extends Controller
             $user->fill($data)->save();
 
             $name = $user->firstname . ' ' . $user->lastname;
-            Session::put('name', $name);
-
+            if (Auth()->user()->id == $request->user_id) {
+                Session::put('name', $name);
+            }
             $notification = array('title' => trans('messages.update'), 'body' => trans('messages.update_success'));
             return Redirect::back()->with('success', $notification);
         }
