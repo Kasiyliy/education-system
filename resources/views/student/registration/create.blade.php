@@ -44,7 +44,7 @@
                                   action="{{URL::route('student.registration.store')}}">
 
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-8">
                                         <div class="item form-group">
                                             <label for="subject">{{trans('messages.registration_text3')}}<span
                                                         class="required">*</span>

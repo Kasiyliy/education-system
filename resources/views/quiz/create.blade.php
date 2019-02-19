@@ -106,10 +106,10 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="table-responsive">
+                                    <div class="container">
+                                        <div class="table-responsive" >
                                             <table id="quizList"
-                                                   class="table table-striped table-bordered table-hover">
+                                                   class="table table-striped table-bordered table-hover ">
                                                 <thead>
                                                 <tr>
                                                     <th>Id</th>
