@@ -211,18 +211,15 @@
 
             var inputs = $('input[type=date]');
 
-            inputs.onchange = function () {
-                inputs.value = inputs.value;
-                inputs.name = "dateToLearn";
-            }
-            var table = $('#studentList').DataTable({
-                responsive: true
-            });
+
 
         };
         //make all checkbox checked
         $('.allCheck').on('change', function () {
             $('.tb-switch').trigger('click');
+        });
+        var table = $('#studentList').DataTable({
+            responsive: true
         });
 
 
