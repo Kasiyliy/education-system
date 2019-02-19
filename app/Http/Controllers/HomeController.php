@@ -95,7 +95,7 @@ class HomeController extends Controller
             ->leftJoin('users' , 'users.id' , '=' , 'student_certificates.teacher_id')
             ->leftJoin('subject' , 'subject.id' , '=' , 'student_certificates.subject_id')
             ->leftJoin('students' , 'students.user_id' , '=' , 'student_certificates.user_id')
-            ->distinct('IdNo')
+            ->distinct('student_certificates.IdNo')
             ->get();
         return view('certificate.index')->with(compact('certificates'));
     }
