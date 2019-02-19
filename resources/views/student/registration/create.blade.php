@@ -135,6 +135,7 @@
                             } else {
                                 $('#btnsave').hide();
                             }
+                            $("#studentList").dataTable().fnDestroy();
                             var studentIds = [];
                             $("#studentList").find("tr:gt(0)").remove();
                             $.each(data.registeredStudents, function (key, value) {
@@ -146,6 +147,12 @@
                                     addRow(value.id, value.firstName + ' ' + value.middleName + ' ' + value.lastName, value.idNo, false);
                                 }
                             });
+
+
+                            $('#studentList').DataTable({
+                                responsive: true,
+                            });
+
                             var elems = Array.prototype.slice.call(document.querySelectorAll('.tb-switch'));
                             elems.forEach(function (html) {
                                 var switchery = new Switchery(html);
@@ -164,6 +171,10 @@
                         }
                     });
                 }
+            });
+
+            $('#studentList').DataTable({
+                responsive: true,
             });
         });
 
@@ -194,6 +205,8 @@
             var cell6 = row.insertCell(2);
             var dateBox = document.createElement("input");
             dateBox.type = "date";
+            dateBox.value = dateBox.value;
+            dateBox.name = "dateToLearn";
             dateBox.onchange = function () {
                 dateBox.value = dateBox.value;
                 dateBox.name = "dateToLearn";
@@ -214,13 +227,8 @@
 
 
         };
-        //make all checkbox checked
-        $('.allCheck').on('change', function () {
-            $('.tb-switch').trigger('click');
-        });
-        var table = $('#studentList').DataTable({
-            responsive: true
-        });
+
+
 
 
     </script>
