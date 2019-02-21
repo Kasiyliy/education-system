@@ -39,7 +39,7 @@
 
                 <div class="clearfix"></div>
 
-                `
+
                 <br/>
 
                 <!-- sidebar menu -->
