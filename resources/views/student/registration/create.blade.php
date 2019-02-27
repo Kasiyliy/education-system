@@ -205,7 +205,6 @@
             var cell6 = row.insertCell(2);
             var dateBox = document.createElement("input");
             dateBox.type = "date";
-            dateBox.name = "dateToLearn";
             dateBox.onchange = function () {
                 dateBox.value = dateBox.value;
                 dateBox.name = "dateToLearn";
