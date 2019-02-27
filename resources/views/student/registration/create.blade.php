@@ -205,12 +205,12 @@
             var cell6 = row.insertCell(2);
             var dateBox = document.createElement("input");
             dateBox.type = "date";
-            dateBox.value = dateBox.value;
             dateBox.name = "dateToLearn";
             dateBox.onchange = function () {
                 dateBox.value = dateBox.value;
                 dateBox.name = "dateToLearn";
             };
+            dateBox.value = dateBox.value;
             cell6.appendChild(dateBox);
 
             var cell5 = row.insertCell(3);
