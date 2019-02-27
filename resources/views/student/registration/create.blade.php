@@ -210,7 +210,6 @@
                 dateBox.value = dateBox.value;
                 dateBox.name = "dateToLearn";
             };
-            dateBox.value = dateBox.value;
             cell6.appendChild(dateBox);
 
             var cell5 = row.insertCell(3);
@@ -221,8 +220,6 @@
             chkbox.name = "registeredIds[" + id + "]";
             chkbox.size = "3";
             cell5.appendChild(chkbox);
-
-            var inputs = $('input[type=date]');
 
 
 
