@@ -153,10 +153,10 @@
                                 responsive: true,
                             });
 
-                            var elems = Array.prototype.slice.call(document.querySelectorAll('.tb-switch'));
-                            elems.forEach(function (html) {
-                                var switchery = new Switchery(html);
-                            });
+                            // var elems = Array.prototype.slice.call(document.querySelectorAll('.tb-switch'));
+                            // elems.forEach(function (html) {
+                            //     var switchery = new Switchery(html);
+                            // });
                         },
                         error: function (data) {
                             var respone = JSON.parse(data.responseText);
@@ -177,14 +177,6 @@
                 responsive: true,
             });
 
-            $('#studentList').on( 'page.dt', function () {
-                var elems = Array.prototype.slice.call(document.querySelectorAll('.tb-switch'));
-                elems.forEach(function (html) {
-                    if(!(html instanceof Switchery)){
-                        var switchery = new Switchery(html);
-                    }
-                });
-            });
         });
 
         //add row to table
@@ -227,6 +219,7 @@
             chkbox.className = "js-switch tb-switch";
             chkbox.name = "registeredIds[" + id + "]";
             chkbox.size = "3";
+            var switchery = new Switchery(chkbox);
             cell5.appendChild(chkbox);
 
 
