@@ -176,6 +176,13 @@
             $('#studentList').DataTable({
                 responsive: true,
             });
+
+            $('#studentList').on( 'page.dt', function () {
+                var elems = Array.prototype.slice.call(document.querySelectorAll('.tb-switch'));
+                elems.forEach(function (html) {
+                    var switchery = new Switchery(html);
+                });
+            });
         });
 
         //add row to table
