@@ -219,9 +219,8 @@
             chkbox.className = "js-switch tb-switch";
             chkbox.name = "registeredIds[" + id + "]";
             chkbox.size = "3";
-            var switchery = new Switchery(chkbox);
             cell5.appendChild(chkbox);
-
+            var switchery = new Switchery(chkbox);
 
 
         };
