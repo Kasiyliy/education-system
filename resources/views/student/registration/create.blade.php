@@ -180,7 +180,9 @@
             $('#studentList').on( 'page.dt', function () {
                 var elems = Array.prototype.slice.call(document.querySelectorAll('.tb-switch'));
                 elems.forEach(function (html) {
-                    var switchery = new Switchery(html);
+                    if(!(html instanceof Switchery)){
+                        var switchery = new Switchery(html);
+                    }
                 });
             });
         });
