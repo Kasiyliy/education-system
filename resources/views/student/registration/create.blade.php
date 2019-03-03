@@ -220,7 +220,10 @@
             chkbox.name = "registeredIds[" + id + "]";
             chkbox.size = "3";
             cell5.appendChild(chkbox);
-            var switchery = new Switchery(chkbox);
+
+            if(window.innerWidth > 730){
+                var switchery = new Switchery(chkbox);
+            }
 
 
         };
