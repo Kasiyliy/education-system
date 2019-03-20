@@ -88,18 +88,6 @@ class HomeController extends Controller
 
     public function certificates()
     {
-        if(Auth::user()->group == User::ADMIN){
-            $certificates = StudentCertificate::select('student_certificates.IdNo as IdNo',
-                'students.firstName as studentfirstname', 'students.lastName as studentlastname'
-                , 'users.firstname as teacherfirstname', 'users.lastname as teacherlastname', 'subject.name as subjectname',
-                'student_certificates.created_at as created_at', 'student_certificates.goden_do as goden_do')
-                ->leftJoin('subject', 'subject.id', '=', 'student_certificates.subject_id')
-                ->leftJoin('students', 'students.user_id', '=', 'student_certificates.user_id')
-                ->distinct('student_certificates.IdNo')
-                ->get();
-            return view('certificate.index')->with(compact('certificates'));
-        }
-        else {
             $certificates = StudentCertificate::select('student_certificates.IdNo as IdNo',
                 'students.firstName as studentfirstname', 'students.lastName as studentlastname'
                 , 'users.firstname as teacherfirstname', 'users.lastname as teacherlastname', 'subject.name as subjectname',
@@ -110,16 +98,23 @@ class HomeController extends Controller
                 ->distinct('student_certificates.IdNo')
                 ->get();
             return view('certificate.index')->with(compact('certificates'));
-        }
     }
 
 
     public function subject_certificate()
     {
-        $subjects = App\Subject::select('*')
-            ->where('user_id', '=', Auth::user()->id)
-            ->get();
-        return view('certificate.show', compact('subjects'));
+
+        if(Auth::user()->group == User::ADMIN){
+            $subjects = App\Subject::select('*')
+                ->get();
+            return view('certificate.show', compact('subjects'));
+        }
+        else {
+            $subjects = App\Subject::select('*')
+                ->where('user_id', '=', Auth::user()->id)
+                ->get();
+            return view('certificate.show', compact('subjects'));
+        }
     }
 
     public function instruction()
