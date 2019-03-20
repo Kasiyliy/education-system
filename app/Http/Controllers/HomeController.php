@@ -88,7 +88,7 @@ class HomeController extends Controller
 
     public function certificates()
     {
-        if(Auth::user()->Admin){
+        if(Auth::user()->group == User::ADMIN){
             $certificates = StudentCertificate::select('student_certificates.IdNo as IdNo',
                 'students.firstName as studentfirstname', 'students.lastName as studentlastname'
                 , 'users.firstname as teacherfirstname', 'users.lastname as teacherlastname', 'subject.name as subjectname',
