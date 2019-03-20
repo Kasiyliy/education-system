@@ -113,6 +113,7 @@
             });
 
 
+
             //get students lists
             $('#subject_id').on('change', function () {
                 var sub = $('#subject_id').val();
@@ -148,10 +149,11 @@
                                 }
                             });
 
-
                             $('#studentList').DataTable({
                                 responsive: true,
-                            });
+                            }).on( 'draw.dt', function () {
+                                $('input[type = checkbox]').removeClass('js-switch tb-switch').addClass('js-switch tb-switch');
+                            } );
 
                             // var elems = Array.prototype.slice.call(document.querySelectorAll('.tb-switch'));
                             // elems.forEach(function (html) {
@@ -177,6 +179,9 @@
                 responsive: true,
             });
 
+            }).on( 'draw.dt', function () {
+                $('input[type = checkbox]').toggleClass('js-switch tb-switch','js-switch tb-switch');
+            } );
         });
 
         //add row to table
@@ -216,7 +221,6 @@
             var chkbox = document.createElement("input");
             chkbox.type = "checkbox";
             chkbox.checked = flag;
-            chkbox.className = "js-switch tb-switch";
             chkbox.name = "registeredIds[" + id + "]";
             chkbox.size = "3";
             cell5.appendChild(chkbox);

@@ -88,16 +88,29 @@ class HomeController extends Controller
 
     public function certificates()
     {
-        $certificates = StudentCertificate::select('student_certificates.IdNo as IdNo' ,
-            'students.firstName as studentfirstname', 'students.lastName as studentlastname'
-        , 'users.firstname as teacherfirstname' , 'users.lastname as teacherlastname' , 'subject.name as subjectname' ,
-            'student_certificates.created_at as created_at' , 'student_certificates.goden_do as goden_do' )
-            ->leftJoin('users' , 'users.id' , '=' , 'student_certificates.teacher_id')
-            ->leftJoin('subject' , 'subject.id' , '=' , 'student_certificates.subject_id')
-            ->leftJoin('students' , 'students.user_id' , '=' , 'student_certificates.user_id')
-            ->distinct('student_certificates.IdNo')
-            ->get();
-        return view('certificate.index')->with(compact('certificates'));
+        if(Auth::user()->Admin){
+            $certificates = StudentCertificate::select('student_certificates.IdNo as IdNo',
+                'students.firstName as studentfirstname', 'students.lastName as studentlastname'
+                , 'users.firstname as teacherfirstname', 'users.lastname as teacherlastname', 'subject.name as subjectname',
+                'student_certificates.created_at as created_at', 'student_certificates.goden_do as goden_do')
+                ->leftJoin('subject', 'subject.id', '=', 'student_certificates.subject_id')
+                ->leftJoin('students', 'students.user_id', '=', 'student_certificates.user_id')
+                ->distinct('student_certificates.IdNo')
+                ->get();
+            return view('certificate.index')->with(compact('certificates'));
+        }
+        else {
+            $certificates = StudentCertificate::select('student_certificates.IdNo as IdNo',
+                'students.firstName as studentfirstname', 'students.lastName as studentlastname'
+                , 'users.firstname as teacherfirstname', 'users.lastname as teacherlastname', 'subject.name as subjectname',
+                'student_certificates.created_at as created_at', 'student_certificates.goden_do as goden_do')
+                ->leftJoin('users', 'users.id', '=', 'student_certificates.teacher_id')
+                ->leftJoin('subject', 'subject.id', '=', 'student_certificates.subject_id')
+                ->leftJoin('students', 'students.user_id', '=', 'student_certificates.user_id')
+                ->distinct('student_certificates.IdNo')
+                ->get();
+            return view('certificate.index')->with(compact('certificates'));
+        }
     }
 
 
