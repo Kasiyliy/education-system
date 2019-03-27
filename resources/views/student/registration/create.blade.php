@@ -178,10 +178,6 @@
             $('#studentList').DataTable({
                 responsive: true,
             });
-
-            }).on( 'draw.dt', function () {
-                $('input[type = checkbox]').toggleClass('js-switch tb-switch','js-switch tb-switch');
-            } );
         });
 
         //add row to table
@@ -225,14 +221,12 @@
             chkbox.size = "3";
             cell5.appendChild(chkbox);
 
-            if(window.innerWidth > 730){
+            if (window.innerWidth > 730) {
                 var switchery = new Switchery(chkbox);
             }
 
 
         };
-
-
 
 
     </script>
