@@ -44,10 +44,10 @@
                                 @foreach($subjects as $subject)
                                     <tr>
                                         <td>{{$subject->name}}</td>
-                                        <td>{{$subject->user->firstname.' '.$subject->user->lastname.' '.$subject->user->middlename}}</td>
+                                        <td>{{$subject->user ? $subject->user->firstname.' '.$subject->user->lastname.' '.$subject->user->middlename : ''}}</td>
                                         <td>{{$subject->code}}</td>
                                         <td>{{$subject->price}}</td>
-                                        <td>{{$subject->department->name}}</td>
+                                        <td>{{$subject->department ? $subject->department->name: ''}}</td>
                                         <td>{{$subject->description}}</td>
                                         <td>
                                             <a title='Update' class='btn btn-info btn-xs btnUpdate'
